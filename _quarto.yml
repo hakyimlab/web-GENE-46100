@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "HKI Courses"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - index-qgt.qmd
+      - index-bios-25328.qmd
+      - index-gene-46100.qmd
+      - index-logistics.qmd
+  body-footer: |
+      © [HakyImLab and Listed Authors](https://hakyimlab.org) - [CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/)
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+

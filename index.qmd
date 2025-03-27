@@ -1,0 +1,14 @@
+---
+title: "Hakyimlab Training Material Page"
+listing:
+  contents: [post]
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: false
+---
+
+Edit source [here](https://github.com/hakyimlab/web-course-material)
