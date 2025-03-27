@@ -1,0 +1,191 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hakyimlab Training Material Page",
+    "section": "",
+    "text": "Edit source here\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npreparing environmentfor unit 00\n\n\n\n\n\n\ngene46100\n\n\nhowto\n\n\n\nsetting up conda environement and installing packages\n\n\n\n\n\nMar 25, 2025\n\n\nHaky Im\n\n\n\n\n\n\n\n\n\n\n\n\nEnvironment Setup\n\n\n\n\n\n\ngene46100\n\n\nnotebook\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nErin Wilson\n\n\n\n\n\n\n\n\n\n\n\n\nQuick introduction to deep learning\n\n\n\n\n\n\ngene46100\n\n\nnotebook\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nBoxiang Liu, modified by Haky Im\n\n\n\n\n\n\n\n\n\n\n\n\nGradient descent illustration\n\n\n\n\n\n\n\n\n\n\n\nJan 1, 2025\n\n\nHaky Im\n\n\n\n\n\n\nNo matching items\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/basic_DNA_tutorial.html",
+    "href": "post/2025-03-25-unit00/basic_DNA_tutorial.html",
+    "title": "",
+    "section": "",
+    "text": "CodeShow All CodeHide All Code\nPytorch tutorial using DNA created by Erin Wilson. Downloaded from here. Minor edits by Haky Im for compatibility with Apple Silicon (M1/M2/M3) MacBooks using MPS\nKey changes: 1. Using float32 instead of float64 (MPS doesn’t support double precision) 2. Setting device to ‘mps’ when available 3. Ensuring tensor data types are compatible with Metal Performance Shaders (MPS)\nThese modifications ensure compatibility with Apple’s built-in GPU acceleration while maintaining compatibility with other systems (CUDA, CPU).\nBelow is the environment by erinhwilson but not recommended here, we use %pip, which yielded fewer version incompatibility issues\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/basic_DNA_tutorial.html#foot-notes",
+    "href": "post/2025-03-25-unit00/basic_DNA_tutorial.html#foot-notes",
+    "title": "",
+    "section": "9. Foot notes",
+    "text": "9. Foot notes\n\nFOOTNOTE 1\nIn this tutorial, the CNN model definition uses a 1D convolutional layer - since DNA is not an image with 2 dimensions, Conv1D is sufficient to just slide along the length dimension and not scan up and down. (In fact, sliding a filter “up” and “down” doesn’t apply to one-hot encoded DNA matrices: separating the A and C rows from the G and T rows doesn’t make sense - you need all 4 rows to accurately represent a DNA sequence.)\nHowever, I once found myself needing to use an analysis tool built with keras and found a pytorch2keras conversion script. The conversion script only knew how to handle Conv2d layers and gave errors for models with Conv1d layers :(\nIn case this happens to you, here is an example of how to reformat the CNN definition using a Conv2D while ensuring that it still scans along the DNA as if it were a Conv1D:\n\n\nShow the code\nclass DNA_CNN_2D(nn.Module):\n    def __init__(self,\n                 seq_len,\n                 num_filters=31,\n                 kernel_size=3,\n                ):\n        super().__init__()\n        self.seq_len = seq_len\n        \n        self.conv_net = nn.Sequential(\n            nn.Conv2d(1, num_filters, kernel_size=(4,kernel_size)),\n            # ^^ changed from 4 to 1 channel, moved 4 to kernel_size\n            nn.ReLU(),\n            nn.Flatten(),\n            nn.Linear(num_filters*(seq_len-kernel_size+1), 1)\n        ) \n\n    def forward(self, xb):\n        # reshape view to batch_ssize x 4channel x seq_len\n        # permute to put channel in correct order\n        xb = xb.permute(0,2,1).unsqueeze(1)\n        # ^^ Conv2D input fix\n        \n        #print(xb.shape)\n        out = self.conv_net(xb)\n        return out\n\n\n\n\nFOOTNOTE 2\nIf you’re doing a classification task instead of a regression task, you may want to use CrossEntropyLoss. However, CrossEntropyLoss expects a slightly different format than MSELoss - try this:\n\n\nShow the code\nloss = loss_func(xb_out, yb.long().squeeze(1))"
+  },
+  {
+    "objectID": "post/2025-02-20-testing/gradient-descent-illustration.html",
+    "href": "post/2025-02-20-testing/gradient-descent-illustration.html",
+    "title": "Gradient descent illustration",
+    "section": "",
+    "text": "Show the code\nimport numpy as np\nimport pandas as pd\nfrom plotnine import *\n\n\n\n\nShow the code\n# Loss function and its gradient\ndef loss(beta):\n    return beta ** 2\n\ndef grad(beta):\n    return 2 * beta\n\n# Simulate gradient descent\nbeta = 3.5  # random initial value\nlearning_rate = 0.2\nsteps = []\n\nfor i in range(10):\n    current_loss = loss(beta)\n    steps.append({'step': i, 'beta': beta, 'loss': current_loss})\n    beta -= learning_rate * grad(beta)\n\ndf = pd.DataFrame(steps)\n\n# Create full curve for loss function\nbeta_vals = np.linspace(-4, 4, 200)\nloss_vals = loss(beta_vals)\ndf_curve = pd.DataFrame({'beta': beta_vals, 'loss': loss_vals})\n\n# Create arrows for learning steps\ndf_arrows = df[:-1].copy()\ndf_arrows['beta_end'] = df['beta'][1:].values\ndf_arrows['loss_end'] = df['loss'][1:].values\n\n# Plot\np = (\n    ggplot(df_curve, aes('beta', 'loss')) +\n    geom_line(size=1.5, color=\"gray\") +\n    geom_point(df, aes('beta', 'loss'), color='purple', size=3) +\n    geom_point(df.tail(1), aes('beta', 'loss'), color='yellow', size=4) +\n    geom_segment(df_arrows,\n                 aes(x='beta', y='loss', xend='beta_end', yend='loss_end'),\n                 arrow=arrow(length=0.15, type='closed'),\n                 color='gray') +\n    annotate('text', x=3.5, y=12, label='Random\\ninitial value', ha='left') +\n#    annotate('text', x=1.5, y=5, label='Learning step', ha='left') +\n#    annotate('text', x=0, y=0.5, label='Minimum', ha='left') +\n    geom_vline(xintercept=0, linetype='dashed', color='gray') +\n    labs(x=r'$\\beta$', y='Loss') +\n    theme_minimal() +\n    theme(\n        figure_size=(7, 4),\n        axis_title=element_text(size=12),\n        axis_text=element_text(size=10)\n    )\n)\n\np\n\n\n\n\n\n\n\n\n\n\n\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/index.html",
+    "href": "post/2025-03-25-unit00/index.html",
+    "title": "preparing environmentfor unit 00",
+    "section": "",
+    "text": "## download miniconda from the command line\n\nwget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh\n\n## or manually from https://www.anaconda.com/docs/getting-started/miniconda/main\n\n## install miniconda\nbash Miniconda3-latest-Linux-x86_64.sh\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/index.html#install-conda",
+    "href": "post/2025-03-25-unit00/index.html#install-conda",
+    "title": "preparing environmentfor unit 00",
+    "section": "",
+    "text": "## download miniconda from the command line\n\nwget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh\n\n## or manually from https://www.anaconda.com/docs/getting-started/miniconda/main\n\n## install miniconda\nbash Miniconda3-latest-Linux-x86_64.sh"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/index.html#create-conda-environment",
+    "href": "post/2025-03-25-unit00/index.html#create-conda-environment",
+    "title": "preparing environmentfor unit 00",
+    "section": "create conda environment",
+    "text": "create conda environment\nconda create -n gene46100 python=3.12\nconda activate gene46100"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/index.html#do-not-install-packages-with-conda",
+    "href": "post/2025-03-25-unit00/index.html#do-not-install-packages-with-conda",
+    "title": "preparing environmentfor unit 00",
+    "section": "do not install packages with conda",
+    "text": "do not install packages with conda\n(I ran into lots of issues with torch version incompatibility with torchvision and torchmetrics)\n# DONT USE CONDA TO INSTALL PYTORCH at least for now\n# conda install scikit-learn plotnine pytorch \n\n## installing torchvision and torchmetrics forced downgrading torch to 2.3.1 which was not compatible with mps"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/index.html#install-all-packages-within-jupyter-notebook-with-pip",
+    "href": "post/2025-03-25-unit00/index.html#install-all-packages-within-jupyter-notebook-with-pip",
+    "title": "preparing environmentfor unit 00",
+    "section": "install all packages within jupyter notebook with %pip",
+    "text": "install all packages within jupyter notebook with %pip\nas of 2025-03-24\nusing %pip will make sure that the packages are accessible by the kernel you are using for the jupyter notebook\n%pip install scikit-learn plotnine tqdm pandas \n%pip install torch\n%pip install torchvision\n%pip install torchmetrics"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/index.html#install-cursor-or-vscode-to-run-the-jupyter-notebook",
+    "href": "post/2025-03-25-unit00/index.html#install-cursor-or-vscode-to-run-the-jupyter-notebook",
+    "title": "preparing environmentfor unit 00",
+    "section": "install cursor or vscode to run the jupyter notebook",
+    "text": "install cursor or vscode to run the jupyter notebook\n\ninstall the python extension for cursor or vscode.\nselect the python interpreter to be the one in the conda environment you created"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/index.html#to-reproduce-the-environment-exactly",
+    "href": "post/2025-03-25-unit00/index.html#to-reproduce-the-environment-exactly",
+    "title": "preparing environmentfor unit 00",
+    "section": "to reproduce the environment exactly",
+    "text": "to reproduce the environment exactly\n\nsave the environment\n# Save conda packages with their sources\nconda env export --from-history &gt; environment-gene46100.yml\n\n# Save pip-installed packages separately\npip list --format=freeze &gt; requirements-gene46100.txt\n\n# Save full environment state (for reference)\nconda env export &gt; environment_full-gene46100.yml\n\n\nreinstall the environment\n# Create environment from conda packages\nconda env create -f environment-gene46100.yml\n\n# Activate the environment\nconda activate gene46100\n\n# Install pip packages\npip install -r requirements-gene46100.txt"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html",
+    "title": "Quick introduction to deep learning",
+    "section": "",
+    "text": "Understand and implement gradient descent to fit a linear model\nBuild and train a multi-layer perceptron (MLP) using PyTorch\nLearn the basics of PyTorch, including model definition, forward pass, and optimization\n\n\n\nWe’ll start by making sure we have all the required Python packages installed and ready to go. PyTorch is the main library we’ll use for deep learning.\n\n\nShow the code\n## install packages if needed\nif False:\n    %pip install scikit-learn plotnine tqdm pandas\n\n\n\n\nShow the code\nfrom sklearn.datasets import make_regression\nimport numpy as np\nfrom numpy.linalg import inv\nfrom plotnine import qplot, ggplot, geom_point, geom_line, aes, geom_abline\nfrom plotnine.themes import theme_bw\nfrom plotnine.geoms import annotate\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#simulate-linear-data",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#simulate-linear-data",
+    "title": "Quick introduction to deep learning",
+    "section": "Simulate linear data",
+    "text": "Simulate linear data\nWe generate 1000 samples, each with 2 features. We’ll define the “true” coefficients and add a bit of noise to make it realistic.\n\nx: predictors/features (shape: 1000×2)\ny: response variable (shape: 1000×1)\ncoef = [\\(\\beta_1 \\beta_2\\)]: the true coefficients used to generate \\(y\\)\n\n\n\nShow the code\nnp.random.seed(42)\nbias = 0\nnoise = 10\nx, y, coef = make_regression(\n    n_samples=1000,\n    n_features=2,\n    n_informative=2,\n    n_targets=1,\n    bias=bias,\n    noise=noise,\n    coef=True\n    )\n\n\n\nshow simulated x, y, and coef= [\\(\\beta_1 \\beta_2\\)]\n\n\nShow the code\nprint('x.shape:', x.shape)\nprint('y.shape:', y.shape)\nprint('coef.shape:', coef.shape)\n\n\nx.shape: (1000, 2)\ny.shape: (1000,)\ncoef.shape: (2,)\n\n\n\n\nShow the code\nprint('x:\\n',x,'\\n')\nprint('y[0:10]:\\n',y[0:10],'\\n')\nprint('coef:\\n',coef,'\\n')\n\n\nx:\n [[-0.16711808  0.14671369]\n [-0.02090159  0.11732738]\n [ 0.15041891  0.364961  ]\n ...\n [ 0.30263547 -0.75427585]\n [ 0.38193545  0.43004165]\n [ 0.07736831 -0.8612842 ]] \n\ny[0:10]:\n [-14.99694989 -12.67808888  17.77545452   6.66146467 -14.19552996\n -25.24484815 -39.23162627 -52.01803821   5.76368853 -50.11860295] \n\ncoef:\n [40.71064891  6.60098441]"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#predict-y-with-ground-truth-parameters",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#predict-y-with-ground-truth-parameters",
+    "title": "Quick introduction to deep learning",
+    "section": "Predict y with ground truth parameters",
+    "text": "Predict y with ground truth parameters\nSince we know the true coefficients, we can directly compute the predicted y and visualize how well they fit.\n\n\nShow the code\ny_hat = x.dot(coef) + bias\n\n\n\ncompare \\(\\hat{y}\\) and \\(y\\)\n\n\nShow the code\n(qplot(x=y, y=y_hat, geom=\"point\", xlab=\"y\", ylab=\"y_hat\") + geom_abline(intercept=0, slope=1, color='gray', linetype='dashed'))"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#compute-analytical-solution",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#compute-analytical-solution",
+    "title": "Quick introduction to deep learning",
+    "section": "Compute analytical solution",
+    "text": "Compute analytical solution\nFor linear regression, there’s a closed-form solution known as the normal equation:\n\\(\\hat{\\beta} = (X^T X)^{-1} X^T y\\)\nThis gives us the optimal coefficients that minimize mean square errors.\nLet’s get \\(\\hat{\\beta}\\) and compare it with the ground truth.\n\nExercise\nDerive the normal equation from the model, using matrix algebra\n\n\nShow the code\nvar = x.transpose().dot(x)\ncov = x.transpose().dot(y)\nb_hat = inv(var).dot(cov)\n\n\n\n\nShow the code\nprint(\"Estimated\")\nprint(b_hat)\n\nprint(\"Ground truth\")\nprint(coef)\n\n\nEstimated\n[41.06972678  6.79965716]\nGround truth\n[40.71064891  6.60098441]\n\n\n\n\nResult Comparison\nEstimated coefficients using the normal equation are close to the true ones, despite noise. That’s a good sanity check.\n\n\nExercise\n\nPlot the prediction with the analystical estimates vs the target \\(y\\)"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#define-stochastic-gradient-descent-sgd",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#define-stochastic-gradient-descent-sgd",
+    "title": "Quick introduction to deep learning",
+    "section": "Define Stochastic Gradient Descent (SGD)",
+    "text": "Define Stochastic Gradient Descent (SGD)\nWhen analytical solutions aren’t available (which is often), we rely on numerical optimization like gradient descent.\nAlthough linear regression has analytical solutions, this is unfortunately not the case for many other models. We may need to resort to numerical approximations to find the optimal parameters. One of the most popular numerical optimizers is called stochastic gradient descent."
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#what-is-a-gradient",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#what-is-a-gradient",
+    "title": "Quick introduction to deep learning",
+    "section": "What is a Gradient?",
+    "text": "What is a Gradient?\nA gradient is the derivative of a function, and it tells us how to adjust parameters to reduce the error.\n$f’() = _{→ 0} = $"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#what-is-gradient-descent",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#what-is-gradient-descent",
+    "title": "Quick introduction to deep learning",
+    "section": "What is Gradient Descent?",
+    "text": "What is Gradient Descent?\nAn optimization algorithm that iteratively updates parameters in the direction of steepest descent (negative gradient) to minimize a loss function.\n\nLearning rate (\\(\\alpha\\)): step size. It is a hyperparameters that determines how fast we move in the direction of the gradient.\nLoss surface: the landscape we are optimizing over\n\nAt a particular \\(β_i\\), we find the gradient \\(f'(\\beta)\\), and take a step along the direction of the gradient to find the next point \\(\\beta_{i+1}\\).\n\\(\\beta_{i+1} = \\beta_i - \\alpha f'(\\beta_i)\\)\nThe \\(\\alpha\\) is called the learning rate.\n\n\n\ngradient descent"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#what-is-stochastic-gradient-descent",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#what-is-stochastic-gradient-descent",
+    "title": "Quick introduction to deep learning",
+    "section": "What is stochastic gradient descent?",
+    "text": "What is stochastic gradient descent?\nIn real-world applications, the size of our dataset is so large that it is impossible to calculate the gradient using all data points. Therefore, we take a small chunk (called a “batch”) of the dataset to calcalate the gradient. This approximates the full-data gradients, thus the word stochastic."
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#three-components-of-machine-learning",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#three-components-of-machine-learning",
+    "title": "Quick introduction to deep learning",
+    "section": "Three Components of Machine Learning",
+    "text": "Three Components of Machine Learning\nTo build a machine learning model, we need:\n\nModel: Defines the hypothesis space (e.g., linear model)\nLoss Function: Measures how well the model fits\nOptimizer: Updates parameters to reduce the loss (e.g., SGD)"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#define-the-loss-function",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#define-the-loss-function",
+    "title": "Quick introduction to deep learning",
+    "section": "Define the Loss Function",
+    "text": "Define the Loss Function\nCommon choice for regression: Mean Squared Error (MSE)\n\\(\\ell(\\beta) = \\frac{1}{2}\\sum\\limits_{i=1}^m (f(\\beta)^{i} - y^{i})^2 / m\\)"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#compute-the-gradient",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#compute-the-gradient",
+    "title": "Quick introduction to deep learning",
+    "section": "Compute the gradient",
+    "text": "Compute the gradient\n\\(\\frac{\\partial}{\\partial \\beta_j}\\ell(\\beta) = \\frac{\\partial}{\\partial \\beta_j} \\frac{1}{2} \\sum_i (f(\\beta)^i - y^i)^2 =  \\sum_i (f(\\beta)^i - y^i) x_j\\)\nRecall that in our example $ f() = = _1 x_1 + _2 x_2$. Here \\(\\beta_j\\) is either \\(\\beta_1\\) or \\(\\beta_2\\).\n\nExercise\nShow that the derivative of the loss function is as stated above."
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#optimize-estimate-parameters-with-gradient-descent",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#optimize-estimate-parameters-with-gradient-descent",
+    "title": "Quick introduction to deep learning",
+    "section": "Optimize: estimate parameters with gradient descent",
+    "text": "Optimize: estimate parameters with gradient descent\n\n\nShow the code\nlr = 0.1 # learning rate\nb = [0.0, 0.0] # initialize all betas to 0\nn_examples = len(y)\ntrajectory = [b]\n\nfor _ in range(50): # 50 steps\n  diff = x.dot(b) - y\n  grad = diff.dot(x) / n_examples\n  b -= lr*grad\n  trajectory.append(b.copy())\n\ntrajectory = np.stack(trajectory, axis=1)\n\n\n\n\nShow the code\nqplot(x=trajectory[0], y=trajectory[1], xlab=\"beta_1\", ylab=\"beta_2\", geom=[\"point\", \"line\"]) + theme_bw() + annotate(geom=\"point\", x=coef[0], y=coef[1], size=8, color=\"blue\",shape='+',stroke=1)\n\n\n\n\n\n\n\n\n\n\nExercise\n\nAdd to the plot the normal equation estimates (traditional linear regression) of the coefficients in a different green\n\n\n\nExercise\n\nSimulate \\(y\\) with larger noise, estimate the regression coefficients using the normal equation and the gradient descent method, and plot the trajectory, the ground truth, and the two estimates for comparison."
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#simulate-non-linear-data",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#simulate-non-linear-data",
+    "title": "Quick introduction to deep learning",
+    "section": "Simulate non linear data",
+    "text": "Simulate non linear data\nLet’s start by simulating data according to the generative model:\n$ y = x_1^3$\n\n\nShow the code\nx = np.random.normal(size=1000)\ny = x ** 3"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#predict-with-simple-linear-model",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#predict-with-simple-linear-model",
+    "title": "Quick introduction to deep learning",
+    "section": "Predict with simple linear model",
+    "text": "Predict with simple linear model\nLet’s try to predict with a simple linear regression model\n$ y = X $\n\nQuestion\nhow many parameters do we need to estimate for this simple linear model?\n\n\nShow the code\nlr = 0.1 # learning rate\nb = 0.0 # initialize all betas to 0\nn_examples = len(y)\n\nfor _ in range(50): # 50 steps\n  diff = x.dot(b) - y\n  grad = diff.dot(x) / n_examples\n  b -= lr*grad\n\n\n\n\nShow the code\ny_hat = x.dot(b)\n( qplot(x = y, y=y_hat, geom=\"point\", xlab=\"y\", ylab=\"y_hat\") +\ngeom_abline(intercept=0, slope=1, color='gray', linetype='dashed') )\n\n\n\n\n\n\n\n\n\n\n\nWe would like to be closer to the dashed gray, identity line! Let’s try MLP."
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#install-packages-if-needed",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#install-packages-if-needed",
+    "title": "Quick introduction to deep learning",
+    "section": "Install packages if needed",
+    "text": "Install packages if needed\n\n\nShow the code\n## install packages if needed\nif False:  # Change to True to run the commands\n    %pip install tqdm\n    %pip install torch\n    %pip install torchvision torchmetrics\n\n\n\n\nShow the code\nimport torch\nprint(torch.__version__)\n## if on a mac check if mps is available so you use gpu\n## print(torch.backends.mps.is_available())\n\n\n2.6.0\n\n\n\nDefine a non linear MLP\n\n\nShow the code\nimport torch\nfrom torch import nn\nimport torch.nn.functional as F\n#device = torch.device(\"cuda\")\ndevice = torch.device(\"mps\") ## use this line instead of the one above withb cuda\n\n\nclass MLP(nn.Module):\n  def __init__(self, input_dim, hid_dim, output_dim):\n    super().__init__()\n    self.fc1 = nn.Linear(input_dim, hid_dim)\n    self.fc2 = nn.Linear(hid_dim, output_dim)\n\n  def forward(self, x):\n    x = F.relu(self.fc1(x))\n    y = self.fc2(x)\n\n    return y.squeeze(1)\n\nmlp = MLP(input_dim=1, hid_dim=1024, output_dim=1).to(device)"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#train-mlp-model-using-pytorch",
+    "href": "post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html#train-mlp-model-using-pytorch",
+    "title": "Quick introduction to deep learning",
+    "section": "train MLP model using pytorch",
+    "text": "train MLP model using pytorch\nWe are now ready to train our model. To understand how our model is doing, we record the loss vs step, which is called the learning curve in ML literature.\n\n\nShow the code\nx_tensor = torch.Tensor(x).unsqueeze(1).to(device)\ny_tensor = torch.Tensor(y).to(device)\nlearning_curve = []\n\noptimizer = torch.optim.SGD(mlp.parameters(), lr=0.001)\nloss_fn = nn.MSELoss()\n\nfor epoch in range(10000):\n  optimizer.zero_grad()\n  y_hat = mlp(x_tensor)\n  loss = loss_fn(y_hat, y_tensor)\n  learning_curve.append(loss.item())\n  loss.backward()\n  optimizer.step()\n\n\n\n---------------------------------------------------------------------------\nNameError                                 Traceback (most recent call last)\nCell In[33], line 5\n      3 learning_curve = []\n      4 for epoch in range(10000):\n----&gt; 5   optimizer.zero_grad()\n      6   y_hat = mlp(x_tensor)\n      7   loss = loss_fn(y_hat, y_tensor)\n\nNameError: name 'optimizer' is not defined\n\n\n\n\n\nShow the code\nqplot(x=range(10000), y=learning_curve, xlab=\"epoch\", ylab=\"loss\")\n\n\n\n\n\n\n\n\n\n\n\nShow the code\ny_hat = mlp(x_tensor)\ny_hat = y_hat.detach().cpu().numpy()\n#qplot(x=y, y=y_hat, geom=\"point\", xlab=\"y\", ylab=\"y_hat\")\nqplot(x=y, y=y_hat, geom=[\"point\", \"abline\"],\n      xlab=\"y\", ylab=\"y_hat\",\n      abline=dict(slope=1, intercept=0, color='red', linetype='dashed'))\n\n\n\n\n\n\n\n\n\nNow this looks much better!"
+  }
+]
