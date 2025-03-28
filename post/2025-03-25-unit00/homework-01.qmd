@@ -17,11 +17,12 @@ draft: false
 
 # Homework 1
 
-- [ ] run all the code in the [notebook](hands-on-introduction-to-deep-learning.ipynb)
-- [ ] complete the exercises in the notebook
-- [ ] submit the pdf printout of the notebook to canvas
+- [ ] set up the environment on macos as described in the [page](index.qmd) (10 points)
+- [ ] git clone the course repository to your local machine (10 points)
 
-- [ ] set up the environment on macos as described in the [page](index.qmd)
-- [ ] git clone the course repository to your local machine
+- [ ] run all the code in the [notebook](https://github.com/hakyimlab/web-GENE-46100/blob/main/post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.ipynb) (20 points)
+- [ ] complete the exercises in the notebook (30 points)
+- [ ] submit the jupyter notebook with the results to canvas assignment
 
+Ask the TA 
 
