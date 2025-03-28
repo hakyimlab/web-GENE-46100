@@ -9,7 +9,7 @@
 <meta name="author" content="Boxiang Liu, modified by Haky Im">
 <meta name="dcterms.date" content="2025-03-25">
 
-<title>Quick introduction to deep learning – HKI Courses</title>
+<title>Quick introduction to deep learning – GENE 46100</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +144,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">HKI Courses</span>
+    <span class="navbar-title">GENE 46100</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -156,26 +156,6 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <span class="nav-link">
-<span class="menu-text">index-qgt.qmd</span>
-    </span>
-  </li>  
-  <li class="nav-item">
-    <span class="nav-link">
-<span class="menu-text">index-bios-25328.qmd</span>
-    </span>
-  </li>  
-  <li class="nav-item">
-    <span class="nav-link">
-<span class="menu-text">index-gene-46100.qmd</span>
-    </span>
-  </li>  
-  <li class="nav-item">
-    <span class="nav-link">
-<span class="menu-text">index-logistics.qmd</span>
-    </span>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -311,7 +291,7 @@ window.Quarto = {
 <section id="install-and-load-some-packages" class="level3">
 <h3 class="anchored" data-anchor-id="install-and-load-some-packages">Install and load some packages</h3>
 <p>We’ll start by making sure we have all the required Python packages installed and ready to go. PyTorch is the main library we’ll use for deep learning.</p>
-<div id="cell-4" class="cell" data-executioninfo="{&quot;elapsed&quot;:2,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869152724,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="35">
+<div id="cell-4" class="cell" data-executioninfo="{&quot;elapsed&quot;:2,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869152724,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">## install packages if needed</span></span>
@@ -319,7 +299,7 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install scikit<span class="op">-</span>learn plotnine tqdm pandas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-5" class="cell" data-executioninfo="{&quot;elapsed&quot;:6183,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869160317,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="36">
+<div id="cell-5" class="cell" data-executioninfo="{&quot;elapsed&quot;:6183,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869160317,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_regression</span>
@@ -346,7 +326,7 @@ window.Quarto = {
 <li>y: response variable (shape: 1000×1)</li>
 <li>coef = [<span class="math inline">\(\beta_1 \beta_2\)</span>]: the true coefficients used to generate <span class="math inline">\(y\)</span></li>
 </ul>
-<div id="cell-8" class="cell" data-executioninfo="{&quot;elapsed&quot;:2,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742878320952,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="37">
+<div id="cell-8" class="cell" data-executioninfo="{&quot;elapsed&quot;:2,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742878320952,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="20">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
@@ -365,7 +345,7 @@ window.Quarto = {
 </div>
 <section id="show-simulated-x-y-and-coef-beta_1-beta_2" class="level3">
 <h3 class="anchored" data-anchor-id="show-simulated-x-y-and-coef-beta_1-beta_2">show simulated x, y, and coef= [<span class="math inline">\(\beta_1 \beta_2\)</span>]</h3>
-<div id="cell-10" class="cell" data-execution_count="38">
+<div id="cell-10" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'x.shape:'</span>, x.shape)</span>
@@ -378,7 +358,7 @@ y.shape: (1000,)
 coef.shape: (2,)</code></pre>
 </div>
 </div>
-<div id="cell-11" class="cell" data-execution_count="39">
+<div id="cell-11" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'x:</span><span class="ch">\n</span><span class="st">'</span>,x,<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
@@ -409,7 +389,7 @@ coef:
 <section id="predict-y-with-ground-truth-parameters" class="level2">
 <h2 class="anchored" data-anchor-id="predict-y-with-ground-truth-parameters">Predict y with ground truth parameters</h2>
 <p>Since we know the true coefficients, we can directly compute the predicted y and visualize how well they fit.</p>
-<div id="cell-13" class="cell" data-executioninfo="{&quot;elapsed&quot;:6,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742878325852,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="40">
+<div id="cell-13" class="cell" data-executioninfo="{&quot;elapsed&quot;:6,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742878325852,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="23">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> x.dot(coef) <span class="op">+</span> bias</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -417,7 +397,7 @@ coef:
 </div>
 <section id="compare-haty-and-y" class="level3">
 <h3 class="anchored" data-anchor-id="compare-haty-and-y">compare <span class="math inline">\(\hat{y}\)</span> and <span class="math inline">\(y\)</span></h3>
-<div id="cell-15" class="cell" data-executioninfo="{&quot;elapsed&quot;:299,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742878331117,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="9168e185-0c92-4ce8-aa2b-29a3bd8724f1" data-execution_count="41">
+<div id="cell-15" class="cell" data-executioninfo="{&quot;elapsed&quot;:299,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742878331117,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="9168e185-0c92-4ce8-aa2b-29a3bd8724f1" data-execution_count="24">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(qplot(x<span class="op">=</span>y, y<span class="op">=</span>y_hat, geom<span class="op">=</span><span class="st">"point"</span>, xlab<span class="op">=</span><span class="st">"y"</span>, ylab<span class="op">=</span><span class="st">"y_hat"</span>) <span class="op">+</span> geom_abline(intercept<span class="op">=</span><span class="dv">0</span>, slope<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'gray'</span>, linetype<span class="op">=</span><span class="st">'dashed'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -441,7 +421,7 @@ coef:
 <section id="exercise" class="level3">
 <h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
 <p>Derive the normal equation from the model, using matrix algebra</p>
-<div id="cell-18" class="cell" data-executioninfo="{&quot;elapsed&quot;:5,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869173429,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="42">
+<div id="cell-18" class="cell" data-executioninfo="{&quot;elapsed&quot;:5,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869173429,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="25">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>var <span class="op">=</span> x.transpose().dot(x)</span>
@@ -449,7 +429,7 @@ coef:
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>b_hat <span class="op">=</span> inv(var).dot(cov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-19" class="cell" data-executioninfo="{&quot;elapsed&quot;:8,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869174652,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="117ee495-8762-479e-bf12-420d77efe94e" data-execution_count="43">
+<div id="cell-19" class="cell" data-executioninfo="{&quot;elapsed&quot;:8,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869174652,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="117ee495-8762-479e-bf12-420d77efe94e" data-execution_count="26">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estimated"</span>)</span>
@@ -533,7 +513,7 @@ Ground truth
 </section>
 <section id="optimize-estimate-parameters-with-gradient-descent" class="level2">
 <h2 class="anchored" data-anchor-id="optimize-estimate-parameters-with-gradient-descent">Optimize: estimate parameters with gradient descent</h2>
-<div id="cell-34" class="cell" data-executioninfo="{&quot;elapsed&quot;:40,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869194536,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="44">
+<div id="cell-34" class="cell" data-executioninfo="{&quot;elapsed&quot;:40,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869194536,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="27">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">0.1</span> <span class="co"># learning rate</span></span>
@@ -550,7 +530,7 @@ Ground truth
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>trajectory <span class="op">=</span> np.stack(trajectory, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-35" class="cell" data-executioninfo="{&quot;elapsed&quot;:724,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869200547,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="4bcff844-74bf-4560-acea-0f3bf2aac83a" data-execution_count="45">
+<div id="cell-35" class="cell" data-executioninfo="{&quot;elapsed&quot;:724,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742869200547,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="4bcff844-74bf-4560-acea-0f3bf2aac83a" data-execution_count="28">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>qplot(x<span class="op">=</span>trajectory[<span class="dv">0</span>], y<span class="op">=</span>trajectory[<span class="dv">1</span>], xlab<span class="op">=</span><span class="st">"beta_1"</span>, ylab<span class="op">=</span><span class="st">"beta_2"</span>, geom<span class="op">=</span>[<span class="st">"point"</span>, <span class="st">"line"</span>]) <span class="op">+</span> theme_bw() <span class="op">+</span> annotate(geom<span class="op">=</span><span class="st">"point"</span>, x<span class="op">=</span>coef[<span class="dv">0</span>], y<span class="op">=</span>coef[<span class="dv">1</span>], size<span class="op">=</span><span class="dv">8</span>, color<span class="op">=</span><span class="st">"blue"</span>,shape<span class="op">=</span><span class="st">'+'</span>,stroke<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -595,7 +575,7 @@ Ground truth
 <h2 class="anchored" data-anchor-id="simulate-non-linear-data">Simulate non linear data</h2>
 <p>Let’s start by simulating data according to the generative model:</p>
 <p>$ y = x_1^3$</p>
-<div id="cell-42" class="cell" data-executioninfo="{&quot;elapsed&quot;:6,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881014146,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="46">
+<div id="cell-42" class="cell" data-executioninfo="{&quot;elapsed&quot;:6,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881014146,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="29">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.normal(size<span class="op">=</span><span class="dv">1000</span>)</span>
@@ -610,7 +590,7 @@ Ground truth
 <section id="question" class="level3">
 <h3 class="anchored" data-anchor-id="question">Question</h3>
 <p>how many parameters do we need to estimate for this simple linear model?</p>
-<div id="cell-45" class="cell" data-executioninfo="{&quot;elapsed&quot;:3,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881016770,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="47">
+<div id="cell-45" class="cell" data-executioninfo="{&quot;elapsed&quot;:3,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881016770,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="30">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">0.1</span> <span class="co"># learning rate</span></span>
@@ -623,7 +603,7 @@ Ground truth
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  b <span class="op">-=</span> lr<span class="op">*</span>grad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-46" class="cell" data-executioninfo="{&quot;elapsed&quot;:274,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881019706,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="2fe5afd8-e5b3-41e0-87c4-1fc17a34119c" data-execution_count="48">
+<div id="cell-46" class="cell" data-executioninfo="{&quot;elapsed&quot;:274,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881019706,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="2fe5afd8-e5b3-41e0-87c4-1fc17a34119c" data-execution_count="31">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> x.dot(b)</span>
@@ -697,7 +677,7 @@ Ground truth
 <p>In this section, we’ll build a simple PyTorch model to predict y from x, demonstrating how these features make deep learning more accessible and efficient. Let’s start by defining our model architecture: a neural network with one hidden layer containing three nodes.</p>
 <section id="install-packages-if-needed" class="level2">
 <h2 class="anchored" data-anchor-id="install-packages-if-needed">Install packages if needed</h2>
-<div id="cell-57" class="cell" data-executioninfo="{&quot;elapsed&quot;:3,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881023621,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="49">
+<div id="cell-57" class="cell" data-executioninfo="{&quot;elapsed&quot;:3,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881023621,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="32">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">## install packages if needed</span></span>
@@ -707,7 +687,7 @@ Ground truth
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install torchvision torchmetrics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="cell-58" class="cell" data-executioninfo="{&quot;elapsed&quot;:5,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881025164,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="fc9d5e55-8d15-4de6-ebbc-a2d8ce81d0a3" data-execution_count="50">
+<div id="cell-58" class="cell" data-executioninfo="{&quot;elapsed&quot;:5,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881025164,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="fc9d5e55-8d15-4de6-ebbc-a2d8ce81d0a3" data-execution_count="33">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -721,7 +701,7 @@ Ground truth
 </div>
 <section id="define-a-non-linear-mlp" class="level3">
 <h3 class="anchored" data-anchor-id="define-a-non-linear-mlp">Define a non linear MLP</h3>
-<div id="cell-60" class="cell" data-executioninfo="{&quot;elapsed&quot;:7,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881165105,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="51">
+<div id="cell-60" class="cell" data-executioninfo="{&quot;elapsed&quot;:7,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881165105,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="34">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -751,7 +731,7 @@ Ground truth
 <section id="train-mlp-model-using-pytorch" class="level2">
 <h2 class="anchored" data-anchor-id="train-mlp-model-using-pytorch">train MLP model using pytorch</h2>
 <p>We are now ready to train our model. To understand how our model is doing, we record the loss vs step, which is called the <strong>learning curve</strong> in ML literature.</p>
-<div id="cell-64" class="cell" data-executioninfo="{&quot;elapsed&quot;:9467,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881177074,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="33">
+<div id="cell-64" class="cell" data-executioninfo="{&quot;elapsed&quot;:9467,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881177074,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-execution_count="35">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x_tensor <span class="op">=</span> torch.Tensor(x).unsqueeze(<span class="dv">1</span>).to(device)</span>
@@ -769,22 +749,8 @@ Ground truth
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  loss.backward()</span>
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  optimizer.step()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[33]</span><span class="ansi-green-fg">, line 5</span>
-<span class="ansi-green-fg">      3</span> learning_curve = []
-<span class="ansi-green-fg">      4</span> <span style="font-weight:bold;color:rgb(0,135,0)">for</span> epoch <span style="font-weight:bold;color:rgb(175,0,255)">in</span> <span style="color:rgb(0,135,0)">range</span>(<span class="ansi-green-fg">10000</span>):
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">5</span>   <span class="ansi-yellow-bg">optimizer</span>.zero_grad()
-<span class="ansi-green-fg">      6</span>   y_hat = mlp(x_tensor)
-<span class="ansi-green-fg">      7</span>   loss = loss_fn(y_hat, y_tensor)
-
-<span class="ansi-red-fg">NameError</span>: name 'optimizer' is not defined</pre>
 </div>
-</div>
-</div>
-<div id="cell-65" class="cell" data-executioninfo="{&quot;elapsed&quot;:605,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881180913,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="bcd13159-fe28-4ff5-9981-4c1e47e49695" data-execution_count="62">
+<div id="cell-65" class="cell" data-executioninfo="{&quot;elapsed&quot;:605,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881180913,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="bcd13159-fe28-4ff5-9981-4c1e47e49695" data-execution_count="37">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>qplot(x<span class="op">=</span><span class="bu">range</span>(<span class="dv">10000</span>), y<span class="op">=</span>learning_curve, xlab<span class="op">=</span><span class="st">"epoch"</span>, ylab<span class="op">=</span><span class="st">"loss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -797,7 +763,7 @@ Ground truth
 </div>
 </div>
 </div>
-<div id="cell-66" class="cell" data-executioninfo="{&quot;elapsed&quot;:253,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881183386,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="55688970-ee03-413b-db6c-2b2c2c5dbf4a" data-execution_count="63">
+<div id="cell-66" class="cell" data-executioninfo="{&quot;elapsed&quot;:253,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1742881183386,&quot;user&quot;:{&quot;displayName&quot;:&quot;Hae Kyung Im&quot;,&quot;userId&quot;:&quot;15264871052778021308&quot;},&quot;user_tz&quot;:300}" data-outputid="55688970-ee03-413b-db6c-2b2c2c5dbf4a" data-execution_count="38">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> mlp(x_tensor)</span>

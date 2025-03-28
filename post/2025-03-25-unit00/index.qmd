@@ -1,7 +1,7 @@
 ---
 title: preparing environmentfor unit 00
 author: Haky Im
-date: 2025-03-25
+date: 2025-03-24
 description: setting up conda environement and installing packages
 categories:
   - gene46100
