@@ -12,3 +12,9 @@ title-block-banner: false
 ---
 
 Edit source [here](https://github.com/hakyimlab/web-GENE-46100)
+
+
+
+This page contains material for the GENE46100 Deep learning in genomics course. Find this year's syllabus [here](https://docs.google.com/document/d/17X3LEh_C-34JfXJcKJfFY8ew8MHBsxc_z0DPEuIlzwE/edit?usp=sharing).
+
+
