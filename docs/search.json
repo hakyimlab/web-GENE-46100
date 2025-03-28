@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Deep Learning in Genomics Course Material",
     "section": "",
-    "text": "Edit source here\nThis page contains material for the GENE46100 Deep learning in genomics course. Find this year’s syllabus here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPytorch tutorial using DNA\n\n\n\n\n\n\ngene46100\n\n\nnotebook\n\n\n\n\n\n\n\n\n\nMar 26, 2025\n\n\nErin Wilson\n\n\n\n\n\n\n\n\n\n\n\n\nQuick introduction to deep learning\n\n\n\n\n\n\ngene46100\n\n\nnotebook\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nBoxiang Liu, modified by Haky Im\n\n\n\n\n\n\n\n\n\n\n\n\npreparing environmentfor unit 00\n\n\n\n\n\n\ngene46100\n\n\nhowto\n\n\n\nsetting up conda environement and installing packages\n\n\n\n\n\nMar 24, 2025\n\n\nHaky Im\n\n\n\n\n\n\n\n\n\n\n\n\nGradient descent illustration\n\n\n\n\n\n\n\n\n\n\n\nJan 1, 2025\n\n\nHaky Im\n\n\n\n\n\n\nNo matching items\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+    "text": "Edit source here\nThis page contains material for the GENE46100 Deep learning in genomics course. Find this year’s syllabus here.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nhomework 1\n\n\n\n\n\n\nGENE46100\n\n\nhomework\n\n\n\n\n\n\n\n\n\nMar 28, 2025\n\n\n\n\n\n\n\n\n\n\n\n\nPytorch tutorial using DNA\n\n\n\n\n\n\ngene46100\n\n\nnotebook\n\n\n\n\n\n\n\n\n\nMar 26, 2025\n\n\nErin Wilson\n\n\n\n\n\n\n\n\n\n\n\n\nQuick introduction to deep learning\n\n\n\n\n\n\ngene46100\n\n\nnotebook\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nBoxiang Liu, modified by Haky Im\n\n\n\n\n\n\n\n\n\n\n\n\npreparing environmentfor unit 00\n\n\n\n\n\n\ngene46100\n\n\nhowto\n\n\n\nsetting up conda environement and installing packages\n\n\n\n\n\nMar 24, 2025\n\n\nHaky Im\n\n\n\n\n\n\n\n\n\n\n\n\nGradient descent illustration\n\n\n\n\n\n\n\n\n\n\n\nJan 1, 2025\n\n\nHaky Im\n\n\n\n\n\n\nNo matching items\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
   },
   {
     "objectID": "post/2025-03-25-unit00/basic_DNA_tutorial.html",
@@ -187,5 +187,12 @@
     "title": "Quick introduction to deep learning",
     "section": "train MLP model using pytorch",
     "text": "train MLP model using pytorch\nWe are now ready to train our model. To understand how our model is doing, we record the loss vs step, which is called the learning curve in ML literature.\n\n\nShow the code\nx_tensor = torch.Tensor(x).unsqueeze(1).to(device)\ny_tensor = torch.Tensor(y).to(device)\nlearning_curve = []\n\noptimizer = torch.optim.SGD(mlp.parameters(), lr=0.001)\nloss_fn = nn.MSELoss()\n\nfor epoch in range(10000):\n  optimizer.zero_grad()\n  y_hat = mlp(x_tensor)\n  loss = loss_fn(y_hat, y_tensor)\n  learning_curve.append(loss.item())\n  loss.backward()\n  optimizer.step()\n\n\n\n\nShow the code\nqplot(x=range(10000), y=learning_curve, xlab=\"epoch\", ylab=\"loss\")\n\n\n\n\n\n\n\n\n\n\n\nShow the code\ny_hat = mlp(x_tensor)\ny_hat = y_hat.detach().cpu().numpy()\n#qplot(x=y, y=y_hat, geom=\"point\", xlab=\"y\", ylab=\"y_hat\")\nqplot(x=y, y=y_hat, geom=[\"point\", \"abline\"],\n      xlab=\"y\", ylab=\"y_hat\",\n      abline=dict(slope=1, intercept=0, color='red', linetype='dashed'))\n\n\n\n\n\n\n\n\n\nNow this looks much better!"
+  },
+  {
+    "objectID": "post/2025-03-25-unit00/homework-01.html",
+    "href": "post/2025-03-25-unit00/homework-01.html",
+    "title": "homework 1",
+    "section": "",
+    "text": "Homework 1\n\nrun all the code in the notebook\ncomplete the exercises in the notebook\nsubmit the pdf printout of the notebook to canvas\nset up the environment on macos as described in the page\ngit clone the course repository to your local machine\n\n\n\n\n\n\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
   }
 ]

@@ -1,0 +1,27 @@
+---
+title: homework 1
+date: 2025-03-28
+categories:
+  - GENE46100
+  - homework
+format:
+  html:
+    toc: true
+    code-fold: false
+    code-summary: "Show the code"
+    code-tools: true
+    code-overflow: wrap
+date-modified: last-modified
+draft: false
+---
+
+# Homework 1
+
+- [ ] run all the code in the [notebook](hands-on-introduction-to-deep-learning.ipynb)
+- [ ] complete the exercises in the notebook
+- [ ] submit the pdf printout of the notebook to canvas
+
+- [ ] set up the environment on macos as described in the [page](index.qmd)
+- [ ] git clone the course repository to your local machine
+
+
