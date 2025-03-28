@@ -1,0 +1,12 @@
+{
+  "hash": "f696f3f611e85f74d74786fc835acbe3",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: preparing environmentfor unit 00\nauthor: Haky Im\ndate: 2025-03-24\ndescription: setting up conda environement and installing packages\ncategories:\n  - gene46100\n  - howto\neval: false\n---\n\n\n## install conda\n\n\n```{bash}\n\n## download miniconda from the command line\n\nwget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh\n\n## or manually from https://www.anaconda.com/docs/getting-started/miniconda/main\n\n## install miniconda\nbash Miniconda3-latest-Linux-x86_64.sh\n\n```\n\n\n## create conda environment\n\n```{bash}\nconda create -n gene46100 python=3.12\nconda activate gene46100\n\n```\n\n\n## do not install packages with conda\n(I ran into lots of issues with torch version incompatibility with torchvision and torchmetrics)\n\n```{bash}\n# DONT USE CONDA TO INSTALL PYTORCH at least for now\n# conda install scikit-learn plotnine pytorch \n\n## installing torchvision and torchmetrics forced downgrading torch to 2.3.1 which was not compatible with mps\n\n```\n\n\n## install all packages within jupyter notebook with %pip\nas of 2025-03-24\n\nusing %pip will make sure that the packages are accessible by the kernel you are using for the jupyter notebook\n\n```{bash}\n%pip install scikit-learn plotnine tqdm pandas \n%pip install torch\n%pip install torchvision\n%pip install torchmetrics\n```\n\n\n\n## install cursor or vscode to run the jupyter notebook\n\n\n- install the python extension for cursor or vscode.\n\n- select the python interpreter to be the one in the conda environment you created \n\n\n\n\n--------------------------------\n\n## to reproduce the environment exactly\n### save the environment\n\n```{bash}\n# Save conda packages with their sources\nconda env export --from-history > environment-gene46100.yml\n\n# Save pip-installed packages separately\npip list --format=freeze > requirements-gene46100.txt\n\n# Save full environment state (for reference)\nconda env export > environment_full-gene46100.yml\n```\n\n\n### reinstall the environment\n\n```{bash}\n# Create environment from conda packages\nconda env create -f environment-gene46100.yml\n\n# Activate the environment\nconda activate gene46100\n\n# Install pip packages\npip install -r requirements-gene46100.txt\n\n```\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

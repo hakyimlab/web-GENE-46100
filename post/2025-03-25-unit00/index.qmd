@@ -65,8 +65,10 @@ using %pip will make sure that the packages are accessible by the kernel you are
 
 --------------------------------
 
-## to reproduce the environment exactly
-### save the environment
+## The following steps are for saving the environment just in case. No need to run them.
+
+### to reproduce the environment exactly
+#### save the environment
 ```{bash}
 # Save conda packages with their sources
 conda env export --from-history > environment-gene46100.yml
@@ -78,7 +80,7 @@ pip list --format=freeze > requirements-gene46100.txt
 conda env export > environment_full-gene46100.yml
 ```
 
-### reinstall the environment
+#### reinstall the environment
 ```{bash}
 # Create environment from conda packages
 conda env create -f environment-gene46100.yml
