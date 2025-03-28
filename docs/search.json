@@ -25,7 +25,7 @@
     "href": "post/2025-03-25-unit00/homework-01.html",
     "title": "homework 1",
     "section": "",
-    "text": "Homework 1\n\nset up the environment on macos as described in the page (10 points)\ngit clone the course repository to your local machine (10 points)\nrun all the code in the notebook (20 points)\ncomplete the exercises in the notebook (30 points)\nsubmit the jupyter notebook with the results to canvas assignment\n\nAsk the TA\n\n\n\n\n\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+    "text": "Homework 1\n\nset up the environment on macos as described in the page (10 points)\ngit clone the course repository to your local machine (10 points)\nrun all the code in the notebook. You should also be able to find the notebook in your cloned course repository. (20 points)\ncomplete the exercises in the notebook (30 points)\nsubmit the jupyter notebook with the results to canvas assignment\n\nAsk the TA\n\n\n\n\n\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
   },
   {
     "objectID": "post/2025-02-20-testing/gradient-descent-illustration.html",
