@@ -1,0 +1,73 @@
+---
+title: "Slides unit 00"
+date: "2023-02-20"
+---
+
+
+
+# What is an MLP (Multilayer Perceptron)?
+
+## Core Idea
+
+An MLP is a fully connected feedforward neural network — the classic deep learning architecture.
+
+## Architecture
+
+Input Layer → Hidden Layer(s) → Output Layer
+
+Each layer performs:
+
+output = activation(Wx + b)
+
+Where:
+
+    W = weight matrix
+
+    x = input vector
+
+    b = bias
+
+    activation = non-linear function like ReLU
+
+# Anatomy of Model Training in Deep Learning
+
+## 1. Data ➡️ Model Input
+
+    DNA/RNA/protein sequences → One-hot encoded or embedded tensors
+
+    Wrapped in custom Dataset + DataLoader for batching
+
+## 2. Training Loop
+
+for xb, yb in train_loader:
+    optimizer.zero_grad()          # Step 1: Clear old gradients
+    preds = model(xb)              # Step 2: Forward pass
+    loss = loss_fn(preds, yb)      # Step 3: Compute loss
+    loss.backward()                # Step 4: Backprop: compute gradients
+    optimizer.step()               # Step 5: Update weights
+
+## 3. Model Components
+
+    nn.Module: Defines layers and forward pass
+
+    nn.Conv1d, nn.Linear, nn.ReLU, etc.
+
+    Outputs: regression (e.g. expression levels) or classification (e.g. binding sites)
+
+## 4. Loss Function
+
+    nn.MSELoss() for expression prediction
+
+    nn.BCELoss() or nn.CrossEntropyLoss() for classification
+
+## 5. Optimizer
+
+    Common: torch.optim.Adam, SGD, etc.
+
+    Controls learning rate and parameter updates
+
+## 6. Evaluation
+
+    Use model.eval() + torch.no_grad() during validation
+
+    Track metrics like loss, R², accuracy, AUC
