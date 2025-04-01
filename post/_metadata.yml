@@ -11,7 +11,7 @@ title-block-banner: false
 format:
   html:
     toc: true
-    code-fold: true
+    code-fold: false
     code-summary: "Show the code"
     code-tools: true
     code-overflow: wrap

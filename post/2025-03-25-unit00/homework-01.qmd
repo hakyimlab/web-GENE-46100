@@ -18,8 +18,10 @@ draft: false
 # Homework 1
 
 - [ ] set up the environment on macos as described in the [page](index.qmd) (10 points)
+  - Upload the environment-gene46100.yml and requirements-gene46100.txt with the canvas assignment
+  - If you have any issues, please let me know.
 - [ ] git clone the [course repository](https://github.com/hakyimlab/web-GENE-46100) to your local machine (10 points)
-
+  - Upload the screenshot of the terminal command you used to clone the repository with the canvas assignment
 - [ ] run all the code in the [notebook](https://github.com/hakyimlab/web-GENE-46100/blob/main/post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.ipynb). You should also be able to find the notebook in your cloned course repository. (20 points)
 - [ ] complete the exercises in the notebook (30 points)
 - [ ] submit the jupyter notebook with the results to canvas assignment

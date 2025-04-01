@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Haky Im">
-<meta name="dcterms.date" content="2025-03-24">
-<meta name="description" content="setting up conda environement and installing packages">
+<meta name="dcterms.date" content="2023-02-20">
 
-<title>preparing environment for unit 00 – GENE 46100</title>
+<title>Slides unit 00 – GENE 46100</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,16 +143,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#install-conda" id="toc-install-conda" class="nav-link active" data-scroll-target="#install-conda">install conda</a></li>
-  <li><a href="#create-conda-environment" id="toc-create-conda-environment" class="nav-link" data-scroll-target="#create-conda-environment">create conda environment</a></li>
-  <li><a href="#do-not-install-packages-with-conda" id="toc-do-not-install-packages-with-conda" class="nav-link" data-scroll-target="#do-not-install-packages-with-conda">do not install packages with conda</a></li>
-  <li><a href="#install-all-packages-within-jupyter-notebook-with-pip" id="toc-install-all-packages-within-jupyter-notebook-with-pip" class="nav-link" data-scroll-target="#install-all-packages-within-jupyter-notebook-with-pip">install all packages within jupyter notebook with %pip</a></li>
-  <li><a href="#install-cursor-or-vscode-to-run-the-jupyter-notebook" id="toc-install-cursor-or-vscode-to-run-the-jupyter-notebook" class="nav-link" data-scroll-target="#install-cursor-or-vscode-to-run-the-jupyter-notebook">install cursor or vscode to run the jupyter notebook</a></li>
-  <li><a href="#save-the-environment-for-reproducibility" id="toc-save-the-environment-for-reproducibility" class="nav-link" data-scroll-target="#save-the-environment-for-reproducibility">Save the environment for reproducibility</a>
+  <li><a href="#what-is-an-mlp-multilayer-perceptron" id="toc-what-is-an-mlp-multilayer-perceptron" class="nav-link active" data-scroll-target="#what-is-an-mlp-multilayer-perceptron">What is an MLP (Multilayer Perceptron)?</a>
   <ul class="collapse">
-  <li><a href="#to-reproduce-the-environment-exactly" id="toc-to-reproduce-the-environment-exactly" class="nav-link" data-scroll-target="#to-reproduce-the-environment-exactly">to reproduce the environment exactly</a></li>
+  <li><a href="#core-idea" id="toc-core-idea" class="nav-link" data-scroll-target="#core-idea">Core Idea</a></li>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
   </ul></li>
-  <li><a href="#do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason" id="toc-do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason" class="nav-link" data-scroll-target="#do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason">DO NOT RUN THE FOLLOWING UNLESS NEED TO REINSTALL THE ENVIRONMENT FOR SOME REASON</a></li>
+  <li><a href="#anatomy-of-model-training-in-deep-learning" id="toc-anatomy-of-model-training-in-deep-learning" class="nav-link" data-scroll-target="#anatomy-of-model-training-in-deep-learning">Anatomy of Model Training in Deep Learning</a>
+  <ul class="collapse">
+  <li><a href="#data-model-input" id="toc-data-model-input" class="nav-link" data-scroll-target="#data-model-input">1. Data ➡️ Model Input</a></li>
+  <li><a href="#training-loop" id="toc-training-loop" class="nav-link" data-scroll-target="#training-loop">2. Training Loop</a></li>
+  <li><a href="#model-components" id="toc-model-components" class="nav-link" data-scroll-target="#model-components">3. Model Components</a></li>
+  <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function">4. Loss Function</a></li>
+  <li><a href="#optimizer" id="toc-optimizer" class="nav-link" data-scroll-target="#optimizer">5. Optimizer</a></li>
+  <li><a href="#evaluation" id="toc-evaluation" class="nav-link" data-scroll-target="#evaluation">6. Evaluation</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -163,33 +165,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">preparing environment for unit 00</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-  <div class="quarto-categories">
-    <div class="quarto-category">gene46100</div>
-    <div class="quarto-category">howto</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    setting up conda environement and installing packages
-  </div>
+<div class="quarto-title-block"><div><h1 class="title">Slides unit 00</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
+
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Haky Im </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 24, 2025</p>
+      <p class="date">February 20, 2023</p>
     </div>
   </div>
   
@@ -201,80 +188,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="install-conda" class="level2">
-<h2 class="anchored" data-anchor-id="install-conda">install conda</h2>
-<pre class="{bash}"><code>
-## download miniconda from the command line
-
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
-
-## or manually from https://www.anaconda.com/docs/getting-started/miniconda/main
-
-## install miniconda
-bash Miniconda3-latest-Linux-x86_64.sh
-</code></pre>
+<section id="what-is-an-mlp-multilayer-perceptron" class="level1">
+<h1>What is an MLP (Multilayer Perceptron)?</h1>
+<section id="core-idea" class="level2">
+<h2 class="anchored" data-anchor-id="core-idea">Core Idea</h2>
+<p>An MLP is a fully connected feedforward neural network — the classic deep learning architecture.</p>
 </section>
-<section id="create-conda-environment" class="level2">
-<h2 class="anchored" data-anchor-id="create-conda-environment">create conda environment</h2>
-<pre class="{bash}"><code>conda create -n gene46100 python=3.12
-conda activate gene46100
-</code></pre>
-</section>
-<section id="do-not-install-packages-with-conda" class="level2">
-<h2 class="anchored" data-anchor-id="do-not-install-packages-with-conda">do not install packages with conda</h2>
-<p>(I ran into lots of issues with torch version incompatibility with torchvision and torchmetrics)</p>
-<pre class="{bash}"><code># DONT USE CONDA TO INSTALL PYTORCH at least for now
-# conda install scikit-learn plotnine pytorch 
+<section id="architecture" class="level2">
+<h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
+<p>Input Layer → Hidden Layer(s) → Output Layer</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../post/2025-03-25-unit00/assets/tensorflow-playground.png" class="img-fluid figure-img"></p>
+<figcaption>MLP with 2 features in the input layer, one hidden layer, one dimentional output layer</figcaption>
+</figure>
+</div>
+<p>Each layer performs:</p>
+<p>output = activation(Wx + b)</p>
+<p>Where:</p>
+<pre><code>W = weight matrix
 
-## installing torchvision and torchmetrics forced downgrading torch to 2.3.1 which was not compatible with mps
-</code></pre>
-</section>
-<section id="install-all-packages-within-jupyter-notebook-with-pip" class="level2">
-<h2 class="anchored" data-anchor-id="install-all-packages-within-jupyter-notebook-with-pip">install all packages within jupyter notebook with %pip</h2>
-<p>as of 2025-03-24</p>
-<p>using %pip will make sure that the packages are accessible by the kernel you are using for the jupyter notebook</p>
-<pre class="{bash}"><code>%pip install scikit-learn plotnine tqdm pandas 
-%pip install torch
-%pip install torchvision
-%pip install torchmetrics</code></pre>
-</section>
-<section id="install-cursor-or-vscode-to-run-the-jupyter-notebook" class="level2">
-<h2 class="anchored" data-anchor-id="install-cursor-or-vscode-to-run-the-jupyter-notebook">install cursor or vscode to run the jupyter notebook</h2>
-<ul>
-<li><p>install the python extension for cursor or vscode.</p></li>
-<li><p>select the python interpreter to be the one in the conda environment you created</p></li>
-</ul>
-</section>
-<section id="save-the-environment-for-reproducibility" class="level2">
-<h2 class="anchored" data-anchor-id="save-the-environment-for-reproducibility">Save the environment for reproducibility</h2>
-<section id="to-reproduce-the-environment-exactly" class="level3">
-<h3 class="anchored" data-anchor-id="to-reproduce-the-environment-exactly">to reproduce the environment exactly</h3>
-<section id="save-the-environment" class="level4">
-<h4 class="anchored" data-anchor-id="save-the-environment">save the environment</h4>
-<pre class="{bash}"><code># Save conda packages with their sources
-conda env export --from-history &gt; environment-gene46100.yml
+x = input vector
 
-# Save pip-installed packages separately
-pip list --format=freeze &gt; requirements-gene46100.txt
+b = bias
 
-# Save full environment state (for reference)
-conda env export &gt; environment_full-gene46100.yml</code></pre>
+activation = non-linear function like ReLU</code></pre>
 </section>
 </section>
+<section id="anatomy-of-model-training-in-deep-learning" class="level1">
+<h1>Anatomy of Model Training in Deep Learning</h1>
+<section id="data-model-input" class="level2">
+<h2 class="anchored" data-anchor-id="data-model-input">1. Data ➡️ Model Input</h2>
+<pre><code>DNA/RNA/protein sequences → One-hot encoded or embedded tensors
+
+Wrapped in custom Dataset + DataLoader for batching</code></pre>
 </section>
-<section id="do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason" class="level2">
-<h2 class="anchored" data-anchor-id="do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason">DO NOT RUN THE FOLLOWING UNLESS NEED TO REINSTALL THE ENVIRONMENT FOR SOME REASON</h2>
-<section id="reinstall-the-environment" class="level4">
-<h4 class="anchored" data-anchor-id="reinstall-the-environment">reinstall the environment</h4>
-<pre class="{bash}"><code># Create environment from conda packages
-conda env create -f environment-gene46100.yml
+<section id="training-loop" class="level2">
+<h2 class="anchored" data-anchor-id="training-loop">2. Training Loop</h2>
+<p>for xb, yb in train_loader: optimizer.zero_grad() # Step 1: Clear old gradients preds = model(xb) # Step 2: Forward pass loss = loss_fn(preds, yb) # Step 3: Compute loss loss.backward() # Step 4: Backprop: compute gradients optimizer.step() # Step 5: Update weights</p>
+</section>
+<section id="model-components" class="level2">
+<h2 class="anchored" data-anchor-id="model-components">3. Model Components</h2>
+<pre><code>nn.Module: Defines layers and forward pass
 
-# Activate the environment
-conda activate gene46100
+nn.Conv1d, nn.Linear, nn.ReLU, etc.
 
-# Install pip packages
-pip install -r requirements-gene46100.txt
-</code></pre>
+Outputs: regression (e.g. expression levels) or classification (e.g. binding sites)</code></pre>
+</section>
+<section id="loss-function" class="level2">
+<h2 class="anchored" data-anchor-id="loss-function">4. Loss Function</h2>
+<pre><code>nn.MSELoss() for expression prediction
+
+nn.BCELoss() or nn.CrossEntropyLoss() for classification</code></pre>
+</section>
+<section id="optimizer" class="level2">
+<h2 class="anchored" data-anchor-id="optimizer">5. Optimizer</h2>
+<pre><code>Common: torch.optim.Adam, SGD, etc.
+
+Controls learning rate and parameter updates</code></pre>
+</section>
+<section id="evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation">6. Evaluation</h2>
+<pre><code>Use model.eval() + torch.no_grad() during validation
+
+Track metrics like loss, R², accuracy, AUC</code></pre>
 
 
 <!-- -->
@@ -752,100 +729,80 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> preparing environment for unit 00</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Haky Im</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-03-24</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> setting up conda environement and installing packages</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - gene46100</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - howto</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="an">eval:</span><span class="co"> false</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Slides unit 00"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2023-02-20"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># What is an MLP (Multilayer Perceptron)?</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Core Idea</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## install conda</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>An MLP is a fully connected feedforward neural network — the classic deep learning architecture.</span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">## download miniconda from the command line</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">## or manually from https://www.anaconda.com/docs/getting-started/miniconda/main</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">## install miniconda</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Miniconda3-latest-Linux-x86_64.sh</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Architecture</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>Input Layer → Hidden Layer(s) → Output Layer</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="al">![MLP with 2 features in the input layer, one hidden layer, one dimentional output layer](/post/2025-03-25-unit00/assets/tensorflow-playground.png)</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>Each layer performs:</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>output = activation(Wx + b)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>Where:</span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="in">    W = weight matrix</span></span>
 <span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## create conda environment</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> gene46100 python=3.12</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate gene46100</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## do not install packages with conda</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>(I ran into lots of issues with torch version incompatibility with torchvision and torchmetrics)</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co"># DONT USE CONDA TO INSTALL PYTORCH at least for now</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co"># conda install scikit-learn plotnine pytorch </span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co">## installing torchvision and torchmetrics forced downgrading torch to 2.3.1 which was not compatible with mps</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## install all packages within jupyter notebook with %pip</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>as of 2025-03-24</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>using %pip will make sure that the packages are accessible by the kernel you are using for the jupyter notebook</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="ex">%pip</span> install scikit-learn plotnine tqdm pandas </span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="ex">%pip</span> install torch</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="ex">%pip</span> install torchvision</span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="ex">%pip</span> install torchmetrics</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="in">    x = input vector</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="in">    b = bias</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="in">    activation = non-linear function like ReLU</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Anatomy of Model Training in Deep Learning</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Data ➡️ Model Input</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="in">    DNA/RNA/protein sequences → One-hot encoded or embedded tensors</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="in">    Wrapped in custom Dataset + DataLoader for batching</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Training Loop</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>for xb, yb in train_loader:</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    optimizer.zero_grad()          # Step 1: Clear old gradients</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    preds = model(xb)              # Step 2: Forward pass</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    loss = loss_fn(preds, yb)      # Step 3: Compute loss</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    loss.backward()                # Step 4: Backprop: compute gradients</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    optimizer.step()               # Step 5: Update weights</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Model Components</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.Module: Defines layers and forward pass</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.Conv1d, nn.Linear, nn.ReLU, etc.</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="in">    Outputs: regression (e.g. expression levels) or classification (e.g. binding sites)</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Loss Function</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.MSELoss() for expression prediction</span></span>
 <span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## install cursor or vscode to run the jupyter notebook</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.BCELoss() or nn.CrossEntropyLoss() for classification</span></span>
 <span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>install the python extension for cursor or vscode.</span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>select the python interpreter to be the one in the conda environment you created </span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Optimizer</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="in">    Common: torch.optim.Adam, SGD, etc.</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="in">    Controls learning rate and parameter updates</span></span>
 <span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. Evaluation</span></span>
 <span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Save the environment for reproducibility</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### to reproduce the environment exactly</span></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="fu">#### save the environment</span></span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Save conda packages with their sources</span></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment-gene46100.yml</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Save pip-installed packages separately</span></span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> list <span class="at">--format</span><span class="op">=</span>freeze <span class="op">&gt;</span> requirements-gene46100.txt</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Save full environment state (for reference)</span></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="op">&gt;</span> environment_full-gene46100.yml</span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## DO NOT RUN THE FOLLOWING UNLESS NEED TO REINSTALL THE ENVIRONMENT FOR SOME REASON</span></span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="fu">#### reinstall the environment</span></span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Create environment from conda packages</span></span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment-gene46100.yml</span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the environment</span></span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate gene46100</span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Install pip packages</span></span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements-gene46100.txt</span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="in">    Use model.eval() + torch.no_grad() during validation</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="in">    Track metrics like loss, R², accuracy, AUC</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

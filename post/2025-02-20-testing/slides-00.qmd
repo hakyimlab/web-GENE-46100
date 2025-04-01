@@ -15,6 +15,8 @@ An MLP is a fully connected feedforward neural network — the classic deep lear
 
 Input Layer → Hidden Layer(s) → Output Layer
 
+![MLP with 2 features in the input layer, one hidden layer, one dimentional output layer](/post/2025-03-25-unit00/assets/tensorflow-playground.png)
+
 Each layer performs:
 
 output = activation(Wx + b)
