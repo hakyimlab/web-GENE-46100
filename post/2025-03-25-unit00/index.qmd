@@ -55,19 +55,14 @@ using %pip will make sure that the packages are accessible by the kernel you are
 
 ## install cursor or vscode to run the jupyter notebook
 
-
 - install the python extension for cursor or vscode.
 
-- select the python interpreter to be the one in the conda environment you created 
-
-
-
+- select the python interpreter to be the one in the conda environment you created (gene46100)
 
 
 ## Save the environment for reproducibility
 
-### to reproduce the environment exactly
-#### save the environment
+### to reproduce the environment exactly, save the environment
 ```{bash}
 # Save conda packages with their sources
 conda env export --from-history > environment-gene46100.yml

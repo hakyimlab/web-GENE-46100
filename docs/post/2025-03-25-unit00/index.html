@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#install-cursor-or-vscode-to-run-the-jupyter-notebook" id="toc-install-cursor-or-vscode-to-run-the-jupyter-notebook" class="nav-link" data-scroll-target="#install-cursor-or-vscode-to-run-the-jupyter-notebook">install cursor or vscode to run the jupyter notebook</a></li>
   <li><a href="#save-the-environment-for-reproducibility" id="toc-save-the-environment-for-reproducibility" class="nav-link" data-scroll-target="#save-the-environment-for-reproducibility">Save the environment for reproducibility</a>
   <ul class="collapse">
-  <li><a href="#to-reproduce-the-environment-exactly" id="toc-to-reproduce-the-environment-exactly" class="nav-link" data-scroll-target="#to-reproduce-the-environment-exactly">to reproduce the environment exactly</a></li>
+  <li><a href="#to-reproduce-the-environment-exactly-save-the-environment" id="toc-to-reproduce-the-environment-exactly-save-the-environment" class="nav-link" data-scroll-target="#to-reproduce-the-environment-exactly-save-the-environment">to reproduce the environment exactly, save the environment</a></li>
   </ul></li>
   <li><a href="#do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason" id="toc-do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason" class="nav-link" data-scroll-target="#do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason">DO NOT RUN THE FOLLOWING UNLESS NEED TO REINSTALL THE ENVIRONMENT FOR SOME REASON</a></li>
   </ul>
@@ -242,15 +242,13 @@ conda activate gene46100
 <h2 class="anchored" data-anchor-id="install-cursor-or-vscode-to-run-the-jupyter-notebook">install cursor or vscode to run the jupyter notebook</h2>
 <ul>
 <li><p>install the python extension for cursor or vscode.</p></li>
-<li><p>select the python interpreter to be the one in the conda environment you created</p></li>
+<li><p>select the python interpreter to be the one in the conda environment you created (gene46100)</p></li>
 </ul>
 </section>
 <section id="save-the-environment-for-reproducibility" class="level2">
 <h2 class="anchored" data-anchor-id="save-the-environment-for-reproducibility">Save the environment for reproducibility</h2>
-<section id="to-reproduce-the-environment-exactly" class="level3">
-<h3 class="anchored" data-anchor-id="to-reproduce-the-environment-exactly">to reproduce the environment exactly</h3>
-<section id="save-the-environment" class="level4">
-<h4 class="anchored" data-anchor-id="save-the-environment">save the environment</h4>
+<section id="to-reproduce-the-environment-exactly-save-the-environment" class="level3">
+<h3 class="anchored" data-anchor-id="to-reproduce-the-environment-exactly-save-the-environment">to reproduce the environment exactly, save the environment</h3>
 <pre class="{bash}"><code># Save conda packages with their sources
 conda env export --from-history &gt; environment-gene46100.yml
 
@@ -259,7 +257,6 @@ pip list --format=freeze &gt; requirements-gene46100.txt
 
 # Save full environment state (for reference)
 conda env export &gt; environment_full-gene46100.yml</code></pre>
-</section>
 </section>
 </section>
 <section id="do-not-run-the-following-unless-need-to-reinstall-the-environment-for-some-reason" class="level2">
@@ -807,44 +804,39 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## install cursor or vscode to run the jupyter notebook</span></span>
 <span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>install the python extension for cursor or vscode.</span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>select the python interpreter to be the one in the conda environment you created </span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>install the python extension for cursor or vscode.</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>select the python interpreter to be the one in the conda environment you created (gene46100)</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Save the environment for reproducibility</span></span>
 <span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Save the environment for reproducibility</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### to reproduce the environment exactly</span></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="fu">#### save the environment</span></span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Save conda packages with their sources</span></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment-gene46100.yml</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Save pip-installed packages separately</span></span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> list <span class="at">--format</span><span class="op">=</span>freeze <span class="op">&gt;</span> requirements-gene46100.txt</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Save full environment state (for reference)</span></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="op">&gt;</span> environment_full-gene46100.yml</span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## DO NOT RUN THE FOLLOWING UNLESS NEED TO REINSTALL THE ENVIRONMENT FOR SOME REASON</span></span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="fu">#### reinstall the environment</span></span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Create environment from conda packages</span></span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment-gene46100.yml</span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the environment</span></span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate gene46100</span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a><span class="co"># Install pip packages</span></span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements-gene46100.txt</span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="fu">### to reproduce the environment exactly, save the environment</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Save conda packages with their sources</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="at">--from-history</span> <span class="op">&gt;</span> environment-gene46100.yml</span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Save pip-installed packages separately</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> list <span class="at">--format</span><span class="op">=</span>freeze <span class="op">&gt;</span> requirements-gene46100.txt</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Save full environment state (for reference)</span></span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env export <span class="op">&gt;</span> environment_full-gene46100.yml</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## DO NOT RUN THE FOLLOWING UNLESS NEED TO REINSTALL THE ENVIRONMENT FOR SOME REASON</span></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="fu">#### reinstall the environment</span></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a><span class="co"># Create environment from conda packages</span></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">-f</span> environment-gene46100.yml</span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the environment</span></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate gene46100</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Install pip packages</span></span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements-gene46100.txt</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

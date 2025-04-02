@@ -150,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#anatomy-of-model-training-in-deep-learning" id="toc-anatomy-of-model-training-in-deep-learning" class="nav-link" data-scroll-target="#anatomy-of-model-training-in-deep-learning">Anatomy of Model Training in Deep Learning</a>
   <ul class="collapse">
-  <li><a href="#data-model-input" id="toc-data-model-input" class="nav-link" data-scroll-target="#data-model-input">1. Data ➡️ Model Input</a></li>
+  <li><a href="#data---model-input" id="toc-data---model-input" class="nav-link" data-scroll-target="#data---model-input">1. Data -&gt; Model Input</a></li>
   <li><a href="#training-loop" id="toc-training-loop" class="nav-link" data-scroll-target="#training-loop">2. Training Loop</a></li>
   <li><a href="#model-components" id="toc-model-components" class="nav-link" data-scroll-target="#model-components">3. Model Components</a></li>
   <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function">4. Loss Function</a></li>
@@ -217,8 +217,8 @@ activation = non-linear function like ReLU</code></pre>
 </section>
 <section id="anatomy-of-model-training-in-deep-learning" class="level1">
 <h1>Anatomy of Model Training in Deep Learning</h1>
-<section id="data-model-input" class="level2">
-<h2 class="anchored" data-anchor-id="data-model-input">1. Data ➡️ Model Input</h2>
+<section id="data---model-input" class="level2">
+<h2 class="anchored" data-anchor-id="data---model-input">1. Data -&gt; Model Input</h2>
 <pre><code>DNA/RNA/protein sequences → One-hot encoded or embedded tensors
 
 Wrapped in custom Dataset + DataLoader for batching</code></pre>
@@ -239,7 +239,9 @@ Outputs: regression (e.g. expression levels) or classification (e.g. binding sit
 <h2 class="anchored" data-anchor-id="loss-function">4. Loss Function</h2>
 <pre><code>nn.MSELoss() for expression prediction
 
-nn.BCELoss() or nn.CrossEntropyLoss() for classification</code></pre>
+nn.CrossEntropyLoss() for classification
+
+nn.BCELoss() for binary classification, this is just -log likelihood for a bernoulli distribution</code></pre>
 </section>
 <section id="optimizer" class="level2">
 <h2 class="anchored" data-anchor-id="optimizer">5. Optimizer</h2>
@@ -763,7 +765,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Anatomy of Model Training in Deep Learning</span></span>
 <span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Data ➡️ Model Input</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Data -&gt; Model Input</span></span>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="in">    DNA/RNA/protein sequences → One-hot encoded or embedded tensors</span></span>
 <span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
@@ -790,19 +792,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.MSELoss() for expression prediction</span></span>
 <span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.BCELoss() or nn.CrossEntropyLoss() for classification</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.CrossEntropyLoss() for classification</span></span>
 <span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Optimizer</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.BCELoss() for binary classification, this is just -log likelihood for a bernoulli distribution</span></span>
 <span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="in">    Common: torch.optim.Adam, SGD, etc.</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Optimizer</span></span>
 <span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="in">    Controls learning rate and parameter updates</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="in">    Common: torch.optim.Adam, SGD, etc.</span></span>
 <span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. Evaluation</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="in">    Controls learning rate and parameter updates</span></span>
 <span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="in">    Use model.eval() + torch.no_grad() during validation</span></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. Evaluation</span></span>
 <span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="in">    Track metrics like loss, R², accuracy, AUC</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="in">    Use model.eval() + torch.no_grad() during validation</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="in">    Track metrics like loss, R², accuracy, AUC</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

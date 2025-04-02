@@ -33,7 +33,7 @@ Where:
 
 # Anatomy of Model Training in Deep Learning
 
-## 1. Data ➡️ Model Input
+## 1. Data -> Model Input
 
     DNA/RNA/protein sequences → One-hot encoded or embedded tensors
 
@@ -60,7 +60,9 @@ for xb, yb in train_loader:
 
     nn.MSELoss() for expression prediction
 
-    nn.BCELoss() or nn.CrossEntropyLoss() for classification
+    nn.CrossEntropyLoss() for classification
+
+    nn.BCELoss() for binary classification, this is just -log likelihood for a bernoulli distribution
 
 ## 5. Optimizer
 

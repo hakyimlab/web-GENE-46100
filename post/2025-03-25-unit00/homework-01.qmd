@@ -2,7 +2,7 @@
 title: homework 1
 date: 2025-03-28
 categories:
-  - GENE46100
+  - gene46100
   - homework
 format:
   html:
