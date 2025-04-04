@@ -12,11 +12,11 @@ title-block-banner: false
 ---
 
 
-This page contains material for the GENE46100 Deep learning in genomics course. 
+- This page contains material for the GENE46100 Deep learning in genomics course. 
 
-Find the 2025 syllabus [here](https://docs.google.com/document/d/17X3LEh_C-34JfXJcKJfFY8ew8MHBsxc_z0DPEuIlzwE/edit?usp=sharing).
+- Find the 2025 syllabus [here](https://docs.google.com/document/d/17X3LEh_C-34JfXJcKJfFY8ew8MHBsxc_z0DPEuIlzwE/edit?usp=sharing).
 
-Edit github source [here](https://github.com/hakyimlab/web-GENE-46100)
+- Edit github source [here](https://github.com/hakyimlab/web-GENE-46100)
 
-
+---
 
