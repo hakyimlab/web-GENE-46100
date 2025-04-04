@@ -1,7 +1,7 @@
 ---
-title: "Deep Learning in Genomics Course Material"
+title: "Deep Learning in Genomics Course Material - ALL"
 listing:
-  contents: [post]
+  contents: [post, DRAFTS]
   sort: "date desc"
   type: default
   categories: true
@@ -12,7 +12,7 @@ title-block-banner: false
 ---
 
 
-- This page contains material for the GENE46100 Deep learning in genomics course. 
+- This page contains ALL material for the GENE46100 Deep learning in genomics course, including test notes.
 
 - Find the 2025 syllabus [here](https://docs.google.com/document/d/17X3LEh_C-34JfXJcKJfFY8ew8MHBsxc_z0DPEuIlzwE/edit?usp=sharing).
 
@@ -20,5 +20,5 @@ title-block-banner: false
 
 
 
-See all notes [here](index-all.qmd)
+---
 

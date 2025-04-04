@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-02-20">
+<meta name="dcterms.date" content="2025-04-04">
 
-<title>Slides unit 00 – GENE 46100</title>
+<title>homework 2 – GENE 46100</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,20 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-an-mlp-multilayer-perceptron" id="toc-what-is-an-mlp-multilayer-perceptron" class="nav-link active" data-scroll-target="#what-is-an-mlp-multilayer-perceptron">What is an MLP (Multilayer Perceptron)?</a>
-  <ul class="collapse">
-  <li><a href="#core-idea" id="toc-core-idea" class="nav-link" data-scroll-target="#core-idea">Core Idea</a></li>
-  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
-  </ul></li>
-  <li><a href="#anatomy-of-model-training-in-deep-learning" id="toc-anatomy-of-model-training-in-deep-learning" class="nav-link" data-scroll-target="#anatomy-of-model-training-in-deep-learning">Anatomy of Model Training in Deep Learning</a>
-  <ul class="collapse">
-  <li><a href="#data---model-input" id="toc-data---model-input" class="nav-link" data-scroll-target="#data---model-input">1. Data -&gt; Model Input</a></li>
-  <li><a href="#training-loop" id="toc-training-loop" class="nav-link" data-scroll-target="#training-loop">2. Training Loop</a></li>
-  <li><a href="#model-components" id="toc-model-components" class="nav-link" data-scroll-target="#model-components">3. Model Components</a></li>
-  <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function">4. Loss Function</a></li>
-  <li><a href="#optimizer" id="toc-optimizer" class="nav-link" data-scroll-target="#optimizer">5. Optimizer</a></li>
-  <li><a href="#evaluation" id="toc-evaluation" class="nav-link" data-scroll-target="#evaluation">6. Evaluation</a></li>
-  </ul></li>
+  <li><a href="#homework-2" id="toc-homework-2" class="nav-link active" data-scroll-target="#homework-2">Homework 2</a></li>
   </ul>
 </nav>
     </div>
@@ -165,8 +152,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Slides unit 00</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-</div>
+<div class="quarto-title-block"><div><h1 class="title">homework 2</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">gene46100</div>
+    <div class="quarto-category">homework</div>
+  </div>
+  </div>
 
 
 
@@ -176,10 +167,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 20, 2023</p>
+      <p class="date">April 4, 2025</p>
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">April 4, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -188,77 +185,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="what-is-an-mlp-multilayer-perceptron" class="level1">
-<h1>What is an MLP (Multilayer Perceptron)?</h1>
-<section id="core-idea" class="level2">
-<h2 class="anchored" data-anchor-id="core-idea">Core Idea</h2>
-<p>An MLP is a fully connected feedforward neural network — the classic deep learning architecture.</p>
-</section>
-<section id="architecture" class="level2">
-<h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
-<p>Input Layer → Hidden Layer(s) → Output Layer</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../post/2025-03-25-unit00/assets/tensorflow-playground.png" class="img-fluid figure-img"></p>
-<figcaption>MLP with 2 features in the input layer, one hidden layer, one dimentional output layer</figcaption>
-</figure>
-</div>
-<p>Each layer performs:</p>
-<p>output = activation(Wx + b)</p>
-<p>Where:</p>
-<pre><code>W = weight matrix
-
-x = input vector
-
-b = bias
-
-activation = non-linear function like ReLU</code></pre>
-</section>
-</section>
-<section id="anatomy-of-model-training-in-deep-learning" class="level1">
-<h1>Anatomy of Model Training in Deep Learning</h1>
-<section id="data---model-input" class="level2">
-<h2 class="anchored" data-anchor-id="data---model-input">1. Data -&gt; Model Input</h2>
-<pre><code>DNA/RNA/protein sequences → One-hot encoded or embedded tensors
-
-Wrapped in custom Dataset + DataLoader for batching</code></pre>
-</section>
-<section id="training-loop" class="level2">
-<h2 class="anchored" data-anchor-id="training-loop">2. Training Loop</h2>
-<p>for xb, yb in train_loader: optimizer.zero_grad() # Step 1: Clear old gradients preds = model(xb) # Step 2: Forward pass loss = loss_fn(preds, yb) # Step 3: Compute loss loss.backward() # Step 4: Backprop: compute gradients optimizer.step() # Step 5: Update weights</p>
-</section>
-<section id="model-components" class="level2">
-<h2 class="anchored" data-anchor-id="model-components">3. Model Components</h2>
-<pre><code>nn.Module: Defines layers and forward pass
-
-nn.Conv1d, nn.Linear, nn.ReLU, etc.
-
-Outputs: regression (e.g. expression levels) or classification (e.g. binding sites)</code></pre>
-</section>
-<section id="loss-function" class="level2">
-<h2 class="anchored" data-anchor-id="loss-function">4. Loss Function</h2>
-<pre><code>nn.MSELoss() for expression prediction
-
-nn.CrossEntropyLoss() for classification
-
-nn.BCELoss() for binary classification, this is just -log likelihood for a bernoulli distribution</code></pre>
-</section>
-<section id="optimizer" class="level2">
-<h2 class="anchored" data-anchor-id="optimizer">5. Optimizer</h2>
-<pre><code>Common: torch.optim.Adam, SGD, etc.
-
-Controls learning rate and parameter updates</code></pre>
-</section>
-<section id="evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="evaluation">6. Evaluation</h2>
-<pre><code>Use model.eval() + torch.no_grad() during validation
-
-Track metrics like loss, R², accuracy, AUC</code></pre>
+<section id="homework-2" class="level1">
+<h1>Homework 2</h1>
+<ul class="task-list">
+<li><label><input type="checkbox">run all the code in the <a href="https://github.com/hakyimlab/web-GENE-46100/blob/main/post/2025-03-25-unit00/updated-basic_DNA_tutorial.ipynb">DNA scoring tutorial notebook</a>. You should also be able to find the notebook in your cloned course repository. (20 points)</label></li>
+<li><label><input type="checkbox">complete the exercises in the notebook (30 points)</label></li>
+<li><label><input type="checkbox">submit the jupyter notebook with the results to canvas assignment</label></li>
+</ul>
 
 
 <!-- -->
 
-</section>
 </section>
 
 <p>© <a href="https://hakyimlab.org">HakyImLab and Listed Authors</a> - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 License</a></p></main> <!-- /main -->
@@ -730,83 +667,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Slides unit 00"</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2023-02-20"</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># What is an MLP (Multilayer Perceptron)?</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Core Idea</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>An MLP is a fully connected feedforward neural network — the classic deep learning architecture.</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Architecture</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>Input Layer → Hidden Layer(s) → Output Layer</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="al">![MLP with 2 features in the input layer, one hidden layer, one dimentional output layer](/post/2025-03-25-unit00/assets/tensorflow-playground.png)</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>Each layer performs:</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>output = activation(Wx + b)</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>Where:</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="in">    W = weight matrix</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="in">    x = input vector</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="in">    b = bias</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="in">    activation = non-linear function like ReLU</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Anatomy of Model Training in Deep Learning</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Data -&gt; Model Input</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="in">    DNA/RNA/protein sequences → One-hot encoded or embedded tensors</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="in">    Wrapped in custom Dataset + DataLoader for batching</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Training Loop</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>for xb, yb in train_loader:</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    optimizer.zero_grad()          # Step 1: Clear old gradients</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    preds = model(xb)              # Step 2: Forward pass</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    loss = loss_fn(preds, yb)      # Step 3: Compute loss</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    loss.backward()                # Step 4: Backprop: compute gradients</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    optimizer.step()               # Step 5: Update weights</span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Model Components</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.Module: Defines layers and forward pass</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.Conv1d, nn.Linear, nn.ReLU, etc.</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="in">    Outputs: regression (e.g. expression levels) or classification (e.g. binding sites)</span></span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Loss Function</span></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.MSELoss() for expression prediction</span></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.CrossEntropyLoss() for classification</span></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="in">    nn.BCELoss() for binary classification, this is just -log likelihood for a bernoulli distribution</span></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Optimizer</span></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="in">    Common: torch.optim.Adam, SGD, etc.</span></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="in">    Controls learning rate and parameter updates</span></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6. Evaluation</span></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="in">    Use model.eval() + torch.no_grad() during validation</span></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="in">    Track metrics like loss, R², accuracy, AUC</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> homework 2</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-04-04</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - gene46100</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  - homework</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Show the code"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="an">draft:</span><span class="co"> false</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu"># Homework 2</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> run all the code in the <span class="co">[</span><span class="ot">DNA scoring tutorial notebook</span><span class="co">](https://github.com/hakyimlab/web-GENE-46100/blob/main/post/2025-03-25-unit00/updated-basic_DNA_tutorial.ipynb)</span>. You should also be able to find the notebook in your cloned course repository. (20 points)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> complete the exercises in the notebook (30 points)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> submit the jupyter notebook with the results to canvas assignment</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
