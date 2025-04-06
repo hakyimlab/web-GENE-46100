@@ -26,6 +26,8 @@ The challenge uses real genomic data to predict TF binding scores:
   - Each sequence has a corresponding 300-long vector of binding scores
   - Scores are predicted using [Homer](http://homer.ucsd.edu/homer/motif/index.html), a widely used motif discovery tool
   - Each position in the vector represents the binding score at that position in the sequence
+  
+Data prepared by Sofia Salazar.
 
 ## Getting Started
 - [Data download link](https://uchicago.box.com/s/eajhnujlaxnd5441sv3dt73pfoxvgh4l)

@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Haky Im">
-<meta name="dcterms.date" content="2025-04-08">
-<meta name="description" content="Competition details for TF binding prediction challenge">
+<meta name="dcterms.date" content="2025-03-24">
+<meta name="description" content="Karpathy’s gpt_dev.ipynb summary by gemini with my edits">
 
-<title>TF binding prediction challenge – GENE 46100</title>
+<title>Building a GPT From Scratch summary – GENE 46100</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -75,7 +41,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-dcc7d9e706e4adfbab8e3d6c7c60bab2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -145,13 +111,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tf-binding-prediction-challenge" id="toc-tf-binding-prediction-challenge" class="nav-link active" data-scroll-target="#tf-binding-prediction-challenge">TF Binding Prediction Challenge</a>
+  <li><a href="#title-slide" id="toc-title-slide" class="nav-link active" data-scroll-target="#title-slide">Title Slide</a>
   <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">Data Description</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
-  <li><a href="#timeline" id="toc-timeline" class="nav-link" data-scroll-target="#timeline">Timeline</a></li>
+  <li><a href="#building-a-gpt-from-scratch-a-character-level-approach" id="toc-building-a-gpt-from-scratch-a-character-level-approach" class="nav-link" data-scroll-target="#building-a-gpt-from-scratch-a-character-level-approach">Building a GPT From Scratch: A Character-Level Approach</a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-core-concepts-based-on-a.-karpathys-nanogpt" id="toc-understanding-the-core-concepts-based-on-a.-karpathys-nanogpt" class="nav-link" data-scroll-target="#understanding-the-core-concepts-based-on-a.-karpathys-nanogpt">Understanding the Core Concepts (Based on A. Karpathy’s NanoGPT)</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#the-task---language-modeling" id="toc-the-task---language-modeling" class="nav-link" data-scroll-target="#the-task---language-modeling">The Task - Language Modeling</a></li>
+  <li><a href="#data-preparation---step-1-loading-inspection" id="toc-data-preparation---step-1-loading-inspection" class="nav-link" data-scroll-target="#data-preparation---step-1-loading-inspection">Data Preparation - Step 1: Loading &amp; Inspection</a></li>
+  <li><a href="#data-preparation---step-2-tokenization" id="toc-data-preparation---step-2-tokenization" class="nav-link" data-scroll-target="#data-preparation---step-2-tokenization">Data Preparation - Step 2: Tokenization</a></li>
+  <li><a href="#data-preparation---step-3-creating-batches-for-training" id="toc-data-preparation---step-3-creating-batches-for-training" class="nav-link" data-scroll-target="#data-preparation---step-3-creating-batches-for-training">Data Preparation - Step 3: Creating Batches for Training</a></li>
+  <li><a href="#a-simple-start-bigram-language-model" id="toc-a-simple-start-bigram-language-model" class="nav-link" data-scroll-target="#a-simple-start-bigram-language-model">A Simple Start: Bigram Language Model</a></li>
+  <li><a href="#the-key-idea-self-attention" id="toc-the-key-idea-self-attention" class="nav-link" data-scroll-target="#the-key-idea-self-attention">The Key Idea: Self-Attention</a></li>
+  <li><a href="#self-attention-query-key-value" id="toc-self-attention-query-key-value" class="nav-link" data-scroll-target="#self-attention-query-key-value">Self-Attention: Query, Key, Value</a></li>
+  <li><a href="#enhancements-multi-head-attention-scaling" id="toc-enhancements-multi-head-attention-scaling" class="nav-link" data-scroll-target="#enhancements-multi-head-attention-scaling">Enhancements: Multi-Head Attention &amp; Scaling</a></li>
+  <li><a href="#the-transformer-block" id="toc-the-transformer-block" class="nav-link" data-scroll-target="#the-transformer-block">The Transformer Block</a></li>
+  <li><a href="#positional-encoding" id="toc-positional-encoding" class="nav-link" data-scroll-target="#positional-encoding">Positional Encoding</a></li>
+  <li><a href="#full-gpt-model-architecture" id="toc-full-gpt-model-architecture" class="nav-link" data-scroll-target="#full-gpt-model-architecture">Full GPT Model Architecture</a></li>
+  <li><a href="#training-loop" id="toc-training-loop" class="nav-link" data-scroll-target="#training-loop">Training Loop</a></li>
+  <li><a href="#generation-inference" id="toc-generation-inference" class="nav-link" data-scroll-target="#generation-inference">Generation (Inference)</a></li>
+  <li><a href="#key-takeaways-next-steps" id="toc-key-takeaways-next-steps" class="nav-link" data-scroll-target="#key-takeaways-next-steps">Key Takeaways &amp; Next Steps</a></li>
   </ul>
 </nav>
     </div>
@@ -160,16 +141,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">TF binding prediction challenge</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<h1 class="title">Building a GPT From Scratch summary</h1>
   <div class="quarto-categories">
     <div class="quarto-category">gene46100</div>
-    <div class="quarto-category">project</div>
+    <div class="quarto-category">slides</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Competition details for TF binding prediction challenge
+    Karpathy’s gpt_dev.ipynb summary by gemini with my edits
   </div>
 </div>
 
@@ -186,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 8, 2025</p>
+      <p class="date">March 24, 2025</p>
     </div>
   </div>
   
@@ -198,68 +179,223 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="tf-binding-prediction-challenge" class="level1">
-<h1>TF Binding Prediction Challenge</h1>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<ul>
-<li><strong>Goal</strong>: Predict transcription factor (TF) binding scores in DNA sequences</li>
-<li><strong>Input</strong>: 300bp human DNA sequences</li>
-<li><strong>Target</strong>: Binding scores for transcription factors</li>
-</ul>
+<section id="title-slide" class="level1">
+<h1>Title Slide</h1>
+<section id="building-a-gpt-from-scratch-a-character-level-approach" class="level2">
+<h2 class="anchored" data-anchor-id="building-a-gpt-from-scratch-a-character-level-approach">Building a GPT From Scratch: A Character-Level Approach</h2>
+<section id="understanding-the-core-concepts-based-on-a.-karpathys-nanogpt" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-the-core-concepts-based-on-a.-karpathys-nanogpt">Understanding the Core Concepts (Based on A. Karpathy’s NanoGPT)</h3>
+<hr>
 </section>
-<section id="data-description" class="level2">
-<h2 class="anchored" data-anchor-id="data-description">Data Description</h2>
-<p>The challenge uses real genomic data to predict TF binding scores:</p>
-<ul>
-<li><strong>Sequence Data</strong>: <code>chr#_sequences.txt.gz</code> files containing 300bp DNA sequences
-<ul>
-<li>Each sequence has a unique identifier in format <code>chr#_start_end</code></li>
-</ul></li>
-<li><strong>Target Data</strong>: <code>chr#_scores.txt.gz</code> files containing binding scores
-<ul>
-<li>Each sequence has a corresponding 300-long vector of binding scores</li>
-<li>Scores are predicted using <a href="http://homer.ucsd.edu/homer/motif/index.html">Homer</a>, a widely used motif discovery tool</li>
-<li>Each position in the vector represents the binding score at that position in the sequence</li>
-</ul></li>
-</ul>
-<p>Data prepared by Sofia Salazar.</p>
 </section>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<ul>
-<li><a href="https://uchicago.box.com/s/eajhnujlaxnd5441sv3dt73pfoxvgh4l">Data download link</a></li>
-<li><a href="../../post/2025-03-25-unit00/tf-binding-prediction-starter.html">Starter notebook</a></li>
-<li><a href="">Example implementation</a></li>
-</ul>
 </section>
-<section id="timeline" class="level2">
-<h2 class="anchored" data-anchor-id="timeline">Timeline</h2>
+<section id="objective" class="level1">
+<h1>Objective</h1>
 <ul>
-<li><strong>Training Sessions</strong>:
+<li><strong>Goal:</strong> To understand the fundamental steps and components involved in building and training a simple <strong>Generative Pre-trained Transformer</strong> (GPT) model.</li>
+<li><strong>Approach:</strong> <strong>Character-level</strong> text generation on the Tiny Shakespeare dataset.</li>
+<li><strong>Focus:</strong> Key concepts: <strong>Tokenization</strong>, <strong>Embedding</strong>, <strong>Self-Attention</strong>, <strong>Transformer Blocks</strong>, <strong>Training</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="the-task---language-modeling" class="level1">
+<h1>The Task - Language Modeling</h1>
 <ul>
-<li>Tuesday, April 8: Sofia will review implementation of using the code in the basic DNA scoring model. Students will continue working on the project. Charles, Sofia, and Ran will be available to help.</li>
-<li>Thursday, April 10: Sofia will explain how to use <strong>weights and biases</strong> to calibrate hyperparameters of the model (learning rate, number of filters, kernel size, etc). Charles, Sofia, Ran, and Haky will be available to help.</li>
+<li><strong>Core Idea:</strong> Predict the <strong>next character</strong> in a sequence given the preceding characters.</li>
+<li><strong>Example:</strong> Given <code>"Hello"</code>, predict <code>" "</code>. Given <code>"Hello "</code>, predict <code>"w"</code>.</li>
+<li><strong>Why Characters?</strong> Simplifies the process, no complex tokenizers needed initially. Demonstrates core concepts effectively.</li>
+<li><strong>Dataset:</strong> <strong>Tiny Shakespeare</strong> (~1 million characters).</li>
+</ul>
+<hr>
+</section>
+<section id="data-preparation---step-1-loading-inspection" class="level1">
+<h1>Data Preparation - Step 1: Loading &amp; Inspection</h1>
+<ul>
+<li>Load the text data (<code>input.txt</code>).</li>
+<li>Inspect basic properties:
+<ul>
+<li>Total number of characters.</li>
+<li>A sample of the text content.</li>
 </ul></li>
-<li><strong>Presentation Day</strong> (Thursday, April 10): Students will present:
+<li>Identify the set of unique characters (the <strong>vocabulary</strong>).
 <ul>
-<li>Model architecture</li>
-<li>Model performance</li>
-<li>Filter interpretation (time permitting)</li>
-<li>Lessons learned</li>
-</ul></li>
-<li><strong>Submission Deadline</strong>: April 18
-<ul>
-<li>Submit best model to Canvas</li>
-<li>TA will test on held-out data</li>
-<li>Leaderboard will be created</li>
+<li><code>vocab_size</code>: Number of unique characters (e.g., 65 in the notebook).</li>
 </ul></li>
 </ul>
+<hr>
+</section>
+<section id="data-preparation---step-2-tokenization" class="level1">
+<h1>Data Preparation - Step 2: Tokenization</h1>
+<ul>
+<li><strong>Concept:</strong> Convert characters into <strong>numerical representations</strong> that the model can process.</li>
+<li><strong>Mapping:</strong>
+<ul>
+<li><code>stoi</code> (string-to-integer): Assign a unique integer to each character in the vocabulary.</li>
+<li><code>itos</code> (integer-to-string): The reverse mapping.</li>
+</ul></li>
+<li><strong>Encoding/Decoding:</strong> Functions to convert text to sequences of integers and back.</li>
+<li><strong>Entire Dataset:</strong> Convert the full text into a single long sequence of integers (a PyTorch Tensor).</li>
+</ul>
+<hr>
+</section>
+<section id="data-preparation---step-3-creating-batches-for-training" class="level1">
+<h1>Data Preparation - Step 3: Creating Batches for Training</h1>
+<ul>
+<li><strong>Goal:</strong> Feed the model chunks of data efficiently.</li>
+<li><strong><code>block_size</code> (Context Length):</strong> How many preceding characters the model looks at to predict the next one (e.g., 8, then 32).</li>
+<li><strong>Input (<code>x</code>) / Target (<code>y</code>):</strong>
+<ul>
+<li>For a sequence: <code>[18, 47, 56, 57, 58,  1, 15, 47, 58]  (block_size=8)</code></li>
+<li><code>x</code> (input context): <code>[18, 47, 56, 57, 58,  1, 15, 47]</code></li>
+<li><code>y</code> (target next char): <code>[47, 56, 57, 58,  1, 15, 47, 58]</code></li>
+<li><em>The model learns:</em> When input is <code>[18]</code>, target is <code>47</code>. When input is <code>[18, 47]</code>, target is <code>56</code>, etc.</li>
+</ul></li>
+<li><strong><code>batch_size</code>:</strong> Number of independent sequences processed in parallel for efficiency (e.g., 4, then 16/32).</li>
+<li><strong><code>get_batch</code> Function:</strong> Randomly samples starting points to create batches of <code>x</code> and <code>y</code>.</li>
+</ul>
+<hr>
+</section>
+<section id="a-simple-start-bigram-language-model" class="level1">
+<h1>A Simple Start: Bigram Language Model</h1>
+<ul>
+<li><strong>Idea:</strong> The simplest possible model. Predicts the next character based <em>only</em> on the <em>immediately preceding</em> character.</li>
+<li><strong>Mechanism:</strong> Uses an <strong>Embedding Table</strong>.
+<ul>
+<li>Size: <code>vocab_size</code> x <code>vocab_size</code>.</li>
+<li>Row <code>i</code> contains the model’s predicted scores (logits) for the next character when the input character is <code>i</code>.</li>
+</ul></li>
+<li><strong>Limitation:</strong> Ignores all context beyond the last character. Output often looks random/nonsensical (as seen in the early <code>generate</code> example).</li>
+</ul>
+<hr>
+</section>
+<section id="the-key-idea-self-attention" class="level1">
+<h1>The Key Idea: Self-Attention</h1>
+<ul>
+<li><strong>Problem:</strong> How can tokens (characters) aggregate information from <em>earlier</em> tokens in the sequence in a <em>data-dependent</em> way?</li>
+<li><strong>Intuition:</strong> For a given token, we want it to “look” at previous tokens and decide which ones are most relevant for predicting the <em>next</em> token. It then aggregates information from those relevant tokens.</li>
+<li><strong>Mechanism:</strong> <strong>Weighted aggregation</strong> based on token similarity.</li>
+</ul>
+<hr>
+</section>
+<section id="self-attention-query-key-value" class="level1">
+<h1>Self-Attention: Query, Key, Value</h1>
+<ul>
+<li>For each token (represented as a vector after embedding):
+<ul>
+<li><strong>Query (Q):</strong> <em>What I’m looking for.</em></li>
+<li><strong>Key (K):</strong> <em>What information I contain.</em></li>
+<li><strong>Value (V):</strong> <em>The actual information I’ll provide if attended to.</em></li>
+</ul></li>
+<li><strong>Process:</strong>
+<ol type="1">
+<li><strong>Calculate Attention Scores:</strong> How much does my Query (Q) match each previous Key (K)? (<code>Q @ K^T</code>).</li>
+<li><strong>Scale</strong> scores (divide by <code>sqrt(head_size)</code>).</li>
+<li><strong>Mask:</strong> Prevent tokens from attending to <em>future</em> tokens (use <code>tril</code> mask, set future scores to <code>float('-inf')</code>). Crucial for autoregressive generation.</li>
+<li><strong>Softmax:</strong> Convert scores into probabilities (weights) that sum to 1.</li>
+<li><strong>Aggregate Values:</strong> Compute weighted sum of Values (V) using the softmax weights (<code>softmax(scores) @ V</code>).</li>
+</ol></li>
+<li><strong>Result:</strong> An output vector for each token that incorporates information from relevant preceding tokens.</li>
+</ul>
+<hr>
+</section>
+<section id="enhancements-multi-head-attention-scaling" class="level1">
+<h1>Enhancements: Multi-Head Attention &amp; Scaling</h1>
+<ul>
+<li><strong>Multi-Head Attention:</strong>
+<ul>
+<li>Run the self-attention mechanism multiple times in parallel (“heads”) with different Q, K, V projections.</li>
+<li>Allows the model to focus on different types of relationships/information simultaneously.</li>
+<li>Concatenate results from all heads and project back to the original dimension.</li>
+</ul></li>
+<li><strong>Scaled Attention:</strong> Dividing scores by <code>sqrt(head_size)</code> prevents scores from becoming too large, keeping softmax from producing overly sharp distributions and aiding training stability.</li>
+</ul>
+<hr>
+</section>
+<section id="the-transformer-block" class="level1">
+<h1>The Transformer Block</h1>
+<ul>
+<li>The core building block of the GPT model. Combines:
+<ol type="1">
+<li><strong>Communication (Self-Attention):</strong> Tokens gather information (<code>MultiHeadAttention</code>). Followed by Layer Normalization.</li>
+<li><strong>Computation (Feed-Forward):</strong> Processes the aggregated information independently at each position (<code>FeedForward</code> network - usually a simple MLP). Followed by Layer Normalization.</li>
+</ol></li>
+<li><strong>Residual Connections:</strong> Add the input <code>x</code> to the output of both the attention and feed-forward layers (<code>output = x + SubLayer(LayerNorm(x))</code>). Helps with training deep networks (gradient flow).</li>
+<li><strong>Layer Normalization:</strong> Normalizes features <em>across the embedding dimension</em> for each token independently. Stabilizes training.</li>
+</ul>
+<hr>
+</section>
+<section id="positional-encoding" class="level1">
+<h1>Positional Encoding</h1>
+<ul>
+<li><strong>Problem:</strong> Self-attention itself doesn’t know the <em>order</em> of tokens (it just sees a set of vectors). <em>“A B C” looks the same as “C B A” to attention alone.</em></li>
+<li><strong>Solution:</strong> Add information about the token’s position in the sequence.</li>
+<li><strong>Method (in notebook):</strong> Learnable <strong>Positional Embeddings</strong>. Create an embedding table (<code>position_embedding_table</code>) of size <code>block_size</code> x <code>embedding_dim</code>. Add the corresponding position embedding to the token embedding.</li>
+</ul>
+<hr>
+</section>
+<section id="full-gpt-model-architecture" class="level1">
+<h1>Full GPT Model Architecture</h1>
+<ul>
+<li><strong>Input:</strong> Sequence of token indices <code>(B, T)</code>.</li>
+<li><strong>1. Embeddings:</strong>
+<ul>
+<li>Token Embeddings (<code>token_embedding_table</code>): <code>(B, T) -&gt; (B, T, C)</code></li>
+<li>Positional Embeddings (<code>position_embedding_table</code>): <code>(T) -&gt; (T, C)</code></li>
+<li>Sum them: <code>x = tok_emb + pos_emb</code></li>
+</ul></li>
+<li><strong>2. Transformer Blocks:</strong> Pass <code>x</code> through multiple <code>Block</code> layers (<code>n_layer</code> times). Each block contains <strong>Multi-Head Attention</strong> and <strong>Feed-Forward</strong> layers with <strong>Residuals</strong> and <strong>LayerNorm</strong>. <code>x = blocks(x)</code></li>
+<li><strong>3. Final Layer Norm:</strong> <code>x = ln_f(x)</code></li>
+<li><strong>4. Linear Head:</strong> Project final embeddings to vocabulary size (<code>lm_head</code>). <code>logits = lm_head(x)</code> -&gt; <code>(B, T, vocab_size)</code></li>
+<li><strong>Output:</strong> <strong>Logits</strong> (raw scores) for the next token prediction at each time step.</li>
+</ul>
+<hr>
+</section>
+<section id="training-loop" class="level1">
+<h1>Training Loop</h1>
+<ul>
+<li><strong>Objective:</strong> Adjust model parameters (weights) to minimize prediction error.</li>
+<li><strong>Loss Function:</strong> <strong>Cross-Entropy Loss</strong> (compares predicted logits against the actual target <code>y</code>).</li>
+<li><strong>Steps (repeated <code>max_iters</code> times):</strong>
+<ol type="1">
+<li><code>get_batch</code>: Sample a batch of inputs (<code>xb</code>) and targets (<code>yb</code>).</li>
+<li><strong>Forward pass:</strong> Calculate <code>logits</code> and <code>loss</code> using the model (<code>logits, loss = model(xb, yb)</code>).</li>
+<li><code>optimizer.zero_grad()</code>: Clear old gradients.</li>
+<li><code>loss.backward()</code>: Compute <strong>gradients</strong> (how much each parameter contributed to the loss).</li>
+<li><code>optimizer.step()</code>: Update parameters using an <strong>optimizer</strong> (e.g., AdamW) based on gradients and learning rate.</li>
+</ol></li>
+<li><strong>Evaluation:</strong> Periodically check loss on a <strong>validation set</strong> (<code>estimate_loss</code>) to monitor overfitting.</li>
+</ul>
+<hr>
+</section>
+<section id="generation-inference" class="level1">
+<h1>Generation (Inference)</h1>
+<ul>
+<li><strong>Goal:</strong> Produce new text.</li>
+<li><strong>Process (<em>Autoregressive</em>):</strong>
+<ol type="1">
+<li>Start with an initial context (e.g., a single token like newline or <code>torch.zeros</code>).</li>
+<li>Feed the current context (up to <code>block_size</code> last tokens) into the model to get <code>logits</code> for the <em>next</em> token.</li>
+<li>Focus on the <code>logits</code> for the very last time step.</li>
+<li>Apply <code>softmax</code> to get probabilities.</li>
+<li><strong>Sample</strong> the next token index based on these probabilities (<code>torch.multinomial</code>).</li>
+<li>Append the sampled token index to the context.</li>
+<li>Repeat steps 2-6 for <code>max_new_tokens</code>.</li>
+<li><code>decode</code> the final sequence of indices back into text.</li>
+</ol></li>
+</ul>
+<hr>
+</section>
+<section id="key-takeaways-next-steps" class="level1">
+<h1>Key Takeaways &amp; Next Steps</h1>
+<ul>
+<li><strong>Recap:</strong> Built a character-level GPT using core components: <strong>Embeddings</strong> (Token+Position), <strong>Self-Attention</strong> (Q,K,V), <strong>Transformer Blocks</strong> (Attention + FeedForward + Residuals + LayerNorm), and a standard <strong>training loop</strong>.</li>
+<li><strong>Self-Attention:</strong> The key mechanism allowing tokens to communicate across the sequence.</li>
+<li><strong>Transformer Blocks:</strong> The repeatable unit combining communication and computation.</li>
+<li><strong>Next Steps:</strong> Scaling up (more data, larger <code>n_embd</code>, <code>n_head</code>, <code>n_layer</code>), using sub-word tokenization (like BPE), exploring different architectures, fine-tuning on specific tasks.</li>
+</ul>
+<hr>
 
 
-<!-- -->
-
-</section>
 </section>
 
 <p>© <a href="https://hakyimlab.org">HakyImLab and Listed Authors</a> - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 License</a></p></main> <!-- /main -->
@@ -350,57 +486,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -730,60 +815,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "TF binding prediction challenge"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Haky Im</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-04-08</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Competition details for TF binding prediction challenge"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - gene46100</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - project</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">eval:</span><span class="co"> false</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># TF Binding Prediction Challenge</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Goal**: Predict transcription factor (TF) binding scores in DNA sequences</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Input**: 300bp human DNA sequences</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Target**: Binding scores for transcription factors</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Description</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>The challenge uses real genomic data to predict TF binding scores:</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Sequence Data**: <span class="in">`chr#_sequences.txt.gz`</span> files containing 300bp DNA sequences</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Each sequence has a unique identifier in format <span class="in">`chr#_start_end`</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Target Data**: <span class="in">`chr#_scores.txt.gz`</span> files containing binding scores</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Each sequence has a corresponding 300-long vector of binding scores</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Scores are predicted using <span class="co">[</span><span class="ot">Homer</span><span class="co">](http://homer.ucsd.edu/homer/motif/index.html)</span>, a widely used motif discovery tool</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Each position in the vector represents the binding score at that position in the sequence</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Data prepared by Sofia Salazar.</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Getting Started</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Data download link</span><span class="co">](https://uchicago.box.com/s/eajhnujlaxnd5441sv3dt73pfoxvgh4l)</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Starter notebook</span><span class="co">](tf-binding-prediction-starter.ipynb)</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Example implementation</span><span class="co">]()</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Timeline</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Training Sessions**:</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Tuesday, April 8: Sofia will review implementation of using the code in the basic DNA scoring model. Students will continue working on the project. Charles, Sofia, and Ran will be available to help.</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Thursday, April 10: Sofia will explain how to use **weights and biases** to calibrate hyperparameters of the model (learning rate, number of filters, kernel size, etc). Charles, Sofia, Ran, and Haky will be available to help.</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Presentation Day** (Thursday, April 10):</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  Students will present:</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Model architecture</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Model performance</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Filter interpretation (time permitting)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Lessons learned</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Submission Deadline**: April 18</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Submit best model to Canvas</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>TA will test on held-out data</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Leaderboard will be created</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</script>
 </div> <!-- /content -->
 
 
