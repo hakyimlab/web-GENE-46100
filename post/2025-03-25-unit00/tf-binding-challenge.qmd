@@ -34,8 +34,8 @@ The challenge uses real genomic data to predict TF binding scores:
 
 ## Timeline
 - **Training Sessions**:
-  - Tuesday, April 8: Sofia will review implementation of basic DNA scoring model
-  - Thursday, April 10: Sofia will explain weights and biases usage
+  - Tuesday, April 8: Sofia will review implementation of using the code in the basic DNA scoring model. Students will continue working on the project. Charles, Sofia, and Ran will be available to help.
+  - Thursday, April 10: Sofia will explain how to use **weights and biases** to calibrate hyperparameters of the model (learning rate, number of filters, kernel size, etc). Charles, Sofia, Ran, and Haky will be available to help.
 
 - **Presentation Day** (Thursday, April 10):
   Students will present:
