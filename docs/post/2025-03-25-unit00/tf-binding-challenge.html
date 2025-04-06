@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Haky Im">
-<meta name="dcterms.date" content="2025-04-03">
+<meta name="dcterms.date" content="2025-04-08">
+<meta name="description" content="Competition details for TF binding prediction challenge">
 
-<title>Measuring information in DNA sequence – GENE 46100</title>
+<title>TF binding prediction challenge – GENE 46100</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,22 +60,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6bd9cfa162949bde0a231f530c97869d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-dcc7d9e706e4adfbab8e3d6c7c60bab2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -114,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">GENE 46100</span>
     </a>
   </div>
@@ -125,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -144,7 +145,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#understanding-entropy-and-information-content-in-dna-sequence-analysis" id="toc-understanding-entropy-and-information-content-in-dna-sequence-analysis" class="nav-link active" data-scroll-target="#understanding-entropy-and-information-content-in-dna-sequence-analysis">Understanding Entropy and Information Content in DNA Sequence Analysis</a></li>
+  <li><a href="#tf-binding-prediction-challenge" id="toc-tf-binding-prediction-challenge" class="nav-link active" data-scroll-target="#tf-binding-prediction-challenge">TF Binding Prediction Challenge</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">Data Description</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
+  <li><a href="#timeline" id="toc-timeline" class="nav-link" data-scroll-target="#timeline">Timeline</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -153,9 +160,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Measuring information in DNA sequence</h1>
-</div>
+<div class="quarto-title-block"><div><h1 class="title">TF binding prediction challenge</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">gene46100</div>
+    <div class="quarto-category">project</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Competition details for TF binding prediction challenge
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -170,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 3, 2025</p>
+      <p class="date">April 8, 2025</p>
     </div>
   </div>
   
@@ -182,113 +198,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="understanding-entropy-and-information-content-in-dna-sequence-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-entropy-and-information-content-in-dna-sequence-analysis">Understanding Entropy and Information Content in DNA Sequence Analysis</h2>
-<p>In the analysis of DNA sequences, particularly when studying motifs and patterns, two key concepts from information theory are entropy and information content. These measures help quantify the variability and conservation of nucleotides at specific positions within a set of aligned sequences.</p>
-<ol type="1">
-<li>Entropy (H):</li>
-</ol>
-<p>Entropy measures the uncertainty or randomness at a given position. For DNA with four possible bases (A, C, G, T) and their respective probabilities at a position being p(A), p(C), p(G), and p(T) (where p(A) + p(C) + p(G) + p(T) = 1), the Shannon entropy (H) in bits is calculated using the following formula:</p>
-<p>H = - (p(A) * log2(p(A)) + p(C) * log2(p(C)) + p(G) * log2(p(G)) + p(T) * log2(p(T))) A higher entropy value indicates greater uncertainty or variability in the nucleotides at that position. A lower entropy value indicates less uncertainty, meaning one or a few nucleotides are more dominant. The maximum possible entropy for DNA (when all four bases are equally likely) is 2 bits. The minimum possible entropy (when only one base is present) is 0 bits. 2. Information Content (IC):</p>
-<p>Information content measures the amount of information gained by knowing the nucleotide at a particular position. It reflects the conservation of that position relative to a background distribution (often assumed to be uniform). The information content (IC) in bits is calculated as:</p>
-<p>IC = log2(N) - H Where:</p>
-<p>N is the number of possible nucleotides (4 for DNA).</p>
-<p>log2(N) represents the maximum possible information content (2 bits for DNA).</p>
-<p>H is the Shannon entropy calculated for that position.</p>
-<p>A higher information content value indicates greater conservation and importance of specific nucleotides at that position.</p>
-<p>A lower information content value indicates less conservation and more variability.</p>
-<p>The maximum possible information content for DNA is 2 bits (when entropy is 0).</p>
-<p>The minimum possible information content (when entropy is maximum) is 0 bits.</p>
-<div id="cell-2" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_entropy(pA, pC, pG, pT):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculates the Shannon entropy for DNA bases given their probabilities.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">        pA (float): Probability of Adenine (A).</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">        pC (float): Probability of Cytosine (C).</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">        pG (float): Probability of Guanine (G).</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">        pT (float): Probability of Thymine (T).</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">        float: The Shannon entropy in bits.</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    entropy <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pA <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        entropy <span class="op">-=</span> pA <span class="op">*</span> math.log2(pA)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pC <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        entropy <span class="op">-=</span> pC <span class="op">*</span> math.log2(pC)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pG <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        entropy <span class="op">-=</span> pG <span class="op">*</span> math.log2(pG)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pT <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        entropy <span class="op">-=</span> pT <span class="op">*</span> math.log2(pT)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> entropy</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calculate_information_content(pA, pC, pG, pT):</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">    Calculates the information content (in bits) at a given position</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">    based on the nucleotide probabilities.</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">        pA (float): Probability of Adenine (A).</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">        pC (float): Probability of Cytosine (C).</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">        pG (float): Probability of Guanine (G).</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">        pT (float): Probability of Thymine (T).</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">        float: The information content in bits.</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    num_nucleotides <span class="op">=</span> <span class="dv">4</span>  <span class="co"># A, C, G, T</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    max_entropy <span class="op">=</span> math.log2(num_nucleotides)  <span class="co"># Maximum entropy for 4 equally likely bases</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    entropy <span class="op">=</span> calculate_entropy(pA, pC, pG, pT)</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    information_content <span class="op">=</span> max_entropy <span class="op">-</span> entropy</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> information_content</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Example Usage:</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>probability_A <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>probability_C <span class="op">=</span> <span class="fl">0.2</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>probability_G <span class="op">=</span> <span class="fl">0.25</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>probability_T <span class="op">=</span> <span class="fl">0.25</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>entropy_value <span class="op">=</span> calculate_entropy(probability_A, probability_C, probability_G, probability_T)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>information_content_value <span class="op">=</span> calculate_information_content(probability_A, probability_C, probability_G, probability_T)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probabilities: p(A)=</span><span class="sc">{</span>probability_A<span class="sc">:.2f}</span><span class="ss">, p(C)=</span><span class="sc">{</span>probability_C<span class="sc">:.2f}</span><span class="ss">, p(G)=</span><span class="sc">{</span>probability_G<span class="sc">:.2f}</span><span class="ss">, p(T)=</span><span class="sc">{</span>probability_T<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Entropy: </span><span class="sc">{</span>entropy_value<span class="sc">:.4f}</span><span class="ss"> bits"</span>)</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Information Content: </span><span class="sc">{</span>information_content_value<span class="sc">:.4f}</span><span class="ss"> bits"</span>)</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Example with uniform distribution:</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>entropy_uniform <span class="op">=</span> calculate_entropy(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>)</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>information_content_uniform <span class="op">=</span> calculate_information_content(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>)</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Probabilities (uniform): p(A)=0.25, p(C)=0.25, p(G)=0.25, p(T)=0.25"</span>)</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Entropy (uniform): </span><span class="sc">{</span>entropy_uniform<span class="sc">:.4f}</span><span class="ss"> bits"</span>)</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Information Content (uniform): </span><span class="sc">{</span>information_content_uniform<span class="sc">:.4f}</span><span class="ss"> bits"</span>)</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Example with a fully conserved position:</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>entropy_conserved <span class="op">=</span> calculate_entropy(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>information_content_conserved <span class="op">=</span> calculate_information_content(<span class="fl">1.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Probabilities (fully conserved): p(A)=1.00, p(C)=0.00, p(G)=0.00, p(T)=0.00"</span>)</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Entropy (fully conserved): </span><span class="sc">{</span>entropy_conserved<span class="sc">:.4f}</span><span class="ss"> bits"</span>)</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Information Content (fully conserved): </span><span class="sc">{</span>information_content_conserved<span class="sc">:.4f}</span><span class="ss"> bits"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Probabilities: p(A)=0.30, p(C)=0.20, p(G)=0.25, p(T)=0.25
-Entropy: 1.9855 bits
-Information Content: 0.0145 bits
-
-Probabilities (uniform): p(A)=0.25, p(C)=0.25, p(G)=0.25, p(T)=0.25
-Entropy (uniform): 2.0000 bits
-Information Content (uniform): 0.0000 bits
-
-Probabilities (fully conserved): p(A)=1.00, p(C)=0.00, p(G)=0.00, p(T)=0.00
-Entropy (fully conserved): 0.0000 bits
-Information Content (fully conserved): 2.0000 bits</code></pre>
-</div>
-</div>
-<p>** text and code generated with gemini 2.0 via a series of prompting **</p>
+<section id="tf-binding-prediction-challenge" class="level1">
+<h1>TF Binding Prediction Challenge</h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<ul>
+<li><strong>Goal</strong>: Predict transcription factor (TF) binding scores in DNA sequences</li>
+<li><strong>Input</strong>: 300bp human DNA sequences</li>
+<li><strong>Target</strong>: Binding scores for transcription factors</li>
+</ul>
+</section>
+<section id="data-description" class="level2">
+<h2 class="anchored" data-anchor-id="data-description">Data Description</h2>
+<p>The challenge uses real genomic data to predict TF binding scores:</p>
+<ul>
+<li><strong>Sequence Data</strong>: <code>chr#_sequences.txt.gz</code> files containing 300bp DNA sequences
+<ul>
+<li>Each sequence has a unique identifier in format <code>chr#_start_end</code></li>
+</ul></li>
+<li><strong>Target Data</strong>: <code>chr#_scores.txt.gz</code> files containing binding scores
+<ul>
+<li>Each sequence has a corresponding 300-long vector of binding scores</li>
+<li>Scores are predicted using <a href="http://homer.ucsd.edu/homer/motif/index.html">Homer</a>, a widely used motif discovery tool</li>
+<li>Each position in the vector represents the binding score at that position in the sequence</li>
+</ul></li>
+</ul>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<ul>
+<li><a href="https://uchicago.box.com/s/eajhnujlaxnd5441sv3dt73pfoxvgh4l">Data download link</a></li>
+<li><a href="../../post/2025-03-25-unit00/tf-binding-prediction-starter.html">Starter notebook</a></li>
+<li><a href="">Example implementation</a></li>
+</ul>
+</section>
+<section id="timeline" class="level2">
+<h2 class="anchored" data-anchor-id="timeline">Timeline</h2>
+<ul>
+<li><strong>Training Sessions</strong>:
+<ul>
+<li>Tuesday, April 8: Sofia will review implementation of basic DNA scoring model</li>
+<li>Thursday, April 10: Sofia will explain weights and biases usage</li>
+</ul></li>
+<li><strong>Presentation Day</strong> (Thursday, April 10): Students will present:
+<ul>
+<li>Model architecture</li>
+<li>Model performance</li>
+<li>Filter interpretation (time permitting)</li>
+<li>Lessons learned</li>
+</ul></li>
+<li><strong>Submission Deadline</strong>: April 18
+<ul>
+<li>Submit best model to Canvas</li>
+<li>TA will test on held-out data</li>
+<li>Leaderboard will be created</li>
+</ul></li>
+</ul>
 
 
+<!-- -->
+
+</section>
 </section>
 
 <p>© <a href="https://hakyimlab.org">HakyImLab and Listed Authors</a> - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 License</a></p></main> <!-- /main -->
@@ -379,6 +349,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       container: window.document.getElementById('quarto-embedded-source-code-modal')
     });
     clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
@@ -708,7 +729,58 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "TF binding prediction challenge"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Haky Im</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-04-08</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Competition details for TF binding prediction challenge"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - gene46100</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  - project</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">eval:</span><span class="co"> false</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># TF Binding Prediction Challenge</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Goal**: Predict transcription factor (TF) binding scores in DNA sequences</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Input**: 300bp human DNA sequences</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Target**: Binding scores for transcription factors</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Description</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>The challenge uses real genomic data to predict TF binding scores:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Sequence Data**: <span class="in">`chr#_sequences.txt.gz`</span> files containing 300bp DNA sequences</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Each sequence has a unique identifier in format <span class="in">`chr#_start_end`</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Target Data**: <span class="in">`chr#_scores.txt.gz`</span> files containing binding scores</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Each sequence has a corresponding 300-long vector of binding scores</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Scores are predicted using <span class="co">[</span><span class="ot">Homer</span><span class="co">](http://homer.ucsd.edu/homer/motif/index.html)</span>, a widely used motif discovery tool</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Each position in the vector represents the binding score at that position in the sequence</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## Getting Started</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Data download link</span><span class="co">](https://uchicago.box.com/s/eajhnujlaxnd5441sv3dt73pfoxvgh4l)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Starter notebook</span><span class="co">](tf-binding-prediction-starter.ipynb)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Example implementation</span><span class="co">]()</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Timeline</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Training Sessions**:</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Tuesday, April 8: Sofia will review implementation of basic DNA scoring model</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Thursday, April 10: Sofia will explain weights and biases usage</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Presentation Day** (Thursday, April 10):</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  Students will present:</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Model architecture</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Model performance</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Filter interpretation (time permitting)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Lessons learned</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Submission Deadline**: April 18</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Submit best model to Canvas</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>TA will test on held-out data</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Leaderboard will be created</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

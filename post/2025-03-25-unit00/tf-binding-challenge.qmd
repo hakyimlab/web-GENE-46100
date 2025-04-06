@@ -5,8 +5,7 @@ date: 2025-04-08
 description: "Competition details for TF binding prediction challenge"
 categories:
   - gene46100
-  - competition
-  - homework
+  - project
 eval: false
 ---
 
