@@ -2,12 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
+      "/post/2025-03-25-unit00/tf-binding-wandb.html",
       "/post/2025-03-25-unit00/tf-binding-challenge.html",
       "/post/2025-03-25-unit00/homework-02.html",
       "/post/2025-03-25-unit00/updated-basic_DNA_tutorial.html",
       "/post/2025-03-25-unit00/tf-binding-prediction-starter.html",
       "/post/2025-03-25-unit00/homework-01.html",
-      "/post/2025-03-25-unit00/basic_DNA_tutorial.html",
       "/post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html",
       "/post/2025-03-25-unit00/index.html"
     ]
@@ -16,6 +16,7 @@
     "listing": "/index-all.html",
     "items": [
       "/DRAFTS/nano-gpt/gpt_dev.html",
+      "/post/2025-03-25-unit00/tf-binding-wandb.html",
       "/post/2025-03-25-unit00/tf-binding-challenge.html",
       "/post/2025-03-25-unit00/homework-02.html",
       "/post/2025-03-25-unit00/updated-basic_DNA_tutorial.html",
