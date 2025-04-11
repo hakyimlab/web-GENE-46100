@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Andrey Karpathy">
+<meta name="dcterms.date" content="2025-04-10">
 
-<title>Building a GPT – GENE 46100</title>
+<title>Building a GPT - companion notebook – GENE 46100</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +144,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-mathematical-trick-in-self-attention" id="toc-the-mathematical-trick-in-self-attention" class="nav-link active" data-scroll-target="#the-mathematical-trick-in-self-attention">The mathematical trick in self-attention</a>
+  <li><a href="#building-a-gpt" id="toc-building-a-gpt" class="nav-link active" data-scroll-target="#building-a-gpt">Building a GPT</a></li>
+  <li><a href="#the-mathematical-trick-in-self-attention" id="toc-the-mathematical-trick-in-self-attention" class="nav-link" data-scroll-target="#the-mathematical-trick-in-self-attention">The mathematical trick in self-attention</a>
   <ul class="collapse">
   <li><a href="#full-finished-code-for-reference" id="toc-full-finished-code-for-reference" class="nav-link" data-scroll-target="#full-finished-code-for-reference">Full finished code, for reference</a></li>
   </ul></li>
@@ -154,14 +157,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Building a GPT</h1>
+<h1 class="title">Building a GPT - companion notebook</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Andrey Karpathy </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 10, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -171,7 +186,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Companion notebook to the <a href="https://karpathy.ai/zero-to-hero.html">Zero To Hero</a> video on GPT.</p>
+<section id="building-a-gpt" class="level2">
+<h2 class="anchored" data-anchor-id="building-a-gpt">Building a GPT</h2>
+<p>Companion notebook to the <a href="https://karpathy.ai/zero-to-hero.html">Zero To Hero</a> video on GPT. Downloaded from <a href="">colab</a></p>
 <div id="cell-2" class="cell" data-outputid="ccc60f0c-fd78-4dbe-8598-0512d1036aad">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We always start with a dataset to train on. Let's download the tiny shakespeare dataset</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># !wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -537,27 +554,25 @@ wnYWmnxKWWev-tDqXErVKLgJ</code></pre>
 <pre><code>4.65630578994751</code></pre>
 </div>
 </div>
-<div id="cell-18" class="cell" data-outputid="0ad6f9d2-ad58-4498-a5f8-6f31407bb18b">
+<div id="cell-18" class="cell" data-outputid="0ad6f9d2-ad58-4498-a5f8-6f31407bb18b" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(m.generate(idx <span class="op">=</span> torch.zeros((<span class="dv">1</span>, <span class="dv">1</span>), dtype<span class="op">=</span>torch.<span class="bu">long</span>), max_new_tokens<span class="op">=</span><span class="dv">500</span>)[<span class="dv">0</span>].tolist()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-oTo.JUZ!!zqe!
-xBP qbs$Gy'AcOmrLwwt
-p$x;Seh-onQbfM?OjKbn'NwUAW -Np3fkz$FVwAUEa-wzWC -wQo-R!v -Mj?,SPiTyZ;o-opr$mOiPJEYD-CfigkzD3p3?zvS;ADz;.y?o,ivCuC'zqHxcVT cHA
-rT'Fd,SBMZyOslg!NXeF$sBe,juUzLq?w-wzP-h
-ERjjxlgJzPbHxf$ q,q,KCDCU fqBOQT
-SV&amp;CW:xSVwZv'DG'NSPypDhKStKzC -$hslxIVzoivnp ,ethA:NCCGoi
-tN!ljjP3fwJMwNelgUzzPGJlgihJ!d?q.d
-pSPYgCuCJrIFtb
-jQXg
-pA.P LP,SPJi
-DBcuBM:CixjJ$Jzkq,OLf3KLQLMGph$O 3DfiPHnXKuHMlyjxEiyZib3FaHV-oJa!zoc'XSP :CKGUhd?lgCOF$;;DTHZMlvvcmZAm;:iv'MMgO&amp;Ywbc;BLCUd&amp;vZINLIzkuTGZa
-D.?</code></pre>
+pJ:Bpm&amp;yiltNCjeO3:Cx&amp;vvMYW-txjuAd IRFbTpJ$zkZelxZtTlHNzdXXUiQQY:qFINTOBNLI,&amp;oTigq z.c:Cq,SDXzetn3XVjX-YBcHAUhk&amp;PHdhcOb
+nhJ?FJU?pRiOLQeUN!BxjPLiq-GJdUV'hsnla!murI!IM?SPNPq?VgC'R
+pD3cLv-bxn-tL!upg
+SZ!Uvdg CtxtT?hsiW:XxKIiPlagHIsr'zKSVxza?GlDWObPmRJgrIAcmspmZ&amp;viCKot:u3qYXA:rZgv f:3Q-oiwUzqh'Z!I'zRS3SP rVchSFUIdd q?sPJpUdhMCK$VXXevXJFMl,i
+YxA:gWId,EXR,iMC,$?srV$VztRwb?KpgUWFjR$zChOLm;JrDnDph
+LBj,KZxJaLPgBAkyzEzSiiQb
+jkSVyb$vvyQFuAUAKuzdZAJktRqUiAcPBa;AgJ;.$l3Pu!.IErMfN!PmuQbvx
+xMkttN:PmJh'wNC
+AUI?wN</code></pre>
 </div>
 </div>
+</section>
 <section id="the-mathematical-trick-in-self-attention" class="level2">
 <h2 class="anchored" data-anchor-id="the-mathematical-trick-in-self-attention">The mathematical trick in self-attention</h2>
-<div id="cell-20" class="cell" data-outputid="d981f6d4-ac08-4ec2-8284-82f5fa1e0815">
+<div id="cell-20" class="cell" data-outputid="d981f6d4-ac08-4ec2-8284-82f5fa1e0815" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># toy example illustrating how matrix multiplication can be used for a "weighted aggregation"</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(<span class="dv">42</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> torch.tril(torch.ones(<span class="dv">3</span>, <span class="dv">3</span>))</span>
@@ -589,18 +604,18 @@ tensor([[2.0000, 7.0000],
         [4.6667, 5.3333]])</code></pre>
 </div>
 </div>
-<div id="cell-21" class="cell" data-outputid="8bf3ff5f-565e-48b8-de8e-7272706c8e12">
+<div id="cell-21" class="cell" data-outputid="8bf3ff5f-565e-48b8-de8e-7272706c8e12" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># consider the following toy example:</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(<span class="dv">1337</span>)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>B,T,C <span class="op">=</span> <span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">2</span> <span class="co"># batch, time, channels</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> torch.randn(B,T,C)</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>x.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>torch.Size([4, 8, 2])</code></pre>
 </div>
 </div>
-<div id="cell-22" class="cell">
+<div id="cell-22" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We want x[b,t] = mean_{i&lt;=t} x[b,i]</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>xbow <span class="op">=</span> torch.zeros((B,T,C))</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(B):</span>
@@ -608,17 +623,17 @@ tensor([[2.0000, 7.0000],
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>        xprev <span class="op">=</span> x[b,:t<span class="op">+</span><span class="dv">1</span>] <span class="co"># (t,C)</span></span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>        xbow[b,t] <span class="op">=</span> torch.mean(xprev, <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-23" class="cell" data-outputid="eaf6ab61-dff1-4bb7-e623-47f692bad5f9">
+<div id="cell-23" class="cell" data-outputid="eaf6ab61-dff1-4bb7-e623-47f692bad5f9" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># version 2: using matrix multiply for a weighted aggregation</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>wei <span class="op">=</span> torch.tril(torch.ones(T, T))</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>wei <span class="op">=</span> wei <span class="op">/</span> wei.<span class="bu">sum</span>(<span class="dv">1</span>, keepdim<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>xbow2 <span class="op">=</span> wei <span class="op">@</span> x <span class="co"># (B, T, T) @ (B, T, C) ----&gt; (B, T, C)</span></span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>torch.allclose(xbow, xbow2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="cell-24" class="cell" data-outputid="080b500d-8110-4602-fcef-7d6f2ebfc6bc">
+<div id="cell-24" class="cell" data-outputid="080b500d-8110-4602-fcef-7d6f2ebfc6bc" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># version 3: use Softmax</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>tril <span class="op">=</span> torch.tril(torch.ones(T, T))</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>wei <span class="op">=</span> torch.zeros((T,T))</span>
@@ -626,11 +641,11 @@ tensor([[2.0000, 7.0000],
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>wei <span class="op">=</span> F.softmax(wei, dim<span class="op">=-</span><span class="dv">1</span>)</span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>xbow3 <span class="op">=</span> wei <span class="op">@</span> x</span>
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>torch.allclose(xbow, xbow3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="cell-25" class="cell" data-outputid="07b587dd-a91c-4bb0-d7f1-e247cd5dacb5">
+<div id="cell-25" class="cell" data-outputid="07b587dd-a91c-4bb0-d7f1-e247cd5dacb5" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># version 4: self-attention!</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(<span class="dv">1337</span>)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>B,T,C <span class="op">=</span> <span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">32</span> <span class="co"># batch, time, channels</span></span>
@@ -655,7 +670,7 @@ tensor([[2.0000, 7.0000],
 <span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="co">#out = wei @ x</span></span>
 <span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>out.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>torch.Size([4, 8, 16])</code></pre>
 </div>
 </div>

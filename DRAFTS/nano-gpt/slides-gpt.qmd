@@ -2,14 +2,13 @@
 title: Building a GPT From Scratch summary
 author: Haky Im
 date: 2025-03-24
-description: Karpathy's gpt_dev.ipynb summary by gemini with my edits
 categories:
   - gene46100
   - slides
 eval: false
 ---
 
-# Title Slide
+Karpathy's gpt_dev.ipynb summarized by gemini, reviewed by me.
 
 ## Building a GPT From Scratch: A Character-Level Approach
 ### Understanding the Core Concepts (Based on A. Karpathy's NanoGPT)
@@ -165,6 +164,41 @@ eval: false
     4.  `loss.backward()`: Compute **gradients** (how much each parameter contributed to the loss).
     5.  `optimizer.step()`: Update parameters using an **optimizer** (e.g., AdamW) based on gradients and learning rate.
 * **Evaluation:** Periodically check loss on a **validation set** (`estimate_loss`) to monitor overfitting.
+
+---
+
+# Note: Understanding the Loss Function: Cross-Entropy
+
+**1. The Goal:**
+* Our model needs to predict the **correct next character** out of all possible characters in the vocabulary (e.g., 65 options in Tiny Shakespeare).
+
+**2. Model's Prediction:**
+* For a given context, the model outputs **logits** – raw scores for each possible next character.
+    * *Example Logits:* `{'a': 0.1, 'b': -2.0, 'c': 1.5, ...}`
+* These logits are converted into **probabilities** using the **Softmax** function. Softmax makes sure probabilities are between 0 and 1, and they all add up to 1.
+    * *Example Probabilities:* `{'a': 0.20, 'b': 0.02, 'c': 0.78, ...}`
+* This probability distribution represents the model's **belief** about what the next character will be.
+
+**3. The Target (Ground Truth):**
+* We know the **actual** next character from the training data.
+* Think of the target as a "perfect" probability distribution: **100%** probability for the correct character and **0%** for all others.
+    * *Example Target (if 'c' is the correct next char):* `{'a': 0, 'b': 0, 'c': 1.0, ...}`
+
+**4. What is Cross-Entropy Loss?**
+* It measures the **difference** (or "distance") between the **model's predicted probability distribution** and the **target distribution**.
+* Essentially, it asks: *"How well do the model's predicted probabilities match the actual outcome?"*
+
+**5. How it Works (Intuition):**
+* Cross-Entropy focuses heavily on the **probability the model assigned to the *correct* character**.
+* A simplified way to think about it for this single-correct-answer task is:
+    `Loss = -log(predicted_probability_of_the_correct_character)`
+* **Why `-log`?**
+    * If prediction for the correct character is high (e.g., 0.9), `log(0.9)` is slightly negative, so `-log(0.9)` is a **small positive loss**. (Good!)
+    * If prediction for the correct character is low (e.g., 0.01), `log(0.01)` is very negative, so `-log(0.01)` is a **large positive loss**. (Bad!)
+* It penalizes the model heavily for being wrong, especially if it was confident (assigned low probability to the correct answer).
+
+**6. Training Goal:**
+* Minimize the Cross-Entropy loss. This forces the model to learn parameters that assign **higher probabilities to the correct next characters** across the training data.
 
 ---
 

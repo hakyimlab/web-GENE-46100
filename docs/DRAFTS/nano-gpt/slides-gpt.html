@@ -8,7 +8,6 @@
 
 <meta name="author" content="Haky Im">
 <meta name="dcterms.date" content="2025-03-24">
-<meta name="description" content="Karpathy’s gpt_dev.ipynb summary by gemini with my edits">
 
 <title>Building a GPT From Scratch summary – GENE 46100</title>
 <style>
@@ -111,12 +110,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#title-slide" id="toc-title-slide" class="nav-link active" data-scroll-target="#title-slide">Title Slide</a>
-  <ul class="collapse">
-  <li><a href="#building-a-gpt-from-scratch-a-character-level-approach" id="toc-building-a-gpt-from-scratch-a-character-level-approach" class="nav-link" data-scroll-target="#building-a-gpt-from-scratch-a-character-level-approach">Building a GPT From Scratch: A Character-Level Approach</a>
+  <li><a href="#building-a-gpt-from-scratch-a-character-level-approach" id="toc-building-a-gpt-from-scratch-a-character-level-approach" class="nav-link active" data-scroll-target="#building-a-gpt-from-scratch-a-character-level-approach">Building a GPT From Scratch: A Character-Level Approach</a>
   <ul class="collapse">
   <li><a href="#understanding-the-core-concepts-based-on-a.-karpathys-nanogpt" id="toc-understanding-the-core-concepts-based-on-a.-karpathys-nanogpt" class="nav-link" data-scroll-target="#understanding-the-core-concepts-based-on-a.-karpathys-nanogpt">Understanding the Core Concepts (Based on A. Karpathy’s NanoGPT)</a></li>
-  </ul></li>
   </ul></li>
   <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
   <li><a href="#the-task---language-modeling" id="toc-the-task---language-modeling" class="nav-link" data-scroll-target="#the-task---language-modeling">The Task - Language Modeling</a></li>
@@ -131,6 +127,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#positional-encoding" id="toc-positional-encoding" class="nav-link" data-scroll-target="#positional-encoding">Positional Encoding</a></li>
   <li><a href="#full-gpt-model-architecture" id="toc-full-gpt-model-architecture" class="nav-link" data-scroll-target="#full-gpt-model-architecture">Full GPT Model Architecture</a></li>
   <li><a href="#training-loop" id="toc-training-loop" class="nav-link" data-scroll-target="#training-loop">Training Loop</a></li>
+  <li><a href="#note-understanding-the-loss-function-cross-entropy" id="toc-note-understanding-the-loss-function-cross-entropy" class="nav-link" data-scroll-target="#note-understanding-the-loss-function-cross-entropy">Note: Understanding the Loss Function: Cross-Entropy</a></li>
   <li><a href="#generation-inference" id="toc-generation-inference" class="nav-link" data-scroll-target="#generation-inference">Generation (Inference)</a></li>
   <li><a href="#key-takeaways-next-steps" id="toc-key-takeaways-next-steps" class="nav-link" data-scroll-target="#key-takeaways-next-steps">Key Takeaways &amp; Next Steps</a></li>
   </ul>
@@ -148,11 +145,6 @@ ul.task-list li input[type="checkbox"] {
   </div>
   </div>
 
-<div>
-  <div class="description">
-    Karpathy’s gpt_dev.ipynb summary by gemini with my edits
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -179,14 +171,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="title-slide" class="level1">
-<h1>Title Slide</h1>
+<p>Karpathy’s gpt_dev.ipynb summarized by gemini, reviewed by me.</p>
 <section id="building-a-gpt-from-scratch-a-character-level-approach" class="level2">
 <h2 class="anchored" data-anchor-id="building-a-gpt-from-scratch-a-character-level-approach">Building a GPT From Scratch: A Character-Level Approach</h2>
 <section id="understanding-the-core-concepts-based-on-a.-karpathys-nanogpt" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-the-core-concepts-based-on-a.-karpathys-nanogpt">Understanding the Core Concepts (Based on A. Karpathy’s NanoGPT)</h3>
 <hr>
-</section>
 </section>
 </section>
 <section id="objective" class="level1">
@@ -365,6 +355,16 @@ ul.task-list li input[type="checkbox"] {
 </ol></li>
 <li><strong>Evaluation:</strong> Periodically check loss on a <strong>validation set</strong> (<code>estimate_loss</code>) to monitor overfitting.</li>
 </ul>
+<hr>
+</section>
+<section id="note-understanding-the-loss-function-cross-entropy" class="level1">
+<h1>Note: Understanding the Loss Function: Cross-Entropy</h1>
+<p><strong>1. The Goal:</strong> * Our model needs to predict the <strong>correct next character</strong> out of all possible characters in the vocabulary (e.g., 65 options in Tiny Shakespeare).</p>
+<p><strong>2. Model’s Prediction:</strong> * For a given context, the model outputs <strong>logits</strong> – raw scores for each possible next character. * <em>Example Logits:</em> <code>{'a': 0.1, 'b': -2.0, 'c': 1.5, ...}</code> * These logits are converted into <strong>probabilities</strong> using the <strong>Softmax</strong> function. Softmax makes sure probabilities are between 0 and 1, and they all add up to 1. * <em>Example Probabilities:</em> <code>{'a': 0.20, 'b': 0.02, 'c': 0.78, ...}</code> * This probability distribution represents the model’s <strong>belief</strong> about what the next character will be.</p>
+<p><strong>3. The Target (Ground Truth):</strong> * We know the <strong>actual</strong> next character from the training data. * Think of the target as a “perfect” probability distribution: <strong>100%</strong> probability for the correct character and <strong>0%</strong> for all others. * <em>Example Target (if ‘c’ is the correct next char):</em> <code>{'a': 0, 'b': 0, 'c': 1.0, ...}</code></p>
+<p><strong>4. What is Cross-Entropy Loss?</strong> * It measures the <strong>difference</strong> (or “distance”) between the <strong>model’s predicted probability distribution</strong> and the <strong>target distribution</strong>. * Essentially, it asks: <em>“How well do the model’s predicted probabilities match the actual outcome?”</em></p>
+<p><strong>5. How it Works (Intuition):</strong> * Cross-Entropy focuses heavily on the <strong>probability the model assigned to the <em>correct</em> character</strong>. * A simplified way to think about it for this single-correct-answer task is: <code>Loss = -log(predicted_probability_of_the_correct_character)</code> * <strong>Why <code>-log</code>?</strong> * If prediction for the correct character is high (e.g., 0.9), <code>log(0.9)</code> is slightly negative, so <code>-log(0.9)</code> is a <strong>small positive loss</strong>. (Good!) * If prediction for the correct character is low (e.g., 0.01), <code>log(0.01)</code> is very negative, so <code>-log(0.01)</code> is a <strong>large positive loss</strong>. (Bad!) * It penalizes the model heavily for being wrong, especially if it was confident (assigned low probability to the correct answer).</p>
+<p><strong>6. Training Goal:</strong> * Minimize the Cross-Entropy loss. This forces the model to learn parameters that assign <strong>higher probabilities to the correct next characters</strong> across the training data.</p>
 <hr>
 </section>
 <section id="generation-inference" class="level1">
