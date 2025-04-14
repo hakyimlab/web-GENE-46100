@@ -5,6 +5,7 @@ date: 2025-03-24
 categories:
   - gene46100
   - slides
+  - gpt
 eval: false
 ---
 

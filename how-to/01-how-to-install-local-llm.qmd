@@ -1,0 +1,48 @@
+---
+title: how to install local llm
+author: Haky Im
+date: 2025-04-14
+categories: [how-to, llm]
+---
+
+#how-to install ollama open webui local llm on a macbook
+adapted using conda instead of pyenv from https://medium.com/@hautel.alex2000/build-your-local-ai-from-zero-to-a-custom-chatgpt-interface-with-ollama-open-webui-6bee2c5abba3
+
+- [ ] install homebrew if not already installed on your mac
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+- [ ] install and start ollama service
+```
+brew install ollama
+brew services start ollama
+```
+- [ ] run ollama with deepseek-r1-14b or other models from https://ollama.com/library
+```
+ollama run deepseek-r1:14b
+```
+- [ ] install miniconda if not already installed
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh -b -p $HOME/miniconda
+```
+- [ ] create and activate conda environment
+```
+conda create -n open-webui python=3.11
+conda activate open-webui
+```
+- [ ] install openwebui
+```
+pip install open-webui
+```
+- [ ] start open-webui
+```
+open-webui serve
+```
+- [ ] open browser and go to http://localhost:8080
+
+
+
+
+
+

@@ -5,7 +5,7 @@ date: 2025-03-24
 description: setting up conda environement and installing packages
 categories:
   - gene46100
-  - howto
+  - how-to
 eval: false
 ---
 
@@ -88,3 +88,7 @@ conda activate gene46100
 pip install -r requirements-gene46100.txt
 
 ```
+
+## configuration to run python in qmd files
+
+Follow instructions in https://thedatasavvycorner.com/blogs/08-quarto-conda-env
