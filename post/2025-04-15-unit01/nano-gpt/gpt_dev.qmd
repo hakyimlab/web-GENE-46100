@@ -2,18 +2,27 @@
 title: Building a GPT - companion notebook qmd
 author: Andrey Karpathy
 date: '2025-04-11'
-eval: false
+freeze: true
 jupyter: 
   kernelspec:
-    name: "conda-env-.venv-py"
+    name: "conda-env-gene46100-py"
     language: "python"
-    display_name: "<.venv>"
+    display_name: "gene46100"
+format:
+  html:
+    code-fold: true
+    code-line-numbers: true
+    code-tools: true
+    code-wrap: true
 ---
 
 ## Building a GPT
 
-Companion notebook to the [Zero To Hero](https://karpathy.ai/zero-to-hero.html) video on GPT. Downloaded from [here](https://github.com/karpathy/nanoGPT)
+Companion notebook to the [Zero To Hero](https://karpathy.ai/zero-to-hero.html) video on GPT. Downloaded from [here](https://colab.research.google.com/drive/1JMLa53HDuA-i7ZBmqV7ZnA3c_fvtXnx-?usp=sharing)
 
+(https://github.com/karpathy/nanoGPT)
+
+### download the tiny shakespeare dataset
 ```{python}
 # We always start with a dataset to train on. Let's download the tiny shakespeare dataset
 #!wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
@@ -26,6 +35,7 @@ with open('input.txt', 'r', encoding='utf-8') as f:
 ```
 
 ```{python}
+# print the length of the dataset
 print("length of dataset in characters: ", len(text))
 ```
 
@@ -79,16 +89,15 @@ print(data.shape, data.dtype)
 print(data[:1000]) # the 1000 characters we looked at earier will to the GPT look like this
 ```
 
-### split the data into train and validation sets
 ```{python}
-# Let's now split up the data into train and validation sets
+# split up the data into train and validation sets
 n = int(0.9*len(data)) # first 90% will be train, rest val
 train_data = data[:n]
 val_data = data[n:]
 ```
 
-### define the block size
 ```{python}
+# define the block size
 block_size = 8
 train_data[:block_size+1]
 ```
@@ -135,7 +144,10 @@ for b in range(batch_size): # batch dimension
 ```
 
 ### start with a simple model: the bigram language model
+This model predicts the next character based on the current character only. 
+It uses the logits for the next character in a lookup table.
 ```{python}
+# define the bigram language model
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -163,8 +175,14 @@ class BigramLanguageModel(nn.Module):
 
         return logits, loss
 
+    # Text Generation Method
+    # This method implements autoregressive text generation by:
+    # 1. Taking the current context (idx)
+    # 2. Predicting the next token probabilities
+    # 3. Sampling from these probabilities
+    # 4. Appending the sampled token to the context
+    # 5. Repeating for max_new_tokens iterations
     def generate(self, idx, max_new_tokens):
-        # idx is (B, T) array of indices in the current context
         for _ in range(max_new_tokens):
             # get the predictions
             logits, loss = self(idx)
@@ -186,6 +204,20 @@ where:
 - p = predicted probability
 - Σ = sum over all classes
 
+This is the loss for a single token. The total loss is the average across all B*T tokens in the batch, where:
+- B = batch size (number of sequences processed in parallel)
+- T = sequence length (number of tokens in each sequence)
+
+Before training, we would expect the model to predict the next character from a uniform distribution.
+
+-Σ(y * log(p)) = 
+= - ( 1 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) ) = - log(1/65) 
+= 4.1744 per token.
+
+i.e. at the beginning we expect loss of -log(1/65) = 4.1744 per token.
+
+
+### initialize the model and compute the loss
 ```{python}
 m = BigramLanguageModel(vocab_size)
 logits, loss = m(xb, yb)
@@ -193,15 +225,17 @@ print(logits.shape)
 print(loss)
 ```
 
+### generate text
 ```{python}
 print(decode(m.generate(idx = torch.zeros((1, 1), dtype=torch.long), max_new_tokens=100)[0].tolist()))
 ```
 
+### choose AdamW as the optimizer
 ```{python}
-# create a PyTorch optimizer
 optimizer = torch.optim.AdamW(m.parameters(), lr=1e-3)
 ```
 
+### train the model
 ```{python}
 batch_size = 32
 for steps in range(100): # increase number of steps for good results...
@@ -218,14 +252,15 @@ for steps in range(100): # increase number of steps for good results...
 print(loss.item())
 ```
 
+### generate text starting with \n as initial context
 ```{python}
 print(decode(m.generate(idx = torch.zeros((1, 1), dtype=torch.long), max_new_tokens=500)[0].tolist()))
 ```
 
 ## The mathematical trick in self-attention
 
+### toy example illustrating how matrix multiplication can be used for a "weighted aggregation"
 ```{python}
-# toy example illustrating how matrix multiplication can be used for a "weighted aggregation"
 torch.manual_seed(42)
 a = torch.tril(torch.ones(3, 3))
 a = a / torch.sum(a, 1, keepdim=True)
@@ -250,6 +285,7 @@ x = torch.randn(B,T,C)
 x.shape
 ```
 
+### version 1: using a for loop to compute the weighted aggregation
 ```{python}
 # We want x[b,t] = mean_{i<=t} x[b,i]
 xbow = torch.zeros((B,T,C))
@@ -259,16 +295,16 @@ for b in range(B):
         xbow[b,t] = torch.mean(xprev, 0)
 ```
 
+### version 2: using matrix multiply for a weighted aggregation
 ```{python}
-# version 2: using matrix multiply for a weighted aggregation
 wei = torch.tril(torch.ones(T, T))
 wei = wei / wei.sum(1, keepdim=True)
 xbow2 = wei @ x # (B, T, T) @ (B, T, C) ----> (B, T, C)
 torch.allclose(xbow, xbow2)
 ```
 
+### version 3: use Softmax
 ```{python}
-# version 3: use Softmax
 tril = torch.tril(torch.ones(T, T))
 wei = torch.zeros((T,T))
 wei = wei.masked_fill(tril == 0, float('-inf'))
@@ -281,8 +317,8 @@ torch.allclose(xbow, xbow3)
 
 softmax($z_i$) = $\frac{e^{z_i}}{\sum_j e^{z_j}}$
 
+# version 4: self-attention
 ```{python}
-# version 4: self-attention!
 torch.manual_seed(1337)
 B,T,C = 4,8,32 # batch, time, channels
 x = torch.randn(B,T,C)
@@ -318,6 +354,9 @@ Notes:
 - Each example across batch dimension is of course processed completely independently and never "talk" to each other
 - In an "encoder" attention block just delete the single line that does masking with `tril`, allowing all tokens to communicate. This block here is called a "decoder" attention block because it has triangular masking, and is usually used in autoregressive settings, like language modeling.
 - "self-attention" just means that the keys and values are produced from the same source as queries. In "cross-attention", the queries still get produced from x, but the keys and values come from some other, external source (e.g. an encoder module)
+
+
+### why scaled attention?
 - "Scaled" attention additional divides `wei` by 1/sqrt(head_size). This makes it so when input Q,K are unit variance, wei will be unit variance too and Softmax will stay diffuse and not saturate too much. Illustration below
 
 ```{python}
@@ -346,6 +385,7 @@ torch.softmax(torch.tensor([0.1, -0.2, 0.3, -0.2, 0.5]), dim=-1)
 torch.softmax(torch.tensor([0.1, -0.2, 0.3, -0.2, 0.5])*8, dim=-1) # gets too peaky, converges to one-hot
 ```
 
+### LayerNorm1d
 ```{python}
 class LayerNorm1d: # (used to be BatchNorm1d)
 
@@ -393,7 +433,6 @@ x[0,:].mean(), x[0,:].std() # mean,std of a single input from the batch, of its 
 You may want to refer directly to the git repo instead though.
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
 import torch
 import torch.nn as nn
 from torch.nn import functional as F

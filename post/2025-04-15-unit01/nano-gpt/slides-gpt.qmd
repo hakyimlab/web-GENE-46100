@@ -152,6 +152,8 @@ Karpathy's gpt_dev.ipynb summarized by gemini, reviewed by me.
 * **4. Linear Head:** Project final embeddings to vocabulary size (`lm_head`). `logits = lm_head(x)` -> `(B, T, vocab_size)`
 * **Output:** **Logits** (raw scores) for the next token prediction at each time step.
 
+![transformer architecture](../images/transformer-architecture.png)
+
 ---
 
 # Training Loop

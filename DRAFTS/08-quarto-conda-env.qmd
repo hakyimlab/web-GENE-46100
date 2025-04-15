@@ -7,6 +7,7 @@ description: "How to specify a specific Conda environment when rendering quarto 
 categories:      
     - how-to
 toc: true
+freeze: true
 ---
 
 borrowed from https://thedatasavvycorner.com/blogs/08-quarto-conda-env modified for GENE-46100
