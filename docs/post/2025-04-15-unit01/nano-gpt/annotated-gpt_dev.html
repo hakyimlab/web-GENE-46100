@@ -250,14 +250,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
 <section id="step-1-loading-inspection" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-loading-inspection">Step 1: Loading &amp; Inspection</h3>
-<div id="14f9e994" class="cell" data-execution_count="1">
+<div id="11899972" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># We always start with a dataset to train on. Let's download the tiny shakespeare dataset</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="co">#!wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5b4d44f4" class="cell" data-execution_count="2">
+<div id="b199cc78" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># read it in to inspect it</span></span>
@@ -265,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3"></a>    text <span class="op">=</span> f.read()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="6e583f91" class="cell" data-execution_count="3">
+<div id="eeb32253" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># print the length of the dataset</span></span>
@@ -275,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>length of dataset in characters:  1115394</code></pre>
 </div>
 </div>
-<div id="ac775ecc" class="cell" data-execution_count="4">
+<div id="476d833e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># let's look at the first 1000 characters</span></span>
@@ -328,7 +328,7 @@ speak this in hunger for bread, not in thirst for revenge.
 </section>
 <section id="step-2-tokenization" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-tokenization">Step 2: Tokenization</h3>
-<div id="f578971b" class="cell" data-execution_count="5">
+<div id="d398aa3b" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># here are all the unique characters that occur in this text</span></span>
@@ -343,7 +343,7 @@ speak this in hunger for bread, not in thirst for revenge.
 65</code></pre>
 </div>
 </div>
-<div id="f4428ea4" class="cell" data-execution_count="6">
+<div id="6f77187d" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># create a mapping from characters to integers</span></span>
@@ -363,7 +363,7 @@ hii there</code></pre>
 </section>
 <section id="step-3-creating-batches-for-training" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-creating-batches-for-training">Step 3: Creating Batches for Training</h3>
-<div id="95f3a944" class="cell" data-execution_count="7">
+<div id="bb6b384f" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># let's now encode the entire text dataset and store it into a torch.Tensor</span></span>
@@ -432,7 +432,7 @@ tensor([18, 47, 56, 57, 58,  1, 15, 47, 58, 47, 64, 43, 52, 10,  0, 14, 43, 44,
         56, 43, 60, 43, 52, 45, 43,  8,  0,  0])</code></pre>
 </div>
 </div>
-<div id="f22cbc39" class="cell" data-execution_count="8">
+<div id="5d2e938c" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># split up the data into train and validation sets</span></span>
@@ -441,21 +441,21 @@ tensor([18, 47, 56, 57, 58,  1, 15, 47, 58, 47, 64, 43, 52, 10,  0, 14, 43, 44,
 <span id="cb13-4"><a href="#cb13-4"></a>val_data <span class="op">=</span> data[n:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="d51889a3" class="cell" data-execution_count="9">
+<div id="eab1c6c1" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># define the block size (context length)</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>block_size <span class="op">=</span> <span class="dv">8</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>train_data[:block_size<span class="op">+</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="62">
 <pre><code>tensor([18, 47, 56, 57, 58,  1, 15, 47, 58])</code></pre>
 </div>
 </div>
 </section>
 <section id="understanding-the-context-and-target" class="level3">
 <h3 class="anchored" data-anchor-id="understanding-the-context-and-target">Understanding the Context and Target</h3>
-<div id="d17dbd73" class="cell" data-execution_count="10">
+<div id="a097222b" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>x <span class="op">=</span> train_data[:block_size]</span>
@@ -479,7 +479,7 @@ when input is tensor([18, 47, 56, 57, 58,  1, 15, 47]) the target: 58</code></pr
 </section>
 <section id="creating-batches" class="level3">
 <h3 class="anchored" data-anchor-id="creating-batches">Creating Batches</h3>
-<div id="67da82d6" class="cell" data-execution_count="11">
+<div id="aab67146" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>torch.manual_seed(<span class="dv">1337</span>)</span>
@@ -566,7 +566,7 @@ when input is [25, 17, 27, 10, 0, 21, 1, 54] the target: 39</code></pre>
 <h3 class="anchored" data-anchor-id="starting-simple-bigram-language-model">Starting Simple: Bigram Language Model</h3>
 <p>This model predicts the next character based on the current character only. It uses the logits for the next character in a lookup table.</p>
 <p>Key points: - Simplest possible model - Uses an Embedding Table of size vocab_size x vocab_size - Each row contains predicted scores for next character - Ignores context beyond last character</p>
-<div id="c7011dcf" class="cell" data-execution_count="12">
+<div id="001b713a" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># define the bigram language model</span></span>
@@ -630,7 +630,7 @@ when input is [25, 17, 27, 10, 0, 21, 1, 54] the target: 39</code></pre>
 </section>
 <section id="model-initialization-and-training" class="level3">
 <h3 class="anchored" data-anchor-id="model-initialization-and-training">Model Initialization and Training</h3>
-<div id="5421df23" class="cell" data-execution_count="13">
+<div id="b4e8345e" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>m <span class="op">=</span> BigramLanguageModel(vocab_size)</span>
@@ -646,7 +646,7 @@ tensor(4.8786, grad_fn=&lt;NllLossBackward0&gt;)</code></pre>
 </section>
 <section id="text-generation" class="level3">
 <h3 class="anchored" data-anchor-id="text-generation">Text Generation</h3>
-<div id="0413593b" class="cell" data-execution_count="14">
+<div id="ec4ea471" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="bu">print</span>(decode(m.generate(idx <span class="op">=</span> torch.zeros((<span class="dv">1</span>, <span class="dv">1</span>), dtype<span class="op">=</span>torch.<span class="bu">long</span>), max_new_tokens<span class="op">=</span><span class="dv">100</span>)[<span class="dv">0</span>].tolist()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -660,7 +660,7 @@ wnYWmnxKWWev-tDqXErVKLgJ</code></pre>
 </section>
 <section id="training-setup" class="level3">
 <h3 class="anchored" data-anchor-id="training-setup">Training Setup</h3>
-<div id="c302bb3a" class="cell" data-execution_count="15">
+<div id="a11776f2" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>optimizer <span class="op">=</span> torch.optim.AdamW(m.parameters(), lr<span class="op">=</span><span class="fl">1e-3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -669,7 +669,7 @@ wnYWmnxKWWev-tDqXErVKLgJ</code></pre>
 </section>
 <section id="training-loop" class="level3">
 <h3 class="anchored" data-anchor-id="training-loop">Training Loop</h3>
-<div id="51aa8246" class="cell" data-execution_count="16">
+<div id="abc8f410" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>batch_size <span class="op">=</span> <span class="dv">32</span></span>
@@ -685,7 +685,7 @@ wnYWmnxKWWev-tDqXErVKLgJ</code></pre>
 <span id="cb26-11"><a href="#cb26-11"></a>    optimizer.step()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="57a88613" class="cell" data-execution_count="17">
+<div id="00019643" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># %pip install torch torchvision torchaudio scikit-learn</span></span>
@@ -704,7 +704,7 @@ wnYWmnxKWWev-tDqXErVKLgJ</code></pre>
 <span id="cb27-14"><a href="#cb27-14"></a><span class="co"># from model import GPTConfig, GPT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="82cb391a" class="cell" data-execution_count="18">
+<div id="d019f5c2" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># let's now encode the entire text dataset and store it into a torch.Tensor</span></span>
@@ -773,7 +773,7 @@ tensor([18, 47, 56, 57, 58,  1, 15, 47, 58, 47, 64, 43, 52, 10,  0, 14, 43, 44,
         56, 43, 60, 43, 52, 45, 43,  8,  0,  0])</code></pre>
 </div>
 </div>
-<div id="7d92f529" class="cell" data-execution_count="19">
+<div id="0b7c7096" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># split up the data into train and validation sets</span></span>
@@ -782,21 +782,21 @@ tensor([18, 47, 56, 57, 58,  1, 15, 47, 58, 47, 64, 43, 52, 10,  0, 14, 43, 44,
 <span id="cb30-4"><a href="#cb30-4"></a>val_data <span class="op">=</span> data[n:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5ae3ae41" class="cell" data-execution_count="20">
+<div id="abca0dcb" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># define the block size</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a>block_size <span class="op">=</span> <span class="dv">8</span></span>
 <span id="cb31-3"><a href="#cb31-3"></a>train_data[:block_size<span class="op">+</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="73">
 <pre><code>tensor([18, 47, 56, 57, 58,  1, 15, 47, 58])</code></pre>
 </div>
 </div>
 </section>
 <section id="define-the-context-and-target-8-examples-in-one-batch" class="level3">
 <h3 class="anchored" data-anchor-id="define-the-context-and-target-8-examples-in-one-batch">define the context and target: 8 examples in one batch</h3>
-<div id="2aa2c93a" class="cell" data-execution_count="21">
+<div id="5deb23cc" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a>x <span class="op">=</span> train_data[:block_size]</span>
@@ -820,7 +820,7 @@ when input is tensor([18, 47, 56, 57, 58,  1, 15, 47]) the target: 58</code></pr
 </section>
 <section id="define-the-batch-size-and-get-the-batch" class="level3">
 <h3 class="anchored" data-anchor-id="define-the-batch-size-and-get-the-batch">define the batch size and get the batch</h3>
-<div id="6cd7dcd3" class="cell" data-execution_count="22">
+<div id="ff3e8036" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>torch.manual_seed(<span class="dv">1337</span>)</span>
@@ -903,7 +903,7 @@ when input is [25, 17, 27, 10, 0, 21, 1, 54] the target: 39</code></pre>
 <section id="start-with-a-simple-model-the-bigram-language-model" class="level3">
 <h3 class="anchored" data-anchor-id="start-with-a-simple-model-the-bigram-language-model">start with a simple model: the bigram language model</h3>
 <p>This model predicts the next character based on the current character only. It uses the logits for the next character in a lookup table.</p>
-<div id="7f06e56e" class="cell" data-execution_count="23">
+<div id="2088892b" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># define the bigram language model</span></span>
@@ -967,7 +967,7 @@ when input is [25, 17, 27, 10, 0, 21, 1, 54] the target: 39</code></pre>
 </section>
 <section id="initialize-the-model-and-compute-the-loss" class="level3">
 <h3 class="anchored" data-anchor-id="initialize-the-model-and-compute-the-loss">initialize the model and compute the loss</h3>
-<div id="dd8077ca" class="cell" data-execution_count="24">
+<div id="2c111834" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a>m <span class="op">=</span> BigramLanguageModel(vocab_size)</span>
@@ -983,7 +983,7 @@ tensor(4.8786, grad_fn=&lt;NllLossBackward0&gt;)</code></pre>
 </section>
 <section id="generate-text" class="level3">
 <h3 class="anchored" data-anchor-id="generate-text">generate text</h3>
-<div id="e91e9c07" class="cell" data-execution_count="25">
+<div id="20bb748a" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a><span class="bu">print</span>(decode(m.generate(idx <span class="op">=</span> torch.zeros((<span class="dv">1</span>, <span class="dv">1</span>), dtype<span class="op">=</span>torch.<span class="bu">long</span>), max_new_tokens<span class="op">=</span><span class="dv">100</span>)[<span class="dv">0</span>].tolist()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -997,7 +997,7 @@ wnYWmnxKWWev-tDqXErVKLgJ</code></pre>
 </section>
 <section id="choose-adamw-as-the-optimizer" class="level3">
 <h3 class="anchored" data-anchor-id="choose-adamw-as-the-optimizer">choose AdamW as the optimizer</h3>
-<div id="17bb8f8f" class="cell" data-execution_count="26">
+<div id="e7a346a1" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>optimizer <span class="op">=</span> torch.optim.AdamW(m.parameters(), lr<span class="op">=</span><span class="fl">1e-3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1006,7 +1006,7 @@ wnYWmnxKWWev-tDqXErVKLgJ</code></pre>
 </section>
 <section id="train-the-model" class="level3">
 <h3 class="anchored" data-anchor-id="train-the-model">train the model</h3>
-<div id="081b40f6" class="cell" data-execution_count="27">
+<div id="c20cc718" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a>batch_size <span class="op">=</span> <span class="dv">32</span></span>
@@ -1030,7 +1030,7 @@ wnYWmnxKWWev-tDqXErVKLgJ</code></pre>
 </section>
 <section id="generate-text-starting-with-as-initial-context" class="level3">
 <h3 class="anchored" data-anchor-id="generate-text-starting-with-as-initial-context">generate text starting with as initial context</h3>
-<div id="a6c5fcbe" class="cell" data-execution_count="28">
+<div id="7693ecf9" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a><span class="bu">print</span>(decode(m.generate(idx <span class="op">=</span> torch.zeros((<span class="dv">1</span>, <span class="dv">1</span>), dtype<span class="op">=</span>torch.<span class="bu">long</span>), max_new_tokens<span class="op">=</span><span class="dv">500</span>)[<span class="dv">0</span>].tolist()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1061,7 +1061,7 @@ D.?</code></pre>
 </section>
 <section id="the-mathematical-trick-weighted-aggregation" class="level3">
 <h3 class="anchored" data-anchor-id="the-mathematical-trick-weighted-aggregation">The Mathematical Trick: Weighted Aggregation</h3>
-<div id="edd0ddcc" class="cell" data-execution_count="29">
+<div id="a3528399" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>torch.manual_seed(<span class="dv">42</span>)</span>
@@ -1098,7 +1098,7 @@ tensor([[2.0000, 7.0000],
 </section>
 <section id="version-1-using-a-for-loop" class="level3">
 <h3 class="anchored" data-anchor-id="version-1-using-a-for-loop">Version 1: Using a For Loop</h3>
-<div id="9bae3fa0" class="cell" data-execution_count="30">
+<div id="d58cf1b9" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a><span class="co"># consider the following toy example:</span></span>
@@ -1107,11 +1107,11 @@ tensor([[2.0000, 7.0000],
 <span id="cb49-4"><a href="#cb49-4"></a>x <span class="op">=</span> torch.randn(B,T,C)</span>
 <span id="cb49-5"><a href="#cb49-5"></a>x.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="83">
 <pre><code>torch.Size([4, 8, 2])</code></pre>
 </div>
 </div>
-<div id="3062571e" class="cell" data-execution_count="31">
+<div id="6c11e0d1" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a><span class="co"># We want x[b,t] = mean_{i&lt;=t} x[b,i]</span></span>
@@ -1125,7 +1125,7 @@ tensor([[2.0000, 7.0000],
 </section>
 <section id="version-2-matrix-multiplication" class="level3">
 <h3 class="anchored" data-anchor-id="version-2-matrix-multiplication">Version 2: Matrix Multiplication</h3>
-<div id="7a5b1731" class="cell" data-execution_count="32">
+<div id="48601758" class="cell" data-execution_count="32">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>wei <span class="op">=</span> torch.tril(torch.ones(T, T))</span>
@@ -1133,14 +1133,14 @@ tensor([[2.0000, 7.0000],
 <span id="cb52-3"><a href="#cb52-3"></a>xbow2 <span class="op">=</span> wei <span class="op">@</span> x <span class="co"># (B, T, T) @ (B, T, C) ----&gt; (B, T, C)</span></span>
 <span id="cb52-4"><a href="#cb52-4"></a>torch.allclose(xbow, xbow2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="85">
 <pre><code>True</code></pre>
 </div>
 </div>
 </section>
 <section id="version-3-using-softmax" class="level3">
 <h3 class="anchored" data-anchor-id="version-3-using-softmax">Version 3: Using Softmax</h3>
-<div id="522e7e9d" class="cell" data-execution_count="33">
+<div id="6122b94d" class="cell" data-execution_count="33">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>tril <span class="op">=</span> torch.tril(torch.ones(T, T))</span>
@@ -1150,14 +1150,14 @@ tensor([[2.0000, 7.0000],
 <span id="cb54-5"><a href="#cb54-5"></a>xbow3 <span class="op">=</span> wei <span class="op">@</span> x</span>
 <span id="cb54-6"><a href="#cb54-6"></a>torch.allclose(xbow, xbow3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="cell-output cell-output-display" data-execution_count="86">
 <pre><code>True</code></pre>
 </div>
 </div>
 </section>
 <section id="version-4-self-attention" class="level3">
 <h3 class="anchored" data-anchor-id="version-4-self-attention">Version 4: Self-Attention</h3>
-<div id="3a6bef18" class="cell" data-execution_count="34">
+<div id="6ed189e2" class="cell" data-execution_count="34">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>torch.manual_seed(<span class="dv">1337</span>)</span>
@@ -1184,7 +1184,7 @@ tensor([[2.0000, 7.0000],
 <span id="cb56-22"><a href="#cb56-22"></a></span>
 <span id="cb56-23"><a href="#cb56-23"></a>out.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="34">
+<div class="cell-output cell-output-display" data-execution_count="87">
 <pre><code>torch.Size([4, 8, 16])</code></pre>
 </div>
 </div>
@@ -1196,7 +1196,7 @@ tensor([[2.0000, 7.0000],
 <li>Keeps softmax from producing overly sharp distributions</li>
 <li>Aids training stability</li>
 </ul>
-<div id="519c74b4" class="cell" data-execution_count="35">
+<div id="bb755d2f" class="cell" data-execution_count="35">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>k <span class="op">=</span> torch.randn(B,T,head_size)</span>
@@ -1204,48 +1204,48 @@ tensor([[2.0000, 7.0000],
 <span id="cb58-3"><a href="#cb58-3"></a>wei <span class="op">=</span> q <span class="op">@</span> k.transpose(<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>) <span class="op">*</span> head_size<span class="op">**-</span><span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="0864adf5" class="cell" data-execution_count="36">
+<div id="91831d41" class="cell" data-execution_count="36">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>k.var()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="36">
+<div class="cell-output cell-output-display" data-execution_count="89">
 <pre><code>tensor(1.0449)</code></pre>
 </div>
 </div>
-<div id="d90b1f2a" class="cell" data-execution_count="37">
+<div id="75d33c2a" class="cell" data-execution_count="37">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a>q.var()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="90">
 <pre><code>tensor(1.0700)</code></pre>
 </div>
 </div>
-<div id="64a274ed" class="cell" data-execution_count="38">
+<div id="c39e9dc9" class="cell" data-execution_count="38">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a>wei.var()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="91">
 <pre><code>tensor(1.0918)</code></pre>
 </div>
 </div>
-<div id="f80440e2" class="cell" data-execution_count="39">
+<div id="78135859" class="cell" data-execution_count="39">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a>torch.softmax(torch.tensor([<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.5</span>]), dim<span class="op">=-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div class="cell-output cell-output-display" data-execution_count="92">
 <pre><code>tensor([0.1925, 0.1426, 0.2351, 0.1426, 0.2872])</code></pre>
 </div>
 </div>
-<div id="15cf8d3a" class="cell" data-execution_count="40">
+<div id="32194e6a" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1"></a>torch.softmax(torch.tensor([<span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0.5</span>])<span class="op">*</span><span class="dv">8</span>, dim<span class="op">=-</span><span class="dv">1</span>) <span class="co"># gets too peaky, converges to one-hot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="40">
+<div class="cell-output cell-output-display" data-execution_count="93">
 <pre><code>tensor([0.0326, 0.0030, 0.1615, 0.0030, 0.8000])</code></pre>
 </div>
 </div>
@@ -1254,7 +1254,7 @@ tensor([[2.0000, 7.0000],
 <section id="layer-normalization" class="level2">
 <h2 class="anchored" data-anchor-id="layer-normalization">Layer Normalization</h2>
 <p>Layer normalization normalizes features across the embedding dimension for each token independently, which helps stabilize training.</p>
-<div id="ade0c38c" class="cell" data-execution_count="41">
+<div id="5a773abd" class="cell" data-execution_count="41">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">class</span> LayerNorm1d: <span class="co"># (used to be BatchNorm1d)</span></span>
@@ -1281,29 +1281,29 @@ tensor([[2.0000, 7.0000],
 <span id="cb69-22"><a href="#cb69-22"></a>x <span class="op">=</span> module(x)</span>
 <span id="cb69-23"><a href="#cb69-23"></a>x.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="41">
+<div class="cell-output cell-output-display" data-execution_count="94">
 <pre><code>torch.Size([32, 100])</code></pre>
 </div>
 </div>
-<div id="31edb7ab" class="cell" data-execution_count="42">
+<div id="315f7f17" class="cell" data-execution_count="42">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1"></a>x[:,<span class="dv">0</span>].mean(), x[:,<span class="dv">0</span>].std() <span class="co"># mean,std of one feature across all batch inputs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="42">
+<div class="cell-output cell-output-display" data-execution_count="95">
 <pre><code>(tensor(0.1469), tensor(0.8803))</code></pre>
 </div>
 </div>
-<div id="89411af9" class="cell" data-execution_count="43">
+<div id="c61fb337" class="cell" data-execution_count="43">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1"></a>x[<span class="dv">0</span>,:].mean(), x[<span class="dv">0</span>,:].std() <span class="co"># mean,std of a single input from the batch, of its features</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="43">
+<div class="cell-output cell-output-display" data-execution_count="96">
 <pre><code>(tensor(2.3842e-09), tensor(1.0000))</code></pre>
 </div>
 </div>
-<div id="80db1a8e" class="cell" data-execution_count="44">
+<div id="d9d3d8ab" class="cell" data-execution_count="44">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1"></a><span class="co"># French to English translation example:</span></span>
@@ -1314,7 +1314,7 @@ tensor([[2.0000, 7.0000],
 </div>
 <section id="full-finished-code-for-reference" class="level3">
 <h3 class="anchored" data-anchor-id="full-finished-code-for-reference">Full finished code, for reference</h3>
-<div id="2a049efa" class="cell" data-execution_count="45">
+<div id="105a2fd7" class="cell" data-execution_count="45">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1"></a><span class="co"># Import necessary PyTorch modules</span></span>
@@ -1597,133 +1597,138 @@ tensor([[2.0000, 7.0000],
 step 0: train loss 4.4116, val loss 4.4022
 step 100: train loss 2.6568, val loss 2.6670
 step 200: train loss 2.5091, val loss 2.5059
-step 300: train loss 2.4201, val loss 2.4342
-step 400: train loss 2.3506, val loss 2.3568
-step 500: train loss 2.2966, val loss 2.3132
-step 600: train loss 2.2407, val loss 2.2496
-step 700: train loss 2.2049, val loss 2.2189
-step 800: train loss 2.1638, val loss 2.1870
-step 900: train loss 2.1237, val loss 2.1507
-step 1000: train loss 2.1022, val loss 2.1299
-step 1100: train loss 2.0686, val loss 2.1176
-step 1200: train loss 2.0376, val loss 2.0790
-step 1300: train loss 2.0236, val loss 2.0630
-step 1400: train loss 1.9928, val loss 2.0362
-step 1500: train loss 1.9707, val loss 2.0299
-step 1600: train loss 1.9610, val loss 2.0458
-step 1700: train loss 1.9418, val loss 2.0132
-step 1800: train loss 1.9071, val loss 1.9940
-step 1900: train loss 1.9110, val loss 1.9885
-step 2000: train loss 1.8843, val loss 1.9938
-step 2100: train loss 1.8713, val loss 1.9753
-step 2200: train loss 1.8598, val loss 1.9625
-step 2300: train loss 1.8571, val loss 1.9541
-step 2400: train loss 1.8412, val loss 1.9435
-step 2500: train loss 1.8171, val loss 1.9435
-step 2600: train loss 1.8257, val loss 1.9373
-step 2700: train loss 1.8096, val loss 1.9340
-step 2800: train loss 1.8064, val loss 1.9245
-step 2900: train loss 1.8060, val loss 1.9332
-step 3000: train loss 1.7945, val loss 1.9203
-step 3100: train loss 1.7676, val loss 1.9189
-step 3200: train loss 1.7548, val loss 1.9131
-step 3300: train loss 1.7564, val loss 1.9080
-step 3400: train loss 1.7552, val loss 1.8949
-step 3500: train loss 1.7385, val loss 1.8981
-step 3600: train loss 1.7248, val loss 1.8911
-step 3700: train loss 1.7266, val loss 1.8810
-step 3800: train loss 1.7206, val loss 1.8961
-step 3900: train loss 1.7223, val loss 1.8753
-step 4000: train loss 1.7117, val loss 1.8621
-step 4100: train loss 1.7129, val loss 1.8762
-step 4200: train loss 1.7057, val loss 1.8645
-step 4300: train loss 1.6988, val loss 1.8513
-step 4400: train loss 1.7059, val loss 1.8685
-step 4500: train loss 1.6897, val loss 1.8517
-step 4600: train loss 1.6877, val loss 1.8358
-step 4700: train loss 1.6818, val loss 1.8459
-step 4800: train loss 1.6672, val loss 1.8465
-step 4900: train loss 1.6663, val loss 1.8391
-step 4999: train loss 1.6670, val loss 1.8286
+step 300: train loss 2.4195, val loss 2.4334
+step 400: train loss 2.3499, val loss 2.3558
+step 500: train loss 2.2965, val loss 2.3129
+step 600: train loss 2.2419, val loss 2.2509
+step 700: train loss 2.2046, val loss 2.2184
+step 800: train loss 2.1625, val loss 2.1854
+step 900: train loss 2.1240, val loss 2.1508
+step 1000: train loss 2.1023, val loss 2.1297
+step 1100: train loss 2.0693, val loss 2.1176
+step 1200: train loss 2.0384, val loss 2.0796
+step 1300: train loss 2.0245, val loss 2.0634
+step 1400: train loss 1.9931, val loss 2.0369
+step 1500: train loss 1.9681, val loss 2.0279
+step 1600: train loss 1.9611, val loss 2.0457
+step 1700: train loss 1.9423, val loss 2.0148
+step 1800: train loss 1.9077, val loss 1.9942
+step 1900: train loss 1.9070, val loss 1.9866
+step 2000: train loss 1.8861, val loss 1.9969
+step 2100: train loss 1.8694, val loss 1.9738
+step 2200: train loss 1.8579, val loss 1.9621
+step 2300: train loss 1.8505, val loss 1.9502
+step 2400: train loss 1.8400, val loss 1.9444
+step 2500: train loss 1.8126, val loss 1.9374
+step 2600: train loss 1.8254, val loss 1.9381
+step 2700: train loss 1.8136, val loss 1.9331
+step 2800: train loss 1.8043, val loss 1.9234
+step 2900: train loss 1.8030, val loss 1.9288
+step 3000: train loss 1.7948, val loss 1.9185
+step 3100: train loss 1.7679, val loss 1.9163
+step 3200: train loss 1.7517, val loss 1.9090
+step 3300: train loss 1.7556, val loss 1.9036
+step 3400: train loss 1.7523, val loss 1.8927
+step 3500: train loss 1.7376, val loss 1.8931
+step 3600: train loss 1.7237, val loss 1.8854
+step 3700: train loss 1.7286, val loss 1.8795
+step 3800: train loss 1.7198, val loss 1.8912
+step 3900: train loss 1.7207, val loss 1.8696
+step 4000: train loss 1.7113, val loss 1.8567
+step 4100: train loss 1.7122, val loss 1.8738
+step 4200: train loss 1.7039, val loss 1.8664
+step 4300: train loss 1.6980, val loss 1.8409
+step 4400: train loss 1.7070, val loss 1.8637
+step 4500: train loss 1.6888, val loss 1.8478
+step 4600: train loss 1.6884, val loss 1.8369
+step 4700: train loss 1.6833, val loss 1.8405
+step 4800: train loss 1.6666, val loss 1.8441
+step 4900: train loss 1.6667, val loss 1.8334
+step 4999: train loss 1.6638, val loss 1.8222
 
 Foast.
 
-MENENIENIUS:
-I sist upon
-in him our knom I heave.
+MENENIUS:
+Prave is your nie.
 
-ANTANGA:
-Yet, you harn be fear thousande of yourse proy way art deed sirrife.
-You boke, and-here, if notw to see gainest,
-Albus strawn'd us; to lace ands would most
-jeak my dream sleast's of so prewit for a shien you that's fourtyle
-Thau tiscont ruthforesty cried men
-and un mampet hither smeried divoth.
-I'll that shollirt's that stake,
-Hazone appad to the preth, and this receas thous late's King me of what thou son,
-Kingived Fear nother have frave death!
+MINur:
+Indeed extage, I horse, beary the deveroned,
+But layst of you simpers way art where
+Goest with herk, as lihtched
+Bing?
 
-BOLINGBOANGE:
-Yetroy-pritch.
-My suntrove, we hus.
- noble will ropt: the in your et-timeman,
-willst I save your bloy shalle I mone faults not fleat?
-Angul stry armsedians, the artsweds, broth off,
-Both gome toots. 'We'll.
+MOMIONA:
+Will could streling'd us; to lace and though misful untoon
+here swear 'tis prognierst for a seasn.
+Why, they foul tlead,
+upeing notruny our than
+Town, what thou bey that prongmanoed, whose then your
+He quingthing a fatwast, and, Then death, depity mine, that rever
+to smingeth so my dream, what thou so not this dire.
 
-DUKE VINCENTIO:
-Have voichs slay of me you; and incae,
-whou comman I sea I sering to emberrer!
-I would thou scange of the toger.
+ROMEO:
+O, upe:
+I his it! him not this bornors
+With charse tonder's in heurse no you?
 
-MOPTERS:
-Stunt-my was I'll fackers.
+DUCUCHESSAH:
+By not to the maide?
 
-ROPUMLANF:
-God my mantoreny.
+RUKESBERLAND:
+O stay,
+That us monger himsay off secame itles guary wisith his
+That with there's off, Bothing eStents.
 
-NORTLA:
-O distreed asomon's thought his lictly:
-First I know hose, Or the
-soul hur lifess herse fortune dequeen;
-Claid to. And the ten weouly entruct you long.
+MENENIUS:
+O, as ext town, Come; is biliengly.
 
-KING HUMNRY:
-Nout Vility:
-Let thou be you?
+COMuLINEY:
+The dumposes! make, O, I serving dies.
 
-ANGELO:
-We'll now
-In am kingly wflent my preson to enpern of an yourst
-So loing long me So me man, mad the's noccurpet in now.
+BUCKINGHARD IVIZING RICHARD III:
+Bett. my, let, is by this as I how?
+If these fortune!
+That I sence Endy. Woust is daughter.
 
-GLOUCESTER:
-Uncunderer you: if
-The I hold thee faintelle
-We ither! hatte's a bed'simter acchar tagus affet pringent,
-And what you four give a griern and it:
-With the late man'd the were not,
-And thy nie,
-You lordone turn to mincture us:
-se no down'd my Poy debrown'd, if their her is the king.
+KING RICHARD II:
+No, thou as queen I know host?
+Or that our huscle?--worgises, they will
+for mole some.
+And this that our fear ustxy, will not,
+Nontreman one honth your burncele's wilthord--
+Larder whis amontaguel: howfunny make fin or cenper; of an was ston
+Good foll'd may,-amses what cheep'd
+naccuse to knot and maker aid the underer you: if
+The I hold thee faints may!
+Come, it. It 'twas do'time:
+Yet not this they tope not
+with trither flast for is a gring,
+And is earns. You ame marry that dexknossed,
+The deleang-er.
 
-Secry most: I bust my crarkes and good,
-Woul, the nambes; what the stwlet teraturs,
-It state, and you raint this mad
-with 
-Without of my prist, that me bourth there
-med of himsends these doth they rings wall guarives the petierce saidin as meak made I scrue.
+JOHN FDecet, mit!
+The sewere now our crunnity deviless nummned it.
 
-SICINIUS:
-Now first.
+HASTIS:
+Let make
+Herreford: I bust ma! part you blood,
+thou met dince to the hather thlee.
 
-JOHUMNINA:
-And, he pronaint; baut his house,
-Havilt, firew thou laie aggainst for him barry.
+Farr'st frost these, if
+you would kingt not bu
+did of loves Warwith that me bone I do requed of himsends.
 
-BRUKE RINCE:
-But sweet for althon, dobesty, you
-and scauge</code></pre>
+HENRY:
+Mather's conspy gently vright: then toogs, time say matcande world good
+comasted to first be the seconds Lorde,
+What, his arm he our ammove have fight untrtlaies go togen
+our whus.
+
+ISABELLA:
+You our hosse beaut all honour.
+
+WARWICK:
+And if for</code></pre>
 </div>
 </div>
 </section>
@@ -1742,7 +1747,7 @@ and scauge</code></pre>
 </section>
 <section id="hyperparameters" class="level3">
 <h3 class="anchored" data-anchor-id="hyperparameters">Hyperparameters</h3>
-<div id="65ca7e84" class="cell" data-execution_count="46">
+<div id="a636f661" class="cell" data-execution_count="46">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1"></a><span class="co"># ===== HYPERPARAMETERS =====</span></span>
@@ -1762,7 +1767,7 @@ and scauge</code></pre>
 </section>
 <section id="device-selection" class="level3">
 <h3 class="anchored" data-anchor-id="device-selection">Device Selection</h3>
-<div id="8ea17665" class="cell" data-execution_count="47">
+<div id="c816aba3" class="cell" data-execution_count="47">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1"></a><span class="co"># Device selection: MPS (Apple Silicon) &gt; CUDA &gt; CPU</span></span>
@@ -1781,7 +1786,7 @@ and scauge</code></pre>
 </section>
 <section id="attention-head-implementation" class="level3">
 <h3 class="anchored" data-anchor-id="attention-head-implementation">Attention Head Implementation</h3>
-<div id="b4356b43" class="cell" data-execution_count="48">
+<div id="789e1275" class="cell" data-execution_count="48">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1"></a><span class="kw">class</span> Head(nn.Module):</span>
@@ -1816,7 +1821,7 @@ and scauge</code></pre>
 </section>
 <section id="multi-head-attention" class="level3">
 <h3 class="anchored" data-anchor-id="multi-head-attention">Multi-Head Attention</h3>
-<div id="a3c779c3" class="cell" data-execution_count="49">
+<div id="7da7a42d" class="cell" data-execution_count="49">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1"></a><span class="kw">class</span> MultiHeadAttention(nn.Module):</span>
@@ -1838,7 +1843,7 @@ and scauge</code></pre>
 </section>
 <section id="feed-forward-network" class="level3">
 <h3 class="anchored" data-anchor-id="feed-forward-network">Feed-Forward Network</h3>
-<div id="75b3f78a" class="cell" data-execution_count="50">
+<div id="6b59c7e9" class="cell" data-execution_count="50">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1"></a><span class="kw">class</span> FeedFoward(nn.Module):</span>
@@ -1860,7 +1865,7 @@ and scauge</code></pre>
 </section>
 <section id="transformer-block" class="level3">
 <h3 class="anchored" data-anchor-id="transformer-block">Transformer Block</h3>
-<div id="38e33bb3" class="cell" data-execution_count="51">
+<div id="10c7f98f" class="cell" data-execution_count="51">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1"></a><span class="kw">class</span> Block(nn.Module):</span>
@@ -1885,7 +1890,7 @@ and scauge</code></pre>
 </section>
 <section id="full-language-model" class="level3">
 <h3 class="anchored" data-anchor-id="full-language-model">Full Language Model</h3>
-<div id="e2000868" class="cell" data-execution_count="52">
+<div id="851f3feb" class="cell" data-execution_count="52">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1"></a><span class="kw">class</span> BigramLanguageModel(nn.Module):</span>
@@ -1948,7 +1953,7 @@ and scauge</code></pre>
 </section>
 <section id="training-loop-1" class="level3">
 <h3 class="anchored" data-anchor-id="training-loop-1">Training Loop</h3>
-<div id="b76b3302" class="cell" data-execution_count="53">
+<div id="835f30d0" class="cell" data-execution_count="53">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a><span class="co"># Create model instance</span></span>
@@ -1984,136 +1989,115 @@ and scauge</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.209729 M parameters
 step 0: train loss 4.3394, val loss 4.3431
-step 100: train loss 2.6632, val loss 2.6791
-step 200: train loss 2.5217, val loss 2.5418
-step 300: train loss 2.4543, val loss 2.4651
-step 400: train loss 2.3816, val loss 2.3964
-step 500: train loss 2.3089, val loss 2.3467
-step 600: train loss 2.2623, val loss 2.2752
-step 700: train loss 2.2159, val loss 2.2506
-step 800: train loss 2.1686, val loss 2.1930
-step 900: train loss 2.1189, val loss 2.1462
-step 1000: train loss 2.0918, val loss 2.1344
-step 1100: train loss 2.0584, val loss 2.1208
-step 1200: train loss 2.0410, val loss 2.0926
-step 1300: train loss 2.0163, val loss 2.0798
-step 1400: train loss 1.9794, val loss 2.0513
-step 1500: train loss 1.9667, val loss 2.0361
-step 1600: train loss 1.9335, val loss 2.0073
-step 1700: train loss 1.9207, val loss 2.0012
-step 1800: train loss 1.9107, val loss 1.9917
-step 1900: train loss 1.8974, val loss 1.9897
-step 2000: train loss 1.8725, val loss 1.9790
-step 2100: train loss 1.8653, val loss 1.9743
-step 2200: train loss 1.8462, val loss 1.9588
-step 2300: train loss 1.8375, val loss 1.9578
-step 2400: train loss 1.8287, val loss 1.9400
-step 2500: train loss 1.8092, val loss 1.9371
-step 2600: train loss 1.7903, val loss 1.9191
-step 2700: train loss 1.7947, val loss 1.9100
-step 2800: train loss 1.7814, val loss 1.9046
-step 2900: train loss 1.7752, val loss 1.9102
-step 3000: train loss 1.7713, val loss 1.8945
-step 3100: train loss 1.7475, val loss 1.8946
-step 3200: train loss 1.7430, val loss 1.8887
-step 3300: train loss 1.7341, val loss 1.8849
-step 3400: train loss 1.7380, val loss 1.8876
-step 3500: train loss 1.7289, val loss 1.8708
-step 3600: train loss 1.7257, val loss 1.8767
-step 3700: train loss 1.7306, val loss 1.8691
-step 3800: train loss 1.7136, val loss 1.8477
-step 3900: train loss 1.7038, val loss 1.8399
-step 4000: train loss 1.7005, val loss 1.8497
-step 4100: train loss 1.6913, val loss 1.8499
-step 4200: train loss 1.7016, val loss 1.8297
-step 4300: train loss 1.6835, val loss 1.8279
-step 4400: train loss 1.6818, val loss 1.8297
-step 4500: train loss 1.6785, val loss 1.8418
-step 4600: train loss 1.6710, val loss 1.8431
-step 4700: train loss 1.6779, val loss 1.8463
-step 4800: train loss 1.6799, val loss 1.8353
-step 4900: train loss 1.6737, val loss 1.8174
-step 4999: train loss 1.6602, val loss 1.7982
+step 100: train loss 2.6633, val loss 2.6792
+step 200: train loss 2.5216, val loss 2.5417
+step 300: train loss 2.4545, val loss 2.4652
+step 400: train loss 2.3814, val loss 2.3960
+step 500: train loss 2.3088, val loss 2.3466
+step 600: train loss 2.2621, val loss 2.2755
+step 700: train loss 2.2157, val loss 2.2505
+step 800: train loss 2.1688, val loss 2.1934
+step 900: train loss 2.1201, val loss 2.1472
+step 1000: train loss 2.0916, val loss 2.1337
+step 1100: train loss 2.0595, val loss 2.1217
+step 1200: train loss 2.0396, val loss 2.0915
+step 1300: train loss 2.0177, val loss 2.0805
+step 1400: train loss 1.9807, val loss 2.0511
+step 1500: train loss 1.9674, val loss 2.0359
+step 1600: train loss 1.9317, val loss 2.0043
+step 1700: train loss 1.9214, val loss 2.0005
+step 1800: train loss 1.9140, val loss 1.9922
+step 1900: train loss 1.8993, val loss 1.9905
+step 2000: train loss 1.8729, val loss 1.9780
+step 2100: train loss 1.8620, val loss 1.9702
+step 2200: train loss 1.8475, val loss 1.9599
+step 2300: train loss 1.8386, val loss 1.9541
+step 2400: train loss 1.8293, val loss 1.9409
+step 2500: train loss 1.8079, val loss 1.9338
+step 2600: train loss 1.7920, val loss 1.9160
+step 2700: train loss 1.7967, val loss 1.9073
+step 2800: train loss 1.7881, val loss 1.9107
+step 2900: train loss 1.7720, val loss 1.9055
+step 3000: train loss 1.7751, val loss 1.8961
+step 3100: train loss 1.7493, val loss 1.8954
+step 3200: train loss 1.7417, val loss 1.8889
+step 3300: train loss 1.7333, val loss 1.8844
+step 3400: train loss 1.7386, val loss 1.8874
+step 3500: train loss 1.7304, val loss 1.8735
+step 3600: train loss 1.7257, val loss 1.8794
+step 3700: train loss 1.7271, val loss 1.8637
+step 3800: train loss 1.7114, val loss 1.8480
+step 3900: train loss 1.7081, val loss 1.8436
+step 4000: train loss 1.6998, val loss 1.8501
+step 4100: train loss 1.6920, val loss 1.8522
+step 4200: train loss 1.7040, val loss 1.8349
+step 4300: train loss 1.6838, val loss 1.8337
+step 4400: train loss 1.6839, val loss 1.8313
+step 4500: train loss 1.6775, val loss 1.8462
+step 4600: train loss 1.6730, val loss 1.8442
+step 4700: train loss 1.6773, val loss 1.8395
+step 4800: train loss 1.6751, val loss 1.8299
+step 4900: train loss 1.6735, val loss 1.8137
+step 4999: train loss 1.6590, val loss 1.7937
 
 
 SICINIUS:
-Say 't a at them, that is I to the larests.
+Was in a alracle, that is I to duke these,
+Stay thou that gropence it him.
 
-KING RICHARD III:
-Them, but asceit, cen hand swereath.
+AUTOLYCUMELLO:
+No! and to Rifled dismeat erper; I made, but in me, no tregett be
+thengracian: that juld e'll
+So yields her him
+Nietder in the win morch to this fired
+For butwents to you. 
+Slook hom'd a grown I hund! are his could are the grow,
+A father shall could is chall baggen ty viloneswiant,
+I could the buttmor him all thou do me, as 'scidans ill in  should barthy tenswer thy ssight mave
+Which onsergel as this world one pits bome thou that
+you one take son'd the heaven.
+Trace But tartry Marwick: Joveit; me bning well like hung
+fidest for be and miciuseman. I may you whatness the moint
+To cairing that parce-park, sign: no I cread,
+Say be sisfy that I, my crive; ay, and smoulde
+I-have your Tarce to trietty haste,
+Look me mas on, cheer his still immerrisged that to--
+Air mineass your time the all foreld
+And we your bid onur to our seet till ine.
 
-PROMENE:
-Rame to is the with you strange, who themselber to
-From and pure-jold e'll
-So you beace him lear
-dear sected unomp sole beditts SA
-That will.
+LUCIO:
+The glood pardy body, in the strove; and your gappy.
 
-ETENCENTIO:
-Cont hom'd a grown I hund! are his could and go greace?
+KING RICHARD IO:
+Whicker is sleign full be a mades,
+And bain it the part of me airts,
+As in greed mort to at my toredien live poy the
+like churse upread truth in holds to the circe to stakence.
 
-ANGOLY MARD III:
-Which scient.
+DEXETER:
+I sadvey's seech batt true be out
+thinks our guad but with or but my drod; hath she servity trespeasess.
 
-EXCK:
-Comenviwing alones.
+LADTI3
 
-Provord:
-I have may queet whate for 'sciands ill in  shouth:
-I them not to thy spirit may,
-Which ons' goldarwick cour ar tears, do manter'd;
-A gue--
-To lack son'd the heaven.
-Trace But then madle here, though me bnigwas the fear upo
-fidest for be and my astemp well be you whatn of the moutlent
-To right the purpore aways: if the
-prrest I chall scuffer and;
-Sell discoray'der, thou se
-I-have you.
-That I vatige the as sodvoliem--
- ign who recomes thing immerous. Look, and an it mineas, there is we caule thy latel'd I your bid onurit,
-Shrue havel of yen to go; ket you our anot bod?
+NORSOR:
+Welaved thine, I have the childne;
+I die lar migaint Majoid: and 'twere to do know and thus follor to friends oposes. then
+A pread toods see a
+His orried lettle men.
 
-First Clitcem; and not what's fathen.
+Second LicborUy:
+That, in hearth one him says thou have for ascoud
+To thee, for not your his strots do graces.
+'SAy:
+The speccer in our vice? Whomed is the more we murdes. Whom be thou han'st rest downsse offore gumpey,
+As is that ink thou wight, my lorck his grace:
+And their not ang not, apreed, well good me it regrent, to up to not---poor brid of this where you sust me,
+As rest erpet thing too? sorus be fartmedly them that overe compake the gave a detersleming?
 
-CORIOLANUS:
-Soke cive les, thus?
+First Kets Come tower.
 
-ISABEXET:
-
-ANTES MOW:
-Thy fairs of my airts, vowike thee
-So the savies the himnour sopdy the
-lows churder wran theres in holds that and a destant;
-Your and upon ene--
-
-AUTOLT:
-Will fear and be old
-that should be whom would lord him dO-do proves come.
-
-SICINIUS:
-Shall hebin as behower and that mine, I
-Like the childners our gire misan:
-That is hands love thou, thereful your made montheres;
-Come foest then a preas toons serve
-His orrived riften. for 'tiol; him kingly,
-If you heaven of me: for, pathe his treath?
-
-DUKE VINCENTIO:
-Not you this strots, the lars.
-3 KING EDWARD IV:
-Come, for me is his is the more wese,
-Must ston be thou honest rest of asseen for Moursedle severt their day of to the nore,
-I her hend his but bid not ang not, apot
-All shing fountire Cate.
-
-DUKE VINCENTIO:
-Apomieves.
-
-Nurse:
-Marry, Kits stlard caurtice, thou hiw I am have must fartmedly them that over the pard me them;
-I det ost in thou ward is says day!
-Thou sake </code></pre>
+HERSH</code></pre>
 </div>
 </div>
 </section>
