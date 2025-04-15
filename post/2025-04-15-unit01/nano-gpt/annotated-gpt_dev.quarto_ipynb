@@ -1,0 +1,1697 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Building a GPT - companion notebook qmd\n",
+        "author: Andrey Karpathy\n",
+        "date: '2025-04-11'\n",
+        "freeze: true\n",
+        "jupyter: \n",
+        "  kernelspec:\n",
+        "    name: \"conda-env-gene46100-py\"\n",
+        "    language: \"python\"\n",
+        "    display_name: \"gene46100\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-fold: true\n",
+        "    code-line-numbers: true\n",
+        "    code-tools: true\n",
+        "    code-wrap: true\n",
+        "description: Companion notebook from Karpathys video on building a minimal GPT, annotated by cursors LLM with summary from gemini.\n",
+        "---\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "## Building a GPT\n",
+        "\n",
+        "Companion notebook to the [Zero To Hero](https://karpathy.ai/zero-to-hero.html) video on GPT. Downloaded from [here](https://colab.research.google.com/drive/1JMLa53HDuA-i7ZBmqV7ZnA3c_fvtXnx-?usp=sharing)\n",
+        "\n",
+        "(https://github.com/karpathy/nanoGPT)\n",
+        "\n",
+        "## Data Preparation\n",
+        "\n",
+        "### Step 1: Loading & Inspection\n"
+      ],
+      "id": "21500b45"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# We always start with a dataset to train on. Let's download the tiny shakespeare dataset\n",
+        "#!wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt"
+      ],
+      "id": "11899972",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# read it in to inspect it\n",
+        "with open('input.txt', 'r', encoding='utf-8') as f:\n",
+        "    text = f.read()"
+      ],
+      "id": "b199cc78",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# print the length of the dataset\n",
+        "print(\"length of dataset in characters: \", len(text))"
+      ],
+      "id": "eeb32253",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# let's look at the first 1000 characters\n",
+        "print(text[:1000])"
+      ],
+      "id": "476d833e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Step 2: Tokenization\n"
+      ],
+      "id": "c1ed9d14"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# here are all the unique characters that occur in this text\n",
+        "chars = sorted(list(set(text)))\n",
+        "vocab_size = len(chars)\n",
+        "print(''.join(chars))\n",
+        "print(vocab_size)"
+      ],
+      "id": "d398aa3b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# create a mapping from characters to integers\n",
+        "stoi = { ch:i for i,ch in enumerate(chars) }\n",
+        "itos = { i:ch for i,ch in enumerate(chars) }\n",
+        "encode = lambda s: [stoi[c] for c in s] # encoder: take a string, output a list of integers\n",
+        "decode = lambda l: ''.join([itos[i] for i in l]) # decoder: take a list of integers, output a string\n",
+        "\n",
+        "print(encode(\"hii there\"))\n",
+        "print(decode(encode(\"hii there\")))"
+      ],
+      "id": "6f77187d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Step 3: Creating Batches for Training\n"
+      ],
+      "id": "e6db8aa7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# let's now encode the entire text dataset and store it into a torch.Tensor\n",
+        "import torch # we use PyTorch: https://pytorch.org\n",
+        "data = torch.tensor(encode(text), dtype=torch.long)\n",
+        "print(data.shape, data.dtype)\n",
+        "print(data[:1000]) # the 1000 characters we looked at earier will to the GPT look like this"
+      ],
+      "id": "bb6b384f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# split up the data into train and validation sets\n",
+        "n = int(0.9*len(data)) # first 90% will be train, rest val\n",
+        "train_data = data[:n]\n",
+        "val_data = data[n:]"
+      ],
+      "id": "5d2e938c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# define the block size (context length)\n",
+        "block_size = 8\n",
+        "train_data[:block_size+1]"
+      ],
+      "id": "eab1c6c1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Understanding the Context and Target\n"
+      ],
+      "id": "a5cc04f4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = train_data[:block_size]\n",
+        "y = train_data[1:block_size+1]\n",
+        "for t in range(block_size):\n",
+        "    context = x[:t+1]\n",
+        "    target = y[t]\n",
+        "    print(f\"when input is {context} the target: {target}\")"
+      ],
+      "id": "a097222b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Creating Batches\n"
+      ],
+      "id": "94cbd19c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "torch.manual_seed(1337)\n",
+        "batch_size = 4 # how many independent sequences will we process in parallel?\n",
+        "block_size = 8 # what is the maximum context length for predictions?\n",
+        "\n",
+        "def get_batch(split):\n",
+        "    # generate a small batch of data of inputs x and targets y\n",
+        "    data = train_data if split == 'train' else val_data\n",
+        "    ix = torch.randint(len(data) - block_size, (batch_size,))\n",
+        "    x = torch.stack([data[i:i+block_size] for i in ix])\n",
+        "    y = torch.stack([data[i+1:i+block_size+1] for i in ix])\n",
+        "    return x, y\n",
+        "\n",
+        "xb, yb = get_batch('train')\n",
+        "print('inputs:')\n",
+        "print(xb.shape)\n",
+        "print(xb)\n",
+        "print('targets:')\n",
+        "print(yb.shape)\n",
+        "print(yb)\n",
+        "\n",
+        "print('----')\n",
+        "\n",
+        "for b in range(batch_size): # batch dimension\n",
+        "    for t in range(block_size): # time dimension\n",
+        "        context = xb[b, :t+1]\n",
+        "        target = yb[b,t]\n",
+        "        print(f\"when input is {context.tolist()} the target: {target}\")"
+      ],
+      "id": "aab67146",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Model Architecture\n",
+        "\n",
+        "### Starting Simple: Bigram Language Model\n",
+        "This model predicts the next character based on the current character only. \n",
+        "It uses the logits for the next character in a lookup table.\n",
+        "\n",
+        "Key points:\n",
+        "- Simplest possible model\n",
+        "- Uses an Embedding Table of size vocab_size x vocab_size\n",
+        "- Each row contains predicted scores for next character\n",
+        "- Ignores context beyond last character\n"
+      ],
+      "id": "dd566732"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# define the bigram language model\n",
+        "import torch\n",
+        "import torch.nn as nn\n",
+        "from torch.nn import functional as F\n",
+        "torch.manual_seed(1337)\n",
+        "\n",
+        "class BigramLanguageModel(nn.Module):\n",
+        "\n",
+        "    def __init__(self, vocab_size):\n",
+        "        super().__init__()\n",
+        "        # each token directly reads off the logits for the next token from a lookup table\n",
+        "        self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)\n",
+        "\n",
+        "    def forward(self, idx, targets=None):\n",
+        "\n",
+        "        # idx and targets are both (B,T) tensor of integers\n",
+        "        logits = self.token_embedding_table(idx) # (B,T,C)\n",
+        "\n",
+        "        if targets is None:\n",
+        "            loss = None\n",
+        "        else:\n",
+        "            B, T, C = logits.shape\n",
+        "            logits = logits.view(B*T, C)\n",
+        "            targets = targets.view(B*T)\n",
+        "            loss = F.cross_entropy(logits, targets)\n",
+        "\n",
+        "        return logits, loss\n",
+        "\n",
+        "    # Text Generation Method\n",
+        "    # This method implements autoregressive text generation by:\n",
+        "    # 1. Taking the current context (idx)\n",
+        "    # 2. Predicting the next token probabilities\n",
+        "    # 3. Sampling from these probabilities\n",
+        "    # 4. Appending the sampled token to the context\n",
+        "    # 5. Repeating for max_new_tokens iterations\n",
+        "    def generate(self, idx, max_new_tokens):\n",
+        "        for _ in range(max_new_tokens):\n",
+        "            # get the predictions\n",
+        "            logits, loss = self(idx)\n",
+        "            # focus only on the last time step\n",
+        "            logits = logits[:, -1, :] # becomes (B, C)\n",
+        "            # apply softmax to get probabilities\n",
+        "            probs = F.softmax(logits, dim=-1) # (B, C)\n",
+        "            # sample from the distribution\n",
+        "            idx_next = torch.multinomial(probs, num_samples=1) # (B, 1)\n",
+        "            # append sampled index to the running sequence\n",
+        "            idx = torch.cat((idx, idx_next), dim=1) # (B, T+1)\n",
+        "        return idx"
+      ],
+      "id": "001b713a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Understanding Cross Entropy Loss\n",
+        "Loss = -Σ(y * log(p))\n",
+        "where:\n",
+        "- y = actual probability (0 or 1)\n",
+        "- p = predicted probability\n",
+        "- Σ = sum over all classes\n",
+        "\n",
+        "This is the loss for a single token. The total loss is the average across all B*T tokens in the batch, where:\n",
+        "- B = batch size (number of sequences processed in parallel)\n",
+        "- T = sequence length (number of tokens in each sequence)\n",
+        "\n",
+        "Before training, we would expect the model to predict the next character from a uniform distribution.\n",
+        "\n",
+        "-Σ(y * log(p)) = \n",
+        "= - ( 1 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) ) = - log(1/65) \n",
+        "= 4.1744 per token.\n",
+        "\n",
+        "i.e. at the beginning we expect loss of -log(1/65) = 4.1744 per token.\n",
+        "\n",
+        "### Model Initialization and Training\n"
+      ],
+      "id": "2e43ca1c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "m = BigramLanguageModel(vocab_size)\n",
+        "logits, loss = m(xb, yb)\n",
+        "print(logits.shape)\n",
+        "print(loss)"
+      ],
+      "id": "b4e8345e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Text Generation\n"
+      ],
+      "id": "85fcf9e3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(decode(m.generate(idx = torch.zeros((1, 1), dtype=torch.long), max_new_tokens=100)[0].tolist()))"
+      ],
+      "id": "ec4ea471",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Training Setup\n"
+      ],
+      "id": "dbd15984"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "optimizer = torch.optim.AdamW(m.parameters(), lr=1e-3)"
+      ],
+      "id": "a11776f2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Training Loop\n"
+      ],
+      "id": "76e0260c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "batch_size = 32\n",
+        "for steps in range(100): # increase number of steps for good results...\n",
+        "\n",
+        "    # sample a batch of data\n",
+        "    xb, yb = get_batch('train')\n",
+        "\n",
+        "    # evaluate the loss\n",
+        "    logits, loss = m(xb, yb)\n",
+        "    optimizer.zero_grad(set_to_none=True)\n",
+        "    loss.backward()\n",
+        "    optimizer.step()"
+      ],
+      "id": "abc8f410",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# %pip install torch torchvision torchaudio scikit-learn\n",
+        "\n",
+        "# import os\n",
+        "# import time\n",
+        "# import math\n",
+        "# import pickle\n",
+        "# from contextlib import nullcontext\n",
+        "\n",
+        "# import numpy as np\n",
+        "# import torch\n",
+        "# from torch.nn.parallel import DistributedDataParallel as DDP\n",
+        "# from torch.distributed import init_process_group, destroy_process_group\n",
+        "\n",
+        "# from model import GPTConfig, GPT"
+      ],
+      "id": "00019643",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# let's now encode the entire text dataset and store it into a torch.Tensor\n",
+        "import torch # we use PyTorch: https://pytorch.org\n",
+        "data = torch.tensor(encode(text), dtype=torch.long)\n",
+        "print(data.shape, data.dtype)\n",
+        "print(data[:1000]) # the 1000 characters we looked at earier will to the GPT look like this"
+      ],
+      "id": "d019f5c2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# split up the data into train and validation sets\n",
+        "n = int(0.9*len(data)) # first 90% will be train, rest val\n",
+        "train_data = data[:n]\n",
+        "val_data = data[n:]"
+      ],
+      "id": "0b7c7096",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# define the block size\n",
+        "block_size = 8\n",
+        "train_data[:block_size+1]"
+      ],
+      "id": "abca0dcb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### define the context and target: 8 examples in one batch\n"
+      ],
+      "id": "ffd77ae7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = train_data[:block_size]\n",
+        "y = train_data[1:block_size+1]\n",
+        "for t in range(block_size):\n",
+        "    context = x[:t+1]\n",
+        "    target = y[t]\n",
+        "    print(f\"when input is {context} the target: {target}\")"
+      ],
+      "id": "5deb23cc",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### define the batch size and get the batch\n"
+      ],
+      "id": "43230461"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "torch.manual_seed(1337)\n",
+        "batch_size = 4 # how many independent sequences will we process in parallel?\n",
+        "block_size = 8 # what is the maximum context length for predictions?\n",
+        "\n",
+        "def get_batch(split):\n",
+        "    # generate a small batch of data of inputs x and targets y\n",
+        "    data = train_data if split == 'train' else val_data\n",
+        "    ix = torch.randint(len(data) - block_size, (batch_size,))\n",
+        "    x = torch.stack([data[i:i+block_size] for i in ix])\n",
+        "    y = torch.stack([data[i+1:i+block_size+1] for i in ix])\n",
+        "    return x, y\n",
+        "\n",
+        "xb, yb = get_batch('train')\n",
+        "print('inputs:')\n",
+        "print(xb.shape)\n",
+        "print(xb)\n",
+        "print('targets:')\n",
+        "print(yb.shape)\n",
+        "print(yb)\n",
+        "\n",
+        "print('----')\n",
+        "\n",
+        "for b in range(batch_size): # batch dimension\n",
+        "    for t in range(block_size): # time dimension\n",
+        "        context = xb[b, :t+1]\n",
+        "        target = yb[b,t]\n",
+        "        print(f\"when input is {context.tolist()} the target: {target}\")"
+      ],
+      "id": "ff3e8036",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### start with a simple model: the bigram language model\n",
+        "This model predicts the next character based on the current character only. \n",
+        "It uses the logits for the next character in a lookup table.\n"
+      ],
+      "id": "516f7cd9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# define the bigram language model\n",
+        "import torch\n",
+        "import torch.nn as nn\n",
+        "from torch.nn import functional as F\n",
+        "torch.manual_seed(1337)\n",
+        "\n",
+        "class BigramLanguageModel(nn.Module):\n",
+        "\n",
+        "    def __init__(self, vocab_size):\n",
+        "        super().__init__()\n",
+        "        # each token directly reads off the logits for the next token from a lookup table\n",
+        "        self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)\n",
+        "\n",
+        "    def forward(self, idx, targets=None):\n",
+        "\n",
+        "        # idx and targets are both (B,T) tensor of integers\n",
+        "        logits = self.token_embedding_table(idx) # (B,T,C)\n",
+        "\n",
+        "        if targets is None:\n",
+        "            loss = None\n",
+        "        else:\n",
+        "            B, T, C = logits.shape\n",
+        "            logits = logits.view(B*T, C)\n",
+        "            targets = targets.view(B*T)\n",
+        "            loss = F.cross_entropy(logits, targets)\n",
+        "\n",
+        "        return logits, loss\n",
+        "\n",
+        "    # Text Generation Method\n",
+        "    # This method implements autoregressive text generation by:\n",
+        "    # 1. Taking the current context (idx)\n",
+        "    # 2. Predicting the next token probabilities\n",
+        "    # 3. Sampling from these probabilities\n",
+        "    # 4. Appending the sampled token to the context\n",
+        "    # 5. Repeating for max_new_tokens iterations\n",
+        "    def generate(self, idx, max_new_tokens):\n",
+        "        for _ in range(max_new_tokens):\n",
+        "            # get the predictions\n",
+        "            logits, loss = self(idx)\n",
+        "            # focus only on the last time step\n",
+        "            logits = logits[:, -1, :] # becomes (B, C)\n",
+        "            # apply softmax to get probabilities\n",
+        "            probs = F.softmax(logits, dim=-1) # (B, C)\n",
+        "            # sample from the distribution\n",
+        "            idx_next = torch.multinomial(probs, num_samples=1) # (B, 1)\n",
+        "            # append sampled index to the running sequence\n",
+        "            idx = torch.cat((idx, idx_next), dim=1) # (B, T+1)\n",
+        "        return idx"
+      ],
+      "id": "2088892b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### cross entropy loss\n",
+        "Loss = -Σ(y * log(p))\n",
+        "where:\n",
+        "- y = actual probability (0 or 1)\n",
+        "- p = predicted probability\n",
+        "- Σ = sum over all classes\n",
+        "\n",
+        "This is the loss for a single token. The total loss is the average across all B*T tokens in the batch, where:\n",
+        "- B = batch size (number of sequences processed in parallel)\n",
+        "- T = sequence length (number of tokens in each sequence)\n",
+        "\n",
+        "Before training, we would expect the model to predict the next character from a uniform distribution.\n",
+        "\n",
+        "-Σ(y * log(p)) = \n",
+        "= - ( 1 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) + 0 * log(1/65) ) = - log(1/65) \n",
+        "= 4.1744 per token.\n",
+        "\n",
+        "i.e. at the beginning we expect loss of -log(1/65) = 4.1744 per token.\n",
+        "\n",
+        "\n",
+        "### initialize the model and compute the loss\n"
+      ],
+      "id": "64d81271"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "m = BigramLanguageModel(vocab_size)\n",
+        "logits, loss = m(xb, yb)\n",
+        "print(logits.shape)\n",
+        "print(loss)"
+      ],
+      "id": "2c111834",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### generate text\n"
+      ],
+      "id": "7c81b998"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(decode(m.generate(idx = torch.zeros((1, 1), dtype=torch.long), max_new_tokens=100)[0].tolist()))"
+      ],
+      "id": "20bb748a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### choose AdamW as the optimizer\n"
+      ],
+      "id": "ab816610"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "optimizer = torch.optim.AdamW(m.parameters(), lr=1e-3)"
+      ],
+      "id": "e7a346a1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### train the model\n"
+      ],
+      "id": "8ef1f6be"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "batch_size = 32\n",
+        "for steps in range(100): # increase number of steps for good results...\n",
+        "\n",
+        "    # sample a batch of data\n",
+        "    xb, yb = get_batch('train')\n",
+        "\n",
+        "    # evaluate the loss\n",
+        "    logits, loss = m(xb, yb)\n",
+        "    optimizer.zero_grad(set_to_none=True)\n",
+        "    loss.backward()\n",
+        "    optimizer.step()\n",
+        "\n",
+        "print(loss.item())"
+      ],
+      "id": "c20cc718",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### generate text starting with \\n as initial context\n"
+      ],
+      "id": "9ad3fa8e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(decode(m.generate(idx = torch.zeros((1, 1), dtype=torch.long), max_new_tokens=500)[0].tolist()))"
+      ],
+      "id": "7693ecf9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Self-Attention: The Key Innovation\n",
+        "\n",
+        "### Understanding Self-Attention\n",
+        "Self-attention allows tokens to communicate across the sequence in a data-dependent way. Each token can \"look\" at previous tokens and decide which ones are most relevant for predicting the next token.\n",
+        "\n",
+        "### The Mathematical Trick: Weighted Aggregation\n"
+      ],
+      "id": "fad0a0ff"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "torch.manual_seed(42)\n",
+        "a = torch.tril(torch.ones(3, 3))\n",
+        "a = a / torch.sum(a, 1, keepdim=True)\n",
+        "b = torch.randint(0,10,(3,2)).float()\n",
+        "c = a @ b\n",
+        "print('a=')\n",
+        "print(a)\n",
+        "print('--')\n",
+        "print('b=')\n",
+        "print(b)\n",
+        "print('--')\n",
+        "print('c=')\n",
+        "print(c)"
+      ],
+      "id": "a3528399",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Version 1: Using a For Loop\n"
+      ],
+      "id": "72995ad2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# consider the following toy example:\n",
+        "torch.manual_seed(1337)\n",
+        "B,T,C = 4,8,2 # batch, time, channels\n",
+        "x = torch.randn(B,T,C)\n",
+        "x.shape"
+      ],
+      "id": "d58cf1b9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# We want x[b,t] = mean_{i<=t} x[b,i]\n",
+        "xbow = torch.zeros((B,T,C))\n",
+        "for b in range(B):\n",
+        "    for t in range(T):\n",
+        "        xprev = x[b,:t+1] # (t,C)\n",
+        "        xbow[b,t] = torch.mean(xprev, 0)"
+      ],
+      "id": "6c11e0d1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Version 2: Matrix Multiplication\n"
+      ],
+      "id": "e49d5c32"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "wei = torch.tril(torch.ones(T, T))\n",
+        "wei = wei / wei.sum(1, keepdim=True)\n",
+        "xbow2 = wei @ x # (B, T, T) @ (B, T, C) ----> (B, T, C)\n",
+        "torch.allclose(xbow, xbow2)"
+      ],
+      "id": "48601758",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Version 3: Using Softmax\n"
+      ],
+      "id": "ed86eaad"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "tril = torch.tril(torch.ones(T, T))\n",
+        "wei = torch.zeros((T,T))\n",
+        "wei = wei.masked_fill(tril == 0, float('-inf'))\n",
+        "wei = F.softmax(wei, dim=-1)\n",
+        "xbow3 = wei @ x\n",
+        "torch.allclose(xbow, xbow3)"
+      ],
+      "id": "6122b94d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Version 4: Self-Attention\n"
+      ],
+      "id": "524294a6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "torch.manual_seed(1337)\n",
+        "B,T,C = 4,8,32 # batch, time, channels\n",
+        "x = torch.randn(B,T,C)\n",
+        "\n",
+        "# let's see a single Head perform self-attention\n",
+        "head_size = 16\n",
+        "key = nn.Linear(C, head_size, bias=False)\n",
+        "query = nn.Linear(C, head_size, bias=False)\n",
+        "value = nn.Linear(C, head_size, bias=False)\n",
+        "k = key(x)   # (B, T, 16)\n",
+        "q = query(x) # (B, T, 16)\n",
+        "wei =  q @ k.transpose(-2, -1) # (B, T, 16) @ (B, 16, T) ---> (B, T, T)\n",
+        "\n",
+        "tril = torch.tril(torch.ones(T, T))\n",
+        "#wei = torch.zeros((T,T))\n",
+        "wei = wei.masked_fill(tril == 0, float('-inf'))\n",
+        "wei = F.softmax(wei, dim=-1)\n",
+        "\n",
+        "v = value(x)\n",
+        "out = wei @ v\n",
+        "#out = wei @ x\n",
+        "\n",
+        "out.shape"
+      ],
+      "id": "6ed189e2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Why Scaled Attention?\n",
+        "- Dividing by sqrt(head_size) prevents scores from becoming too large\n",
+        "- Keeps softmax from producing overly sharp distributions\n",
+        "- Aids training stability\n"
+      ],
+      "id": "b8690355"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "k = torch.randn(B,T,head_size)\n",
+        "q = torch.randn(B,T,head_size)\n",
+        "wei = q @ k.transpose(-2, -1) * head_size**-0.5"
+      ],
+      "id": "bb755d2f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "k.var()"
+      ],
+      "id": "91831d41",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "q.var()"
+      ],
+      "id": "75d33c2a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "wei.var()"
+      ],
+      "id": "c39e9dc9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "torch.softmax(torch.tensor([0.1, -0.2, 0.3, -0.2, 0.5]), dim=-1)"
+      ],
+      "id": "78135859",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "torch.softmax(torch.tensor([0.1, -0.2, 0.3, -0.2, 0.5])*8, dim=-1) # gets too peaky, converges to one-hot"
+      ],
+      "id": "32194e6a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Layer Normalization\n",
+        "Layer normalization normalizes features across the embedding dimension for each token independently, which helps stabilize training.\n"
+      ],
+      "id": "6198257a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "class LayerNorm1d: # (used to be BatchNorm1d)\n",
+        "\n",
+        "  def __init__(self, dim, eps=1e-5, momentum=0.1):\n",
+        "    self.eps = eps\n",
+        "    self.gamma = torch.ones(dim)\n",
+        "    self.beta = torch.zeros(dim)\n",
+        "\n",
+        "  def __call__(self, x):\n",
+        "    # calculate the forward pass\n",
+        "    xmean = x.mean(1, keepdim=True) # batch mean\n",
+        "    xvar = x.var(1, keepdim=True) # batch variance\n",
+        "    xhat = (x - xmean) / torch.sqrt(xvar + self.eps) # normalize to unit variance\n",
+        "    self.out = self.gamma * xhat + self.beta\n",
+        "    return self.out\n",
+        "\n",
+        "  def parameters(self):\n",
+        "    return [self.gamma, self.beta]\n",
+        "\n",
+        "torch.manual_seed(1337)\n",
+        "module = LayerNorm1d(100)\n",
+        "x = torch.randn(32, 100) # batch size 32 of 100-dimensional vectors\n",
+        "x = module(x)\n",
+        "x.shape"
+      ],
+      "id": "5a773abd",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x[:,0].mean(), x[:,0].std() # mean,std of one feature across all batch inputs"
+      ],
+      "id": "315f7f17",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x[0,:].mean(), x[0,:].std() # mean,std of a single input from the batch, of its features"
+      ],
+      "id": "c61fb337",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# French to English translation example:\n",
+        "\n",
+        "# <--------- ENCODE ------------------><--------------- DECODE ----------------->\n",
+        "# les réseaux de neurones sont géniaux! <START> neural networks are awesome!<END>"
+      ],
+      "id": "d9d3d8ab",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Full finished code, for reference\n"
+      ],
+      "id": "12a9e84a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Import necessary PyTorch modules\n",
+        "import torch\n",
+        "import torch.nn as nn\n",
+        "from torch.nn import functional as F\n",
+        "\n",
+        "# ===== HYPERPARAMETERS =====\n",
+        "# These are the key parameters that control the model's behavior and training\n",
+        "batch_size = 16        # Number of independent sequences processed in parallel\n",
+        "block_size = 32        # Maximum context length for predictions (like a window size)\n",
+        "max_iters = 5000       # Total number of training iterations\n",
+        "eval_interval = 100    # How often to evaluate the model during training\n",
+        "learning_rate = 1e-3   # Step size for gradient descent\n",
+        "eval_iters = 200       # Number of iterations to average over when evaluating\n",
+        "n_embd = 64           # Size of the embedding dimension (d_model in original paper)\n",
+        "n_head = 4            # Number of attention heads\n",
+        "n_layer = 4           # Number of transformer layers\n",
+        "dropout = 0.0         # Probability of dropping out neurons (0 = no dropout)\n",
+        "# ==========================\n",
+        "\n",
+        "# Device selection: MPS (Apple Silicon) > CUDA > CPU\n",
+        "if torch.backends.mps.is_available():\n",
+        "    device = torch.device(\"mps\")  # Apple Silicon GPU\n",
+        "elif torch.cuda.is_available():\n",
+        "    device = torch.device(\"cuda\")  # NVIDIA GPU\n",
+        "else:\n",
+        "    device = torch.device(\"cpu\")   # CPU fallback\n",
+        "print(f\"Using device: {device}\")\n",
+        "\n",
+        "# Set random seed for reproducibility\n",
+        "torch.manual_seed(1337)\n",
+        "if device.type == 'cuda':\n",
+        "    torch.cuda.manual_seed(1337)\n",
+        "elif device.type == 'mps':\n",
+        "    torch.mps.manual_seed(1337)\n",
+        "\n",
+        "# Load and read the training text\n",
+        "# Note: This assumes 'input.txt' exists in the current directory\n",
+        "with open('input.txt', 'r', encoding='utf-8') as f:\n",
+        "    text = f.read()\n",
+        "\n",
+        "# ===== DATA PREPROCESSING =====\n",
+        "# Create vocabulary from unique characters in the text\n",
+        "chars = sorted(list(set(text)))\n",
+        "vocab_size = len(chars)\n",
+        "# Create mapping between characters and integers\n",
+        "stoi = { ch:i for i,ch in enumerate(chars) }  # string to index\n",
+        "itos = { i:ch for i,ch in enumerate(chars) }  # index to string\n",
+        "# Define encoder and decoder functions\n",
+        "encode = lambda s: [stoi[c] for c in s]  # convert string to list of integers\n",
+        "decode = lambda l: ''.join([itos[i] for i in l])  # convert list of integers to string\n",
+        "\n",
+        "# Split data into training and validation sets\n",
+        "data = torch.tensor(encode(text), dtype=torch.long)\n",
+        "n = int(0.9*len(data))  # first 90% for training\n",
+        "train_data = data[:n]\n",
+        "val_data = data[n:]\n",
+        "# =============================\n",
+        "\n",
+        "# ===== DATA LOADING FUNCTION =====\n",
+        "def get_batch(split):\n",
+        "    \"\"\"Generate a batch of data for training or validation.\n",
+        "    \n",
+        "    Args:\n",
+        "        split: 'train' or 'val' to specify which dataset to use\n",
+        "    \n",
+        "    Returns:\n",
+        "        x: input sequence of shape (batch_size, block_size)\n",
+        "        y: target sequence of shape (batch_size, block_size)\n",
+        "    \"\"\"\n",
+        "    data = train_data if split == 'train' else val_data\n",
+        "    # Randomly select starting indices for sequences\n",
+        "    ix = torch.randint(len(data) - block_size, (batch_size,))\n",
+        "    # Create input and target sequences\n",
+        "    x = torch.stack([data[i:i+block_size] for i in ix])\n",
+        "    y = torch.stack([data[i+1:i+block_size+1] for i in ix])\n",
+        "    x, y = x.to(device), y.to(device)\n",
+        "    return x, y\n",
+        "# ================================\n",
+        "\n",
+        "# ===== LOSS ESTIMATION FUNCTION =====\n",
+        "@torch.no_grad()  # Disable gradient calculation for efficiency\n",
+        "def estimate_loss():\n",
+        "    \"\"\"Estimate the loss on training and validation sets.\n",
+        "    \n",
+        "    Returns:\n",
+        "        Dictionary containing average loss for train and validation sets\n",
+        "    \"\"\"\n",
+        "    out = {}\n",
+        "    model.eval()  # Set model to evaluation mode\n",
+        "    for split in ['train', 'val']:\n",
+        "        losses = torch.zeros(eval_iters)\n",
+        "        for k in range(eval_iters):\n",
+        "            X, Y = get_batch(split)\n",
+        "            logits, loss = model(X, Y)\n",
+        "            losses[k] = loss.item()\n",
+        "        out[split] = losses.mean()\n",
+        "    model.train()  # Set model back to training mode\n",
+        "    return out\n",
+        "# ===================================\n",
+        "\n",
+        "# ===== ATTENTION HEAD IMPLEMENTATION =====\n",
+        "class Head(nn.Module):\n",
+        "    \"\"\"Single head of self-attention.\"\"\"\n",
+        "    \n",
+        "    def __init__(self, head_size):\n",
+        "        super().__init__()\n",
+        "        # Key, Query, Value projections\n",
+        "        self.key = nn.Linear(n_embd, head_size, bias=False)\n",
+        "        self.query = nn.Linear(n_embd, head_size, bias=False)\n",
+        "        self.value = nn.Linear(n_embd, head_size, bias=False)\n",
+        "        # Create lower triangular mask for causal attention\n",
+        "        self.register_buffer('tril', torch.tril(torch.ones(block_size, block_size)))\n",
+        "        self.dropout = nn.Dropout(dropout)\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        B,T,C = x.shape\n",
+        "        # Compute key, query, and value matrices\n",
+        "        k = self.key(x)   # (B,T,C)\n",
+        "        q = self.query(x) # (B,T,C)\n",
+        "        # Compute attention scores\n",
+        "        wei = q @ k.transpose(-2,-1) * C**-0.5  # Scale by sqrt(d_k)\n",
+        "        wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf'))  # Apply mask\n",
+        "        wei = F.softmax(wei, dim=-1)  # Convert to probabilities\n",
+        "        wei = self.dropout(wei)\n",
+        "        # Weighted aggregation of values\n",
+        "        v = self.value(x)\n",
+        "        out = wei @ v\n",
+        "        return out\n",
+        "# ========================================\n",
+        "\n",
+        "# ===== MULTI-HEAD ATTENTION =====\n",
+        "class MultiHeadAttention(nn.Module):\n",
+        "    \"\"\"Multiple heads of self-attention in parallel.\"\"\"\n",
+        "    \n",
+        "    def __init__(self, num_heads, head_size):\n",
+        "        super().__init__()\n",
+        "        self.heads = nn.ModuleList([Head(head_size) for _ in range(num_heads)])\n",
+        "        self.proj = nn.Linear(n_embd, n_embd)  # Projection layer\n",
+        "        self.dropout = nn.Dropout(dropout)\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        # Process through each head and concatenate results\n",
+        "        out = torch.cat([h(x) for h in self.heads], dim=-1)\n",
+        "        out = self.dropout(self.proj(out))\n",
+        "        return out\n",
+        "# ===============================\n",
+        "\n",
+        "# ===== FEED-FORWARD NETWORK =====\n",
+        "class FeedFoward(nn.Module):\n",
+        "    \"\"\"Simple feed-forward network with one hidden layer.\"\"\"\n",
+        "    \n",
+        "    def __init__(self, n_embd):\n",
+        "        super().__init__()\n",
+        "        self.net = nn.Sequential(\n",
+        "            nn.Linear(n_embd, 4 * n_embd),  # Expand dimension\n",
+        "            nn.ReLU(),                      # Non-linearity\n",
+        "            nn.Linear(4 * n_embd, n_embd),  # Project back\n",
+        "            nn.Dropout(dropout),\n",
+        "        )\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        return self.net(x)\n",
+        "# ==============================\n",
+        "\n",
+        "# ===== TRANSFORMER BLOCK =====\n",
+        "class Block(nn.Module):\n",
+        "    \"\"\"Transformer block: communication (attention) followed by computation (FFN).\"\"\"\n",
+        "    \n",
+        "    def __init__(self, n_embd, n_head):\n",
+        "        super().__init__()\n",
+        "        head_size = n_embd // n_head  # floor(n_embd / n_head)\n",
+        "        self.sa = MultiHeadAttention(n_head, head_size)\n",
+        "        self.ffwd = FeedFoward(n_embd)\n",
+        "        self.ln1 = nn.LayerNorm(n_embd)  # Layer normalization\n",
+        "        self.ln2 = nn.LayerNorm(n_embd)\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        # Apply attention with residual connection\n",
+        "        x = x + self.sa(self.ln1(x))\n",
+        "        # Apply feed-forward with residual connection\n",
+        "        x = x + self.ffwd(self.ln2(x))\n",
+        "        return x\n",
+        "# ============================\n",
+        "\n",
+        "# ===== LANGUAGE MODEL =====\n",
+        "class BigramLanguageModel(nn.Module):\n",
+        "    \"\"\"Simple bigram language model with transformer architecture.\"\"\"\n",
+        "    \n",
+        "    def __init__(self):\n",
+        "        super().__init__()\n",
+        "        # Token embeddings\n",
+        "        self.token_embedding_table = nn.Embedding(vocab_size, n_embd)\n",
+        "        # Position embeddings\n",
+        "        self.position_embedding_table = nn.Embedding(block_size, n_embd)\n",
+        "        # Stack of transformer blocks\n",
+        "        self.blocks = nn.Sequential(*[Block(n_embd, n_head=n_head) for _ in range(n_layer)])\n",
+        "        self.ln_f = nn.LayerNorm(n_embd)  # Final layer norm\n",
+        "        self.lm_head = nn.Linear(n_embd, vocab_size)  # Language model head\n",
+        "\n",
+        "    def forward(self, idx, targets=None):\n",
+        "        B, T = idx.shape\n",
+        "        \n",
+        "        # Get token embeddings\n",
+        "        tok_emb = self.token_embedding_table(idx)  # (B,T,C)\n",
+        "        # Get position embeddings\n",
+        "        pos_emb = self.position_embedding_table(torch.arange(T, device=device))  # (T,C)\n",
+        "        # Combine token and position embeddings\n",
+        "        x = tok_emb + pos_emb  # (B,T,C)\n",
+        "        # Process through transformer blocks\n",
+        "        x = self.blocks(x)  # (B,T,C)\n",
+        "        x = self.ln_f(x)  # (B,T,C)\n",
+        "        logits = self.lm_head(x)  # (B,T,vocab_size)\n",
+        "\n",
+        "        if targets is None:\n",
+        "            loss = None\n",
+        "        else:\n",
+        "            # Reshape for loss calculation\n",
+        "            B, T, C = logits.shape\n",
+        "            logits = logits.view(B*T, C)\n",
+        "            targets = targets.view(B*T)\n",
+        "            loss = F.cross_entropy(logits, targets)\n",
+        "\n",
+        "        return logits, loss\n",
+        "\n",
+        "    def generate(self, idx, max_new_tokens):\n",
+        "        \"\"\"Generate new text given a starting sequence.\"\"\"\n",
+        "        for _ in range(max_new_tokens):\n",
+        "            # Crop context to block_size\n",
+        "            idx_cond = idx[:, -block_size:]\n",
+        "            # Get predictions\n",
+        "            logits, loss = self(idx_cond)\n",
+        "            # Focus on last time step\n",
+        "            logits = logits[:, -1, :]  # (B, C)\n",
+        "            # Convert to probabilities\n",
+        "            probs = F.softmax(logits, dim=-1)  # (B, C)\n",
+        "            # Sample from distribution\n",
+        "            idx_next = torch.multinomial(probs, num_samples=1)  # (B, 1)\n",
+        "            # Append to sequence\n",
+        "            idx = torch.cat((idx, idx_next), dim=1)  # (B, T+1)\n",
+        "        return idx\n",
+        "# =========================\n",
+        "\n",
+        "# ===== MODEL INITIALIZATION AND TRAINING =====\n",
+        "# Create model instance\n",
+        "model = BigramLanguageModel()\n",
+        "m = model.to(device)\n",
+        "# Print number of parameters\n",
+        "print(sum(p.numel() for p in m.parameters())/1e6, 'M parameters')\n",
+        "\n",
+        "# Create optimizer\n",
+        "optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)\n",
+        "\n",
+        "# Training loop\n",
+        "for iter in range(max_iters):\n",
+        "    # Evaluate loss periodically\n",
+        "    if iter % eval_interval == 0 or iter == max_iters - 1:\n",
+        "        losses = estimate_loss()\n",
+        "        print(f\"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}\")\n",
+        "\n",
+        "    # Get batch of data\n",
+        "    xb, yb = get_batch('train')\n",
+        "\n",
+        "    # Forward pass\n",
+        "    logits, loss = model(xb, yb)\n",
+        "    # Backward pass\n",
+        "    optimizer.zero_grad(set_to_none=True)\n",
+        "    loss.backward()\n",
+        "    optimizer.step()\n",
+        "\n",
+        "# Generate text from the model\n",
+        "context = torch.zeros((1, 1), dtype=torch.long, device=device)\n",
+        "print(decode(m.generate(context, max_new_tokens=2000)[0].tolist()))\n",
+        "# ============================================"
+      ],
+      "id": "105a2fd7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Full GPT Model Architecture\n",
+        "\n",
+        "### Key Components\n",
+        "1. **Token Embeddings**: Convert input tokens to vectors\n",
+        "2. **Position Embeddings**: Add positional information\n",
+        "3. **Transformer Blocks**: Process information through attention and feed-forward layers\n",
+        "4. **Layer Normalization**: Stabilize training\n",
+        "5. **Language Model Head**: Predict next token probabilities\n",
+        "\n",
+        "### Hyperparameters\n"
+      ],
+      "id": "e74860e8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# ===== HYPERPARAMETERS =====\n",
+        "batch_size = 16        # Number of independent sequences processed in parallel\n",
+        "block_size = 32        # Maximum context length for predictions\n",
+        "max_iters = 5000       # Total number of training iterations\n",
+        "eval_interval = 100    # How often to evaluate the model\n",
+        "learning_rate = 1e-3   # Step size for gradient descent\n",
+        "eval_iters = 200       # Number of iterations to average over when evaluating\n",
+        "n_embd = 64           # Size of the embedding dimension\n",
+        "n_head = 4            # Number of attention heads\n",
+        "n_layer = 4           # Number of transformer layers\n",
+        "dropout = 0.0         # Probability of dropping out neurons\n",
+        "# =========================="
+      ],
+      "id": "a636f661",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Device Selection\n"
+      ],
+      "id": "cb9baf54"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Device selection: MPS (Apple Silicon) > CUDA > CPU\n",
+        "if torch.backends.mps.is_available():\n",
+        "    device = torch.device(\"mps\")  # Apple Silicon GPU\n",
+        "elif torch.cuda.is_available():\n",
+        "    device = torch.device(\"cuda\")  # NVIDIA GPU\n",
+        "else:\n",
+        "    device = torch.device(\"cpu\")   # CPU fallback\n",
+        "print(f\"Using device: {device}\")"
+      ],
+      "id": "c816aba3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Attention Head Implementation\n"
+      ],
+      "id": "20d12189"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "class Head(nn.Module):\n",
+        "    \"\"\"Single head of self-attention.\"\"\"\n",
+        "    \n",
+        "    def __init__(self, head_size):\n",
+        "        super().__init__()\n",
+        "        # Key, Query, Value projections\n",
+        "        self.key = nn.Linear(n_embd, head_size, bias=False)\n",
+        "        self.query = nn.Linear(n_embd, head_size, bias=False)\n",
+        "        self.value = nn.Linear(n_embd, head_size, bias=False)\n",
+        "        # Create lower triangular mask for causal attention\n",
+        "        self.register_buffer('tril', torch.tril(torch.ones(block_size, block_size)))\n",
+        "        self.dropout = nn.Dropout(dropout)\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        B,T,C = x.shape\n",
+        "        # Compute key, query, and value matrices\n",
+        "        k = self.key(x)   # (B,T,C)\n",
+        "        q = self.query(x) # (B,T,C)\n",
+        "        # Compute attention scores\n",
+        "        wei = q @ k.transpose(-2,-1) * C**-0.5  # Scale by sqrt(d_k)\n",
+        "        wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf'))  # Apply mask\n",
+        "        wei = F.softmax(wei, dim=-1)  # Convert to probabilities\n",
+        "        wei = self.dropout(wei)\n",
+        "        # Weighted aggregation of values\n",
+        "        v = self.value(x)\n",
+        "        out = wei @ v\n",
+        "        return out"
+      ],
+      "id": "789e1275",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Multi-Head Attention\n"
+      ],
+      "id": "a5de36db"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "class MultiHeadAttention(nn.Module):\n",
+        "    \"\"\"Multiple heads of self-attention in parallel.\"\"\"\n",
+        "    \n",
+        "    def __init__(self, num_heads, head_size):\n",
+        "        super().__init__()\n",
+        "        self.heads = nn.ModuleList([Head(head_size) for _ in range(num_heads)])\n",
+        "        self.proj = nn.Linear(n_embd, n_embd)  # Projection layer\n",
+        "        self.dropout = nn.Dropout(dropout)\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        # Process through each head and concatenate results\n",
+        "        out = torch.cat([h(x) for h in self.heads], dim=-1)\n",
+        "        out = self.dropout(self.proj(out))\n",
+        "        return out"
+      ],
+      "id": "7da7a42d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Feed-Forward Network\n"
+      ],
+      "id": "c4ffbc1e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "class FeedFoward(nn.Module):\n",
+        "    \"\"\"Simple feed-forward network with one hidden layer.\"\"\"\n",
+        "    \n",
+        "    def __init__(self, n_embd):\n",
+        "        super().__init__()\n",
+        "        self.net = nn.Sequential(\n",
+        "            nn.Linear(n_embd, 4 * n_embd),  # Expand dimension\n",
+        "            nn.ReLU(),                      # Non-linearity\n",
+        "            nn.Linear(4 * n_embd, n_embd),  # Project back\n",
+        "            nn.Dropout(dropout),\n",
+        "        )\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        return self.net(x)"
+      ],
+      "id": "6b59c7e9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Transformer Block\n"
+      ],
+      "id": "6a98e84d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "class Block(nn.Module):\n",
+        "    \"\"\"Transformer block: communication (attention) followed by computation (FFN).\"\"\"\n",
+        "    \n",
+        "    def __init__(self, n_embd, n_head):\n",
+        "        super().__init__()\n",
+        "        head_size = n_embd // n_head  # floor(n_embd / n_head)\n",
+        "        self.sa = MultiHeadAttention(n_head, head_size)\n",
+        "        self.ffwd = FeedFoward(n_embd)\n",
+        "        self.ln1 = nn.LayerNorm(n_embd)  # Layer normalization\n",
+        "        self.ln2 = nn.LayerNorm(n_embd)\n",
+        "\n",
+        "    def forward(self, x):\n",
+        "        # Apply attention with residual connection\n",
+        "        x = x + self.sa(self.ln1(x))\n",
+        "        # Apply feed-forward with residual connection\n",
+        "        x = x + self.ffwd(self.ln2(x))\n",
+        "        return x"
+      ],
+      "id": "10c7f98f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Full Language Model\n"
+      ],
+      "id": "2c501c6f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "class BigramLanguageModel(nn.Module):\n",
+        "    \"\"\"Simple bigram language model with transformer architecture.\"\"\"\n",
+        "    \n",
+        "    def __init__(self):\n",
+        "        super().__init__()\n",
+        "        # Token embeddings\n",
+        "        self.token_embedding_table = nn.Embedding(vocab_size, n_embd)\n",
+        "        # Position embeddings\n",
+        "        self.position_embedding_table = nn.Embedding(block_size, n_embd)\n",
+        "        # Stack of transformer blocks\n",
+        "        self.blocks = nn.Sequential(*[Block(n_embd, n_head=n_head) for _ in range(n_layer)])\n",
+        "        self.ln_f = nn.LayerNorm(n_embd)  # Final layer norm\n",
+        "        self.lm_head = nn.Linear(n_embd, vocab_size)  # Language model head\n",
+        "\n",
+        "    def forward(self, idx, targets=None):\n",
+        "        B, T = idx.shape\n",
+        "        \n",
+        "        # Get token embeddings\n",
+        "        tok_emb = self.token_embedding_table(idx)  # (B,T,C)\n",
+        "        # Get position embeddings\n",
+        "        pos_emb = self.position_embedding_table(torch.arange(T, device=device))  # (T,C)\n",
+        "        # Combine token and position embeddings\n",
+        "        x = tok_emb + pos_emb  # (B,T,C)\n",
+        "        # Process through transformer blocks\n",
+        "        x = self.blocks(x)  # (B,T,C)\n",
+        "        x = self.ln_f(x)  # (B,T,C)\n",
+        "        logits = self.lm_head(x)  # (B,T,vocab_size)\n",
+        "\n",
+        "        if targets is None:\n",
+        "            loss = None\n",
+        "        else:\n",
+        "            # Reshape for loss calculation\n",
+        "            B, T, C = logits.shape\n",
+        "            logits = logits.view(B*T, C)\n",
+        "            targets = targets.view(B*T)\n",
+        "            loss = F.cross_entropy(logits, targets)\n",
+        "\n",
+        "        return logits, loss\n",
+        "\n",
+        "    def generate(self, idx, max_new_tokens):\n",
+        "        \"\"\"Generate new text given a starting sequence.\"\"\"\n",
+        "        for _ in range(max_new_tokens):\n",
+        "            # Crop context to block_size\n",
+        "            idx_cond = idx[:, -block_size:]\n",
+        "            # Get predictions\n",
+        "            logits, loss = self(idx_cond)\n",
+        "            # Focus on last time step\n",
+        "            logits = logits[:, -1, :]  # (B, C)\n",
+        "            # Convert to probabilities\n",
+        "            probs = F.softmax(logits, dim=-1)  # (B, C)\n",
+        "            # Sample from distribution\n",
+        "            idx_next = torch.multinomial(probs, num_samples=1)  # (B, 1)\n",
+        "            # Append to sequence\n",
+        "            idx = torch.cat((idx, idx_next), dim=1)  # (B, T+1)\n",
+        "        return idx"
+      ],
+      "id": "851f3feb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Training Loop\n"
+      ],
+      "id": "671c6772"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Create model instance\n",
+        "model = BigramLanguageModel()\n",
+        "m = model.to(device)\n",
+        "# Print number of parameters\n",
+        "print(sum(p.numel() for p in m.parameters())/1e6, 'M parameters')\n",
+        "\n",
+        "# Create optimizer\n",
+        "optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)\n",
+        "\n",
+        "# Training loop\n",
+        "for iter in range(max_iters):\n",
+        "    # Evaluate loss periodically\n",
+        "    if iter % eval_interval == 0 or iter == max_iters - 1:\n",
+        "        losses = estimate_loss()\n",
+        "        print(f\"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}\")\n",
+        "\n",
+        "    # Get batch of data\n",
+        "    xb, yb = get_batch('train')\n",
+        "\n",
+        "    # Forward pass\n",
+        "    logits, loss = model(xb, yb)\n",
+        "    # Backward pass\n",
+        "    optimizer.zero_grad(set_to_none=True)\n",
+        "    loss.backward()\n",
+        "    optimizer.step()\n",
+        "\n",
+        "# Generate text from the model\n",
+        "context = torch.zeros((1, 1), dtype=torch.long, device=device)\n",
+        "print(decode(m.generate(context, max_new_tokens=2000)[0].tolist()))"
+      ],
+      "id": "835f30d0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Key Takeaways\n",
+        "\n",
+        "1. **Data Preparation**\n",
+        "   - Tokenization: Convert text to numerical representations\n",
+        "   - Batching: Create efficient training batches\n",
+        "   - Context and Targets: Understand the prediction task\n",
+        "\n",
+        "2. **Model Architecture**\n",
+        "   - Token and Position Embeddings\n",
+        "   - Self-Attention Mechanism\n",
+        "   - Transformer Blocks\n",
+        "   - Layer Normalization\n",
+        "   - Language Model Head\n",
+        "\n",
+        "3. **Training Process**\n",
+        "   - Loss Function: Cross-Entropy\n",
+        "   - Optimization: AdamW\n",
+        "   - Evaluation: Periodic validation checks\n",
+        "   - Generation: Autoregressive text generation\n",
+        "\n",
+        "4. **Key Concepts**\n",
+        "   - Self-Attention: Communication between tokens\n",
+        "   - Positional Encoding: Preserving sequence order\n",
+        "   - Residual Connections: Helping gradient flow\n",
+        "   - Layer Normalization: Stabilizing training\n",
+        "   - Multi-Head Attention: Capturing different relationships\n",
+        "```\n"
+      ],
+      "id": "e554cb0d"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "conda-env-gene46100-py",
+      "language": "python",
+      "display_name": "gene46100"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
