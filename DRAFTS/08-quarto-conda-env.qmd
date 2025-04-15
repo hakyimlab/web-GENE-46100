@@ -107,7 +107,7 @@ palmerpenguins
 project.
 2. Save the requirements to a `requirements.txt` file.
 3. Create a new quarto document in the project root. In VS Code, use  
-`File` {{< fa arrow-right >}} `New File...` {{< fa arrow-right >}}
+`File` <i class="bi bi-arrow-right"></i> `New File...` <i class="bi bi-arrow-right"></i>
 `Quarto Document`.
 4. Write the following content to a python code chunk in the quarto file and
 save as `penguins.qmd`

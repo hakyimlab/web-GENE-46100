@@ -103,8 +103,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -816,7 +830,7 @@ tensor([[2.0000, 7.0000],
 </div>
 </div>
 <p><strong>softmax function</strong></p>
-<p>softmax(<span class="math inline">\(z_i\)</span>) = <span class="math inline">\(\frac{e^{z_i}}{\sum_j e^{z_j}}\)</span></p>
+<p>softmax(<span class="math inline">z_i</span>) = <span class="math inline">\frac{e^{z_i}}{\sum_j e^{z_j}}</span></p>
 </section>
 </section>
 <section id="version-4-self-attention" class="level1">

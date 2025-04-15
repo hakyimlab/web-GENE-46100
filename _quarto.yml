@@ -19,5 +19,6 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    html-math-method: katex
 
 
