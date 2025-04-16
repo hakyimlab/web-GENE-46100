@@ -91,4 +91,56 @@ pip install -r requirements-gene46100.txt
 
 ## configuration to run python in qmd files
 
-Follow instructions in https://thedatasavvycorner.com/blogs/08-quarto-conda-env
+Follow instructions in https://thedatasavvycorner.com/blogs/08-quarto-conda-en copied to /DRAFTS/2025-02-20-testin/08-quarto-conda-env.qmd
+
+Below is a shortened version of the instructions when you already have a conda environment.
+```{bash, eval=false}
+conda activate gene46100
+pip install nbclient nbformat
+
+# Use conda to install the nb_conda_kernels package. This is used to manage python jupyter kernels for notebooks.
+
+conda install nb_conda_kernels
+
+# Copy the path returned from the below command
+jupyter --config-dir
+
+# in my case it was ~/.jupyter
+
+# Create a jupyter_config.json in the jupyter config directory:
+touch ~/.jupyter/jupyter_config.json
+echo '{
+  "CondaKernelSpecManager": {
+    "kernelspec_path": "--user"
+  }
+}' >> ~/.jupyter/jupyter_config.json
+
+# Run the below command to return a list of available kernels:
+python -m nb_conda_kernels list
+
+# Copy the name (not the path) for the environment that you created with the
+format `conda-env-<YOUR_ENV_NAME>-py`.
+
+# add the following to the yaml header in the qmd file with python blocks
+jupyter: 
+  kernelspec:
+    name: "conda-env-<YOUR_ENV_NAME>-py"
+    language: "python"
+    display_name: "<YOUR_ENV_NAME>"
+
+# my environment was conda-env-gene46100-py
+# now you can run quarto render and it will be rendered with the conda environment you specified
+# when running interactively, you can choose the kernel, similarly to a jupyter notebook
+jupyter: 
+  kernelspec:
+    name: "conda-env-gene46100-py"
+    language: "python"
+    display_name: "gene46100"
+freeze: true
+## you may want to choose freeze true if you don't want to run the code every time you render the qmd file
+
+```
+
+```{bash}
+
+```

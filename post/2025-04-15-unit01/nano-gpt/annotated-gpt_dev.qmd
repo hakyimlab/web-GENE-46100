@@ -488,7 +488,7 @@ else:
     device = torch.device("cpu")   # CPU fallback
 print(f"Using device: {device}")
 
-# Set random seed for reproducibility across devices
+# Set random seed for reproducibility
 torch.manual_seed(1337)
 if device.type == 'cuda':
     torch.cuda.manual_seed(1337)
