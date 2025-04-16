@@ -2,10 +2,9 @@
   {
     "listing": "/index-all.html",
     "items": [
-      "/how-to/01-how-to-install-local-llm.html",
       "/post/2025-04-15-unit01/nano-gpt/annotated-gpt_dev.html",
+      "/how-to/01-how-to-install-local-llm.html",
       "/post/2025-04-15-unit01/nano-gpt/gpt_dev.html",
-      "/post/2025-03-25-unit00/homework-03.html",
       "/post/2025-03-25-unit00/tf-binding-wandb.html",
       "/post/2025-03-25-unit00/tf-binding-challenge.html",
       "/post/2025-03-25-unit00/homework-02.html",
@@ -14,7 +13,6 @@
       "/DRAFTS/2020-01-01-TODO/fit-linear-model-to-linear.html",
       "/DRAFTS/measuring-info-in-DNA-seq.html",
       "/post/2025-03-25-unit00/homework-01.html",
-      "/post/2025-03-25-unit00/basic_DNA_tutorial.html",
       "/post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html",
       "/post/2025-03-25-unit00/index.html",
       "/post/2025-04-15-unit01/nano-gpt/slides-gpt.html",
@@ -29,14 +27,12 @@
     "items": [
       "/post/2025-04-15-unit01/nano-gpt/annotated-gpt_dev.html",
       "/post/2025-04-15-unit01/nano-gpt/gpt_dev.html",
-      "/post/2025-03-25-unit00/homework-03.html",
       "/post/2025-03-25-unit00/tf-binding-wandb.html",
       "/post/2025-03-25-unit00/tf-binding-challenge.html",
       "/post/2025-03-25-unit00/homework-02.html",
       "/post/2025-03-25-unit00/updated-basic_DNA_tutorial.html",
       "/post/2025-03-25-unit00/tf-binding-prediction-starter.html",
       "/post/2025-03-25-unit00/homework-01.html",
-      "/post/2025-03-25-unit00/basic_DNA_tutorial.html",
       "/post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html",
       "/post/2025-03-25-unit00/index.html",
       "/post/2025-04-15-unit01/nano-gpt/slides-gpt.html"
