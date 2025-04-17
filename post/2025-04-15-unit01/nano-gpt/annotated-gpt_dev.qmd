@@ -25,7 +25,7 @@ Companion notebook to the [Zero To Hero](https://karpathy.ai/zero-to-hero.html) 
 
 ### download the tiny shakespeare dataset
 ```{python}
-# We always start with a dataset to train on. Let's download the tiny shakespeare dataset
+# Download the tiny shakespeare dataset
 #!wget https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
 
 ```
@@ -54,6 +54,7 @@ print(''.join(chars))
 print(vocab_size)
 ```
 
+### mapping characters to integers and vice versa
 ```{python}
 # create a mapping from characters to integers
 stoi = { ch:i for i,ch in enumerate(chars) }
@@ -65,23 +66,7 @@ print(encode("hii there"))
 print(decode(encode("hii there")))
 ```
 
-```{python}
-# %pip install torch torchvision torchaudio scikit-learn
-
-# import os
-# import time
-# import math
-# import pickle
-# from contextlib import nullcontext
-
-# import numpy as np
-# import torch
-# from torch.nn.parallel import DistributedDataParallel as DDP
-# from torch.distributed import init_process_group, destroy_process_group
-
-# from model import GPTConfig, GPT
-```
-
+### encode the data into torch tensor
 ```{python}
 # let's now encode the entire text dataset and store it into a torch.Tensor
 import torch # we use PyTorch: [https://pytorch.org](https://pytorch.org)
@@ -90,6 +75,7 @@ print(data.shape, data.dtype)
 print(data[:1000]) # the 1000 characters we looked at earier will to the GPT look like this
 ```
 
+### split up the data into train and validation sets
 ```{python}
 # split up the data into train and validation sets
 n = int(0.9*len(data)) # first 90% will be train, rest val
@@ -97,14 +83,13 @@ train_data = data[:n]
 val_data = data[n:]
 ```
 
+### define the block size
 ```{python}
-# define the block size
 block_size = 8
 train_data[:block_size+1]
 ```
 
 ### define the context and target: 8 examples in one batch
-
 ```{python}
 x = train_data[:block_size]
 y = train_data[1:block_size+1]
@@ -192,7 +177,7 @@ class BigramLanguageModel(nn.Module):
 
 ### cross entropy loss
 
-Loss = $-\sum_{i}(y_i * \log(p_i))$
+Loss = $-\sum_{i}(y_i * \log(p_i))$x
 
 where:
 
@@ -247,7 +232,7 @@ for steps in range(100): # # sample a batch of data
 print(loss.item())
 ```
 
-### generate text starting with \n as initial context
+### generate text starting with 0=`\n` as initial context
 
 ```{python}
 print(decode(m.generate(idx = torch.zeros((1, 1), dtype=torch.long), max_new_tokens=500)[0].tolist()))
@@ -360,18 +345,57 @@ out.shape # Expected: (B, T, head_size) = (4, 8, 16)
 wei[0] # Show attention weights for the first sequence in the batch
 ```
 
+
+### Check that X X'/C is is the correlation matrix if X is normalized
+
+```{r showing xx'/C is correlation matrix if X is normalized}
+
+nC = 64
+X = matrix(rnorm(4*64), nrow=4, ncol=nC)
+## make it so that the third token is similar to the last one
+X[2,] = X[4,]*0.5 + X[2,]*0.5
+## normalize X
+X = t(scale(t(X)))
+
+q = X
+k = X
+v = X
+
+qkt = q %*% t(k)/(nC-1)
+xcor = cor(t(q),t(k))
+dim(xcor)
+dim(qkt)
+cat("xcor\n")
+xcor
+cat("---\n qkt\n")
+qkt
+
+cat("are xcor and qkt equal?")
+all.equal(xcor, qkt)
+
+par(mar=c(5, 6, 4, 2) + 0.1)  # increase left margin to avoid cutting of the y label
+par(pty="s")  # Set plot type to "square"
+plot(c(xcor), c(qkt),cex=3,cex.lab=3,cex.axis=2,cex.main=2,cex.sub=2); abline(0,1)
+par(pty="m")  # Reset to default plot type
+par(mar=c(5, 4, 4, 2) + 0.1)  # Reset to default margins
+
+
+```
+
+
 ### Notes:
 
 Attention is a communication mechanism. Can be seen as nodes in a directed graph looking at each other and aggregating information with a weighted sum from all nodes that point to them, with data-dependent weights. 
 
 - There is no notion of space. Attention simply acts over a set of vectors. This is why we need to positionally encode tokens. 
+    example: "the cat sat on the mat" should be different from "the mat sat on the cat"
 - Each example across batch dimension is of course processed completely independently and never "talk" to each other. 
 - In an "encoder" attention block just delete the single line that does masking with tril, allowing all tokens to communicate. This block here is called a "decoder" attention block because it has triangular masking, and is usually used in autoregressive settings, like language modeling. 
 - "self-attention" just means that the keys and values are produced from the same source as queries (all come from x). In "cross-attention", the queries still get produced from x, but the keys and values come from some other, external source (e.g. an encoder module)
 
 ### why scaled attention?
 
-"Scaled" attention additional divides wei by 1/sqrt(head_size). This makes it so when input Q,K are unit variance, wei will be unit variance too and Softmax will stay diffuse and not saturate too much. Illustration below
+"Scaled" attention additionaly divides wei by 1/sqrt(head_size). This makes it so when input Q,K are unit variance, wei will be unit variance too and Softmax will stay diffuse and not saturate too much. Illustration below
 
 ```{python}
 # Demonstrate variance without scaling
@@ -442,6 +466,24 @@ x = module(x)
 x.shape # Should be (32, 100)
 ```
 
+Explanation of layernorm
+
+Input shape: (B, T, C) where:
+B = batch size
+T = sequence length (number of tokens)
+C = embedding dimension (features of each token)
+For each token in the sequence (each position T), LayerNorm:
+Takes its embedding vector of size C
+Calculates the mean and standard deviation of just that vector
+Normalizes that vector by subtracting its mean and dividing by its standard deviation
+Applies the learnable scale (gamma) and shift (beta) parameters
+So if you have a sequence like "The cat sat", and each word is represented by a 64-dimensional embedding vector, LayerNorm would:
+Take "The"'s 64-dimensional vector and normalize it
+Take "cat"'s 64-dimensional vector and normalize it
+Take "sat"'s 64-dimensional vector and normalize it
+Each token's vector is normalized independently of the others. This is different from BatchNorm, which would normalize across the batch dimension (i.e., looking at the same position across different examples in the batch).
+This per-token normalization helps maintain stable gradients during training and is particularly important in Transformers where the attention mechanism needs to work with normalized vectors to compute meaningful attention scores.
+
 ```{python}
 # Mean and std of the first feature *across the batch*. Not expected to be 0 and 1.
 x[:,0].mean(), x[:,0].std()
@@ -469,7 +511,7 @@ from torch.nn import functional as F
 # ===== HYPERPARAMETERS =====
 batch_size = 16       # Number of sequences per batch (Smaller than Bigram training)
 block_size = 32       # Context length (Larger than Bigram demo)
-max_iters = 500      # Total training iterations (More substantial training) TODO change to 5000 later
+max_iters = 5000      # Total training iterations (More substantial training) TODO change to 5000 later
 eval_interval = 100   # How often to check validation loss
 learning_rate = 1e-3  # Optimizer learning rate
 eval_iters = 200      # Number of batches to average for validation loss estimate
@@ -726,3 +768,7 @@ print(decode(m.generate(context, max_new_tokens=2000)[0].tolist()))
 # ============================================
 ```
 
+
+::: {.callout-note}
+With 5000 iterations, the model is able to generate text that is similar to the training text.
+:::

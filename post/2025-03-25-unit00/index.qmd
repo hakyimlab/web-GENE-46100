@@ -118,19 +118,23 @@ echo '{
 # Run the below command to return a list of available kernels:
 python -m nb_conda_kernels list
 
-# Copy the name (not the path) for the environment that you created with the
-format `conda-env-<YOUR_ENV_NAME>-py`.
+# Copy the name (not the path) for the environment that you created with the format `conda-env-<YOUR_ENV_NAME>-py`.
+```
 
-# add the following to the yaml header in the qmd file with python blocks
+add the following to the yaml header in the qmd file with python blocks
+```
 jupyter: 
   kernelspec:
     name: "conda-env-<YOUR_ENV_NAME>-py"
     language: "python"
     display_name: "<YOUR_ENV_NAME>"
+```
 
-# my environment was conda-env-gene46100-py
-# now you can run quarto render and it will be rendered with the conda environment you specified
-# when running interactively, you can choose the kernel, similarly to a jupyter notebook
+ my environment was conda-env-gene46100-py
+ you can run quarto render and it will be rendered with the conda environment you specified
+ when running interactively, you can choose the kernel, similarly to a jupyter notebook
+
+```{yaml}
 jupyter: 
   kernelspec:
     name: "conda-env-gene46100-py"
@@ -141,6 +145,3 @@ freeze: true
 
 ```
 
-```{bash}
-
-```

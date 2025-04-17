@@ -1,5 +1,5 @@
 ---
-title: Building a GPT - companion notebook qmd
+title: Building a GPT - companion notebook backup
 author: Andrey Karpathy
 date: '2025-04-11'
 freeze: true
@@ -14,6 +14,7 @@ format:
     code-line-numbers: true
     code-tools: true
     code-wrap: true
+draft: true
 ---
 
 ## Building a GPT
