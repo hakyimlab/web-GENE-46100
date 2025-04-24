@@ -12,7 +12,6 @@ format:
     code-tools: true
     code-overflow: wrap
 date-modified: last-modified
-draft: true
 ---
 
 # Homework 3
