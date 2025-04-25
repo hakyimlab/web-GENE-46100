@@ -107,12 +107,3 @@ if(png2file) {
   )
 }
 ```
-
-```{r}
-
-col=5
-plot(svdfit$u[,col],type="n")
-text(svdfit$u[,col],embeddings$token,cex=2)
-
-
-```

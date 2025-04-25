@@ -11,7 +11,7 @@ eval: false
 
 ## install conda
 
-```{bash}
+```{{bash}}
 
 ## download miniconda from the command line
 
@@ -25,7 +25,7 @@ bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
 ## create conda environment
-```{bash}
+```{{bash}}
 conda create -n gene46100 python=3.12
 conda activate gene46100
 
@@ -33,7 +33,7 @@ conda activate gene46100
 
 ## do not install packages with conda
 (I ran into lots of issues with torch version incompatibility with torchvision and torchmetrics)
-```{bash}
+```{{bash}}
 # DONT USE CONDA TO INSTALL PYTORCH at least for now
 # conda install scikit-learn plotnine pytorch 
 
@@ -45,7 +45,7 @@ conda activate gene46100
 as of 2025-03-24
 
 using %pip will make sure that the packages are accessible by the kernel you are using for the jupyter notebook
-```{bash}
+```{{bash}}
 %pip install scikit-learn plotnine tqdm pandas 
 %pip install torch
 %pip install torchvision
@@ -63,7 +63,7 @@ using %pip will make sure that the packages are accessible by the kernel you are
 ## Save the environment for reproducibility
 
 ### to reproduce the environment exactly, save the environment
-```{bash}
+```{{bash}}
 # Save conda packages with their sources
 conda env export --from-history > environment-gene46100.yml
 
@@ -77,7 +77,7 @@ conda env export > environment_full-gene46100.yml
 ## DO NOT RUN THE FOLLOWING UNLESS NEED TO REINSTALL THE ENVIRONMENT FOR SOME REASON
 
 #### reinstall the environment
-```{bash}
+```{{bash}}
 # Create environment from conda packages
 conda env create -f environment-gene46100.yml
 
@@ -94,7 +94,7 @@ pip install -r requirements-gene46100.txt
 Follow instructions in https://thedatasavvycorner.com/blogs/08-quarto-conda-en copied to /DRAFTS/2025-02-20-testin/08-quarto-conda-env.qmd
 
 Below is a shortened version of the instructions when you already have a conda environment.
-```{bash, eval=false}
+```{{bash}}
 conda activate gene46100
 pip install nbclient nbformat
 
@@ -122,7 +122,8 @@ python -m nb_conda_kernels list
 ```
 
 add the following to the yaml header in the qmd file with python blocks
-```
+
+```{{yaml}}
 jupyter: 
   kernelspec:
     name: "conda-env-<YOUR_ENV_NAME>-py"
@@ -134,7 +135,7 @@ jupyter:
  you can run quarto render and it will be rendered with the conda environment you specified
  when running interactively, you can choose the kernel, similarly to a jupyter notebook
 
-```{yaml}
+```{{yaml}}
 jupyter: 
   kernelspec:
     name: "conda-env-gene46100-py"
