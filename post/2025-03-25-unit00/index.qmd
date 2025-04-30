@@ -74,6 +74,17 @@ pip list --format=freeze > requirements-gene46100.txt
 conda env export > environment_full-gene46100.yml
 ```
 
+### to clone the environment
+```{{bash}}
+# create a new environment named newenv46100 with the same packages as the original environment test46100
+conda create --name newenv46100 --clone test46100
+```
+
+### to remove the environment
+```{{bash}}
+conda env remove --name newenv46100
+```
+
 ## DO NOT RUN THE FOLLOWING UNLESS NEED TO REINSTALL THE ENVIRONMENT FOR SOME REASON
 
 #### reinstall the environment

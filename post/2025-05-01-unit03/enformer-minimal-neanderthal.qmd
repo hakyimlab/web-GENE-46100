@@ -1,14 +1,19 @@
 ---
 title: Enformer usage neanderthal
-date: '2023-08-22'
+date: '2025-04-28'
 description: predict neanderthal epigenome with enformer
 jupyter: 
   kernelspec:
-    name: "conda-env-gene46100-py"
+    name: "conda-env-enformer46100-py"
     language: "python"
-    display_name: "gene46100"
+    display_name: "enformer46100"
 eval: false
+categories:
+  - gene46100
+  - notebook
 ---
+
+> modified from Enformer usage notebook in https://github.com/google-deepmind/deepmind-research/blob/master/enformer/enformer-usage.ipynb
 
 ### Steps
 
@@ -19,13 +24,46 @@ This notebook demonstrates how to
 ## 1. set up and function definitions
 This is Sabrina's EnformerVCF.py file with functions necessary to run vcf modified enformer, based on functions from Temi and Sai, in turn based on Avsec et al's code
 
-### import packages
-
+### Install Required Python Packages (First Run Only)
 ```{python}
+# Install Required Python Packages (First Run Only)
+first_time = False  # Set to False after first run
+
+if first_time:
+    %pip install tensorflow
+    ## this requires  numpy<2.2.0,>=1.26.0 (from tensorflow)
+    ## it will uninstall numpy not compatible with tensorflow
+
+    import platform
+    if platform.processor() == 'arm':
+        print("Apple Silicon detected, installing tensorflow-metal...")
+        %pip install tensorflow-metal
+    else:
+        print("Not running on Apple Silicon, skipping tensorflow-metal installation")
+
+    %pip install tensorflow_hub
+    # %pip install joblib # already installed
+    %pip install kipoiseq
+    # %pip install pyfaidx # already installed
+    # %pip install pandas # already installed
+    # %pip install numpy # already installed
+    # %pip install matplotlib # already installed
+    # %pip install seaborn # already installed
+    %pip install cyvcf2
+
+    %pip install Bio
+
+```
+
+### Import Libraries and Define Utility Functions
+```{python}
+# Import Libraries and Define Utility Functions
 import tensorflow as tf
+
 # Make sure the GPU is enabled 
 assert tf.config.list_physical_devices('GPU'), 'Start the colab kernel with GPU: Runtime -> Change runtime type -> GPU'
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
+
 import tensorflow_hub as hub # for interacting with saved models and tensorflow hub
 import joblib
 import gzip # for manipulating compressed files
@@ -51,10 +89,11 @@ import os
 import gzip
 ```
 
-### define classes and functions
+### Define Enformer Model Classes and Sequence Extraction
 
 ```{python}
-# @title `Enformer`, `EnformerScoreVariantsNormalized`, `EnformerScoreVariantsPCANormalized`,
+# Define Enformer Model Classes and Sequence Extraction
+
 SEQUENCE_LENGTH = 393216
 
 
@@ -150,7 +189,9 @@ class FastaStringExtractor:
         return self.fasta.close()
 ```
 
+### Data Processing and Visualization Functions
 ```{python}
+# Data Processing and Visualization Functions
 def one_hot_encode(sequence):
   return kipoiseq.transforms.functional.one_hot_dna(sequence).astype(np.float32)
 
@@ -176,6 +217,7 @@ def read_vcf(path):
     ).rename(columns={'#CHROM': 'CHROM'})
 
 def vcf_to_seq(target_interval, individual, vcf, fasta_extractor):
+  ## should be replaced with vcf_to_seq_faster
   target_fa = fasta_extractor.extract(target_interval.resize(SEQUENCE_LENGTH))
   window_coords = target_interval.resize(SEQUENCE_LENGTH)
       # two haplotypes per individual
@@ -194,9 +236,7 @@ def vcf_to_seq(target_interval, individual, vcf, fasta_extractor):
     if geno[1] == "1":
       haplo_2[row["POS"]-window_coords.start-1] = row["ALT"]
   return haplo_1, haplo_2
-```
 
-```{python}
 def vcf_to_seq_faster(target_interval, individual, vcf_file, fasta_extractor):
   # target_inverval is a kipoiseq interval, e.g. kipoiseq.Interval("chr22", 18118779, 18145669)
   # individual is the id of the individual in the vcf file
@@ -242,10 +282,11 @@ def vcf_to_seq_faster(target_interval, individual, vcf_file, fasta_extractor):
   return haplo_1, haplo_2
 ```
 
-### define comparison functions
+### Define comparison functions
 
 ```{python}
-# Comparison functions 
+# Comparison and Summary Statistics Functions
+
 
 def get_diffmat(mat1, mat2):
     
@@ -296,9 +337,21 @@ def column_correlations(mat1, mat2):
     return correlations
 ```
 
-## 2. define locations, load model, target annotations
+## 2. Set File Paths and Load Enformer Model
+
+If first time, download the model from here 
+https://uchicago.box.com/s/ppzn9lqqsnr3i9jqcgc52zf668sllkjx
+
+and the hg19 fasta file from here 
+https://uchicago.box.com/s/0rh4q4syucn66ne1d8n2aw9g3yyst9a0
+
+If needed, you can also download the hg38 fasta file from here (but I believe neanderthal vcf is based on hg19) 
+https://uchicago.box.com/s/wl50ji7jms2c8alyqxyk4q6uru37nnt9
 
 ```{python}
+# Set File Paths and Load Enformer Model
+
+## edit this path to the location of the files on your computer
 PRE = "/Users/haekyungim/Library/CloudStorage/Box-Box/LargeFiles/imlab-data/Reference-Data/"
 
 model_path = PRE + "models/enformer/raw"
@@ -310,15 +363,18 @@ model = Enformer(model_path) # here we load the model architecture.
 fasta_extractor = FastaStringExtractor(fasta_file)
 ```
 
+### Load Target Annotation Data
 ```{python}
-## load target data
+## Load Target Annotation Data
 targets_txt = 'https://raw.githubusercontent.com/calico/basenji/master/manuscripts/cross2020/targets_human.txt'
 # df_targets = pd.read_csv(targets_txt, sep='\t')
 targets_slim_file = PRE + "models/enformer/targets_slims.csv"
 targets_slim_df = pd.read_csv(targets_slim_file)
 ```
 
-## 3. load neanderthal variants and run enformer
+## 3. Run Enformer on Neanderthal genomes
+
+### Shell Script: Preprocess Neanderthal VCF Files
 
 Download Altai ch5 filtered vcf
 brew install htslib
@@ -327,7 +383,9 @@ tabix -p vcf AltaiNea.hg19_1000g.5.vcf.gz
 
 create file filter-add-chr.sh with the following content
 chmod u+x filter-add-chr.sh to make it executable 
-```#!/bin/bash
+
+```{{bash}}
+#!/bin/bash
 
 for NUM in {1..22}; do
     # Filter missing genotypes and non-variant sites
@@ -344,8 +402,13 @@ for NUM in {1..22}; do
     bcftools view -i 'strlen(REF) = 1 && strlen(ALT) = 1' AltaiNea.hg19_1000g.chr${NUM}.nomiss.vcf.gz > AltaiNea.hg19_1000g.chr${NUM}.nomiss.snps_only.vcf
 done
 ```
-
+### Load Neanderthal vcf and predict epigenome
 ```{python}
+# Load Neanderthal vcf and predict epigenome
+
+# download the vcf file from here https://uchicago.box.com/s/f682q1c6tl3cdnqwbvga0z72u5e203zs
+# and put it in your data folder
+
 # read VCFs and encode haplotypes
 CHROM='chr5'
 vcf_file = PRE + "neanderthal/AltaiNea.hg19_1000g." + CHROM + ".nomiss.snps_only.vcf.gz"
@@ -361,10 +424,13 @@ haplo0_enc = one_hot_encode("".join(haplo0))[np.newaxis]
 print("number of changes");print(np.sum(haplo2_enc != haplo0_enc))
 
 pred_human = model.predict_on_batch(haplo0_enc)['human'][0]
-pred_altai = model.predict_on_batch(haplo1_enc + haplo2_enc)['human'][0]
+pred_altai = model.predict_on_batch((haplo1_enc + haplo2_enc)/2)['human'][0]
 ```
 
+### Plot Human reference epigenome
 ```{python}
+#  Plot Human and Neanderthal epigenomes
+
 predictions = pred_human
 tracks = {'DNASE:CD14-positive monocyte female': predictions[:, 41],
           'DNASE:keratinocyte female': predictions[:, 42],
@@ -373,6 +439,7 @@ tracks = {'DNASE:CD14-positive monocyte female': predictions[:, 41],
 plot_tracks(tracks, target_interval)
 ```
 
+### Plot Neanderthal epigenome
 ```{python}
 predictions = pred_altai
 tracks = {'DNASE:CD14-positive monocyte female': predictions[:, 41],
@@ -384,9 +451,6 @@ plot_tracks(tracks, target_interval)
 
 ```{python}
 get_summary(get_diffmat(pred_human,pred_altai))
-```
-
-```{python}
 get_summary(column_correlations(pred_human,pred_altai))
 ```
 

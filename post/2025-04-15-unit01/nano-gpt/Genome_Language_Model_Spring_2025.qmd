@@ -11,9 +11,9 @@ draft: true
 eval: false
 jupyter: 
   kernelspec:
-    name: "conda-env-gene46100-py"
+    name: "conda-env-nanogpt46100-py"
     language: "python"
-    display_name: "gene46100"
+    display_name: "nanogpt46100"
 ---
 
 **Acknowledgement**:
@@ -42,9 +42,9 @@ First, it is necessary to connect to the GPU. If you are working in Colab, this 
 Next, we need to install a few things that help us build and run the model efficiently.
 
 
+
 ```{python}
-%%capture
-!pip install torch numpy transformers datasets tiktoken wandb tqdm biopython huggingface_hub accelerate
+#%pip install torch numpy transformers datasets tiktoken wandb tqdm biopython huggingface_hub accelerate
 import os
 import pickle
 import requests
@@ -73,10 +73,23 @@ import matplotlib.pyplot as plt
 For our training, we will be using the GRCh38 human reference genome (credit to the Genome Reference Consortium: https://www.ncbi.nlm.nih.gov/grc). In the next block, we simply create a place to store our genome in the Colab filesystem and download the genome file remotely.
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
-!mkdir /root/data
-fasta_file = '/root/data/genome.fa'
-!wget -O - https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz | gunzip -c > {fasta_file}
+running_in_colab = False
+if running_in_colab:
+  WORKDIR = '/root/data/'
+  !mkdir /root/data
+  fasta_file = WORKDIR + 'genome.fa'
+  !wget -O - https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz | gunzip -c > {fasta_file}
+  input_file_path = os.path.join(WORKDIR, 'genome.fa')
+else:
+  WORKDIR = '~/Downloads/'
+  fasta_path = '/Users/haekyungim/Library/CloudStorage/Box-Box/LargeFiles/imlab-data/Reference-Data/ref_sequences/hg38/'
+  fasta_file = fasta_path + 'Homo_sapiens_assembly38.fasta'
+  input_file_path = fasta_file
+  # Properly expand the home directory if using ~
+  WORKDIR = os.path.expanduser('~/Downloads')
+  # Create directory if it doesn't exist
+  os.makedirs(WORKDIR, exist_ok=True)
+
 
 """
 Prepare the hg38 genomic dataset for character-level language modeling.
@@ -85,14 +98,11 @@ Will save train.bin, val.bin containing the ids, and meta.pkl containing the
 encoder and decoder and some other related info.
 """
 
-# access the genome dataset
-input_file_path = os.path.join('/root/data', 'genome.fa')
 ```
 
 Now that we have the genome file saved locally, we have to read it into our environment in order to make it usable. To do this, we just read in the entire file as one long string, which we can then subset and investigate as we wish. For example, we may want to know the total length of our dataset, and all of the unique characters we have:
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
 with open(input_file_path, 'r') as f:
     data = f.read()
 print(f"length of dataset in characters: {len(data):,}")
@@ -106,7 +116,8 @@ print(f"vocab size: {vocab_size:,}")
 
 Great! The number of characters we have is approximately the same as the number of nucleotides in the human genome (about 3.2 billion), so it looks like our data imported correctly. However, you may notice that we have more characters than just "A", "T", "C", "G", and "N" as you may expect from genomic data. This is because our text file includes headers for each part of the genome assembly (i.e. chromosomes and fragments).
 
-One nice thing about working with a language model is that we don't need to worry about this. Even if the input data is a bit messy, the model is essentially designed to predict the most likely characters based on a general input. Since the headers make up a tiny fraction of the total number of characters, our model will assign a very very low probability to each of the non-ATCGN characters, and they will not influence our outputs.
+UPDATE: Daniel tested that performance of downstream task is better when removing non DNA characters. ~~One nice thing about working with a language model is that we don't need to worry about this. Even if the input data is a bit messy, the model is essentially designed to predict the most likely characters based on a general input. Since the headers make up a tiny fraction of the total number of characters, our model will assign a very very low probability to each of the non-ATCGN characters, and they will not influence our outputs.~~
+To keep the example simple, we will keep using the full genome file with non-DNA characters.
 
 ## Mapping Characters to Integers (i.e. Tokenization)
 
@@ -128,7 +139,6 @@ def decode(l):
 Now that we have our functions defined, it is time to actually do the tokenization. This will take a few minutes, so go ahead and run the block, and see the description of what it is doing below:
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/}
 # create the train and test splits
 n = len(data)
 train_data = data[:int(n*0.9)]
@@ -151,8 +161,8 @@ for i in np.arange(0,1,0.05):
   val_ids = encode(val_data[int(nval*i):int(nval*(i+0.05))])
   train_ids = np.array(train_ids, dtype=np.uint16)
   val_ids = np.array(val_ids, dtype=np.uint16)
-  append_to_binary_file(os.path.join('/root/data', 'train.bin'), train_ids)
-  append_to_binary_file(os.path.join('/root/data', 'val.bin'), val_ids)
+  append_to_binary_file(os.path.join(WORKDIR, 'train.bin'), train_ids)
+  append_to_binary_file(os.path.join(WORKDIR, 'val.bin'), val_ids)
 print(f"train has {ntrain:,} tokens")
 print(f"val has {nval:,} tokens")
 ```
@@ -173,12 +183,13 @@ meta = {
     'itos': itos,
     'stoi': stoi,
 }
-with open(os.path.join('/root/data', 'meta.pkl'), 'wb') as f:
+with open(os.path.join(WORKDIR, 'meta.pkl'), 'wb') as f:
     pickle.dump(meta, f)
 ```
 
 ```{python}
-os.kill(os.getpid(), 9) #If running in a low-memory environment, this will clear our RAM. After this, go run the very first block again!
+if running_in_colab:
+  os.kill(os.getpid(), 9) #If running in a low-memory environment, this will clear our RAM. After this, go run the very first block again!
 ```
 
 #### Questions:
@@ -507,7 +518,7 @@ gc.collect()
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt on hg38 reference genome
 # I/O
-out_dir = '/root/data/out'
+out_dir = WORKDIR + 'out'
 eval_interval = 1000
 log_interval = 100
 eval_iters = 100

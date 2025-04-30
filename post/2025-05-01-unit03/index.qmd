@@ -11,7 +11,66 @@ Slides for Unit 3 - Enformer and PrediXcan [link](https://www.icloud.com/keynote
 
 
 
+## Enformer Architecture 
+Summarized by cursor from enformer.py
 
+### Purpose
+- Designed for effective gene expression prediction from sequence by integrating long-range interactions
+- Takes DNA sequences as input and predicts gene expression patterns
+
+### Architecture Overview
+
+#### 1. Input Processing
+- Sequence length: 196,608 base pairs
+- Input format: One-hot encoded DNA sequences (ACGT)
+
+#### 2. Main Components
+
+##### a. Stem Layer
+- Initial convolutional layer
+- Residual connections
+- Pooling layer
+
+##### b. Convolutional Tower
+- Multiple convolutional blocks in series
+- Channel progression: Gradually increases from channels/2 to full channels
+- Block components:
+  - Convolutions
+  - Residual connections
+  - Pooling layers
+
+##### c. Transformer
+- Configuration:
+  - 11 transformer layers (default)
+  - 8 attention heads (default)
+- Transformer block structure:
+  - Multi-head attention layer
+  - MLP with residual connections
+  - Layer normalization
+
+##### d. Final Processing
+- Target length cropping: 896 bins
+- Final pointwise convolutions
+
+##### e. Prediction Heads
+- Human head: 5313 channels
+- Mouse head: 1643 channels
+- Each head predicts different genomic features
+
+### Key Parameters
+- Channel width: 1536 (default)
+- Transformer layers: 11
+- Attention heads: 8
+- Bin size: 128 base pairs
+- Target length: 896 bins
+
+### Notable Features
+- Hybrid architecture combining CNNs and transformers
+- Extensive residual connections
+- Sophisticated positional encoding
+- GELU activation functions
+- Dropout regularization
+- Batch normalization in convolutional layers
 
 
 
