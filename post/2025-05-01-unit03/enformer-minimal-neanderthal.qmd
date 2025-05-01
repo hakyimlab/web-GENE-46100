@@ -8,6 +8,7 @@ jupyter:
     language: "python"
     display_name: "enformer46100"
 eval: false
+freeze: true
 categories:
   - gene46100
   - notebook
@@ -121,7 +122,7 @@ class Enformer:
     input_grad = tape.gradient(prediction, input_sequence) * input_sequence
     input_grad = tf.squeeze(input_grad, axis=0)
     return tf.reduce_sum(input_grad, axis=-1)
-
+  
 class EnformerScoreVariantsRaw:
 
   def __init__(self, tfhub_url, organism='human'):
@@ -216,26 +217,26 @@ def read_vcf(path):
         sep='\t'
     ).rename(columns={'#CHROM': 'CHROM'})
 
-def vcf_to_seq(target_interval, individual, vcf, fasta_extractor):
-  ## should be replaced with vcf_to_seq_faster
-  target_fa = fasta_extractor.extract(target_interval.resize(SEQUENCE_LENGTH))
-  window_coords = target_interval.resize(SEQUENCE_LENGTH)
-      # two haplotypes per individual
-  haplo_1 = list(target_fa[:])
-  haplo_2 = list(target_fa[:])
+# def vcf_to_seq(target_interval, individual, vcf, fasta_extractor):
+#   ## should be replaced with vcf_to_seq_faster
+#   target_fa = fasta_extractor.extract(target_interval.resize(SEQUENCE_LENGTH))
+#   window_coords = target_interval.resize(SEQUENCE_LENGTH)
+#       # two haplotypes per individual
+#   haplo_1 = list(target_fa[:])
+#   haplo_2 = list(target_fa[:])
 
-  ref_mismatch_count = 0
-  for i,row in vcf.iterrows():
-    geno = row[individual].split("|")
-    if (row["POS"]-window_coords.start-1) >= len(haplo_2):
-      continue
-    if (row["POS"]-window_coords.start-1) < 0:
-      continue
-    if geno[0] == "1":
-      haplo_1[row["POS"]-window_coords.start-1] = row["ALT"]
-    if geno[1] == "1":
-      haplo_2[row["POS"]-window_coords.start-1] = row["ALT"]
-  return haplo_1, haplo_2
+#   ref_mismatch_count = 0
+#   for i,row in vcf.iterrows():
+#     geno = row[individual].split("|")
+#     if (row["POS"]-window_coords.start-1) >= len(haplo_2):
+#       continue
+#     if (row["POS"]-window_coords.start-1) < 0:
+#       continue
+#     if geno[0] == "1":
+#       haplo_1[row["POS"]-window_coords.start-1] = row["ALT"]
+#     if geno[1] == "1":
+#       haplo_2[row["POS"]-window_coords.start-1] = row["ALT"]
+#   return haplo_1, haplo_2
 
 def vcf_to_seq_faster(target_interval, individual, vcf_file, fasta_extractor):
   # target_inverval is a kipoiseq interval, e.g. kipoiseq.Interval("chr22", 18118779, 18145669)
@@ -283,7 +284,6 @@ def vcf_to_seq_faster(target_interval, individual, vcf_file, fasta_extractor):
 ```
 
 ### Define comparison functions
-
 ```{python}
 # Comparison and Summary Statistics Functions
 
@@ -429,7 +429,7 @@ pred_altai = model.predict_on_batch((haplo1_enc + haplo2_enc)/2)['human'][0]
 
 ### Plot Human reference epigenome
 ```{python}
-#  Plot Human and Neanderthal epigenomes
+#  Plot Human epigenomes
 
 predictions = pred_human
 tracks = {'DNASE:CD14-positive monocyte female': predictions[:, 41],
