@@ -77,8 +77,8 @@ Summarized by cursor from enformer.py
 - Batch normalization in convolutional layers
 
 
-## Enformer class definition in pytorch
-downloaded from [enformer.py](https://github.com/google-deepmind/deepmind-research/blob/master/enformer/enformer.py) annotated with cursor
+## Enformer class definition in tensorflow
+downloaded from [enformer.py](https://github.com/google-deepmind/deepmind-research/blob/master/enformer/enformer.py) annotated with gemini
 
 ```{{python}}
 # Copyright 2021 DeepMind Technologies Limited

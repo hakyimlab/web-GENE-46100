@@ -47,3 +47,7 @@ If you run the analysis locally, make sure you clone the gene46100 conda environ
 1. Why do we need to one-hot encode the sequences? (5 points)
 2. What is the purpose of the SEQUENCE_LENGTH parameter? (5 points)
 3. How does the model handle the two haplotypes in the Neanderthal genome? (10 points)
+
+## 5. Extra Credit (10 points)
+
+Use enformer to predict the DNA binding score from project 1. Compare the results with your original DNA binding score.
