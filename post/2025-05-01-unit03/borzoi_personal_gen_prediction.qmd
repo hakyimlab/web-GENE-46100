@@ -18,15 +18,23 @@ categories:
 jupyter: python3
 ---
 
-## 1. Set up
+# Borzoi Personal Genome Prediction Tutorial
 
-Recommended: create a new conda environment, borzoi is not compatible with python > 3.10
+This notebook demonstrates how to use Borzoi, a deep learning model for predicting genomic regulatory activity, to analyze personal genome sequences. We'll learn how to:
 
+1. Set up the environment and install required packages
+2. Download and prepare model files and reference data
+3. Process personal genome data from VCF files
+4. Make predictions using Borzoi
+5. Visualize and interpret the results
+
+## 1. Environment Setup
+
+First, we need to set up our Python environment. Borzoi requires Python 3.10 or lower due to compatibility requirements.
+
+```
 conda create --name borzoi46100 python=3.10
-
-Then, use borzoi46100 environment to run the notebook
-
-Install software repositories
+```
 
 ```{python}
 import os
@@ -507,7 +515,8 @@ fasta_extractor = FastaStringExtractor(fasta_file)
 ```{python}
 #| output: false
 SEQUENCE_LENGTH = 524288
-n_folds = 4       #To use only one model fold, change to 'n_folds = 1'
+#n_folds = 4       #To use only one model fold, change to 'n_folds = 1'
+n_folds = 1       #To use only one model fold, change to 'n_folds = 1'
 rc = True         #Average across reverse-complement prediction
 
 #Read model parameters
@@ -581,7 +590,6 @@ my_tracks = ['CAGE:B lymphoblastoid cell line: GM12878 ENCODE, biol_',
 ```
 
 ```{python}
-#| colab: {base_uri: https://localhost:8080/, height: 1000}
 for h in range(0, len(sequences)):
   haplotypes = ["Reference", "Haplotype 1", "Haplotype 2"]
   prediction = make_prediction(gene = 'ENSG00000099968', interval = target_interval,
@@ -595,4 +603,53 @@ for h in range(0, len(sequences)):
 #| colab: {base_uri: https://localhost:8080/}
 prediction.shape
 ```
+
+## Technical Details
+
+### Model Architecture
+Borzoi is a deep learning model that:
+- Takes DNA sequences as input (one-hot encoded)
+- Uses a convolutional neural network architecture and transformer layers
+- Predicts multiple genomic features simultaneously
+- Can identify regulatory elements and their activity levels
+
+### Key Parameters
+- `SEQUENCE_LENGTH`: 524,288 bp (512 kb) - the size of genomic windows processed
+- `n_folds`: 4 - number of model replicates for ensemble predictions
+- `rc`: True - whether to average predictions from forward and reverse complement sequences
+
+### Data Requirements
+1. Reference Genome (hg38):
+   - Used as baseline for sequence comparison
+   - Required for proper variant mapping
+
+2. VCF File:
+   - Contains personal genome variants
+   - Must be phased for haplotype analysis
+   - Should be properly indexed
+
+3. Annotation Files:
+   - GTF file for gene annotations
+   - Additional files for specific features (CAGE, DNase, etc.)
+
+### Prediction Workflow
+1. Sequence Extraction:
+   - Extract reference sequence for target region
+   - Modify sequence based on personal variants
+   - Generate two haplotypes
+
+2. Model Input:
+   - Convert sequences to one-hot encoding
+   - Process in 512kb windows
+   - Handle sequence padding and truncation
+
+3. Prediction:
+   - Run through model ensemble
+   - Average predictions across folds
+   - Generate tissue-specific predictions
+
+4. Visualization:
+   - Plot predictions for each haplotype
+   - Compare with reference sequence
+   - Highlight significant differences
 
