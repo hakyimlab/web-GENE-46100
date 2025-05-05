@@ -2,6 +2,7 @@
 title: "Embeddings Analysis"
 date: "2025-04-23"
 author: Haky Im
+freeze: true
 ---
 
 ** embeddings provided by Henry from his DNA GPT model**
