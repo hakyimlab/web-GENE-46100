@@ -298,795 +298,173 @@ TensorFlow is using the GPU.</code></pre>
   self.shell.db['dhist'] = compress_dhist(dhist)[-100:]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="7">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git clone https:<span class="op">//</span>github.com<span class="op">/</span>calico<span class="op">/</span>baskerville.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Cloning into 'baskerville'...
-remote: Enumerating objects: 1802, done.
-remote: Counting objects: 100% (464/464), done.
-remote: Compressing objects: 100% (187/187), done.
-remote: Total 1802 (delta 324), reused 347 (delta 277), pack-reused 1338 (from 2)
-Receiving objects: 100% (1802/1802), 20.98 MiB | 1.07 MiB/s, done.
-Resolving deltas: 100% (973/973), done.</code></pre>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd baskerville</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">-</span>e .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd baskerville</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">-</span>e .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/Users/sofiasalazar/Desktop/IM_lab/borzoi_folder/baskerville
-Obtaining file:///Users/sofiasalazar/Desktop/IM_lab/borzoi_folder/baskerville
-  Installing build dependencies ... done
-  Checking if build backend supports build_editable ... done
-  Getting requirements to build editable ... done
-  Preparing editable metadata (pyproject.toml) ... done
-Collecting h5py~=3.10.0 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading h5py-3.10.0-cp310-cp310-macosx_11_0_arm64.whl.metadata (2.5 kB)
-Collecting intervaltree~=3.1.0 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading intervaltree-3.1.0.tar.gz (32 kB)
-  Preparing metadata (setup.py) ... done
-Collecting joblib~=1.1.1 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading joblib-1.1.1-py2.py3-none-any.whl.metadata (5.2 kB)
-Collecting matplotlib~=3.7.1 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading matplotlib-3.7.5-cp310-cp310-macosx_11_0_arm64.whl.metadata (5.7 kB)
-Collecting google-cloud-storage~=2.0.0 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading google_cloud_storage-2.0.0-py2.py3-none-any.whl.metadata (5.3 kB)
-Collecting natsort~=7.1.1 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading natsort-7.1.1-py3-none-any.whl.metadata (22 kB)
-Collecting networkx~=2.8.4 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading networkx-2.8.8-py3-none-any.whl.metadata (5.1 kB)
-Collecting numpy~=1.24.3 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading numpy-1.24.4-cp310-cp310-macosx_11_0_arm64.whl.metadata (5.6 kB)
-Collecting pandas~=1.5.3 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading pandas-1.5.3-cp310-cp310-macosx_11_0_arm64.whl.metadata (11 kB)
-Collecting pybigwig~=0.3.18 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading pybigwig-0.3.24.tar.gz (75 kB)
-  Installing build dependencies ... done
-  Getting requirements to build wheel ... done
-  Preparing metadata (pyproject.toml) ... done
-Collecting pybedtools~=0.10.0 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading pybedtools-0.10.0.tar.gz (12.6 MB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.6/12.6 MB 3.5 MB/s eta 0:00:00a 0:00:01
-  Preparing metadata (setup.py) ... done
-Collecting pysam~=0.22.0 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading pysam-0.22.1-cp310-cp310-macosx_11_0_arm64.whl.metadata (1.5 kB)
-Collecting qnorm~=0.8.1 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading qnorm-0.8.1-py3-none-any.whl.metadata (10 kB)
-Collecting seaborn~=0.12.2 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading seaborn-0.12.2-py3-none-any.whl.metadata (5.4 kB)
-Collecting scikit-learn~=1.2.2 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading scikit_learn-1.2.2-cp310-cp310-macosx_12_0_arm64.whl.metadata (11 kB)
-Collecting scipy~=1.9.1 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading scipy-1.9.3-cp310-cp310-macosx_12_0_arm64.whl.metadata (53 kB)
-Collecting statsmodels~=0.13.5 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading statsmodels-0.13.5-cp310-cp310-macosx_11_0_arm64.whl.metadata (9.5 kB)
-Collecting tabulate~=0.8.10 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading tabulate-0.8.10-py3-none-any.whl.metadata (25 kB)
-Requirement already satisfied: tensorflow~=2.15.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from baskerville==0.1.dev272+gaf9e2df) (2.15.0)
-Collecting tqdm~=4.65.0 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading tqdm-4.65.2-py3-none-any.whl.metadata (56 kB)
-Collecting pyfaidx~=0.7.1 (from baskerville==0.1.dev272+gaf9e2df)
-  Downloading pyfaidx-0.7.2.2-py3-none-any.whl.metadata (25 kB)
-Requirement already satisfied: google-auth&lt;3.0dev,&gt;=1.25.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.39.0)
-Collecting google-api-core&lt;3.0dev,&gt;=1.29.0 (from google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading google_api_core-2.25.0rc0-py3-none-any.whl.metadata (3.0 kB)
-Collecting google-cloud-core&lt;3.0dev,&gt;=1.6.0 (from google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading google_cloud_core-2.4.3-py2.py3-none-any.whl.metadata (2.7 kB)
-Collecting google-resumable-media&gt;=1.3.0 (from google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading google_resumable_media-2.7.2-py2.py3-none-any.whl.metadata (2.2 kB)
-Requirement already satisfied: requests&lt;3.0.0dev,&gt;=2.18.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.32.3)
-Requirement already satisfied: protobuf in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (4.25.7)
-Collecting googleapis-common-protos&lt;2.0.0,&gt;=1.56.2 (from google-api-core&lt;3.0dev,&gt;=1.29.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading googleapis_common_protos-1.70.0-py3-none-any.whl.metadata (9.3 kB)
-Collecting proto-plus&lt;2.0.0,&gt;=1.22.3 (from google-api-core&lt;3.0dev,&gt;=1.29.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Using cached proto_plus-1.26.1-py3-none-any.whl.metadata (2.2 kB)
-Requirement already satisfied: cachetools&lt;6.0,&gt;=2.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-auth&lt;3.0dev,&gt;=1.25.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (5.5.2)
-Requirement already satisfied: pyasn1-modules&gt;=0.2.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-auth&lt;3.0dev,&gt;=1.25.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (0.4.2)
-Requirement already satisfied: rsa&lt;5,&gt;=3.1.4 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-auth&lt;3.0dev,&gt;=1.25.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (4.9.1)
-Collecting sortedcontainers&lt;3.0,&gt;=2.0 (from intervaltree~=3.1.0-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Using cached sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
-Collecting contourpy&gt;=1.0.1 (from matplotlib~=3.7.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading contourpy-1.3.2-cp310-cp310-macosx_11_0_arm64.whl.metadata (5.5 kB)
-Collecting cycler&gt;=0.10 (from matplotlib~=3.7.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Using cached cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
-Collecting fonttools&gt;=4.22.0 (from matplotlib~=3.7.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading fonttools-4.57.0-cp310-cp310-macosx_10_9_universal2.whl.metadata (102 kB)
-Collecting kiwisolver&gt;=1.0.1 (from matplotlib~=3.7.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading kiwisolver-1.4.8-cp310-cp310-macosx_11_0_arm64.whl.metadata (6.2 kB)
-Requirement already satisfied: packaging&gt;=20.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;baskerville==0.1.dev272+gaf9e2df) (25.0)
-Collecting pillow&gt;=6.2.0 (from matplotlib~=3.7.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading pillow-11.2.1-cp310-cp310-macosx_11_0_arm64.whl.metadata (8.9 kB)
-Collecting pyparsing&gt;=2.3.1 (from matplotlib~=3.7.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Using cached pyparsing-3.2.3-py3-none-any.whl.metadata (5.0 kB)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;baskerville==0.1.dev272+gaf9e2df) (2.9.0.post0)
-Collecting pytz&gt;=2020.1 (from pandas~=1.5.3-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Using cached pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
-Requirement already satisfied: six in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyfaidx~=0.7.1-&gt;baskerville==0.1.dev272+gaf9e2df) (1.17.0)
-Requirement already satisfied: setuptools in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyfaidx~=0.7.1-&gt;baskerville==0.1.dev272+gaf9e2df) (78.1.0)
-Collecting importlib-metadata (from pyfaidx~=0.7.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading importlib_metadata-8.7.0-py3-none-any.whl.metadata (4.8 kB)
-Collecting numba (from qnorm~=0.8.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading numba-0.61.2-cp310-cp310-macosx_11_0_arm64.whl.metadata (2.8 kB)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (3.4.2)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (3.10)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.4.0)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2025.4.26)
-Requirement already satisfied: pyasn1&gt;=0.1.3 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from rsa&lt;5,&gt;=3.1.4-&gt;google-auth&lt;3.0dev,&gt;=1.25.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df) (0.6.1)
-Collecting threadpoolctl&gt;=2.0.0 (from scikit-learn~=1.2.2-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Using cached threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
-Collecting patsy&gt;=0.5.2 (from statsmodels~=0.13.5-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Using cached patsy-1.0.1-py2.py3-none-any.whl.metadata (3.3 kB)
-Requirement already satisfied: tensorflow-macos==2.15.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.15.0)
-Requirement already satisfied: absl-py&gt;=1.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.2.2)
-Requirement already satisfied: astunparse&gt;=1.6.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (1.6.3)
-Requirement already satisfied: flatbuffers&gt;=23.5.26 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (25.2.10)
-Requirement already satisfied: gast!=0.5.0,!=0.5.1,!=0.5.2,&gt;=0.2.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (0.6.0)
-Requirement already satisfied: google-pasta&gt;=0.1.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (0.2.0)
-Requirement already satisfied: libclang&gt;=13.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (18.1.1)
-Requirement already satisfied: ml-dtypes~=0.2.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (0.2.0)
-Requirement already satisfied: opt-einsum&gt;=2.3.2 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (3.4.0)
-Requirement already satisfied: termcolor&gt;=1.1.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (3.1.0)
-Requirement already satisfied: typing-extensions&gt;=3.6.6 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (4.13.2)
-Requirement already satisfied: wrapt&lt;1.15,&gt;=1.11.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (1.14.1)
-Requirement already satisfied: tensorflow-io-gcs-filesystem&gt;=0.23.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (0.37.1)
-Requirement already satisfied: grpcio&lt;2.0,&gt;=1.24.3 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (1.71.0)
-Requirement already satisfied: tensorboard&lt;2.16,&gt;=2.15 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.15.2)
-Requirement already satisfied: tensorflow-estimator&lt;2.16,&gt;=2.15.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.15.0)
-Requirement already satisfied: keras&lt;2.16,&gt;=2.15.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.15.0)
-Requirement already satisfied: google-auth-oauthlib&lt;2,&gt;=0.5 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (1.2.2)
-Requirement already satisfied: markdown&gt;=2.6.8 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (3.8)
-Requirement already satisfied: tensorboard-data-server&lt;0.8.0,&gt;=0.7.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (0.7.2)
-Requirement already satisfied: werkzeug&gt;=1.0.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (3.1.3)
-Requirement already satisfied: requests-oauthlib&gt;=0.7.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-auth-oauthlib&lt;2,&gt;=0.5-&gt;tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (2.0.0)
-Requirement already satisfied: wheel&lt;1.0,&gt;=0.23.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from astunparse&gt;=1.6.0-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (0.45.1)
-Collecting google-crc32c&lt;2.0dev,&gt;=1.0 (from google-resumable-media&gt;=1.3.0-&gt;google-cloud-storage~=2.0.0-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading google_crc32c-1.7.1-cp310-cp310-macosx_12_0_arm64.whl.metadata (2.3 kB)
-Requirement already satisfied: oauthlib&gt;=3.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests-oauthlib&gt;=0.7.0-&gt;google-auth-oauthlib&lt;2,&gt;=0.5-&gt;tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (3.2.2)
-Requirement already satisfied: MarkupSafe&gt;=2.1.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from werkzeug&gt;=1.0.1-&gt;tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;baskerville==0.1.dev272+gaf9e2df) (3.0.2)
-Collecting zipp&gt;=3.20 (from importlib-metadata-&gt;pyfaidx~=0.7.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Using cached zipp-3.21.0-py3-none-any.whl.metadata (3.7 kB)
-Collecting llvmlite&lt;0.45,&gt;=0.44.0dev0 (from numba-&gt;qnorm~=0.8.1-&gt;baskerville==0.1.dev272+gaf9e2df)
-  Downloading llvmlite-0.44.0-cp310-cp310-macosx_11_0_arm64.whl.metadata (4.8 kB)
-Downloading google_cloud_storage-2.0.0-py2.py3-none-any.whl (106 kB)
-Downloading google_api_core-2.25.0rc0-py3-none-any.whl (160 kB)
-Downloading google_cloud_core-2.4.3-py2.py3-none-any.whl (29 kB)
-Downloading googleapis_common_protos-1.70.0-py3-none-any.whl (294 kB)
-Downloading h5py-3.10.0-cp310-cp310-macosx_11_0_arm64.whl (2.7 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.7/2.7 MB 3.2 MB/s eta 0:00:0000:0100:01
-Downloading joblib-1.1.1-py2.py3-none-any.whl (309 kB)
-Downloading matplotlib-3.7.5-cp310-cp310-macosx_11_0_arm64.whl (7.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.3/7.3 MB 3.3 MB/s eta 0:00:00a 0:00:01
-Downloading natsort-7.1.1-py3-none-any.whl (35 kB)
-Downloading networkx-2.8.8-py3-none-any.whl (2.0 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 3.3 MB/s eta 0:00:00a 0:00:01
-Downloading numpy-1.24.4-cp310-cp310-macosx_11_0_arm64.whl (13.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.9/13.9 MB 3.4 MB/s eta 0:00:00a 0:00:01
-Downloading pandas-1.5.3-cp310-cp310-macosx_11_0_arm64.whl (10.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.9/10.9 MB 3.5 MB/s eta 0:00:00a 0:00:01
-Using cached proto_plus-1.26.1-py3-none-any.whl (50 kB)
-Downloading pyfaidx-0.7.2.2-py3-none-any.whl (28 kB)
-Downloading pysam-0.22.1-cp310-cp310-macosx_11_0_arm64.whl (8.0 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 3.8 MB/s eta 0:00:00a 0:00:01
-Downloading qnorm-0.8.1-py3-none-any.whl (15 kB)
-Downloading scikit_learn-1.2.2-cp310-cp310-macosx_12_0_arm64.whl (8.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.5/8.5 MB 4.0 MB/s eta 0:00:00a 0:00:01
-Downloading scipy-1.9.3-cp310-cp310-macosx_12_0_arm64.whl (28.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 28.5/28.5 MB 3.5 MB/s eta 0:00:0000:0100:01
-Downloading seaborn-0.12.2-py3-none-any.whl (293 kB)
-Using cached sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
-Downloading statsmodels-0.13.5-cp310-cp310-macosx_11_0_arm64.whl (9.2 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.2/9.2 MB 3.0 MB/s eta 0:00:00a 0:00:01
-Downloading tabulate-0.8.10-py3-none-any.whl (29 kB)
-Downloading tqdm-4.65.2-py3-none-any.whl (77 kB)
-Downloading contourpy-1.3.2-cp310-cp310-macosx_11_0_arm64.whl (253 kB)
-Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
-Downloading fonttools-4.57.0-cp310-cp310-macosx_10_9_universal2.whl (2.8 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 MB 3.6 MB/s eta 0:00:00a 0:00:01
-Downloading google_resumable_media-2.7.2-py2.py3-none-any.whl (81 kB)
-Downloading google_crc32c-1.7.1-cp310-cp310-macosx_12_0_arm64.whl (30 kB)
-Downloading kiwisolver-1.4.8-cp310-cp310-macosx_11_0_arm64.whl (65 kB)
-Using cached patsy-1.0.1-py2.py3-none-any.whl (232 kB)
-Downloading pillow-11.2.1-cp310-cp310-macosx_11_0_arm64.whl (3.0 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 3.5 MB/s eta 0:00:00a 0:00:01
-Using cached pyparsing-3.2.3-py3-none-any.whl (111 kB)
-Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
-Using cached threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
-Downloading importlib_metadata-8.7.0-py3-none-any.whl (27 kB)
-Using cached zipp-3.21.0-py3-none-any.whl (9.6 kB)
-Downloading numba-0.61.2-cp310-cp310-macosx_11_0_arm64.whl (2.8 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 MB 2.3 MB/s eta 0:00:00a 0:00:01
-Downloading llvmlite-0.44.0-cp310-cp310-macosx_11_0_arm64.whl (26.2 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 26.2/26.2 MB 3.2 MB/s eta 0:00:00a 0:00:01
-Building wheels for collected packages: baskerville, intervaltree, pybedtools, pybigwig
-  Building editable for baskerville (pyproject.toml) ... done
-  Created wheel for baskerville: filename=baskerville-0.1.dev272+gaf9e2df-0.editable-py3-none-any.whl size=6079 sha256=5a18dc9f1b5fc7c6cce8c02c9214ea936b53361a0ed6a2c950966aa8c005a857
-  Stored in directory: /private/var/folders/rl/w_hnqr4533qff8zrnlk9dwzw0000gq/T/pip-ephem-wheel-cache-_jjbpoe5/wheels/0f/56/74/d5894a0e13c9a9f059875f8f42ff310565887376453cd2005f
-  DEPRECATION: Building 'intervaltree' using the legacy setup.py bdist_wheel mechanism, which will be removed in a future version. pip 25.3 will enforce this behaviour change. A possible replacement is to use the standardized build interface by setting the `--use-pep517` option, (possibly combined with `--no-build-isolation`), or adding a `pyproject.toml` file to the source tree of 'intervaltree'. Discussion can be found at https://github.com/pypa/pip/issues/6334
-  Building wheel for intervaltree (setup.py) ... done
-  Created wheel for intervaltree: filename=intervaltree-3.1.0-py2.py3-none-any.whl size=26189 sha256=97959a40b4b3cf71adafe5a9293226756246808c187f0e9dcd76c81ab44f2c6e
-  Stored in directory: /Users/sofiasalazar/Library/Caches/pip/wheels/fa/80/8c/43488a924a046b733b64de3fac99252674c892a4c3801c0a61
-  DEPRECATION: Building 'pybedtools' using the legacy setup.py bdist_wheel mechanism, which will be removed in a future version. pip 25.3 will enforce this behaviour change. A possible replacement is to use the standardized build interface by setting the `--use-pep517` option, (possibly combined with `--no-build-isolation`), or adding a `pyproject.toml` file to the source tree of 'pybedtools'. Discussion can be found at https://github.com/pypa/pip/issues/6334
-  Building wheel for pybedtools (setup.py) ... done
-  Created wheel for pybedtools: filename=pybedtools-0.10.0-cp310-cp310-macosx_15_0_arm64.whl size=12808822 sha256=434bdb13cbda1ded43b1f821fb2c8351459e450cfe6321019b0d380b0dc4e570
-  Stored in directory: /Users/sofiasalazar/Library/Caches/pip/wheels/e5/26/a4/6913af11fdcfbc926c98fee0768b4fe955f6e3cc7ebe2c9d9e
-  Building wheel for pybigwig (pyproject.toml) ... done
-  Created wheel for pybigwig: filename=pybigwig-0.3.24-cp310-cp310-macosx_15_0_arm64.whl size=66428 sha256=ed5b5873f7398ed1841b1d270a74fda1a3b458d1a5d30f54317e6114b4414566
-  Stored in directory: /Users/sofiasalazar/Library/Caches/pip/wheels/4c/dc/e5/71b35cd736373cb2732292f5c0297e1d77daf2a930e35229e0
-Successfully built baskerville intervaltree pybedtools pybigwig
-Installing collected packages: sortedcontainers, pytz, zipp, tqdm, threadpoolctl, tabulate, pysam, pyparsing, pybigwig, proto-plus, pillow, numpy, networkx, natsort, llvmlite, kiwisolver, joblib, intervaltree, googleapis-common-protos, google-crc32c, fonttools, cycler, scipy, pybedtools, patsy, pandas, numba, importlib-metadata, h5py, google-resumable-media, contourpy, statsmodels, scikit-learn, qnorm, pyfaidx, matplotlib, google-api-core, seaborn, google-cloud-core, google-cloud-storage, baskerville
-  Attempting uninstall: numpym━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  9/41 [proto-plus]
-    Found existing installation: numpy 1.26.4━━━━━━━━━━━━━━━━━  9/41 [proto-plus]
-    Uninstalling numpy-1.26.4:0m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11/41 [numpy]]
-      Successfully uninstalled numpy-1.26.4━━━━━━━━━━━━━━━━━━━ 11/41 [numpy]
-  Attempting uninstall: h5py━━━━━╺━━━━━━━━━━━━━━ 26/41 [numba]]ls]
-    Found existing installation: h5py 3.13.0[90m━━━━━━━━━━━━━━ 26/41 [numba]
-    Uninstalling h5py-3.13.0:╺━━━━━━━━━━━━━━ 26/41 [numba]
-      Successfully uninstalled h5py-3.13.0m━━━━━━━━━━━━━━ 26/41 [numba]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 41/41 [baskerville] [google-cloud-storage]
-Successfully installed baskerville-0.1.dev272+gaf9e2df contourpy-1.3.2 cycler-0.12.1 fonttools-4.57.0 google-api-core-2.25.0rc0 google-cloud-core-2.4.3 google-cloud-storage-2.0.0 google-crc32c-1.7.1 google-resumable-media-2.7.2 googleapis-common-protos-1.70.0 h5py-3.10.0 importlib-metadata-8.7.0 intervaltree-3.1.0 joblib-1.1.1 kiwisolver-1.4.8 llvmlite-0.44.0 matplotlib-3.7.5 natsort-7.1.1 networkx-2.8.8 numba-0.61.2 numpy-1.24.4 pandas-1.5.3 patsy-1.0.1 pillow-11.2.1 proto-plus-1.26.1 pybedtools-0.10.0 pybigwig-0.3.24 pyfaidx-0.7.2.2 pyparsing-3.2.3 pysam-0.22.1 pytz-2025.2 qnorm-0.8.1 scikit-learn-1.2.2 scipy-1.9.3 seaborn-0.12.2 sortedcontainers-2.4.0 statsmodels-0.13.5 tabulate-0.8.10 threadpoolctl-3.6.0 tqdm-4.65.2 zipp-3.21.0
-Note: you may need to restart the kernel to use updated packages.</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd ..</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git clone https:<span class="op">//</span>github.com<span class="op">/</span>calico<span class="op">/</span>borzoi.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd ..</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git clone https:<span class="op">//</span>github.com<span class="op">/</span>calico<span class="op">/</span>borzoi.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/Users/sofiasalazar/Desktop/IM_lab/borzoi_folder
-Cloning into 'borzoi'...
-remote: Enumerating objects: 682, done.
-remote: Counting objects: 100% (187/187), done.
-remote: Compressing objects: 100% (70/70), done.
-remote: Total 682 (delta 133), reused 143 (delta 116), pack-reused 495 (from 1)
-Receiving objects: 100% (682/682), 11.68 MiB | 1.16 MiB/s, done.
-Resolving deltas: 100% (415/415), done.</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd borzoi</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">-</span>e .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/Users/sofiasalazar/Desktop/IM_lab/borzoi_folder/borzoi
-Obtaining file:///Users/sofiasalazar/Desktop/IM_lab/borzoi_folder/borzoi
-  Installing build dependencies ... done
-  Checking if build backend supports build_editable ... done
-  Getting requirements to build editable ... done
-  Preparing editable metadata (pyproject.toml) ... done
-Requirement already satisfied: h5py~=3.10.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (3.10.0)
-Requirement already satisfied: intervaltree~=3.1.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (3.1.0)
-Requirement already satisfied: joblib~=1.1.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (1.1.1)
-Requirement already satisfied: matplotlib~=3.7.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (3.7.5)
-Requirement already satisfied: google-cloud-storage~=2.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (2.0.0)
-Requirement already satisfied: natsort~=7.1.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (7.1.1)
-Requirement already satisfied: networkx~=2.8.4 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (2.8.8)
-Requirement already satisfied: numpy~=1.24.3 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (1.24.4)
-Requirement already satisfied: pandas~=1.5.3 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (1.5.3)
-Requirement already satisfied: pybigwig~=0.3.18 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (0.3.24)
-Requirement already satisfied: pybedtools~=0.10.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (0.10.0)
-Requirement already satisfied: pysam~=0.22.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (0.22.1)
-Requirement already satisfied: qnorm~=0.8.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (0.8.1)
-Requirement already satisfied: seaborn~=0.12.2 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (0.12.2)
-Requirement already satisfied: scikit-learn~=1.2.2 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (1.2.2)
-Requirement already satisfied: scipy~=1.9.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (1.9.3)
-Requirement already satisfied: tensorflow~=2.15.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (2.15.0)
-Requirement already satisfied: tqdm~=4.65.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (4.65.2)
-Requirement already satisfied: pyfaidx~=0.7.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from borzoi==1.0.1.dev5+g77670d9) (0.7.2.2)
-Collecting pyranges~=0.0.129 (from borzoi==1.0.1.dev5+g77670d9)
-  Downloading pyranges-0.0.133-py3-none-any.whl.metadata (3.6 kB)
-Requirement already satisfied: google-auth&lt;3.0dev,&gt;=1.25.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.39.0)
-Requirement already satisfied: google-api-core&lt;3.0dev,&gt;=1.29.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.25.0rc0)
-Requirement already satisfied: google-cloud-core&lt;3.0dev,&gt;=1.6.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.4.3)
-Requirement already satisfied: google-resumable-media&gt;=1.3.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.7.2)
-Requirement already satisfied: requests&lt;3.0.0dev,&gt;=2.18.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.32.3)
-Requirement already satisfied: protobuf in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (4.25.7)
-Requirement already satisfied: googleapis-common-protos&lt;2.0.0,&gt;=1.56.2 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-api-core&lt;3.0dev,&gt;=1.29.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (1.70.0)
-Requirement already satisfied: proto-plus&lt;2.0.0,&gt;=1.22.3 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-api-core&lt;3.0dev,&gt;=1.29.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (1.26.1)
-Requirement already satisfied: cachetools&lt;6.0,&gt;=2.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-auth&lt;3.0dev,&gt;=1.25.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (5.5.2)
-Requirement already satisfied: pyasn1-modules&gt;=0.2.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-auth&lt;3.0dev,&gt;=1.25.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (0.4.2)
-Requirement already satisfied: rsa&lt;5,&gt;=3.1.4 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-auth&lt;3.0dev,&gt;=1.25.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (4.9.1)
-Requirement already satisfied: sortedcontainers&lt;3.0,&gt;=2.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from intervaltree~=3.1.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.4.0)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (1.3.2)
-Requirement already satisfied: cycler&gt;=0.10 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (4.57.0)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (1.4.8)
-Requirement already satisfied: packaging&gt;=20.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (25.0)
-Requirement already satisfied: pillow&gt;=6.2.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (11.2.1)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (3.2.3)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from matplotlib~=3.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (2.9.0.post0)
-Requirement already satisfied: pytz&gt;=2020.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pandas~=1.5.3-&gt;borzoi==1.0.1.dev5+g77670d9) (2025.2)
-Requirement already satisfied: six in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyfaidx~=0.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (1.17.0)
-Requirement already satisfied: setuptools in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyfaidx~=0.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (78.1.0)
-Requirement already satisfied: importlib-metadata in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyfaidx~=0.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (8.7.0)
-Collecting ncls&gt;=0.0.63 (from pyranges~=0.0.129-&gt;borzoi==1.0.1.dev5+g77670d9)
-  Using cached ncls-0.0.68.tar.gz (483 kB)
-  Installing build dependencies ... done
-  Getting requirements to build wheel ... done
-  Preparing metadata (pyproject.toml) ... done
-Requirement already satisfied: tabulate in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyranges~=0.0.129-&gt;borzoi==1.0.1.dev5+g77670d9) (0.8.10)
-Collecting sorted-nearest&gt;=0.0.33 (from pyranges~=0.0.129-&gt;borzoi==1.0.1.dev5+g77670d9)
-  Using cached sorted_nearest-0.0.39.tar.gz (1.2 MB)
-  Installing build dependencies ... done
-  Getting requirements to build wheel ... done
-  Preparing metadata (pyproject.toml) ... done
-Requirement already satisfied: numba in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from qnorm~=0.8.1-&gt;borzoi==1.0.1.dev5+g77670d9) (0.61.2)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (3.4.2)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (3.10)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.4.0)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&lt;3.0.0dev,&gt;=2.18.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2025.4.26)
-Requirement already satisfied: pyasn1&gt;=0.1.3 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from rsa&lt;5,&gt;=3.1.4-&gt;google-auth&lt;3.0dev,&gt;=1.25.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (0.6.1)
-Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from scikit-learn~=1.2.2-&gt;borzoi==1.0.1.dev5+g77670d9) (3.6.0)
-Requirement already satisfied: tensorflow-macos==2.15.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.15.0)
-Requirement already satisfied: absl-py&gt;=1.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.2.2)
-Requirement already satisfied: astunparse&gt;=1.6.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (1.6.3)
-Requirement already satisfied: flatbuffers&gt;=23.5.26 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (25.2.10)
-Requirement already satisfied: gast!=0.5.0,!=0.5.1,!=0.5.2,&gt;=0.2.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (0.6.0)
-Requirement already satisfied: google-pasta&gt;=0.1.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (0.2.0)
-Requirement already satisfied: libclang&gt;=13.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (18.1.1)
-Requirement already satisfied: ml-dtypes~=0.2.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (0.2.0)
-Requirement already satisfied: opt-einsum&gt;=2.3.2 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (3.4.0)
-Requirement already satisfied: termcolor&gt;=1.1.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (3.1.0)
-Requirement already satisfied: typing-extensions&gt;=3.6.6 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (4.13.2)
-Requirement already satisfied: wrapt&lt;1.15,&gt;=1.11.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (1.14.1)
-Requirement already satisfied: tensorflow-io-gcs-filesystem&gt;=0.23.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (0.37.1)
-Requirement already satisfied: grpcio&lt;2.0,&gt;=1.24.3 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (1.71.0)
-Requirement already satisfied: tensorboard&lt;2.16,&gt;=2.15 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.15.2)
-Requirement already satisfied: tensorflow-estimator&lt;2.16,&gt;=2.15.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.15.0)
-Requirement already satisfied: keras&lt;2.16,&gt;=2.15.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.15.0)
-Requirement already satisfied: google-auth-oauthlib&lt;2,&gt;=0.5 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (1.2.2)
-Requirement already satisfied: markdown&gt;=2.6.8 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (3.8)
-Requirement already satisfied: tensorboard-data-server&lt;0.8.0,&gt;=0.7.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (0.7.2)
-Requirement already satisfied: werkzeug&gt;=1.0.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (3.1.3)
-Requirement already satisfied: requests-oauthlib&gt;=0.7.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-auth-oauthlib&lt;2,&gt;=0.5-&gt;tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (2.0.0)
-Requirement already satisfied: wheel&lt;1.0,&gt;=0.23.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from astunparse&gt;=1.6.0-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (0.45.1)
-Requirement already satisfied: google-crc32c&lt;2.0dev,&gt;=1.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from google-resumable-media&gt;=1.3.0-&gt;google-cloud-storage~=2.0.0-&gt;borzoi==1.0.1.dev5+g77670d9) (1.7.1)
-Requirement already satisfied: oauthlib&gt;=3.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests-oauthlib&gt;=0.7.0-&gt;google-auth-oauthlib&lt;2,&gt;=0.5-&gt;tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (3.2.2)
-Requirement already satisfied: MarkupSafe&gt;=2.1.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from werkzeug&gt;=1.0.1-&gt;tensorboard&lt;2.16,&gt;=2.15-&gt;tensorflow-macos==2.15.0-&gt;tensorflow~=2.15.0-&gt;borzoi==1.0.1.dev5+g77670d9) (3.0.2)
-Requirement already satisfied: zipp&gt;=3.20 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from importlib-metadata-&gt;pyfaidx~=0.7.1-&gt;borzoi==1.0.1.dev5+g77670d9) (3.21.0)
-Requirement already satisfied: llvmlite&lt;0.45,&gt;=0.44.0dev0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from numba-&gt;qnorm~=0.8.1-&gt;borzoi==1.0.1.dev5+g77670d9) (0.44.0)
-Downloading pyranges-0.0.133-py3-none-any.whl (1.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 8.2 MB/s eta 0:00:00
-Building wheels for collected packages: borzoi, ncls, sorted-nearest
-  Building editable for borzoi (pyproject.toml) ... done
-  Created wheel for borzoi: filename=borzoi-1.0.1.dev5+g77670d9-0.editable-py3-none-any.whl size=8795 sha256=d8bc5e16d1a2384890eab58e98d602bb8ebc4e4ed15e1de40de1f7aa778025f2
-  Stored in directory: /private/var/folders/rl/w_hnqr4533qff8zrnlk9dwzw0000gq/T/pip-ephem-wheel-cache-zsaipyop/wheels/c9/9b/d5/8703891c994a9e7c0e3f779c8adcaaa9d55d38b8ce398e7e27
-  Building wheel for ncls (pyproject.toml) ... done
-  Created wheel for ncls: filename=ncls-0.0.68-cp310-cp310-macosx_15_0_arm64.whl size=929557 sha256=9b2bb528affbf16a673b4b1537815245ac139dd58631dd9ecb1106e9e003c7ae
-  Stored in directory: /Users/sofiasalazar/Library/Caches/pip/wheels/3d/bb/c6/ddd371cd19a3169b5a94cd5906b05aa56a2d1ce382df1d486a
-  Building wheel for sorted-nearest (pyproject.toml) ... done
-  Created wheel for sorted-nearest: filename=sorted_nearest-0.0.39-cp310-cp310-macosx_15_0_arm64.whl size=2501079 sha256=892210e5760b2a2fff3b6ed41d8619f7bbdf05bb53ca56a4c6985aa825d96cf0
-  Stored in directory: /Users/sofiasalazar/Library/Caches/pip/wheels/46/56/bb/42c251764b345b69bade41e3c1f91f52dfc49a5e2074989767
-Successfully built borzoi ncls sorted-nearest
-Installing collected packages: sorted-nearest, ncls, pyranges, borzoi
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4/4 [borzoi]
-Successfully installed borzoi-1.0.1.dev5+g77670d9 ncls-0.0.68 pyranges-0.0.133 sorted-nearest-0.0.39
-Note: you may need to restart the kernel to use updated packages.</code></pre>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd borzoi</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install <span class="op">-</span>e .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then I installed other libraries that we will be using as well</p>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install kipoiseq</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install h5py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Collecting kipoiseq
-  Using cached kipoiseq-0.7.1-py3-none-any.whl.metadata (1.4 kB)
-Collecting kipoi&gt;=0.5.5 (from kipoiseq)
-  Using cached kipoi-0.8.6-py3-none-any.whl.metadata (1.6 kB)
-Requirement already satisfied: pyfaidx in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from kipoiseq) (0.7.2.2)
-Requirement already satisfied: numpy in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from kipoiseq) (1.24.4)
-Requirement already satisfied: pandas in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from kipoiseq) (1.5.3)
-Requirement already satisfied: tqdm in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from kipoiseq) (4.65.2)
-Collecting gffutils (from kipoiseq)
-  Using cached gffutils-0.13-py3-none-any.whl.metadata (1.5 kB)
-Collecting kipoi-utils&gt;=0.1.1 (from kipoiseq)
-  Using cached kipoi_utils-0.7.7-py3-none-any.whl.metadata (921 bytes)
-Collecting kipoi-conda&gt;=0.1.0 (from kipoiseq)
-  Using cached kipoi_conda-0.3.1-py3-none-any.whl.metadata (935 bytes)
-Requirement already satisfied: pyranges in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from kipoiseq) (0.0.133)
-Collecting pyyaml (from kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached PyYAML-6.0.2-cp310-cp310-macosx_11_0_arm64.whl.metadata (2.1 kB)
-Collecting related&gt;=0.6.0 (from kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached related-0.7.3-py2.py3-none-any.whl.metadata (13 kB)
-Collecting colorlog (from kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached colorlog-6.9.0-py3-none-any.whl.metadata (10 kB)
-Collecting jinja2 (from kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
-Collecting cookiecutter&gt;=1.6.0 (from kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached cookiecutter-2.6.0-py3-none-any.whl.metadata (7.3 kB)
-Requirement already satisfied: h5py in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from kipoi&gt;=0.5.5-&gt;kipoiseq) (3.10.0)
-Requirement already satisfied: urllib3&gt;=1.21.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from kipoi&gt;=0.5.5-&gt;kipoiseq) (2.4.0)
-Collecting tinydb (from kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached tinydb-4.8.2-py3-none-any.whl.metadata (6.7 kB)
-Collecting deprecation&gt;=2.0.6 (from kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached deprecation-2.1.0-py2.py3-none-any.whl.metadata (4.6 kB)
-Collecting attrs&lt;=21.4.0 (from kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached attrs-21.4.0-py2.py3-none-any.whl.metadata (9.8 kB)
-Collecting binaryornot&gt;=0.4.4 (from cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached binaryornot-0.4.4-py2.py3-none-any.whl.metadata (6.0 kB)
-Collecting click&lt;9.0.0,&gt;=7.0 (from cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached click-8.1.8-py3-none-any.whl.metadata (2.3 kB)
-Collecting python-slugify&gt;=4.0.0 (from cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached python_slugify-8.0.4-py2.py3-none-any.whl.metadata (8.5 kB)
-Requirement already satisfied: requests&gt;=2.23.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq) (2.32.3)
-Collecting arrow (from cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached arrow-1.3.0-py3-none-any.whl.metadata (7.5 kB)
-Collecting rich (from cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached rich-14.0.0-py3-none-any.whl.metadata (18 kB)
-Requirement already satisfied: MarkupSafe&gt;=2.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from jinja2-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq) (3.0.2)
-Collecting chardet&gt;=3.0.2 (from binaryornot&gt;=0.4.4-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached chardet-5.2.0-py3-none-any.whl.metadata (3.4 kB)
-Requirement already satisfied: packaging in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from deprecation&gt;=2.0.6-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq) (25.0)
-Requirement already satisfied: python-dateutil&gt;=2.8.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pandas-&gt;kipoiseq) (2.9.0.post0)
-Requirement already satisfied: pytz&gt;=2020.1 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pandas-&gt;kipoiseq) (2025.2)
-Requirement already satisfied: six&gt;=1.5 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas-&gt;kipoiseq) (1.17.0)
-Collecting text-unidecode&gt;=1.3 (from python-slugify&gt;=4.0.0-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached text_unidecode-1.3-py2.py3-none-any.whl.metadata (2.4 kB)
-Collecting future (from related&gt;=0.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached future-1.0.0-py3-none-any.whl.metadata (4.0 kB)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&gt;=2.23.0-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq) (3.4.2)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&gt;=2.23.0-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq) (3.10)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from requests&gt;=2.23.0-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq) (2025.4.26)
-Collecting types-python-dateutil&gt;=2.8.10 (from arrow-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached types_python_dateutil-2.9.0.20241206-py3-none-any.whl.metadata (2.1 kB)
-Collecting argh&gt;=0.26.2 (from gffutils-&gt;kipoiseq)
-  Using cached argh-0.31.3-py3-none-any.whl.metadata (7.4 kB)
-Collecting argcomplete&gt;=1.9.4 (from gffutils-&gt;kipoiseq)
-  Downloading argcomplete-3.6.2-py3-none-any.whl.metadata (16 kB)
-Collecting simplejson (from gffutils-&gt;kipoiseq)
-  Downloading simplejson-3.20.1-cp310-cp310-macosx_11_0_arm64.whl.metadata (3.3 kB)
-Requirement already satisfied: setuptools in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyfaidx-&gt;kipoiseq) (78.1.0)
-Requirement already satisfied: importlib-metadata in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyfaidx-&gt;kipoiseq) (8.7.0)
-Requirement already satisfied: zipp&gt;=3.20 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from importlib-metadata-&gt;pyfaidx-&gt;kipoiseq) (3.21.0)
-Requirement already satisfied: ncls&gt;=0.0.63 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyranges-&gt;kipoiseq) (0.0.68)
-Requirement already satisfied: tabulate in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyranges-&gt;kipoiseq) (0.8.10)
-Requirement already satisfied: sorted-nearest&gt;=0.0.33 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyranges-&gt;kipoiseq) (0.0.39)
-Requirement already satisfied: natsort in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from pyranges-&gt;kipoiseq) (7.1.1)
-Collecting markdown-it-py&gt;=2.2.0 (from rich-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached markdown_it_py-3.0.0-py3-none-any.whl.metadata (6.9 kB)
-Requirement already satisfied: pygments&lt;3.0.0,&gt;=2.13.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from rich-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq) (2.19.1)
-Requirement already satisfied: typing-extensions&lt;5.0,&gt;=4.0.0 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from rich-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq) (4.13.2)
-Collecting mdurl~=0.1 (from markdown-it-py&gt;=2.2.0-&gt;rich-&gt;cookiecutter&gt;=1.6.0-&gt;kipoi&gt;=0.5.5-&gt;kipoiseq)
-  Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
-Using cached kipoiseq-0.7.1-py3-none-any.whl (44 kB)
-Using cached kipoi-0.8.6-py3-none-any.whl (102 kB)
-Using cached attrs-21.4.0-py2.py3-none-any.whl (60 kB)
-Using cached cookiecutter-2.6.0-py3-none-any.whl (39 kB)
-Using cached click-8.1.8-py3-none-any.whl (98 kB)
-Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
-Using cached binaryornot-0.4.4-py2.py3-none-any.whl (9.0 kB)
-Using cached chardet-5.2.0-py3-none-any.whl (199 kB)
-Using cached deprecation-2.1.0-py2.py3-none-any.whl (11 kB)
-Using cached kipoi_conda-0.3.1-py3-none-any.whl (8.7 kB)
-Using cached kipoi_utils-0.7.7-py3-none-any.whl (30 kB)
-Using cached python_slugify-8.0.4-py2.py3-none-any.whl (10 kB)
-Using cached PyYAML-6.0.2-cp310-cp310-macosx_11_0_arm64.whl (171 kB)
-Using cached related-0.7.3-py2.py3-none-any.whl (16 kB)
-Using cached text_unidecode-1.3-py2.py3-none-any.whl (78 kB)
-Using cached arrow-1.3.0-py3-none-any.whl (66 kB)
-Using cached types_python_dateutil-2.9.0.20241206-py3-none-any.whl (14 kB)
-Using cached colorlog-6.9.0-py3-none-any.whl (11 kB)
-Using cached future-1.0.0-py3-none-any.whl (491 kB)
-Using cached gffutils-0.13-py3-none-any.whl (1.6 MB)
-Downloading argcomplete-3.6.2-py3-none-any.whl (43 kB)
-Using cached argh-0.31.3-py3-none-any.whl (44 kB)
-Using cached rich-14.0.0-py3-none-any.whl (243 kB)
-Using cached markdown_it_py-3.0.0-py3-none-any.whl (87 kB)
-Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
-Downloading simplejson-3.20.1-cp310-cp310-macosx_11_0_arm64.whl (75 kB)
-Using cached tinydb-4.8.2-py3-none-any.whl (24 kB)
-Installing collected packages: text-unidecode, types-python-dateutil, tinydb, simplejson, pyyaml, python-slugify, mdurl, jinja2, future, deprecation, colorlog, click, chardet, attrs, argh, argcomplete, related, markdown-it-py, binaryornot, arrow, rich, kipoi-utils, gffutils, kipoi-conda, cookiecutter, kipoi, kipoiseq
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 27/27 [kipoiseq]/27 [gffutils]ot]
-Successfully installed argcomplete-3.6.2 argh-0.31.3 arrow-1.3.0 attrs-21.4.0 binaryornot-0.4.4 chardet-5.2.0 click-8.1.8 colorlog-6.9.0 cookiecutter-2.6.0 deprecation-2.1.0 future-1.0.0 gffutils-0.13 jinja2-3.1.6 kipoi-0.8.6 kipoi-conda-0.3.1 kipoi-utils-0.7.7 kipoiseq-0.7.1 markdown-it-py-3.0.0 mdurl-0.1.2 python-slugify-8.0.4 pyyaml-6.0.2 related-0.7.3 rich-14.0.0 simplejson-3.20.1 text-unidecode-1.3 tinydb-4.8.2 types-python-dateutil-2.9.0.20241206
-Note: you may need to restart the kernel to use updated packages.
-Requirement already satisfied: h5py in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (3.10.0)
-Requirement already satisfied: numpy&gt;=1.17.3 in /Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages (from h5py) (1.24.4)
-Note: you may need to restart the kernel to use updated packages.</code></pre>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install kipoiseq</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pip install h5py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Here I had to restart the kernel to use baskerville</strong></p>
 </section>
 <section id="download-models" class="level2">
 <h2 class="anchored" data-anchor-id="download-models">3. Download models</h2>
 <p>The borzoi models are each ~1GB (~4GB in total as there are 4 models, each correspond to a cross validation fold from the training process). Further down you’ll see that we can choose to predict using the 4 models or only a couple of them.</p>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd <span class="op">/</span>Users<span class="op">/</span>sofiasalazar<span class="op">/</span>Desktop<span class="op">/</span>IM_lab<span class="op">/</span>borzoi_folder<span class="op">/</span>borzoi</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> .<span class="op">/</span>download_models.sh </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/Users/sofiasalazar/borzoiTools/lib/python3.10/site-packages/IPython/core/magics/osm.py:417: UserWarning: This is now an optional IPython functionality, setting dhist requires you to install the `pickleshare` library.
-  self.shell.db['dhist'] = compress_dhist(dhist)[-100:]</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/Users/sofiasalazar/Desktop/IM_lab/borzoi_folder/borzoi
---2025-05-05 11:17:15--  https://storage.googleapis.com/seqnn-share/borzoi/f0/model0_best.h5
-Resolving storage.googleapis.com (storage.googleapis.com)... 142.250.190.91, 142.250.190.155, 172.217.0.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|142.250.190.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 744112468 (710M) [application/octet-stream]
-Saving to: ‘examples/saved_models/f3c0/train/model0_best.h5’
-
-examples/saved_mode 100%[===================&gt;] 709.64M  7.29MB/s    in 1m 43s  
-
-2025-05-05 11:18:57 (6.92 MB/s) - ‘examples/saved_models/f3c0/train/model0_best.h5’ saved [744112468/744112468]
-
---2025-05-05 11:18:57--  https://storage.googleapis.com/seqnn-share/borzoi/f1/model0_best.h5
-Resolving storage.googleapis.com (storage.googleapis.com)... 142.250.190.91, 142.250.190.155, 172.217.0.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|142.250.190.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 744112468 (710M) [application/octet-stream]
-Saving to: ‘examples/saved_models/f3c1/train/model0_best.h5’
-
-examples/saved_mode 100%[===================&gt;] 709.64M  5.03MB/s    in 95s     
-
-2025-05-05 11:20:33 (7.44 MB/s) - ‘examples/saved_models/f3c1/train/model0_best.h5’ saved [744112468/744112468]
-
---2025-05-05 11:20:33--  https://storage.googleapis.com/seqnn-share/borzoi/f2/model0_best.h5
-Resolving storage.googleapis.com (storage.googleapis.com)... 142.250.190.91, 142.250.190.155, 172.217.0.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|142.250.190.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 744112468 (710M) [application/octet-stream]
-Saving to: ‘examples/saved_models/f3c2/train/model0_best.h5’
-
-examples/saved_mode 100%[===================&gt;] 709.64M  5.20MB/s    in 1m 49s  
-
-2025-05-05 11:22:22 (6.54 MB/s) - ‘examples/saved_models/f3c2/train/model0_best.h5’ saved [744112468/744112468]
-
---2025-05-05 11:22:22--  https://storage.googleapis.com/seqnn-share/borzoi/f3/model0_best.h5
-Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.4.91, 172.217.4.59, 142.250.191.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.4.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 744112468 (710M) [application/octet-stream]
-Saving to: ‘examples/saved_models/f3c3/train/model0_best.h5’
-
-examples/saved_mode 100%[===================&gt;] 709.64M  9.27MB/s    in 1m 47s  
-
-2025-05-05 11:24:09 (6.64 MB/s) - ‘examples/saved_models/f3c3/train/model0_best.h5’ saved [744112468/744112468]
-
---2025-05-05 11:24:09--  https://storage.googleapis.com/seqnn-share/helper/gencode41_basic_nort.gtf.gz
-Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.4.91, 172.217.4.59, 142.250.191.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.4.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 30909907 (29M) [application/octet-stream]
-Saving to: ‘STDOUT’
-
--                   100%[===================&gt;]  29.48M  9.61MB/s    in 3.1s    
-
-2025-05-05 11:24:12 (9.61 MB/s) - written to stdout [30909907/30909907]
-
---2025-05-05 11:24:12--  https://storage.googleapis.com/seqnn-share/helper/gencode41_basic_nort_protein.gtf.gz
-Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.4.91, 172.217.4.59, 142.250.191.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.4.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 23949234 (23M) [application/x-gzip]
-Saving to: ‘STDOUT’
-
--                   100%[===================&gt;]  22.84M  7.77MB/s    in 2.9s    
-
-2025-05-05 11:24:15 (7.77 MB/s) - written to stdout [23949234/23949234]
-
---2025-05-05 11:24:15--  https://storage.googleapis.com/seqnn-share/helper/gencode41_basic_protein.gtf.gz
-Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.4.91, 172.217.4.59, 142.250.191.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.4.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 24113047 (23M) [application/x-gzip]
-Saving to: ‘STDOUT’
-
--                   100%[===================&gt;]  23.00M  7.08MB/s    in 3.2s    
-
-2025-05-05 11:24:19 (7.09 MB/s) - written to stdout [24113047/24113047]
-
---2025-05-05 11:24:19--  https://storage.googleapis.com/seqnn-share/helper/gencode41_basic_tss2.bed.gz
-Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.4.91, 172.217.4.59, 142.250.191.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.4.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 1925276 (1.8M) [application/x-gzip]
-Saving to: ‘STDOUT’
-
--                   100%[===================&gt;]   1.84M  10.4MB/s    in 0.2s    
-
-2025-05-05 11:24:19 (10.4 MB/s) - written to stdout [1925276/1925276]
-
---2025-05-05 11:24:19--  https://storage.googleapis.com/seqnn-share/helper/gencode41_basic_protein_splice.csv.gz
-Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.4.91, 172.217.4.59, 142.250.191.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.4.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 3729563 (3.6M) [text/csv]
-Saving to: ‘examples/hg38/genes/gencode41/gencode41_basic_protein_splice.csv.gz’
-
-examples/hg38/genes 100%[===================&gt;]   3.56M  10.5MB/s    in 0.3s    
-
-2025-05-05 11:24:20 (10.5 MB/s) - ‘examples/hg38/genes/gencode41/gencode41_basic_protein_splice.csv.gz’ saved [3729563/3729563]
-
---2025-05-05 11:24:20--  https://storage.googleapis.com/seqnn-share/helper/gencode41_basic_protein_splice.gff.gz
-Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.4.91, 172.217.4.59, 142.250.191.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.4.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 12496136 (12M) [application/x-gzip]
-Saving to: ‘STDOUT’
-
--                   100%[===================&gt;]  11.92M  9.36MB/s    in 1.3s    
-
-2025-05-05 11:24:21 (9.36 MB/s) - written to stdout [12496136/12496136]
-
---2025-05-05 11:24:21--  https://storage.googleapis.com/seqnn-share/helper/polyadb_human_v3.csv.gz
-Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.4.91, 172.217.4.59, 142.250.191.187, ...
-Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.4.91|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 5889770 (5.6M) [text/csv]
-Saving to: ‘examples/hg38/genes/polyadb/polyadb_human_v3.csv.gz’
-
-examples/hg38/genes 100%[===================&gt;]   5.62M  8.76MB/s    in 0.6s    
-
-2025-05-05 11:24:22 (8.76 MB/s) - ‘examples/hg38/genes/polyadb/polyadb_human_v3.csv.gz’ saved [5889770/5889770]
-
---2025-05-05 11:24:22--  http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
-Resolving hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)... 128.114.119.163
-Connecting to hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)|128.114.119.163|:80... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 983659424 (938M) [application/x-gzip]
-Saving to: ‘STDOUT’
-
--                    84%[===============&gt;    ] 792.18M  --.-KB/s    in 53m 37s 
-
-2025-05-05 12:17:59 (252 KB/s) - Read error at byte 830660782/983659424 (Operation timed out). Retrying.
-
---2025-05-05 12:18:00--  (try: 2)  http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
-Connecting to hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)|128.114.119.163|:80... connected.
-HTTP request sent, awaiting response... 206 Partial Content
-Length: 983659424 (938M), 152998642 (146M) remaining [application/x-gzip]
-Saving to: ‘STDOUT’
-
--                    95%[++++++++++++++++==&gt; ] 900.48M   243KB/s    in 4m 50s  
-
-2025-05-05 12:27:40 (382 KB/s) - Read error at byte 944223569/983659424 (Connection reset by peer). Retrying.
-
---2025-05-05 12:27:42--  (try: 3)  http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
-Connecting to hgdownload.cse.ucsc.edu (hgdownload.cse.ucsc.edu)|128.114.119.163|:80... connected.
-HTTP request sent, awaiting response... 206 Partial Content
-Length: 983659424 (938M), 39435855 (38M) remaining [application/x-gzip]
-Saving to: ‘STDOUT’
-
--                   100%[+++++++++++++++++++&gt;] 938.09M   298KB/s    in 97s     
-
-2025-05-05 12:29:19 (396 KB/s) - written to stdout [983659424/983659424]
-</code></pre>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd <span class="op">/</span>Users<span class="op">/</span>sofiasalazar<span class="op">/</span>Desktop<span class="op">/</span>IM_lab<span class="op">/</span>borzoi_folder<span class="op">/</span>borzoi</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> .<span class="op">/</span>download_models.sh </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="set-up-borzoi-and-helper-functions" class="level2">
 <h2 class="anchored" data-anchor-id="set-up-borzoi-and-helper-functions">4. Set up borzoi and helper functions</h2>
 <p>The previous steps are run only once, afterwards, we can set up the borzoi functions as well as other utilities to extract the reference sequence and mutate it.</p>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> baskerville</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> baskerville <span class="im">import</span> seqnn</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> baskerville <span class="im">import</span> gene <span class="im">as</span> bgene</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> baskerville <span class="im">import</span> dna</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kipoiseq</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyfaidx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> h5py</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> baskerville</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> baskerville <span class="im">import</span> seqnn</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> baskerville <span class="im">import</span> gene <span class="im">as</span> bgene</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> baskerville <span class="im">import</span> dna</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kipoiseq</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyfaidx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>gpus <span class="op">=</span> tf.config.experimental.list_physical_devices(<span class="st">'GPU'</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>gpus</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gpus <span class="op">=</span> tf.config.experimental.list_physical_devices(<span class="st">'GPU'</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>gpus</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>DEVICE <span class="op">=</span> <span class="st">"/GPU:0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>DEVICE <span class="op">=</span> <span class="st">"/GPU:0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Change the following paths to your personal paths</p>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>BORZOI_PATH <span class="op">=</span> <span class="st">"/Users/sofiasalazar/Desktop/IM_lab/borzoi_folder/borzoi"</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>models_path <span class="op">=</span> os.path.join(BORZOI_PATH, <span class="st">"examples/saved_models"</span> )</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>fasta_file <span class="op">=</span> <span class="st">"/Users/sofiasalazar/Library/CloudStorage/Box-Box/imlab-data/Reference-Data/ref_sequences/hg38/Homo_sapiens_assembly38.fasta"</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>params_file <span class="op">=</span> os.path.join(BORZOI_PATH, <span class="st">"examples/params_pred.json"</span>)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>targets_file <span class="op">=</span> os.path.join(BORZOI_PATH, <span class="st">"examples/targets_human.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>BORZOI_PATH <span class="op">=</span> <span class="st">"/Users/sofiasalazar/Desktop/IM_lab/borzoi_folder/borzoi"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>models_path <span class="op">=</span> os.path.join(BORZOI_PATH, <span class="st">"examples/saved_models"</span> )</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>fasta_file <span class="op">=</span> <span class="st">"/Users/sofiasalazar/Library/CloudStorage/Box-Box/imlab-data/Reference-Data/ref_sequences/hg38/Homo_sapiens_assembly38.fasta"</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>params_file <span class="op">=</span> os.path.join(BORZOI_PATH, <span class="st">"examples/params_pred.json"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>targets_file <span class="op">=</span> os.path.join(BORZOI_PATH, <span class="st">"examples/targets_human.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The following classes will help us extract the reference genome sequence, mutate it and one hot encode it.</p>
 <div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FastaStringExtractor:</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, fasta_file):</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fasta <span class="op">=</span> pyfaidx.Fasta(fasta_file)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._chromosome_sizes <span class="op">=</span> {k: <span class="bu">len</span>(v) <span class="cf">for</span> k, v <span class="kw">in</span> <span class="va">self</span>.fasta.items()}</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#import pd.Interval as Interval</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> extract(<span class="va">self</span>, interval: kipoiseq.Interval, snp_position <span class="op">=</span> <span class="va">None</span>, snp_base<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Truncate interval if it extends beyond the chromosome lengths.</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        chromosome_length <span class="op">=</span> <span class="va">self</span>._chromosome_sizes[interval.chrom]</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>        trimmed_interval <span class="op">=</span> kipoiseq.Interval(interval.chrom,</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="bu">max</span>(interval.start, <span class="dv">0</span>),</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="bu">min</span>(interval.end, chromosome_length),</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>                                    )</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># pyfaidx wants a 1-based interval</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>        sequence <span class="op">=</span> <span class="bu">str</span>(<span class="va">self</span>.fasta.get_seq(trimmed_interval.chrom,</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>                                          trimmed_interval.start <span class="op">+</span> <span class="dv">1</span>,</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>                                          trimmed_interval.stop).seq).upper()</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply SNP modification if specified</span></span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> snp_position <span class="kw">and</span> snp_base:</span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> snp_position <span class="op">-</span> trimmed_interval.start <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> pos <span class="op">&lt;</span> <span class="bu">len</span>(sequence):</span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(sequence[pos<span class="op">-</span><span class="dv">1</span>:pos<span class="op">+</span><span class="dv">2</span>])</span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>                sequence <span class="op">=</span> sequence[:pos] <span class="op">+</span> snp_base <span class="op">+</span> sequence[pos <span class="op">+</span> <span class="dv">1</span>:]</span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(sequence[pos<span class="op">-</span><span class="dv">1</span>:pos<span class="op">+</span><span class="dv">2</span>])</span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fill truncated values with N's.</span></span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>        pad_upstream <span class="op">=</span> <span class="st">'N'</span> <span class="op">*</span> <span class="bu">max</span>(<span class="op">-</span>interval.start, <span class="dv">0</span>)</span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>        pad_downstream <span class="op">=</span> <span class="st">'N'</span> <span class="op">*</span> <span class="bu">max</span>(interval.end <span class="op">-</span> chromosome_length, <span class="dv">0</span>)</span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pad_upstream <span class="op">+</span> sequence <span class="op">+</span> pad_downstream</span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> close(<span class="va">self</span>):</span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fasta.close()</span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> one_hot_encode(sequence):</span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> kipoiseq.transforms.functional.one_hot_dna(sequence).astype(np.float32)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FastaStringExtractor:</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, fasta_file):</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.fasta <span class="op">=</span> pyfaidx.Fasta(fasta_file)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._chromosome_sizes <span class="op">=</span> {k: <span class="bu">len</span>(v) <span class="cf">for</span> k, v <span class="kw">in</span> <span class="va">self</span>.fasta.items()}</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#import pd.Interval as Interval</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> extract(<span class="va">self</span>, interval: kipoiseq.Interval, snp_position <span class="op">=</span> <span class="va">None</span>, snp_base<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Truncate interval if it extends beyond the chromosome lengths.</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        chromosome_length <span class="op">=</span> <span class="va">self</span>._chromosome_sizes[interval.chrom]</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        trimmed_interval <span class="op">=</span> kipoiseq.Interval(interval.chrom,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="bu">max</span>(interval.start, <span class="dv">0</span>),</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="bu">min</span>(interval.end, chromosome_length),</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                                    )</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># pyfaidx wants a 1-based interval</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>        sequence <span class="op">=</span> <span class="bu">str</span>(<span class="va">self</span>.fasta.get_seq(trimmed_interval.chrom,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>                                          trimmed_interval.start <span class="op">+</span> <span class="dv">1</span>,</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>                                          trimmed_interval.stop).seq).upper()</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply SNP modification if specified</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> snp_position <span class="kw">and</span> snp_base:</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> snp_position <span class="op">-</span> trimmed_interval.start <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> pos <span class="op">&lt;</span> <span class="bu">len</span>(sequence):</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(sequence[pos<span class="op">-</span><span class="dv">1</span>:pos<span class="op">+</span><span class="dv">2</span>])</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>                sequence <span class="op">=</span> sequence[:pos] <span class="op">+</span> snp_base <span class="op">+</span> sequence[pos <span class="op">+</span> <span class="dv">1</span>:]</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(sequence[pos<span class="op">-</span><span class="dv">1</span>:pos<span class="op">+</span><span class="dv">2</span>])</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fill truncated values with N's.</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>        pad_upstream <span class="op">=</span> <span class="st">'N'</span> <span class="op">*</span> <span class="bu">max</span>(<span class="op">-</span>interval.start, <span class="dv">0</span>)</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>        pad_downstream <span class="op">=</span> <span class="st">'N'</span> <span class="op">*</span> <span class="bu">max</span>(interval.end <span class="op">-</span> chromosome_length, <span class="dv">0</span>)</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pad_upstream <span class="op">+</span> sequence <span class="op">+</span> pad_downstream</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> close(<span class="va">self</span>):</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fasta.close()</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> one_hot_encode(sequence):</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> kipoiseq.transforms.functional.one_hot_dna(sequence).astype(np.float32)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Borzoi prediction functions</p>
 <p><strong>Here we define how many model folds we want to use for the prediction</strong></p>
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>n_reps <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>n_reps <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>seq_len <span class="op">=</span> <span class="dv">524288</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>rc <span class="op">=</span> <span class="va">True</span>         <span class="co">#Average across reverse-complement prediction</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(params_file) <span class="im">as</span> params_open :</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> json.load(params_open)</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    params_model <span class="op">=</span> params[<span class="st">'model'</span>]</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    params_train <span class="op">=</span> params[<span class="st">'train'</span>]</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>params_model[<span class="st">'trunk'</span>][<span class="op">-</span><span class="dv">2</span>][<span class="st">'cropping'</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>targets_df <span class="op">=</span> pd.read_csv(targets_file, index_col<span class="op">=</span><span class="dv">0</span>, sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>target_index <span class="op">=</span> targets_df.index </span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Create local index of strand_pair (relative to sliced targets)</span></span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> rc :</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    strand_pair <span class="op">=</span> targets_df.strand_pair</span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    target_slice_dict <span class="op">=</span> {ix : i <span class="cf">for</span> i, ix <span class="kw">in</span> <span class="bu">enumerate</span>(target_index.values.tolist())}</span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    slice_pair <span class="op">=</span> np.array([</span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>        target_slice_dict[ix] <span class="cf">if</span> ix <span class="kw">in</span> target_slice_dict <span class="cf">else</span> ix <span class="cf">for</span> ix <span class="kw">in</span> strand_pair.values.tolist()</span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    ], dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> []</span>
-<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rep_ix <span class="kw">in</span> <span class="bu">range</span>(n_reps) :</span>
-<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    model_file <span class="op">=</span> os.path.join(BORZOI_PATH, <span class="ss">f"examples/saved_models/f3c</span><span class="sc">{</span>rep_ix<span class="sc">}</span><span class="ss">/train/model0_best.h5"</span>)</span>
-<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    seqnn_model <span class="op">=</span> seqnn.SeqNN(params_model)</span>
-<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>    seqnn_model.restore(model_file, <span class="dv">0</span>)</span>
-<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    seqnn_model.build_slice(target_index)</span>
-<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> rc :</span>
-<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>        seqnn_model.strand_pair.append(slice_pair)</span>
-<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    seqnn_model.build_ensemble(rc, [<span class="dv">0</span>])</span>
-<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>    models.append(seqnn_model)</span>
-<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_tracks(models, sequence_one_hot):</span>
-<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>    predicted_tracks <span class="op">=</span> []</span>
-<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> fold_ix <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(models)):</span>
-<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>        yh <span class="op">=</span> models[fold_ix](sequence_one_hot[<span class="va">None</span>, ...])[:, <span class="va">None</span>, ...].astype(</span>
-<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">"float16"</span></span>
-<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>        predicted_tracks.append(yh)</span>
-<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>    predicted_tracks <span class="op">=</span> np.concatenate(predicted_tracks, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> predicted_tracks</span>
-<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_prediction(sequence):</span>
-<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> tf.device(DEVICE):</span>
-<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a>        y_wt <span class="op">=</span> predict_tracks(models, sequence)</span>
-<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y_wt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>seq_len <span class="op">=</span> <span class="dv">524288</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>rc <span class="op">=</span> <span class="va">True</span>         <span class="co">#Average across reverse-complement prediction</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(params_file) <span class="im">as</span> params_open :</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> json.load(params_open)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    params_model <span class="op">=</span> params[<span class="st">'model'</span>]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    params_train <span class="op">=</span> params[<span class="st">'train'</span>]</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>params_model[<span class="st">'trunk'</span>][<span class="op">-</span><span class="dv">2</span>][<span class="st">'cropping'</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>targets_df <span class="op">=</span> pd.read_csv(targets_file, index_col<span class="op">=</span><span class="dv">0</span>, sep<span class="op">=</span><span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>target_index <span class="op">=</span> targets_df.index </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Create local index of strand_pair (relative to sliced targets)</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> rc :</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    strand_pair <span class="op">=</span> targets_df.strand_pair</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    target_slice_dict <span class="op">=</span> {ix : i <span class="cf">for</span> i, ix <span class="kw">in</span> <span class="bu">enumerate</span>(target_index.values.tolist())}</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    slice_pair <span class="op">=</span> np.array([</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>        target_slice_dict[ix] <span class="cf">if</span> ix <span class="kw">in</span> target_slice_dict <span class="cf">else</span> ix <span class="cf">for</span> ix <span class="kw">in</span> strand_pair.values.tolist()</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    ], dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> []</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rep_ix <span class="kw">in</span> <span class="bu">range</span>(n_reps) :</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    model_file <span class="op">=</span> os.path.join(BORZOI_PATH, <span class="ss">f"examples/saved_models/f3c</span><span class="sc">{</span>rep_ix<span class="sc">}</span><span class="ss">/train/model0_best.h5"</span>)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    seqnn_model <span class="op">=</span> seqnn.SeqNN(params_model)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    seqnn_model.restore(model_file, <span class="dv">0</span>)</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>    seqnn_model.build_slice(target_index)</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> rc :</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>        seqnn_model.strand_pair.append(slice_pair)</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>    seqnn_model.build_ensemble(rc, [<span class="dv">0</span>])</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>    models.append(seqnn_model)</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_tracks(models, sequence_one_hot):</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>    predicted_tracks <span class="op">=</span> []</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> fold_ix <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(models)):</span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>        yh <span class="op">=</span> models[fold_ix](sequence_one_hot[<span class="va">None</span>, ...])[:, <span class="va">None</span>, ...].astype(</span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>            <span class="st">"float16"</span></span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>        predicted_tracks.append(yh)</span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>    predicted_tracks <span class="op">=</span> np.concatenate(predicted_tracks, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> predicted_tracks</span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_prediction(sequence):</span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> tf.device(DEVICE):</span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>        y_wt <span class="op">=</span> predict_tracks(models, sequence)</span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y_wt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>2025-05-05 13:09:41.154901: I metal_plugin/src/device/metal_device.cc:1154] Metal device set to: Apple M1 Pro
 2025-05-05 13:09:41.154939: I metal_plugin/src/device/metal_device.cc:296] systemMemory: 32.00 GB
@@ -1101,125 +479,125 @@ Saving to: ‘STDOUT’
 <p>In <a href="https://www.nature.com/articles/s41588-021-00864-5">this paper</a>, 3’ alternative polyadenylation QTLs (1’aQTLs) where identified using gtex individuals. They were stored <a href="https://doi.org/10.7303/syn22236281">here</a>.</p>
 <p>For the purpose of this example, we will focus on the variant <strong>rs10954213</strong>: chr7_128949373_G_A (hg38), which is one of the whole blood 3’aQTLs that was reported on the paper (Figure 1b)</p>
 <div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fasta_extractor <span class="op">=</span> FastaStringExtractor(fasta_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fasta_extractor <span class="op">=</span> FastaStringExtractor(fasta_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sequence_interval <span class="op">=</span> kipoiseq.Interval(<span class="st">"chr7"</span>, <span class="dv">128949373</span>, <span class="dv">128949374</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sequence_interval <span class="op">=</span> kipoiseq.Interval(<span class="st">"chr7"</span>, <span class="dv">128949373</span>, <span class="dv">128949374</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>reference_one_hot <span class="op">=</span> one_hot_encode(fasta_extractor.extract(sequence_interval.resize(seq_len)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>reference_one_hot <span class="op">=</span> one_hot_encode(fasta_extractor.extract(sequence_interval.resize(seq_len)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here the <code>snp_position</code> argument of the <code>extract</code> function refers to the position in the sequence where we want to introduce the mutation. <code>snp_base</code> is the nucleotide which will replace the reference nucleotide.</p>
 <p>Note that in the output, the reference and mutated nucleotides are printed in the middle of the upstream and downstream nucleotides.</p>
 <div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mutated_one_hot <span class="op">=</span> one_hot_encode(fasta_extractor.extract(sequence_interval.resize(seq_len), snp_position<span class="op">=</span><span class="dv">128949373</span>, snp_base<span class="op">=</span><span class="st">'A'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mutated_one_hot <span class="op">=</span> one_hot_encode(fasta_extractor.extract(sequence_interval.resize(seq_len), snp_position<span class="op">=</span><span class="dv">128949373</span>, snp_base<span class="op">=</span><span class="st">'A'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>TGA
 TAA</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>reference_one_hot <span class="op">=</span> reference_one_hot.astype(<span class="st">"float32"</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>mutated_one_hot <span class="op">=</span> mutated_one_hot.astype(<span class="st">"float32"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>reference_one_hot <span class="op">=</span> reference_one_hot.astype(<span class="st">"float32"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>mutated_one_hot <span class="op">=</span> mutated_one_hot.astype(<span class="st">"float32"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pred_reference <span class="op">=</span> make_prediction(reference_one_hot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>pred_reference <span class="op">=</span> make_prediction(reference_one_hot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>pred_reference.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>pred_reference.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>(1, 1, 16384, 7611)</code></pre>
 </div>
 </div>
 <p>We remove the 0 dimension and average across the 1 dimension (folds)</p>
 <div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pred_reference <span class="op">=</span> pred_reference.squeeze(<span class="dv">0</span>).mean(axis <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>pred_reference.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pred_reference <span class="op">=</span> pred_reference.squeeze(<span class="dv">0</span>).mean(axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>pred_reference.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>(16384, 7611)</code></pre>
 </div>
 </div>
 <p>Then we keep only the whole blood RNA-seq prediction <a href="https://github.com/calico/borzoi/blob/main/examples/targets_human.txt">see track description here</a></p>
 <div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>pred_reference <span class="op">=</span> pred_reference[:, <span class="dv">7531</span>:<span class="dv">7534</span>]</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>pred_reference.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>pred_reference <span class="op">=</span> pred_reference[:, <span class="dv">7531</span>:<span class="dv">7534</span>]</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>pred_reference.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>(16384, 3)</code></pre>
 </div>
 </div>
 <p>Average across the RNA blood tracks</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>pred_reference <span class="op">=</span> pred_reference.mean(axis <span class="op">=</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pred_reference <span class="op">=</span> pred_reference.mean(axis <span class="op">=</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>pred_reference.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>pred_reference.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>(16384,)</code></pre>
 </div>
 </div>
 <p>We do the same for the mutated sequence</p>
 <div class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>pred_mutated <span class="op">=</span> make_prediction(mutated_one_hot)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>pred_mutated <span class="op">=</span> pred_mutated.squeeze(<span class="dv">0</span>).mean(axis <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>pred_mutated <span class="op">=</span> pred_mutated[:, <span class="dv">7531</span>:<span class="dv">7534</span>]</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>pred_mutated <span class="op">=</span> pred_mutated.mean(axis <span class="op">=</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pred_mutated <span class="op">=</span> make_prediction(mutated_one_hot)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>pred_mutated <span class="op">=</span> pred_mutated.squeeze(<span class="dv">0</span>).mean(axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>pred_mutated <span class="op">=</span> pred_mutated[:, <span class="dv">7531</span>:<span class="dv">7534</span>]</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>pred_mutated <span class="op">=</span> pred_mutated.mean(axis <span class="op">=</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>pred_mutated.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>pred_mutated.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>(16384,)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tracks_nested(nested_tracks, interval, highlight_position <span class="op">=</span> <span class="va">None</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, height<span class="op">=</span><span class="fl">1.5</span>):</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co">    nested_tracks: dict of dicts</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co">        Outer keys: data sources (e.g., replicates or conditions)</span></span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Inner keys: track names to plot (these become the rows)</span></span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co">    interval: a kipoiseq interval with .start and .end</span></span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    all_inner_keys <span class="op">=</span> <span class="bu">set</span>()</span>
-<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> subdict <span class="kw">in</span> nested_tracks.values():</span>
-<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>        all_inner_keys.update(subdict.keys())</span>
-<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>    all_inner_keys <span class="op">=</span> <span class="bu">sorted</span>(all_inner_keys)</span>
-<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>    n_tracks <span class="op">=</span> <span class="bu">len</span>(all_inner_keys)</span>
-<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(n_tracks, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, height <span class="op">*</span> n_tracks), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n_tracks <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> [axes]</span>
-<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, inner_key <span class="kw">in</span> <span class="bu">zip</span>(axes, all_inner_keys):</span>
-<span id="cb56-20"><a href="#cb56-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> outer_key, subdict <span class="kw">in</span> nested_tracks.items():</span>
-<span id="cb56-21"><a href="#cb56-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> inner_key <span class="kw">in</span> subdict:</span>
-<span id="cb56-22"><a href="#cb56-22" aria-hidden="true" tabindex="-1"></a>                y <span class="op">=</span> subdict[inner_key]</span>
-<span id="cb56-23"><a href="#cb56-23" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> np.linspace(interval.start, interval.end, num<span class="op">=</span><span class="bu">len</span>(y))</span>
-<span id="cb56-24"><a href="#cb56-24" aria-hidden="true" tabindex="-1"></a>                ax.fill_between(x, y, alpha<span class="op">=</span>alpha, label<span class="op">=</span>outer_key)</span>
-<span id="cb56-25"><a href="#cb56-25" aria-hidden="true" tabindex="-1"></a>        ax.set_title(inner_key, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb56-26"><a href="#cb56-26" aria-hidden="true" tabindex="-1"></a>        ax.legend(loc<span class="op">=</span><span class="st">'upper right'</span>, fontsize<span class="op">=</span><span class="dv">8</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb56-27"><a href="#cb56-27" aria-hidden="true" tabindex="-1"></a>        sns.despine(ax<span class="op">=</span>ax, top<span class="op">=</span><span class="va">True</span>, right<span class="op">=</span><span class="va">True</span>, bottom<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb56-28"><a href="#cb56-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> highlight_position <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> interval.start <span class="op">&lt;=</span> highlight_position <span class="op">&lt;=</span> interval.end:</span>
-<span id="cb56-29"><a href="#cb56-29" aria-hidden="true" tabindex="-1"></a>            ax.axvline(x<span class="op">=</span>highlight_position, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb56-30"><a href="#cb56-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-31"><a href="#cb56-31" aria-hidden="true" tabindex="-1"></a>    axes[<span class="op">-</span><span class="dv">1</span>].set_xlabel(<span class="bu">str</span>(interval))</span>
-<span id="cb56-32"><a href="#cb56-32" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb56-33"><a href="#cb56-33" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tracks_nested(nested_tracks, interval, highlight_position <span class="op">=</span> <span class="va">None</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>, height<span class="op">=</span><span class="fl">1.5</span>):</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">    nested_tracks: dict of dicts</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co">        Outer keys: data sources (e.g., replicates or conditions)</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Inner keys: track names to plot (these become the rows)</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co">    interval: a kipoiseq interval with .start and .end</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    all_inner_keys <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> subdict <span class="kw">in</span> nested_tracks.values():</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>        all_inner_keys.update(subdict.keys())</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>    all_inner_keys <span class="op">=</span> <span class="bu">sorted</span>(all_inner_keys)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>    n_tracks <span class="op">=</span> <span class="bu">len</span>(all_inner_keys)</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(n_tracks, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, height <span class="op">*</span> n_tracks), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n_tracks <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>        axes <span class="op">=</span> [axes]</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, inner_key <span class="kw">in</span> <span class="bu">zip</span>(axes, all_inner_keys):</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> outer_key, subdict <span class="kw">in</span> nested_tracks.items():</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> inner_key <span class="kw">in</span> subdict:</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>                y <span class="op">=</span> subdict[inner_key]</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> np.linspace(interval.start, interval.end, num<span class="op">=</span><span class="bu">len</span>(y))</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>                ax.fill_between(x, y, alpha<span class="op">=</span>alpha, label<span class="op">=</span>outer_key)</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>        ax.set_title(inner_key, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>        ax.legend(loc<span class="op">=</span><span class="st">'upper right'</span>, fontsize<span class="op">=</span><span class="dv">8</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>        sns.despine(ax<span class="op">=</span>ax, top<span class="op">=</span><span class="va">True</span>, right<span class="op">=</span><span class="va">True</span>, bottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> highlight_position <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> interval.start <span class="op">&lt;=</span> highlight_position <span class="op">&lt;=</span> interval.end:</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>            ax.axvline(x<span class="op">=</span>highlight_position, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>    axes[<span class="op">-</span><span class="dv">1</span>].set_xlabel(<span class="bu">str</span>(interval))</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since we are only interested in the 3’UTR region, we will center our plot on the 64 middle bins (for borzoi, each bin is 32 base pair-long). Remember that the prediction is centered at the 3’aQTL (dashed line on the plot). Indeed the coverage difference between the reference and alternative sequences is evident.</p>
 <div class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>pred_reference[<span class="dv">8160</span>:<span class="dv">8224</span>, ].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>pred_reference[<span class="dv">8160</span>:<span class="dv">8224</span>, ].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="45">
 <pre><code>(64,)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>tracks <span class="op">=</span> {<span class="st">'Reference'</span>: {<span class="st">'Whole Blood RNA-seq'</span>: pred_reference[<span class="dv">8160</span>:<span class="dv">8224</span>, ]},</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Mutated'</span>: {<span class="st">'Whole Blood RNA-seq'</span>: pred_mutated[<span class="dv">8160</span>:<span class="dv">8224</span>, ]}}</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>plot_tracks_nested(tracks, sequence_interval.resize(<span class="dv">64</span><span class="op">*</span><span class="dv">32</span>), highlight_position<span class="op">=</span>sequence_interval.start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>tracks <span class="op">=</span> {<span class="st">'Reference'</span>: {<span class="st">'Whole Blood RNA-seq'</span>: pred_reference[<span class="dv">8160</span>:<span class="dv">8224</span>, ]},</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">'Mutated'</span>: {<span class="st">'Whole Blood RNA-seq'</span>: pred_mutated[<span class="dv">8160</span>:<span class="dv">8224</span>, ]}}</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>plot_tracks_nested(tracks, sequence_interval.resize(<span class="dv">64</span><span class="op">*</span><span class="dv">32</span>), highlight_position<span class="op">=</span>sequence_interval.start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="borzoi_apa_tutorial_files/figure-html/cell-37-output-1.png" class="img-fluid"></p>
 </div>
