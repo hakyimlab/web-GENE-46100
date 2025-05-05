@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="environment-setup">1. Environment Setup</h2>
 <p>First, we need to set up our Python environment. Borzoi requires Python 3.10 or lower due to compatibility requirements.</p>
 <pre><code>conda create --name borzoi46100 python=3.10</code></pre>
-<div id="197e2dae" class="cell" data-execution_count="1">
+<div id="cf661ebd" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -248,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>After loading baskerville, restart runtime, run code from here</strong></p>
 <p>Install libraries</p>
-<div id="9dbc5366" class="cell" data-execution_count="2">
+<div id="6ebe97f2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">!</span>pip install <span class="op">-</span>e {GITHUB_DIR}<span class="op">/</span>baskerville</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="97bc980f" class="cell" data-execution_count="3">
+<div id="be59fe0e" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>NOTE: install tensorflow-metal if running on a mac</p>
-<div id="dc2a89e7" class="cell" data-execution_count="4">
+<div id="9a8c7dea" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import platform</span></span>
@@ -280,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="load-libraries" class="level3">
 <h3 class="anchored" data-anchor-id="load-libraries">Load libraries</h3>
-<div id="cd832aa1" class="cell" data-execution_count="5">
+<div id="a10301ba" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
@@ -322,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="configure-gpu-device" class="level3">
 <h3 class="anchored" data-anchor-id="configure-gpu-device">Configure GPU device</h3>
-<div id="3bf0fba7" class="cell" data-execution_count="6">
+<div id="f9108a39" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Num GPUs Available: "</span>, <span class="bu">len</span>(tf.config.list_physical_devices(<span class="st">'GPU'</span>)))</span>
@@ -333,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dowload-model-files" class="level3">
 <h3 class="anchored" data-anchor-id="dowload-model-files">Dowload model files</h3>
-<div id="84953ddd" class="cell" data-execution_count="7">
+<div id="0bd3d5b0" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>PRE <span class="op">=</span> <span class="st">'/Users/haekyungim/Library/CloudStorage/Box-Box/LargeFiles/imlab-data/data-Github/web-data/web-GENE-46100'</span></span>
@@ -358,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">!</span>mkdir {saved_models_path}<span class="op">/</span>f3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5019c42e" class="cell" data-execution_count="8">
+<div id="4e5f59b9" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Download model weights</span></span>
@@ -372,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">!</span>wget https:<span class="op">//</span>storage.googleapis.com<span class="op">/</span>seqnn<span class="op">-</span>share<span class="op">/</span>borzoi<span class="op">/</span>f3<span class="op">/</span>model0_best.h5 <span class="op">-</span>O {saved_models_path}<span class="op">/</span>f3<span class="op">/</span>model0_best.h5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="58702e34" class="cell" data-execution_count="9">
+<div id="b93f42a0" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Download and uncompress annotation files</span></span>
@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="download-reference-genome" class="level3">
 <h3 class="anchored" data-anchor-id="download-reference-genome">Download reference genome</h3>
-<div id="a8f45dcb" class="cell" data-execution_count="10">
+<div id="37cbd5b8" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fasta_file <span class="op">=</span> os.path.join(CONTENT_DIR, <span class="st">'data/hg38.fa'</span>)</span>
@@ -395,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">!</span>wget <span class="op">-</span>O <span class="op">-</span> http:<span class="op">//</span>hgdownload.cse.ucsc.edu<span class="op">/</span>goldenPath<span class="op">/</span>hg38<span class="op">/</span>bigZips<span class="op">/</span>hg38.fa.gz <span class="op">|</span> gunzip <span class="op">-</span>c <span class="op">&gt;</span> {fasta_file}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="f333d68a" class="cell" data-execution_count="11">
+<div id="62dca67e" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">### download vcf file and index for chromosome 22</span></span>
@@ -404,14 +404,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">!</span>wget https:<span class="op">//</span>uchicago.box.com<span class="op">/</span>shared<span class="op">/</span>static<span class="op">/</span>u526pjh29w93ufn65yomlch4z8lkb1sp.gz <span class="op">-</span>O {VCF_FILE}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="1109f319" class="cell" data-execution_count="12">
+<div id="773414cf" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!ls /content/data</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls {CONTENT_DIR}<span class="op">/</span>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="67405221" class="cell" data-execution_count="13">
+<div id="b32c5b63" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>cd {CONTENT_DIR}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="download-htslib-to-index-genome" class="level4">
 <h4 class="anchored" data-anchor-id="download-htslib-to-index-genome">Download htslib to index genome</h4>
-<div id="c2a0fd60" class="cell" data-execution_count="14">
+<div id="382a812c" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !wget https://github.com/samtools/htslib/releases/download/1.9/htslib-1.9.tar.bz2</span></span>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># !make install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="a4171752" class="cell" data-execution_count="15">
+<div id="0978d7ba" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">## if you Permission denied error on a mac, try</span></span>
@@ -441,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="index-vcf" class="level4">
 <h4 class="anchored" data-anchor-id="index-vcf">Index vcf</h4>
-<div id="7494bfd8" class="cell" data-execution_count="16">
+<div id="ad5bd49a" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(VCF_FILE <span class="op">+</span> <span class="st">'.tbi'</span>):</span>
@@ -452,7 +452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="define-paths" class="level3">
 <h3 class="anchored" data-anchor-id="define-paths">Define paths</h3>
-<div id="b51bb809" class="cell" data-execution_count="17">
+<div id="c511ef84" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>models_path <span class="op">=</span> CONTENT_DIR <span class="op">+</span> <span class="st">'/data/saved_models/'</span></span>
@@ -460,16 +460,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>targets_file <span class="op">=</span> GITHUB_DIR <span class="op">+</span> <span class="st">'/borzoi/examples/targets_human.txt'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Load splice site annotation</p>
-<div id="d6a2fe77" class="cell" data-execution_count="18">
+<div id="8a46feaf" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># splice_df = pd.read_csv(CONTENT_DIR+'/data/gencode41_basic_protein_splice.csv.gz', sep='\t', compression='gzip')</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print("len(splice_df) = " + str(len(splice_df)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load splice site annotation</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># splice_df = pd.read_csv(CONTENT_DIR+'/data/gencode41_basic_protein_splice.csv.gz', sep='\t', compression='gzip')</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># print("len(splice_df) = " + str(len(splice_df)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Load transcriptome</p>
-<div id="599efe61" class="cell" data-execution_count="19">
+<div id="6b76eb1b" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>transcriptome <span class="op">=</span> bgene.Transcriptome(CONTENT_DIR <span class="op">+</span> <span class="st">'/data/gencode41_basic_nort.gtf'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -495,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>makes prediction of ALL tracks given an encoded sequence</li>
 </ul>
-<div id="19c8b445" class="cell" data-execution_count="20">
+<div id="15064d5a" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FastaStringExtractor:</span>
@@ -525,7 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.fasta.close()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="ecd2ab92" class="cell" data-execution_count="21">
+<div id="967d39dd" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make one-hot coded sequence (modified from borzoi)</span></span>
@@ -552,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Modifies ref sequence to personal sequence given the vcf</li>
 </ul>
-<div id="38ae7648" class="cell" data-execution_count="22">
+<div id="5eaf344a" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> vcf_to_seq_faster(target_interval, individual, vcf_file, fasta_extractor):</span>
@@ -603,7 +603,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="make_prediction-function" class="level4">
 <h4 class="anchored" data-anchor-id="make_prediction-function">make_prediction function</h4>
-<div id="7c52a22c" class="cell" data-execution_count="23">
+<div id="8be7ea5f" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_prediction(gene, interval, haplo, sequence_one_hot, window <span class="op">=</span> <span class="dv">131072</span>): <span class="co"># snp_pos, alt_allele</span></span>
@@ -637,7 +637,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="get-indexes-of-tracks-function" class="level4">
 <h4 class="anchored" data-anchor-id="get-indexes-of-tracks-function">Get indexes of tracks function</h4>
-<div id="608e358b" class="cell" data-execution_count="24">
+<div id="db9a8aab" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get indexes of track</span></span>
@@ -652,7 +652,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plot-tracks-function" class="level4">
 <h4 class="anchored" data-anchor-id="plot-tracks-function">Plot tracks function</h4>
-<div id="bc257989" class="cell" data-execution_count="25">
+<div id="1fc18cc7" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_tracks(prediction, interval, haplo, anno_df<span class="op">=</span><span class="va">None</span>, tracks<span class="op">=</span>[],</span>
@@ -754,7 +754,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="extract-fasta" class="level3">
 <h3 class="anchored" data-anchor-id="extract-fasta">Extract fasta</h3>
-<div id="5a102b63" class="cell" data-execution_count="26">
+<div id="55271848" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fasta_extractor <span class="op">=</span> FastaStringExtractor(fasta_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -764,7 +764,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="model-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="model-configuration">3.Model configuration</h2>
-<div id="72cf9efd" class="cell" data-execution_count="27">
+<div id="a70b83bc" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>SEQUENCE_LENGTH <span class="op">=</span> <span class="dv">524288</span></span>
@@ -817,7 +817,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="build-sequence" class="level2">
 <h2 class="anchored" data-anchor-id="build-sequence">4. Build sequence</h2>
-<div id="a426af04" class="cell" data-execution_count="28">
+<div id="825f6b0d" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read VCFs and encode haplotypes</span></span>
@@ -837,7 +837,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="predict" class="level2">
 <h2 class="anchored" data-anchor-id="predict">5. Predict</h2>
 <p>ENSG00000099968</p>
-<div id="ea407d5f" class="cell" data-execution_count="29">
+<div id="e50127cd" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sequences <span class="op">=</span> [haplo0_enc, haplo1_enc, haplo2_enc]</span>
@@ -846,7 +846,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'RNA:blood'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="c5505839" class="cell" data-execution_count="30">
+<div id="b79be356" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> h <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(sequences)):</span>
@@ -858,7 +858,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>              tracks <span class="op">=</span> my_tracks, log <span class="op">=</span> [<span class="va">True</span>, <span class="va">True</span>, <span class="va">False</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="bbabd5ff" class="cell" data-execution_count="31">
+<div id="d26c6416" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>prediction.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1641,9 +1641,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb33-268"><a href="#cb33-268" aria-hidden="true" tabindex="-1"></a>targets_file <span class="op">=</span> GITHUB_DIR <span class="op">+</span> <span class="st">'/borzoi/examples/targets_human.txt'</span></span>
 <span id="cb33-269"><a href="#cb33-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb33-270"><a href="#cb33-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-271"><a href="#cb33-271" aria-hidden="true" tabindex="-1"></a>Load splice site annotation</span>
-<span id="cb33-272"><a href="#cb33-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-275"><a href="#cb33-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb33-271"><a href="#cb33-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-274"><a href="#cb33-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb33-275"><a href="#cb33-275" aria-hidden="true" tabindex="-1"></a><span class="co"># Load splice site annotation</span></span>
 <span id="cb33-276"><a href="#cb33-276" aria-hidden="true" tabindex="-1"></a><span class="co"># splice_df = pd.read_csv(CONTENT_DIR+'/data/gencode41_basic_protein_splice.csv.gz', sep='\t', compression='gzip')</span></span>
 <span id="cb33-277"><a href="#cb33-277" aria-hidden="true" tabindex="-1"></a><span class="co"># print("len(splice_df) = " + str(len(splice_df)))</span></span>
 <span id="cb33-278"><a href="#cb33-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>

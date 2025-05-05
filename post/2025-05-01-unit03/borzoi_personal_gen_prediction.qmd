@@ -234,9 +234,9 @@ params_file = GITHUB_DIR + '/borzoi/examples/params_pred.json'
 targets_file = GITHUB_DIR + '/borzoi/examples/targets_human.txt'
 ```
 
-Load splice site annotation
 
 ```{python}
+# Load splice site annotation
 # splice_df = pd.read_csv(CONTENT_DIR+'/data/gencode41_basic_protein_splice.csv.gz', sep='\t', compression='gzip')
 # print("len(splice_df) = " + str(len(splice_df)))
 ```
