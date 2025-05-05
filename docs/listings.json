@@ -1,37 +1,11 @@
 [
   {
-    "listing": "/index.html",
-    "items": [
-      "/post/2025-05-12-unit04/index.html",
-      "/post/2025-05-12-unit04/seurat5_pbmc3k_tutorial.html",
-      "/post/2025-05-01-unit03/borzoi_personal_gen_prediction.html",
-      "/post/2025-05-01-unit03/homework-06.html",
-      "/post/2025-05-01-unit03/enformer.html",
-      "/post/2025-05-01-unit03/index.html",
-      "/post/2025-05-01-unit03/enformer_training.html",
-      "/post/2025-05-01-unit03/enformer-minimal-neanderthal.html",
-      "/post/2025-04-15-unit01/homework-05.html",
-      "/post/2025-04-15-unit01/homework-04.html",
-      "/post/2025-04-15-unit01/nano-gpt/annotated-gpt_dev.html",
-      "/post/2025-03-25-unit00/homework-03.html",
-      "/post/2025-03-25-unit00/tf-binding-wandb.html",
-      "/post/2025-03-25-unit00/tf-binding-challenge.html",
-      "/post/2025-03-25-unit00/homework-02.html",
-      "/post/2025-03-25-unit00/updated-basic_DNA_tutorial.html",
-      "/post/2025-03-25-unit00/tf-binding-prediction-starter.html",
-      "/post/2025-03-25-unit00/homework-01.html",
-      "/post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html",
-      "/post/2025-03-25-unit00/index.html",
-      "/post/2025-04-15-unit01/nano-gpt/slides-gpt.html",
-      "/post/2025-05-01-unit03/borzoi_personal_gen_prediction-jupyter.html"
-    ]
-  },
-  {
     "listing": "/index-all.html",
     "items": [
       "/post/2025-05-12-unit04/index.html",
       "/post/2025-05-12-unit04/seurat5_pbmc3k_tutorial.html",
       "/post/2025-05-01-unit03/borzoi_personal_gen_prediction.html",
+      "/post/2025-05-01-unit03/borzoi_apa_tutorial.html",
       "/post/2025-05-01-unit03/homework-06.html",
       "/post/2025-05-01-unit03/enformer.html",
       "/post/2025-05-01-unit03/index.html",
@@ -59,6 +33,34 @@
       "/post/2025-05-01-unit03/borzoi_personal_gen_prediction-jupyter.html",
       "/DRAFTS/slides-00.html",
       "/DRAFTS/2020-01-01-TODO/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/post/2025-05-12-unit04/index.html",
+      "/post/2025-05-12-unit04/seurat5_pbmc3k_tutorial.html",
+      "/post/2025-05-01-unit03/borzoi_personal_gen_prediction.html",
+      "/post/2025-05-01-unit03/borzoi_apa_tutorial.html",
+      "/post/2025-05-01-unit03/homework-06.html",
+      "/post/2025-05-01-unit03/enformer.html",
+      "/post/2025-05-01-unit03/index.html",
+      "/post/2025-05-01-unit03/enformer_training.html",
+      "/post/2025-05-01-unit03/enformer-minimal-neanderthal.html",
+      "/post/2025-04-15-unit01/homework-05.html",
+      "/post/2025-04-15-unit01/homework-04.html",
+      "/post/2025-04-15-unit01/nano-gpt/annotated-gpt_dev.html",
+      "/post/2025-03-25-unit00/homework-03.html",
+      "/post/2025-03-25-unit00/tf-binding-wandb.html",
+      "/post/2025-03-25-unit00/tf-binding-challenge.html",
+      "/post/2025-03-25-unit00/homework-02.html",
+      "/post/2025-03-25-unit00/updated-basic_DNA_tutorial.html",
+      "/post/2025-03-25-unit00/tf-binding-prediction-starter.html",
+      "/post/2025-03-25-unit00/homework-01.html",
+      "/post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html",
+      "/post/2025-03-25-unit00/index.html",
+      "/post/2025-04-15-unit01/nano-gpt/slides-gpt.html",
+      "/post/2025-05-01-unit03/borzoi_personal_gen_prediction-jupyter.html"
     ]
   }
 ]
