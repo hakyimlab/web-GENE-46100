@@ -6,7 +6,7 @@ date-modified: last-modified
 categories:
     - gene46100
     - tutorial
-eval: false
+freeze: true
 ---
 
 ```{r preliminaries}
@@ -53,8 +53,6 @@ knitr::opts_chunk$set(
 ```
 
 
-
-
 # Setup the Seurat Object
 
 For this tutorial, we will be analyzing the a dataset of Peripheral Blood Mononuclear Cells (PBMC) freely available from 10X Genomics. There are 2,700 single cells that were sequenced on the Illumina NextSeq 500. The raw data can be found [here](https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz).
@@ -68,8 +66,44 @@ if(!file.exists(pbmc_file)) {
 }
 ```
 
+## read the data
+
 We start by reading in the data. The `Read10X()` function reads in the output of the [cellranger](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) pipeline from 10X, returning a unique molecular identified (UMI) count matrix. The values in this matrix represent the number of molecules for each feature (i.e. gene; row) that are detected in each cell (column).
 
+### cell ranger pipeline data format
+
+The cellranger pipeline from 10X Genomics processes raw single-cell RNA sequencing data and produces several key outputs. Here are the main components: 
+
+- Filtered Gene-Barcode Matrix:
+    + Contains the UMI (Unique Molecular Identifier) counts for each gene in each cell
+    + Organized as a gene-by-cell matrix
+    + Only includes cells that pass quality filters
+    + In this tutorial, it's in the filtered_gene_bc_matrices/hg19/ directory
+- Raw Gene-Barcode Matrix:
+    + Contains all barcodes, including those that might be empty droplets or low quality
+    + Not used in this tutorial as we want to work with high-quality cells
+- Feature-Barcode Matrix Structure:
+    + features.tsv (or genes.tsv): Contains gene identifiers and names
+    + barcodes.tsv: Contains cell barcodes
+    + matrix.mtx: Contains the actual count data in a sparse matrix format
+- Quality Control Metrics:
+    + Number of reads per cell
+    + Number of genes detected per cell
+    + Percentage of reads mapping to the genome
+    + Percentage of reads mapping to the transcriptome
+
+In this tutorial, we're using the filtered matrix, which means we're only working with cells that have passed 10X's quality control filters. The Read10X() function in Seurat automatically reads these files and combines them into a single count matrix that we can use for analysis.
+
+The data structure looks like this:
+```text
+filtered_gene_bc_matrices/
+└── hg19/
+    ├── barcodes.tsv
+    ├── features.tsv
+    └── matrix.mtx
+```
+
+## create a seurat object
 We next use the count matrix to create a `Seurat` object. The object serves as a container that contains both data (like the count matrix) and analysis (like PCA, or clustering results) for a single-cell dataset. For a technical discussion of the `Seurat` object structure, check out our [GitHub Wiki](https://github.com/satijalab/seurat/wiki). For example, the count matrix is stored in `pbmc[["RNA"]]@counts`.
 
 ```{r init, error=TRUE}
@@ -93,7 +127,7 @@ pbmc
 ```
 
 
-## What does data in a count matrix look like?
+### What does data in a count matrix look like?
 
 ```{r, error=TRUE}
 # Lets examine a few genes in the first thirty cells
@@ -109,8 +143,6 @@ sparse.size <- object.size(pbmc.data)
 sparse.size
 dense.size / sparse.size
 ```
-</details>
-\  
 
 # Standard pre-processing workflow
 
@@ -335,7 +367,10 @@ DimPlot(pbmc, reduction = 'umap')
 You can save the object at this point so that it can easily be loaded back in without having to rerun the computationally intensive steps performed above, or easily shared with collaborators.
 
 ```{r saveobject, eval=FALSE}
-saveRDS(pbmc, file = "../output/pbmc_tutorial.rds")
+outdir = glue("{DATA}/output")
+if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))
+filename = glue("{outdir}/pbmc_tutorial.rds")
+saveRDS(pbmc, file = filename)
 ```
 
 ***
@@ -413,19 +448,31 @@ library(ggplot2)
 plot <- DimPlot(pbmc, reduction = "umap", label = TRUE, label.size = 4.5) + xlab("UMAP 1") + ylab("UMAP 2") + 
   theme(axis.title = element_text(size = 18), legend.text = element_text(size = 18)) + 
   guides(colour = guide_legend(override.aes = list(size = 10)))
-ggsave(filename = "../output/images/pbmc3k_umap.jpg", height = 7, width = 12, plot = plot, quality = 50)
+outdir = glue("{DATA}/output/images")
+if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))
+filename = glue("{outdir}/pbmc3k_umap.jpg")
+ggsave(filename = filename, height = 7, width = 12, plot = plot, quality = 50)
 ```
 
 ```{r save.rds, eval=FALSE}
-saveRDS(pbmc, file = "../output/pbmc3k_final.rds")
+outdir = glue("{DATA}/output")
+if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))
+filename = glue("{outdir}/pbmc3k_final.rds")
+saveRDS(pbmc, file = filename)
 ```
 
 ```{r save2, include=TRUE}
-saveRDS(pbmc, file = "../data/pbmc3k_final.rds")
+outdir = glue("{DATA}/output")
+if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))
+filename = glue("{outdir}/pbmc3k_final.rds")
+saveRDS(pbmc, file = filename)
 ```
 
 ```{r save.times, include=TRUE}
-write.csv(x = t(as.data.frame(all_times)), file = "../output/timings/seurat5_pbmc3k_tutorial_times.csv")
+outdir = glue("{DATA}/output/timings")
+if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))
+filename = glue("{outdir}/seurat5_pbmc3k_tutorial_times.csv")
+write.csv(x = t(as.data.frame(all_times)), file = filename)
 ```
 
 <details>
