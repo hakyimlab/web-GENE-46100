@@ -1,17 +1,27 @@
 ---
 title: scanpy tutorial - qmd
-date: '2025-05-05'
+date: '2025-05-12'
 author: scanpy authors
-eval: false
+eval: true
 categories:
-  - gene46100
   - notebook
 freeze: true
-jupyter: python3
+jupyter: 
+  kernelspec:
+    name: "conda-env-scanpy-tutorial-py"
+    language: "python"
+    display_name: "scanpy-tutorial"
 ---
 
-Create sc46100 env cloning gene46100
-`conda create --name sc46100 --clone gene46100`
+This notebook is not compatible with this python 3.12. Some issues with pickle data and celltypist.
+
+
+```{{bash}}
+conda create --name scanpy-tutorial python=3.9
+conda activate scanpy-tutorial
+conda install nb_conda_kernels jupyter_server
+pip install nbclient nbformat
+```
 
 ```{python}
 # set first time to False to avoid multiple downloads
@@ -371,20 +381,35 @@ Let's get canonical cell markers using with [decoupler](https://github.com/saezl
 # Query Omnipath and get PanglaoDB
 markers = dc.get_resource(name="PanglaoDB", organism="human")
 
-# Convert canonical_marker to boolean if it's string
-if markers["canonical_marker"].dtype == 'object':
-    markers["canonical_marker"] = markers["canonical_marker"].map({'True': True, 'False': False})
+# Print initial information about the markers DataFrame
+print("Initial markers DataFrame shape:", markers.shape)
+
+# Convert canonical_marker to boolean - fixing the conversion
+markers["canonical_marker"] = markers["canonical_marker"].astype(str).map({'True': True, 'False': False})
 
 # Keep canonical cell type markers alone
-markers = markers[markers["canonical_marker"]]
+markers = markers[markers["canonical_marker"] == True]
+print("\nShape after filtering canonical markers:", markers.shape)
 
 # Remove duplicated entries
 markers = markers[~markers.duplicated(["cell_type", "genesymbol"])]
-markers.head()
-```
+print("\nShape after removing duplicates:", markers.shape)
 
-```{python}
-dc.run_mlm(mat=adata, net=markers, weight=None, source="cell_type", target="genesymbol", verbose=True, use_raw=False)
+# Convert gene symbols to uppercase in both datasets to ensure consistent matching
+markers["genesymbol"] = markers["genesymbol"].str.upper()
+adata.var_names = adata.var_names.str.upper()
+
+# Print overlap statistics
+print("\nNumber of unique genes in markers:", len(markers["genesymbol"].unique()))
+print("Number of genes in adata:", adata.n_vars)
+print("Number of overlapping genes:", len(set(markers["genesymbol"].unique()) & set(adata.var_names)))
+
+# Print some example cell types and their marker counts
+print("\nNumber of markers per cell type:")
+print(markers.groupby("cell_type")["genesymbol"].count().sort_values(ascending=False).head())
+
+# Run MLM with a lower min_n value
+dc.run_mlm(mat=adata, net=markers, weight=None, source="cell_type", target="genesymbol", verbose=True, use_raw=False, min_n=2)
 ```
 
 The obtained results are stored in the .obsm key, with `mlm_estimate` representing coefficient t-values:
