@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,8 +23,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +67,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-dcc7d9e706e4adfbab8e3d6c7c60bab2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-30950e57ca2d683c179b59b95dd53cbb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -197,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 5, 2025</p>
+      <p class="date-modified">May 14, 2025</p>
     </div>
   </div>
     
@@ -963,287 +965,293 @@ loaded via a namespace (and not attached):
 
 <p>© <a href="https://hakyimlab.org">HakyImLab and Listed Authors</a> - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 License</a></p></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
         }
-        return container.innerHTML
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1251,185 +1259,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb68" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Seurat - Guided Clustering Tutorial"</span></span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-05-12</span></span>
@@ -1442,46 +1426,46 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r preliminaries}</span></span>
-<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a><span class="in">suppressMessages(library(tidyverse))</span></span>
-<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a><span class="in">suppressMessages(library(glue))</span></span>
-<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a><span class="in">WEBDATA = "/Users/haekyungim/Library/CloudStorage/Box-Box/LargeFiles/imlab-data/data-Github/web-data"</span></span>
-<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a><span class="in"># SLUG="seurat-pbmc3k-tutorial" ## copy the slug from the header</span></span>
-<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a><span class="in"># bDATE='2025-05-12' ## copy the date from the blog's header here</span></span>
-<span id="cb68-18"><a href="#cb68-18" aria-hidden="true" tabindex="-1"></a><span class="in">DATA = glue("{WEBDATA}/web-GENE-46100/seurat/")</span></span>
-<span id="cb68-19"><a href="#cb68-19" aria-hidden="true" tabindex="-1"></a><span class="in">if(!file.exists(DATA)) system(glue::glue("mkdir {DATA}"))</span></span>
-<span id="cb68-20"><a href="#cb68-20" aria-hidden="true" tabindex="-1"></a><span class="in">WORK=DATA</span></span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(glue))</span>
+<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a>WEBDATA <span class="ot">=</span> <span class="st">"/Users/haekyungim/Library/CloudStorage/Box-Box/LargeFiles/imlab-data/data-Github/web-data"</span></span>
+<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a><span class="co"># SLUG="seurat-pbmc3k-tutorial" ## copy the slug from the header</span></span>
+<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a><span class="co"># bDATE='2025-05-12' ## copy the date from the blog's header here</span></span>
+<span id="cb68-18"><a href="#cb68-18" aria-hidden="true" tabindex="-1"></a>DATA <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{WEBDATA}/web-GENE-46100/seurat/"</span>)</span>
+<span id="cb68-19"><a href="#cb68-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(DATA)) <span class="fu">system</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"mkdir {DATA}"</span>))</span>
+<span id="cb68-20"><a href="#cb68-20" aria-hidden="true" tabindex="-1"></a>WORK<span class="ot">=</span>DATA</span>
 <span id="cb68-21"><a href="#cb68-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-22"><a href="#cb68-22" aria-hidden="true" tabindex="-1"></a><span class="in">## move data to DATA</span></span>
-<span id="cb68-23"><a href="#cb68-23" aria-hidden="true" tabindex="-1"></a><span class="in">#tempodata=("~/Downloads/tempo/gwas_catalog_v1.0.2-associations_e105_r2022-04-07.tsv")</span></span>
-<span id="cb68-24"><a href="#cb68-24" aria-hidden="true" tabindex="-1"></a><span class="in">#system(glue::glue("cp {tempodata} {DATA}/"))</span></span>
+<span id="cb68-22"><a href="#cb68-22" aria-hidden="true" tabindex="-1"></a><span class="do">## move data to DATA</span></span>
+<span id="cb68-23"><a href="#cb68-23" aria-hidden="true" tabindex="-1"></a><span class="co">#tempodata=("~/Downloads/tempo/gwas_catalog_v1.0.2-associations_e105_r2022-04-07.tsv")</span></span>
+<span id="cb68-24"><a href="#cb68-24" aria-hidden="true" tabindex="-1"></a><span class="co">#system(glue::glue("cp {tempodata} {DATA}/"))</span></span>
 <span id="cb68-25"><a href="#cb68-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-26"><a href="#cb68-26" aria-hidden="true" tabindex="-1"></a><span class="in">#system(glue("open {DATA}")) ## this will open the folder </span></span>
+<span id="cb68-26"><a href="#cb68-26" aria-hidden="true" tabindex="-1"></a><span class="co">#system(glue("open {DATA}")) ## this will open the folder </span></span>
 <span id="cb68-27"><a href="#cb68-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-28"><a href="#cb68-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-29"><a href="#cb68-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-30"><a href="#cb68-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-31"><a href="#cb68-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-32"><a href="#cb68-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=TRUE}</span></span>
-<span id="cb68-33"><a href="#cb68-33" aria-hidden="true" tabindex="-1"></a><span class="in">all_times &lt;- list()  # store the time for each chunk</span></span>
-<span id="cb68-34"><a href="#cb68-34" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::knit_hooks$set(time_it = local({</span></span>
-<span id="cb68-35"><a href="#cb68-35" aria-hidden="true" tabindex="-1"></a><span class="in">  now &lt;- NULL</span></span>
-<span id="cb68-36"><a href="#cb68-36" aria-hidden="true" tabindex="-1"></a><span class="in">  function(before, options) {</span></span>
-<span id="cb68-37"><a href="#cb68-37" aria-hidden="true" tabindex="-1"></a><span class="in">    if (before) {</span></span>
-<span id="cb68-38"><a href="#cb68-38" aria-hidden="true" tabindex="-1"></a><span class="in">      now &lt;&lt;- Sys.time()</span></span>
-<span id="cb68-39"><a href="#cb68-39" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
-<span id="cb68-40"><a href="#cb68-40" aria-hidden="true" tabindex="-1"></a><span class="in">      res &lt;- difftime(Sys.time(), now, units = "secs")</span></span>
-<span id="cb68-41"><a href="#cb68-41" aria-hidden="true" tabindex="-1"></a><span class="in">      all_times[[options$label]] &lt;&lt;- res</span></span>
-<span id="cb68-42"><a href="#cb68-42" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb68-43"><a href="#cb68-43" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb68-44"><a href="#cb68-44" aria-hidden="true" tabindex="-1"></a><span class="in">}))</span></span>
-<span id="cb68-45"><a href="#cb68-45" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(</span></span>
-<span id="cb68-46"><a href="#cb68-46" aria-hidden="true" tabindex="-1"></a><span class="in">  tidy = TRUE,</span></span>
-<span id="cb68-47"><a href="#cb68-47" aria-hidden="true" tabindex="-1"></a><span class="in">  tidy.opts = list(width.cutoff = 95),</span></span>
-<span id="cb68-48"><a href="#cb68-48" aria-hidden="true" tabindex="-1"></a><span class="in">  message = FALSE,</span></span>
-<span id="cb68-49"><a href="#cb68-49" aria-hidden="true" tabindex="-1"></a><span class="in">  warning = FALSE,</span></span>
-<span id="cb68-50"><a href="#cb68-50" aria-hidden="true" tabindex="-1"></a><span class="in">  time_it = TRUE,</span></span>
-<span id="cb68-51"><a href="#cb68-51" aria-hidden="true" tabindex="-1"></a><span class="in">  error = TRUE</span></span>
-<span id="cb68-52"><a href="#cb68-52" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb68-33"><a href="#cb68-33" aria-hidden="true" tabindex="-1"></a>all_times <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># store the time for each chunk</span></span>
+<span id="cb68-34"><a href="#cb68-34" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">time_it =</span> <span class="fu">local</span>({</span>
+<span id="cb68-35"><a href="#cb68-35" aria-hidden="true" tabindex="-1"></a>  now <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb68-36"><a href="#cb68-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(before, options) {</span>
+<span id="cb68-37"><a href="#cb68-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (before) {</span>
+<span id="cb68-38"><a href="#cb68-38" aria-hidden="true" tabindex="-1"></a>      now <span class="ot">&lt;&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb68-39"><a href="#cb68-39" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb68-40"><a href="#cb68-40" aria-hidden="true" tabindex="-1"></a>      res <span class="ot">&lt;-</span> <span class="fu">difftime</span>(<span class="fu">Sys.time</span>(), now, <span class="at">units =</span> <span class="st">"secs"</span>)</span>
+<span id="cb68-41"><a href="#cb68-41" aria-hidden="true" tabindex="-1"></a>      all_times[[options<span class="sc">$</span>label]] <span class="ot">&lt;&lt;-</span> res</span>
+<span id="cb68-42"><a href="#cb68-42" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb68-43"><a href="#cb68-43" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb68-44"><a href="#cb68-44" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb68-45"><a href="#cb68-45" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb68-46"><a href="#cb68-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb68-47"><a href="#cb68-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">tidy.opts =</span> <span class="fu">list</span>(<span class="at">width.cutoff =</span> <span class="dv">95</span>),</span>
+<span id="cb68-48"><a href="#cb68-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb68-49"><a href="#cb68-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb68-50"><a href="#cb68-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_it =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb68-51"><a href="#cb68-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">error =</span> <span class="cn">TRUE</span></span>
+<span id="cb68-52"><a href="#cb68-52" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb68-53"><a href="#cb68-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-54"><a href="#cb68-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-55"><a href="#cb68-55" aria-hidden="true" tabindex="-1"></a></span>
@@ -1490,12 +1474,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-58"><a href="#cb68-58" aria-hidden="true" tabindex="-1"></a>For this tutorial, we will be analyzing the a dataset of Peripheral Blood Mononuclear Cells (PBMC) freely available from 10X Genomics. There are 2,700 single cells that were sequenced on the Illumina NextSeq 500. The raw data can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz)</span>.</span>
 <span id="cb68-59"><a href="#cb68-59" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-60"><a href="#cb68-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, download pbmc data}</span></span>
-<span id="cb68-61"><a href="#cb68-61" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc_file = glue("{DATA}/pbmc3k_filtered_gene_bc_matrices.tar.gz")</span></span>
-<span id="cb68-62"><a href="#cb68-62" aria-hidden="true" tabindex="-1"></a><span class="in">if(!file.exists(pbmc_file)) {</span></span>
-<span id="cb68-63"><a href="#cb68-63" aria-hidden="true" tabindex="-1"></a><span class="in">    download.file("https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz", </span></span>
-<span id="cb68-64"><a href="#cb68-64" aria-hidden="true" tabindex="-1"></a><span class="in">              destfile = pbmc_file)</span></span>
-<span id="cb68-65"><a href="#cb68-65" aria-hidden="true" tabindex="-1"></a><span class="in">    system(glue("tar -xzf {pbmc_file} -C {DATA}"))</span></span>
-<span id="cb68-66"><a href="#cb68-66" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb68-61"><a href="#cb68-61" aria-hidden="true" tabindex="-1"></a>pbmc_file <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{DATA}/pbmc3k_filtered_gene_bc_matrices.tar.gz"</span>)</span>
+<span id="cb68-62"><a href="#cb68-62" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(pbmc_file)) {</span>
+<span id="cb68-63"><a href="#cb68-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">download.file</span>(<span class="st">"https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz"</span>, </span>
+<span id="cb68-64"><a href="#cb68-64" aria-hidden="true" tabindex="-1"></a>              <span class="at">destfile =</span> pbmc_file)</span>
+<span id="cb68-65"><a href="#cb68-65" aria-hidden="true" tabindex="-1"></a>    <span class="fu">system</span>(<span class="fu">glue</span>(<span class="st">"tar -xzf {pbmc_file} -C {DATA}"</span>))</span>
+<span id="cb68-66"><a href="#cb68-66" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb68-67"><a href="#cb68-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-68"><a href="#cb68-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-69"><a href="#cb68-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## read the data</span></span>
@@ -1539,41 +1523,41 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-107"><a href="#cb68-107" aria-hidden="true" tabindex="-1"></a>We next use the count matrix to create a <span class="in">`Seurat`</span> object. The object serves as a container that contains both data (like the count matrix) and analysis (like PCA, or clustering results) for a single-cell dataset. For a technical discussion of the <span class="in">`Seurat`</span> object structure, check out our <span class="co">[</span><span class="ot">GitHub Wiki</span><span class="co">](https://github.com/satijalab/seurat/wiki)</span>. For example, the count matrix is stored in <span class="in">`pbmc[["RNA"]]@counts`</span>.</span>
 <span id="cb68-108"><a href="#cb68-108" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-109"><a href="#cb68-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r init, error=TRUE}</span></span>
-<span id="cb68-110"><a href="#cb68-110" aria-hidden="true" tabindex="-1"></a><span class="in"># Check and install required packages if not available</span></span>
-<span id="cb68-111"><a href="#cb68-111" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("Seurat", quietly = TRUE)) {</span></span>
-<span id="cb68-112"><a href="#cb68-112" aria-hidden="true" tabindex="-1"></a><span class="in">    install.packages("Seurat")</span></span>
-<span id="cb68-113"><a href="#cb68-113" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb68-114"><a href="#cb68-114" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("patchwork", quietly = TRUE)) {</span></span>
-<span id="cb68-115"><a href="#cb68-115" aria-hidden="true" tabindex="-1"></a><span class="in">    install.packages("patchwork")</span></span>
-<span id="cb68-116"><a href="#cb68-116" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb68-110"><a href="#cb68-110" aria-hidden="true" tabindex="-1"></a><span class="co"># Check and install required packages if not available</span></span>
+<span id="cb68-111"><a href="#cb68-111" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"Seurat"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb68-112"><a href="#cb68-112" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"Seurat"</span>)</span>
+<span id="cb68-113"><a href="#cb68-113" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb68-114"><a href="#cb68-114" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"patchwork"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb68-115"><a href="#cb68-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb68-116"><a href="#cb68-116" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb68-117"><a href="#cb68-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-118"><a href="#cb68-118" aria-hidden="true" tabindex="-1"></a><span class="in">library(Seurat)</span></span>
-<span id="cb68-119"><a href="#cb68-119" aria-hidden="true" tabindex="-1"></a><span class="in">options(Seurat.object.assay.version = "v5")</span></span>
-<span id="cb68-120"><a href="#cb68-120" aria-hidden="true" tabindex="-1"></a><span class="in">library(patchwork)</span></span>
+<span id="cb68-118"><a href="#cb68-118" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
+<span id="cb68-119"><a href="#cb68-119" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">Seurat.object.assay.version =</span> <span class="st">"v5"</span>)</span>
+<span id="cb68-120"><a href="#cb68-120" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb68-121"><a href="#cb68-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-122"><a href="#cb68-122" aria-hidden="true" tabindex="-1"></a><span class="in"># Load the PBMC dataset</span></span>
-<span id="cb68-123"><a href="#cb68-123" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc.data &lt;- Read10X(data.dir = glue("{DATA}/filtered_gene_bc_matrices/hg19/"))</span></span>
-<span id="cb68-124"><a href="#cb68-124" aria-hidden="true" tabindex="-1"></a><span class="in"># Initialize the Seurat object with the raw (non-normalized data).</span></span>
-<span id="cb68-125"><a href="#cb68-125" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k", min.cells = 3, min.features = 200)</span></span>
-<span id="cb68-126"><a href="#cb68-126" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc</span></span>
+<span id="cb68-122"><a href="#cb68-122" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the PBMC dataset</span></span>
+<span id="cb68-123"><a href="#cb68-123" aria-hidden="true" tabindex="-1"></a>pbmc.data <span class="ot">&lt;-</span> <span class="fu">Read10X</span>(<span class="at">data.dir =</span> <span class="fu">glue</span>(<span class="st">"{DATA}/filtered_gene_bc_matrices/hg19/"</span>))</span>
+<span id="cb68-124"><a href="#cb68-124" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the Seurat object with the raw (non-normalized data).</span></span>
+<span id="cb68-125"><a href="#cb68-125" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(<span class="at">counts =</span> pbmc.data, <span class="at">project =</span> <span class="st">"pbmc3k"</span>, <span class="at">min.cells =</span> <span class="dv">3</span>, <span class="at">min.features =</span> <span class="dv">200</span>)</span>
+<span id="cb68-126"><a href="#cb68-126" aria-hidden="true" tabindex="-1"></a>pbmc</span>
 <span id="cb68-127"><a href="#cb68-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-128"><a href="#cb68-128" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-129"><a href="#cb68-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-130"><a href="#cb68-130" aria-hidden="true" tabindex="-1"></a><span class="fu">### What does data in a count matrix look like?</span></span>
 <span id="cb68-131"><a href="#cb68-131" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-132"><a href="#cb68-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error=TRUE}</span></span>
-<span id="cb68-133"><a href="#cb68-133" aria-hidden="true" tabindex="-1"></a><span class="in"># Lets examine a few genes in the first thirty cells</span></span>
-<span id="cb68-134"><a href="#cb68-134" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc.data[c("CD3D", "TCL1A", "MS4A1"), 1:30]</span></span>
+<span id="cb68-133"><a href="#cb68-133" aria-hidden="true" tabindex="-1"></a><span class="co"># Lets examine a few genes in the first thirty cells</span></span>
+<span id="cb68-134"><a href="#cb68-134" aria-hidden="true" tabindex="-1"></a>pbmc.data[<span class="fu">c</span>(<span class="st">"CD3D"</span>, <span class="st">"TCL1A"</span>, <span class="st">"MS4A1"</span>), <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>]</span>
 <span id="cb68-135"><a href="#cb68-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-136"><a href="#cb68-136" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-137"><a href="#cb68-137" aria-hidden="true" tabindex="-1"></a>The <span class="in">`.`</span> values in the matrix represent 0s (no molecules detected). Since most values in an scRNA-seq matrix are 0,  Seurat uses a sparse-matrix representation whenever possible. This results in significant memory and speed savings for Drop-seq/inDrop/10x data.</span>
 <span id="cb68-138"><a href="#cb68-138" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-139"><a href="#cb68-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, error=TRUE}</span></span>
-<span id="cb68-140"><a href="#cb68-140" aria-hidden="true" tabindex="-1"></a><span class="in">dense.size &lt;- object.size(as.matrix(pbmc.data))</span></span>
-<span id="cb68-141"><a href="#cb68-141" aria-hidden="true" tabindex="-1"></a><span class="in">dense.size</span></span>
-<span id="cb68-142"><a href="#cb68-142" aria-hidden="true" tabindex="-1"></a><span class="in">sparse.size &lt;- object.size(pbmc.data)</span></span>
-<span id="cb68-143"><a href="#cb68-143" aria-hidden="true" tabindex="-1"></a><span class="in">sparse.size</span></span>
-<span id="cb68-144"><a href="#cb68-144" aria-hidden="true" tabindex="-1"></a><span class="in">dense.size / sparse.size</span></span>
+<span id="cb68-140"><a href="#cb68-140" aria-hidden="true" tabindex="-1"></a>dense.size <span class="ot">&lt;-</span> <span class="fu">object.size</span>(<span class="fu">as.matrix</span>(pbmc.data))</span>
+<span id="cb68-141"><a href="#cb68-141" aria-hidden="true" tabindex="-1"></a>dense.size</span>
+<span id="cb68-142"><a href="#cb68-142" aria-hidden="true" tabindex="-1"></a>sparse.size <span class="ot">&lt;-</span> <span class="fu">object.size</span>(pbmc.data)</span>
+<span id="cb68-143"><a href="#cb68-143" aria-hidden="true" tabindex="-1"></a>sparse.size</span>
+<span id="cb68-144"><a href="#cb68-144" aria-hidden="true" tabindex="-1"></a>dense.size <span class="sc">/</span> sparse.size</span>
 <span id="cb68-145"><a href="#cb68-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-146"><a href="#cb68-146" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-147"><a href="#cb68-147" aria-hidden="true" tabindex="-1"></a><span class="fu"># Standard pre-processing workflow</span></span>
@@ -1594,20 +1578,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-162"><a href="#cb68-162" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>We use the set of all genes starting with <span class="in">`MT-`</span> as a set of mitochondrial genes</span>
 <span id="cb68-163"><a href="#cb68-163" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-164"><a href="#cb68-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mito, fig.height=7, fig.width=13, error=TRUE}</span></span>
-<span id="cb68-165"><a href="#cb68-165" aria-hidden="true" tabindex="-1"></a><span class="in"># The [[ operator can add columns to object metadata. This is a great place to stash QC stats</span></span>
-<span id="cb68-166"><a href="#cb68-166" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc[["percent.mt"]] &lt;- PercentageFeatureSet(pbmc, pattern = "^MT-")</span></span>
+<span id="cb68-165"><a href="#cb68-165" aria-hidden="true" tabindex="-1"></a><span class="co"># The [[ operator can add columns to object metadata. This is a great place to stash QC stats</span></span>
+<span id="cb68-166"><a href="#cb68-166" aria-hidden="true" tabindex="-1"></a>pbmc[[<span class="st">"percent.mt"</span>]] <span class="ot">&lt;-</span> <span class="fu">PercentageFeatureSet</span>(pbmc, <span class="at">pattern =</span> <span class="st">"^MT-"</span>)</span>
 <span id="cb68-167"><a href="#cb68-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-168"><a href="#cb68-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-169"><a href="#cb68-169" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb68-170"><a href="#cb68-170" aria-hidden="true" tabindex="-1"></a>  &lt;summary&gt;**Where are QC metrics stored in Seurat?**&lt;/summary&gt;</span>
+<span id="cb68-169"><a href="#cb68-169" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb68-170"><a href="#cb68-170" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>**Where are QC metrics stored in Seurat?**<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb68-171"><a href="#cb68-171" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-172"><a href="#cb68-172" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The number of unique genes and total molecules are automatically calculated during <span class="in">`CreateSeuratObject()`</span></span>
 <span id="cb68-173"><a href="#cb68-173" aria-hidden="true" tabindex="-1"></a><span class="ss">    + </span>You can find them stored in the object meta data</span>
 <span id="cb68-174"><a href="#cb68-174" aria-hidden="true" tabindex="-1"></a><span class="in">```{r qc, fig.height=7, fig.width=13, error=TRUE}</span></span>
-<span id="cb68-175"><a href="#cb68-175" aria-hidden="true" tabindex="-1"></a><span class="in"># Show QC metrics for the first 5 cells</span></span>
-<span id="cb68-176"><a href="#cb68-176" aria-hidden="true" tabindex="-1"></a><span class="in">head(pbmc@meta.data, 5)</span></span>
+<span id="cb68-175"><a href="#cb68-175" aria-hidden="true" tabindex="-1"></a><span class="co"># Show QC metrics for the first 5 cells</span></span>
+<span id="cb68-176"><a href="#cb68-176" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pbmc<span class="sc">@</span>meta.data, <span class="dv">5</span>)</span>
 <span id="cb68-177"><a href="#cb68-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb68-178"><a href="#cb68-178" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb68-178"><a href="#cb68-178" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb68-179"><a href="#cb68-179" aria-hidden="true" tabindex="-1"></a>\  </span>
 <span id="cb68-180"><a href="#cb68-180" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-181"><a href="#cb68-181" aria-hidden="true" tabindex="-1"></a>In the example below, we visualize QC metrics, and use these to filter cells.</span>
@@ -1617,16 +1601,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-185"><a href="#cb68-185" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb68-186"><a href="#cb68-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r qc2, fig.height=7, fig.width=13, error=TRUE}</span></span>
 <span id="cb68-187"><a href="#cb68-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-188"><a href="#cb68-188" aria-hidden="true" tabindex="-1"></a><span class="in">#Visualize QC metrics as a violin plot</span></span>
-<span id="cb68-189"><a href="#cb68-189" aria-hidden="true" tabindex="-1"></a><span class="in">VlnPlot(pbmc, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)</span></span>
+<span id="cb68-188"><a href="#cb68-188" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualize QC metrics as a violin plot</span></span>
+<span id="cb68-189"><a href="#cb68-189" aria-hidden="true" tabindex="-1"></a><span class="fu">VlnPlot</span>(pbmc, <span class="at">features =</span> <span class="fu">c</span>(<span class="st">"nFeature_RNA"</span>, <span class="st">"nCount_RNA"</span>, <span class="st">"percent.mt"</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span>
 <span id="cb68-190"><a href="#cb68-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-191"><a href="#cb68-191" aria-hidden="true" tabindex="-1"></a><span class="in"># FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.</span></span>
+<span id="cb68-191"><a href="#cb68-191" aria-hidden="true" tabindex="-1"></a><span class="co"># FeatureScatter is typically used to visualize feature-feature relationships, but can be used for anything calculated by the object, i.e. columns in object metadata, PC scores etc.</span></span>
 <span id="cb68-192"><a href="#cb68-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-193"><a href="#cb68-193" aria-hidden="true" tabindex="-1"></a><span class="in">plot1 &lt;- FeatureScatter(pbmc, feature1 = "nCount_RNA", feature2 = "percent.mt")</span></span>
-<span id="cb68-194"><a href="#cb68-194" aria-hidden="true" tabindex="-1"></a><span class="in">plot2 &lt;- FeatureScatter(pbmc, feature1 = "nCount_RNA", feature2 = "nFeature_RNA") </span></span>
-<span id="cb68-195"><a href="#cb68-195" aria-hidden="true" tabindex="-1"></a><span class="in">plot1 + plot2</span></span>
+<span id="cb68-193"><a href="#cb68-193" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">FeatureScatter</span>(pbmc, <span class="at">feature1 =</span> <span class="st">"nCount_RNA"</span>, <span class="at">feature2 =</span> <span class="st">"percent.mt"</span>)</span>
+<span id="cb68-194"><a href="#cb68-194" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">FeatureScatter</span>(pbmc, <span class="at">feature1 =</span> <span class="st">"nCount_RNA"</span>, <span class="at">feature2 =</span> <span class="st">"nFeature_RNA"</span>) </span>
+<span id="cb68-195"><a href="#cb68-195" aria-hidden="true" tabindex="-1"></a>plot1 <span class="sc">+</span> plot2</span>
 <span id="cb68-196"><a href="#cb68-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-197"><a href="#cb68-197" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- subset(pbmc, subset = nFeature_RNA &gt; 200 &amp; nFeature_RNA &lt; 2500 &amp; percent.mt &lt; 5)</span></span>
+<span id="cb68-197"><a href="#cb68-197" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">subset</span>(pbmc, <span class="at">subset =</span> nFeature_RNA <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">&amp;</span> nFeature_RNA <span class="sc">&lt;</span> <span class="dv">2500</span> <span class="sc">&amp;</span> percent.mt <span class="sc">&lt;</span> <span class="dv">5</span>)</span>
 <span id="cb68-198"><a href="#cb68-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-199"><a href="#cb68-199" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-200"><a href="#cb68-200" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -1636,12 +1620,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-204"><a href="#cb68-204" aria-hidden="true" tabindex="-1"></a>After removing unwanted cells from the dataset, the next step is to normalize the data. By default, we employ a global-scaling normalization method "LogNormalize" that normalizes the feature expression measurements for each cell by the total expression, multiplies this by a scale factor (10,000 by default), and log-transforms the result. Normalized values are stored in <span class="in">`pbmc[["RNA"]]@data`</span>.</span>
 <span id="cb68-205"><a href="#cb68-205" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-206"><a href="#cb68-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{r normalize, error=TRUE}</span></span>
-<span id="cb68-207"><a href="#cb68-207" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- NormalizeData(pbmc, normalization.method = "LogNormalize", scale.factor = 1e4)</span></span>
+<span id="cb68-207"><a href="#cb68-207" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(pbmc, <span class="at">normalization.method =</span> <span class="st">"LogNormalize"</span>, <span class="at">scale.factor =</span> <span class="fl">1e4</span>)</span>
 <span id="cb68-208"><a href="#cb68-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-209"><a href="#cb68-209" aria-hidden="true" tabindex="-1"></a>For clarity, in this previous line of code (and in future commands), we provide the default values for certain parameters in the function call. However, this isn't required and the same behavior can be achieved with:</span>
 <span id="cb68-210"><a href="#cb68-210" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-211"><a href="#cb68-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r normalize.default, eval = FALSE}</span></span>
-<span id="cb68-212"><a href="#cb68-212" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- NormalizeData(pbmc)</span></span>
+<span id="cb68-212"><a href="#cb68-212" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(pbmc)</span>
 <span id="cb68-213"><a href="#cb68-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-214"><a href="#cb68-214" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-215"><a href="#cb68-215" aria-hidden="true" tabindex="-1"></a><span class="fu"># Identification of highly variable features (feature selection)</span></span>
@@ -1651,16 +1635,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-219"><a href="#cb68-219" aria-hidden="true" tabindex="-1"></a>Our procedure in Seurat is described in detail <span class="co">[</span><span class="ot">here</span><span class="co">](https://doi.org/10.1016/j.cell.2019.05.031)</span>, and improves on previous versions by directly modeling the mean-variance relationship inherent in single-cell data, and is implemented in the <span class="in">`FindVariableFeatures()`</span> function. By default, we return 2,000 features per dataset. These will be used in downstream analysis, like PCA.</span>
 <span id="cb68-220"><a href="#cb68-220" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-221"><a href="#cb68-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r var_features, fig.height=5, fig.width=11}</span></span>
-<span id="cb68-222"><a href="#cb68-222" aria-hidden="true" tabindex="-1"></a><span class="in">DefaultLayer(pbmc[["RNA"]]) &lt;- "counts"</span></span>
-<span id="cb68-223"><a href="#cb68-223" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- FindVariableFeatures(pbmc, selection.method = 'vst', nfeatures = 2000)</span></span>
+<span id="cb68-222"><a href="#cb68-222" aria-hidden="true" tabindex="-1"></a><span class="fu">DefaultLayer</span>(pbmc[[<span class="st">"RNA"</span>]]) <span class="ot">&lt;-</span> <span class="st">"counts"</span></span>
+<span id="cb68-223"><a href="#cb68-223" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(pbmc, <span class="at">selection.method =</span> <span class="st">'vst'</span>, <span class="at">nfeatures =</span> <span class="dv">2000</span>)</span>
 <span id="cb68-224"><a href="#cb68-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-225"><a href="#cb68-225" aria-hidden="true" tabindex="-1"></a><span class="in"># Identify the 10 most highly variable genes</span></span>
-<span id="cb68-226"><a href="#cb68-226" aria-hidden="true" tabindex="-1"></a><span class="in">top10 &lt;- head(VariableFeatures(pbmc), 10)</span></span>
+<span id="cb68-225"><a href="#cb68-225" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify the 10 most highly variable genes</span></span>
+<span id="cb68-226"><a href="#cb68-226" aria-hidden="true" tabindex="-1"></a>top10 <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">VariableFeatures</span>(pbmc), <span class="dv">10</span>)</span>
 <span id="cb68-227"><a href="#cb68-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-228"><a href="#cb68-228" aria-hidden="true" tabindex="-1"></a><span class="in"># plot variable features with and without labels</span></span>
-<span id="cb68-229"><a href="#cb68-229" aria-hidden="true" tabindex="-1"></a><span class="in">plot1 &lt;- VariableFeaturePlot(pbmc)</span></span>
-<span id="cb68-230"><a href="#cb68-230" aria-hidden="true" tabindex="-1"></a><span class="in">plot2 &lt;- LabelPoints(plot = plot1, points = top10, repel = TRUE)</span></span>
-<span id="cb68-231"><a href="#cb68-231" aria-hidden="true" tabindex="-1"></a><span class="in">plot1 + plot2</span></span>
+<span id="cb68-228"><a href="#cb68-228" aria-hidden="true" tabindex="-1"></a><span class="co"># plot variable features with and without labels</span></span>
+<span id="cb68-229"><a href="#cb68-229" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">VariableFeaturePlot</span>(pbmc)</span>
+<span id="cb68-230"><a href="#cb68-230" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">LabelPoints</span>(<span class="at">plot =</span> plot1, <span class="at">points =</span> top10, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-231"><a href="#cb68-231" aria-hidden="true" tabindex="-1"></a>plot1 <span class="sc">+</span> plot2</span>
 <span id="cb68-232"><a href="#cb68-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-233"><a href="#cb68-233" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-234"><a href="#cb68-234" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -1675,29 +1659,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-243"><a href="#cb68-243" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The results of this are stored in <span class="in">`pbmc[["RNA"]]@scale.data`</span></span>
 <span id="cb68-244"><a href="#cb68-244" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-245"><a href="#cb68-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r regress, fig.height=7, fig.width=11, results='hide'}</span></span>
-<span id="cb68-246"><a href="#cb68-246" aria-hidden="true" tabindex="-1"></a><span class="in">DefaultLayer(pbmc[["RNA"]]) &lt;- "data"</span></span>
-<span id="cb68-247"><a href="#cb68-247" aria-hidden="true" tabindex="-1"></a><span class="in">all.genes &lt;- rownames(pbmc)</span></span>
-<span id="cb68-248"><a href="#cb68-248" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- ScaleData(pbmc, features = all.genes)</span></span>
+<span id="cb68-246"><a href="#cb68-246" aria-hidden="true" tabindex="-1"></a><span class="fu">DefaultLayer</span>(pbmc[[<span class="st">"RNA"</span>]]) <span class="ot">&lt;-</span> <span class="st">"data"</span></span>
+<span id="cb68-247"><a href="#cb68-247" aria-hidden="true" tabindex="-1"></a>all.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pbmc)</span>
+<span id="cb68-248"><a href="#cb68-248" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(pbmc, <span class="at">features =</span> all.genes)</span>
 <span id="cb68-249"><a href="#cb68-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb68-250"><a href="#cb68-250" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb68-251"><a href="#cb68-251" aria-hidden="true" tabindex="-1"></a>  &lt;summary&gt;**This step takes too long! Can I make it faster?**&lt;/summary&gt;</span>
+<span id="cb68-250"><a href="#cb68-250" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb68-251"><a href="#cb68-251" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>**This step takes too long! Can I make it faster?**<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb68-252"><a href="#cb68-252" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-253"><a href="#cb68-253" aria-hidden="true" tabindex="-1"></a>Scaling is an essential step in the Seurat workflow, but only on genes that will be used as input to PCA. Therefore, the default in <span class="in">`ScaleData()`</span> is only to perform scaling on the previously identified variable features (2,000 by default). To do this, omit the <span class="in">`features`</span> argument in the previous function call, i.e.</span>
 <span id="cb68-254"><a href="#cb68-254" aria-hidden="true" tabindex="-1"></a><span class="in">```{r regressvar, fig.height=7, fig.width=11, results='hide', eval = FALSE}</span></span>
-<span id="cb68-255"><a href="#cb68-255" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- ScaleData(pbmc)</span></span>
+<span id="cb68-255"><a href="#cb68-255" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(pbmc)</span>
 <span id="cb68-256"><a href="#cb68-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-257"><a href="#cb68-257" aria-hidden="true" tabindex="-1"></a>Your PCA and clustering results will be unaffected. However, Seurat heatmaps (produced as shown below with <span class="in">`DoHeatmap()`</span>) require genes in the heatmap to be scaled, to make sure highly-expressed genes don't dominate the heatmap. To make sure we don't leave any genes out of the heatmap later, we are scaling all genes in this tutorial. </span>
-<span id="cb68-258"><a href="#cb68-258" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb68-258"><a href="#cb68-258" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb68-259"><a href="#cb68-259" aria-hidden="true" tabindex="-1"></a>\  </span>
-<span id="cb68-260"><a href="#cb68-260" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb68-261"><a href="#cb68-261" aria-hidden="true" tabindex="-1"></a>  &lt;summary&gt;**How can I remove unwanted sources of variation, as in Seurat v2?**&lt;/summary&gt;</span>
+<span id="cb68-260"><a href="#cb68-260" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb68-261"><a href="#cb68-261" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>**How can I remove unwanted sources of variation, as in Seurat v2?**<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb68-262"><a href="#cb68-262" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-263"><a href="#cb68-263" aria-hidden="true" tabindex="-1"></a>In <span class="in">`Seurat v2`</span> we also use the <span class="in">`ScaleData()`</span> function to remove unwanted sources of variation from a single-cell dataset. For example, we could 'regress out' heterogeneity associated with (for example) cell cycle stage, or mitochondrial contamination. These features are still supported in <span class="in">`ScaleData()`</span> in <span class="in">`Seurat v3`</span>, i.e.: </span>
 <span id="cb68-264"><a href="#cb68-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r regressvarmt, fig.height=7, fig.width=11, results='hide', eval = FALSE}</span></span>
-<span id="cb68-265"><a href="#cb68-265" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- ScaleData(pbmc, vars.to.regress = 'percent.mt')</span></span>
+<span id="cb68-265"><a href="#cb68-265" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(pbmc, <span class="at">vars.to.regress =</span> <span class="st">'percent.mt'</span>)</span>
 <span id="cb68-266"><a href="#cb68-266" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-267"><a href="#cb68-267" aria-hidden="true" tabindex="-1"></a>However, particularly for advanced users who would like to use this functionality, we strongly recommend the use of our new normalization workflow, <span class="in">`SCTransform()`</span>. The method is described in our <span class="co">[</span><span class="ot">paper</span><span class="co">](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1874-1)</span>, with a separate vignette using Seurat v3 <span class="co">[</span><span class="ot">here</span><span class="co">](sctransform_vignette.html)</span>. As with <span class="in">`ScaleData()`</span>, the function <span class="in">`SCTransform()`</span> also includes a <span class="in">`vars.to.regress`</span> parameter.</span>
-<span id="cb68-268"><a href="#cb68-268" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb68-268"><a href="#cb68-268" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb68-269"><a href="#cb68-269" aria-hidden="true" tabindex="-1"></a>\ </span>
 <span id="cb68-270"><a href="#cb68-270" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-271"><a href="#cb68-271" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -1707,26 +1691,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-275"><a href="#cb68-275" aria-hidden="true" tabindex="-1"></a>Next we perform PCA on the scaled data. By default, only the previously determined variable features are used as input, but can be defined using <span class="in">`features`</span> argument if you wish to choose a different subset.</span>
 <span id="cb68-276"><a href="#cb68-276" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-277"><a href="#cb68-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pca}</span></span>
-<span id="cb68-278"><a href="#cb68-278" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- RunPCA(pbmc, features = VariableFeatures(object = pbmc))</span></span>
+<span id="cb68-278"><a href="#cb68-278" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">RunPCA</span>(pbmc, <span class="at">features =</span> <span class="fu">VariableFeatures</span>(<span class="at">object =</span> pbmc))</span>
 <span id="cb68-279"><a href="#cb68-279" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-280"><a href="#cb68-280" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-281"><a href="#cb68-281" aria-hidden="true" tabindex="-1"></a>Seurat provides several useful ways of visualizing both cells and features that define the PCA, including <span class="in">`VizDimReduction()`</span>, <span class="in">`DimPlot()`</span>, and <span class="in">`DimHeatmap()`</span></span>
 <span id="cb68-282"><a href="#cb68-282" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-283"><a href="#cb68-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pca_viz, message=TRUE}</span></span>
-<span id="cb68-284"><a href="#cb68-284" aria-hidden="true" tabindex="-1"></a><span class="in"># Examine and visualize PCA results a few different ways</span></span>
-<span id="cb68-285"><a href="#cb68-285" aria-hidden="true" tabindex="-1"></a><span class="in">print(pbmc[['pca']], dims = 1:5, nfeatures = 5)</span></span>
-<span id="cb68-286"><a href="#cb68-286" aria-hidden="true" tabindex="-1"></a><span class="in">VizDimLoadings(pbmc, dims = 1:2, reduction = 'pca')</span></span>
-<span id="cb68-287"><a href="#cb68-287" aria-hidden="true" tabindex="-1"></a><span class="in">DimPlot(pbmc, reduction = 'pca')</span></span>
+<span id="cb68-284"><a href="#cb68-284" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine and visualize PCA results a few different ways</span></span>
+<span id="cb68-285"><a href="#cb68-285" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pbmc[[<span class="st">'pca'</span>]], <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">nfeatures =</span> <span class="dv">5</span>)</span>
+<span id="cb68-286"><a href="#cb68-286" aria-hidden="true" tabindex="-1"></a><span class="fu">VizDimLoadings</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">reduction =</span> <span class="st">'pca'</span>)</span>
+<span id="cb68-287"><a href="#cb68-287" aria-hidden="true" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc, <span class="at">reduction =</span> <span class="st">'pca'</span>)</span>
 <span id="cb68-288"><a href="#cb68-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-289"><a href="#cb68-289" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-290"><a href="#cb68-290" aria-hidden="true" tabindex="-1"></a>In particular <span class="in">`DimHeatmap()`</span> allows for easy exploration of the primary sources of heterogeneity in a dataset, and can be useful when trying to decide which PCs to include for further downstream analyses. Both cells and features are ordered according to their PCA scores. Setting <span class="in">`cells`</span> to a number plots the 'extreme' cells on both ends of the spectrum, which dramatically speeds plotting for large datasets. Though clearly a supervised analysis, we find this to be a valuable tool for exploring correlated feature sets.</span>
 <span id="cb68-291"><a href="#cb68-291" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-292"><a href="#cb68-292" aria-hidden="true" tabindex="-1"></a><span class="in">```{r single-heatmap}</span></span>
-<span id="cb68-293"><a href="#cb68-293" aria-hidden="true" tabindex="-1"></a><span class="in">DimHeatmap(pbmc, dims = 1, cells = 500, balanced = TRUE)</span></span>
+<span id="cb68-293"><a href="#cb68-293" aria-hidden="true" tabindex="-1"></a><span class="fu">DimHeatmap</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span>, <span class="at">cells =</span> <span class="dv">500</span>, <span class="at">balanced =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb68-294"><a href="#cb68-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-295"><a href="#cb68-295" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-296"><a href="#cb68-296" aria-hidden="true" tabindex="-1"></a><span class="in">```{r multi-heatmap, fig.height=15, fig.width=9}</span></span>
-<span id="cb68-297"><a href="#cb68-297" aria-hidden="true" tabindex="-1"></a><span class="in">DimHeatmap(pbmc, dims = 1:15, cells = 500, balanced = TRUE)</span></span>
+<span id="cb68-297"><a href="#cb68-297" aria-hidden="true" tabindex="-1"></a><span class="fu">DimHeatmap</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">cells =</span> <span class="dv">500</span>, <span class="at">balanced =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb68-298"><a href="#cb68-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-299"><a href="#cb68-299" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-300"><a href="#cb68-300" aria-hidden="true" tabindex="-1"></a><span class="fu"># Determine the 'dimensionality' of the dataset</span></span>
@@ -1736,21 +1720,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-304"><a href="#cb68-304" aria-hidden="true" tabindex="-1"></a>In <span class="co">[</span><span class="ot">Macosko *et al*</span><span class="co">]</span>(http://www.cell.com/abstract/S0092-8674(15)00549-8), we implemented a resampling test inspired by the JackStraw procedure. We randomly permute a subset of the data (1% by default) and rerun PCA, constructing a 'null distribution' of feature scores, and repeat this procedure. We identify 'significant' PCs as those who have a strong enrichment of low p-value features.</span>
 <span id="cb68-305"><a href="#cb68-305" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-306"><a href="#cb68-306" aria-hidden="true" tabindex="-1"></a><span class="in">```{r jackstraw, fig.height=6, fig.width=10}</span></span>
-<span id="cb68-307"><a href="#cb68-307" aria-hidden="true" tabindex="-1"></a><span class="in"># NOTE: This process can take a long time for big datasets, comment out for expediency. More approximate techniques such as those implemented in ElbowPlot() can be used to reduce computation time</span></span>
-<span id="cb68-308"><a href="#cb68-308" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- JackStraw(pbmc, num.replicate = 100)</span></span>
-<span id="cb68-309"><a href="#cb68-309" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- ScoreJackStraw(pbmc, dims = 1:20)</span></span>
+<span id="cb68-307"><a href="#cb68-307" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: This process can take a long time for big datasets, comment out for expediency. More approximate techniques such as those implemented in ElbowPlot() can be used to reduce computation time</span></span>
+<span id="cb68-308"><a href="#cb68-308" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">JackStraw</span>(pbmc, <span class="at">num.replicate =</span> <span class="dv">100</span>)</span>
+<span id="cb68-309"><a href="#cb68-309" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">ScoreJackStraw</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
 <span id="cb68-310"><a href="#cb68-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-311"><a href="#cb68-311" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-312"><a href="#cb68-312" aria-hidden="true" tabindex="-1"></a>The <span class="in">`JackStrawPlot()`</span> function provides a visualization tool for comparing the distribution of p-values for each PC with a uniform distribution (dashed line). 'Significant' PCs will show a strong enrichment of features with low p-values (solid curve above the dashed line). In this case it appears that there is a sharp drop-off in significance after the first 10-12 PCs.</span>
 <span id="cb68-313"><a href="#cb68-313" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-314"><a href="#cb68-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r jsplots, fig.height=6, fig.width=10}</span></span>
-<span id="cb68-315"><a href="#cb68-315" aria-hidden="true" tabindex="-1"></a><span class="in">JackStrawPlot(pbmc, dims = 1:15)</span></span>
+<span id="cb68-315"><a href="#cb68-315" aria-hidden="true" tabindex="-1"></a><span class="fu">JackStrawPlot</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span>
 <span id="cb68-316"><a href="#cb68-316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-317"><a href="#cb68-317" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-318"><a href="#cb68-318" aria-hidden="true" tabindex="-1"></a>An alternative heuristic method generates an 'Elbow plot': a ranking of principle components based on the percentage of variance explained by each one (<span class="in">`ElbowPlot()`</span> function). In this example, we can observe an 'elbow' around PC9-10, suggesting that the majority of true signal is captured in the first 10 PCs. </span>
 <span id="cb68-319"><a href="#cb68-319" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-320"><a href="#cb68-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r elbow_plot, fig.height=6, fig.width=10}</span></span>
-<span id="cb68-321"><a href="#cb68-321" aria-hidden="true" tabindex="-1"></a><span class="in">ElbowPlot(pbmc)</span></span>
+<span id="cb68-321"><a href="#cb68-321" aria-hidden="true" tabindex="-1"></a><span class="fu">ElbowPlot</span>(pbmc)</span>
 <span id="cb68-322"><a href="#cb68-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-323"><a href="#cb68-323" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-324"><a href="#cb68-324" aria-hidden="true" tabindex="-1"></a>Identifying the true dimensionality of a dataset -- can be challenging/uncertain for the user. We therefore suggest these three approaches to consider. The first is more supervised, exploring PCs to determine relevant sources of heterogeneity, and could be used in conjunction with GSEA for example. The second implements a statistical test based on a random null model, but is time-consuming for large datasets, and may not return a clear PC cutoff. The third is a heuristic that is commonly used, and can be calculated instantly. In this example, all three approaches yielded similar results, but we might have been justified in choosing anything between PC 7-12 as a cutoff. </span>
@@ -1773,11 +1757,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-341"><a href="#cb68-341" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-342"><a href="#cb68-342" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-343"><a href="#cb68-343" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cluster, fig.height=5, fig.width=7}</span></span>
-<span id="cb68-344"><a href="#cb68-344" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- FindNeighbors(pbmc, dims = 1:10)</span></span>
-<span id="cb68-345"><a href="#cb68-345" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- FindClusters(pbmc, resolution = 0.5)</span></span>
+<span id="cb68-344"><a href="#cb68-344" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">FindNeighbors</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb68-345"><a href="#cb68-345" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">FindClusters</span>(pbmc, <span class="at">resolution =</span> <span class="fl">0.5</span>)</span>
 <span id="cb68-346"><a href="#cb68-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-347"><a href="#cb68-347" aria-hidden="true" tabindex="-1"></a><span class="in"># Look at cluster IDs of the first 5 cells</span></span>
-<span id="cb68-348"><a href="#cb68-348" aria-hidden="true" tabindex="-1"></a><span class="in">head(Idents(pbmc), 5)</span></span>
+<span id="cb68-347"><a href="#cb68-347" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at cluster IDs of the first 5 cells</span></span>
+<span id="cb68-348"><a href="#cb68-348" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">Idents</span>(pbmc), <span class="dv">5</span>)</span>
 <span id="cb68-349"><a href="#cb68-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-350"><a href="#cb68-350" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-351"><a href="#cb68-351" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -1787,22 +1771,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-355"><a href="#cb68-355" aria-hidden="true" tabindex="-1"></a>Seurat offers several non-linear dimensional reduction techniques, such as tSNE and UMAP, to visualize and explore these datasets. The goal of these algorithms is to learn the underlying manifold of the data in order to place similar cells together in low-dimensional space. Cells within the graph-based clusters determined above should co-localize on these dimension reduction plots. As input to the UMAP and tSNE, we suggest using the same PCs as input to the clustering analysis.</span>
 <span id="cb68-356"><a href="#cb68-356" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-357"><a href="#cb68-357" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tsne, fig.height=5, fig.width=7}</span></span>
-<span id="cb68-358"><a href="#cb68-358" aria-hidden="true" tabindex="-1"></a><span class="in"># If you haven't installed UMAP, you can do so via reticulate::py_install(packages = "umap-learn")</span></span>
-<span id="cb68-359"><a href="#cb68-359" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- RunUMAP(pbmc, dims = 1:10)</span></span>
+<span id="cb68-358"><a href="#cb68-358" aria-hidden="true" tabindex="-1"></a><span class="co"># If you haven't installed UMAP, you can do so via reticulate::py_install(packages = "umap-learn")</span></span>
+<span id="cb68-359"><a href="#cb68-359" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">RunUMAP</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
 <span id="cb68-360"><a href="#cb68-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-361"><a href="#cb68-361" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-362"><a href="#cb68-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r tsneplot, fig.height=5, fig.width=7}</span></span>
-<span id="cb68-363"><a href="#cb68-363" aria-hidden="true" tabindex="-1"></a><span class="in"># note that you can set `label = TRUE` or use the LabelClusters function to help label individual clusters</span></span>
-<span id="cb68-364"><a href="#cb68-364" aria-hidden="true" tabindex="-1"></a><span class="in">DimPlot(pbmc, reduction = 'umap')</span></span>
+<span id="cb68-363"><a href="#cb68-363" aria-hidden="true" tabindex="-1"></a><span class="co"># note that you can set `label = TRUE` or use the LabelClusters function to help label individual clusters</span></span>
+<span id="cb68-364"><a href="#cb68-364" aria-hidden="true" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc, <span class="at">reduction =</span> <span class="st">'umap'</span>)</span>
 <span id="cb68-365"><a href="#cb68-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-366"><a href="#cb68-366" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-367"><a href="#cb68-367" aria-hidden="true" tabindex="-1"></a>You can save the object at this point so that it can easily be loaded back in without having to rerun the computationally intensive steps performed above, or easily shared with collaborators.</span>
 <span id="cb68-368"><a href="#cb68-368" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-369"><a href="#cb68-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r saveobject, eval=FALSE}</span></span>
-<span id="cb68-370"><a href="#cb68-370" aria-hidden="true" tabindex="-1"></a><span class="in">outdir = glue("{DATA}/output")</span></span>
-<span id="cb68-371"><a href="#cb68-371" aria-hidden="true" tabindex="-1"></a><span class="in">if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))</span></span>
-<span id="cb68-372"><a href="#cb68-372" aria-hidden="true" tabindex="-1"></a><span class="in">filename = glue("{outdir}/pbmc_tutorial.rds")</span></span>
-<span id="cb68-373"><a href="#cb68-373" aria-hidden="true" tabindex="-1"></a><span class="in">saveRDS(pbmc, file = filename)</span></span>
+<span id="cb68-370"><a href="#cb68-370" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{DATA}/output"</span>)</span>
+<span id="cb68-371"><a href="#cb68-371" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(outdir)) <span class="fu">system</span>(<span class="fu">glue</span>(<span class="st">"mkdir -p {outdir}"</span>))</span>
+<span id="cb68-372"><a href="#cb68-372" aria-hidden="true" tabindex="-1"></a>filename <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{outdir}/pbmc_tutorial.rds"</span>)</span>
+<span id="cb68-373"><a href="#cb68-373" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(pbmc, <span class="at">file =</span> filename)</span>
 <span id="cb68-374"><a href="#cb68-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-375"><a href="#cb68-375" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-376"><a href="#cb68-376" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -1814,40 +1798,40 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-382"><a href="#cb68-382" aria-hidden="true" tabindex="-1"></a>The <span class="in">`min.pct`</span> argument requires a feature to be detected at a minimum percentage in either of the two groups of cells, and the thresh.test argument requires a feature to be differentially expressed (on average) by some amount between the two groups. You can set both of these to 0, but with a dramatic increase in time - since this will test a large number of features that are unlikely to be highly discriminatory. As another option to speed up these computations, <span class="in">`max.cells.per.ident`</span> can be set. This will downsample each identity class to have no more cells than whatever this is set to. While there is generally going to be a loss in power, the speed increases can be significant and the most highly differentially expressed features will likely still rise to the top.</span>
 <span id="cb68-383"><a href="#cb68-383" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-384"><a href="#cb68-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r markers1, fig.height=8, fig.width=15}</span></span>
-<span id="cb68-385"><a href="#cb68-385" aria-hidden="true" tabindex="-1"></a><span class="in"># find all markers of cluster 2</span></span>
-<span id="cb68-386"><a href="#cb68-386" aria-hidden="true" tabindex="-1"></a><span class="in">cluster2.markers &lt;- FindMarkers(pbmc, ident.1 = 2, min.pct = 0.25)</span></span>
-<span id="cb68-387"><a href="#cb68-387" aria-hidden="true" tabindex="-1"></a><span class="in">head(cluster2.markers, n = 5)</span></span>
-<span id="cb68-388"><a href="#cb68-388" aria-hidden="true" tabindex="-1"></a><span class="in"># find all markers distinguishing cluster 5 from clusters 0 and 3</span></span>
-<span id="cb68-389"><a href="#cb68-389" aria-hidden="true" tabindex="-1"></a><span class="in">cluster5.markers &lt;- FindMarkers(pbmc, ident.1 = 5, ident.2 = c(0, 3), min.pct = 0.25)</span></span>
-<span id="cb68-390"><a href="#cb68-390" aria-hidden="true" tabindex="-1"></a><span class="in">head(cluster5.markers, n = 5)</span></span>
-<span id="cb68-391"><a href="#cb68-391" aria-hidden="true" tabindex="-1"></a><span class="in"># find markers for every cluster compared to all remaining cells, report only the positive ones</span></span>
-<span id="cb68-392"><a href="#cb68-392" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc.markers &lt;- FindAllMarkers(pbmc, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)</span></span>
-<span id="cb68-393"><a href="#cb68-393" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc.markers %&gt;% group_by(cluster) %&gt;% slice_max(n = 2, order_by = avg_log2FC)</span></span>
+<span id="cb68-385"><a href="#cb68-385" aria-hidden="true" tabindex="-1"></a><span class="co"># find all markers of cluster 2</span></span>
+<span id="cb68-386"><a href="#cb68-386" aria-hidden="true" tabindex="-1"></a>cluster2.markers <span class="ot">&lt;-</span> <span class="fu">FindMarkers</span>(pbmc, <span class="at">ident.1 =</span> <span class="dv">2</span>, <span class="at">min.pct =</span> <span class="fl">0.25</span>)</span>
+<span id="cb68-387"><a href="#cb68-387" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cluster2.markers, <span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb68-388"><a href="#cb68-388" aria-hidden="true" tabindex="-1"></a><span class="co"># find all markers distinguishing cluster 5 from clusters 0 and 3</span></span>
+<span id="cb68-389"><a href="#cb68-389" aria-hidden="true" tabindex="-1"></a>cluster5.markers <span class="ot">&lt;-</span> <span class="fu">FindMarkers</span>(pbmc, <span class="at">ident.1 =</span> <span class="dv">5</span>, <span class="at">ident.2 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="at">min.pct =</span> <span class="fl">0.25</span>)</span>
+<span id="cb68-390"><a href="#cb68-390" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cluster5.markers, <span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb68-391"><a href="#cb68-391" aria-hidden="true" tabindex="-1"></a><span class="co"># find markers for every cluster compared to all remaining cells, report only the positive ones</span></span>
+<span id="cb68-392"><a href="#cb68-392" aria-hidden="true" tabindex="-1"></a>pbmc.markers <span class="ot">&lt;-</span> <span class="fu">FindAllMarkers</span>(pbmc, <span class="at">only.pos =</span> <span class="cn">TRUE</span>, <span class="at">min.pct =</span> <span class="fl">0.25</span>, <span class="at">logfc.threshold =</span> <span class="fl">0.25</span>)</span>
+<span id="cb68-393"><a href="#cb68-393" aria-hidden="true" tabindex="-1"></a>pbmc.markers <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span> <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">2</span>, <span class="at">order_by =</span> avg_log2FC)</span>
 <span id="cb68-394"><a href="#cb68-394" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-395"><a href="#cb68-395" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-396"><a href="#cb68-396" aria-hidden="true" tabindex="-1"></a>Seurat has several tests for differential expression which can be set with the test.use parameter (see our <span class="co">[</span><span class="ot">DE vignette</span><span class="co">](de_vignette.html)</span> for details). For example, the ROC test returns the 'classification power' for any individual marker (ranging from 0 - random, to 1 - perfect).</span>
 <span id="cb68-397"><a href="#cb68-397" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-398"><a href="#cb68-398" aria-hidden="true" tabindex="-1"></a><span class="in">```{r markersroc, fig.height=8, fig.width=15}</span></span>
-<span id="cb68-399"><a href="#cb68-399" aria-hidden="true" tabindex="-1"></a><span class="in">cluster0.markers &lt;- FindMarkers(pbmc, ident.1 = 0, logfc.threshold = 0.25, test.use = "roc", only.pos = TRUE)</span></span>
+<span id="cb68-399"><a href="#cb68-399" aria-hidden="true" tabindex="-1"></a>cluster0.markers <span class="ot">&lt;-</span> <span class="fu">FindMarkers</span>(pbmc, <span class="at">ident.1 =</span> <span class="dv">0</span>, <span class="at">logfc.threshold =</span> <span class="fl">0.25</span>, <span class="at">test.use =</span> <span class="st">"roc"</span>, <span class="at">only.pos =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb68-400"><a href="#cb68-400" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-401"><a href="#cb68-401" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-402"><a href="#cb68-402" aria-hidden="true" tabindex="-1"></a>We include several tools for visualizing marker expression. <span class="in">`VlnPlot()`</span> (shows expression probability distributions across clusters), and <span class="in">`FeaturePlot()`</span> (visualizes feature expression on a tSNE or PCA plot) are our most commonly used visualizations. We also suggest exploring <span class="in">`RidgePlot()`</span>, <span class="in">`CellScatter()`</span>, and <span class="in">`DotPlot()`</span> as additional methods to view your dataset.</span>
 <span id="cb68-403"><a href="#cb68-403" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-404"><a href="#cb68-404" aria-hidden="true" tabindex="-1"></a><span class="in">```{r markerplots, fig.height=10, fig.width=15}</span></span>
-<span id="cb68-405"><a href="#cb68-405" aria-hidden="true" tabindex="-1"></a><span class="in">VlnPlot(pbmc, features = c("MS4A1", "CD79A"))</span></span>
-<span id="cb68-406"><a href="#cb68-406" aria-hidden="true" tabindex="-1"></a><span class="in"># you can plot raw counts as well</span></span>
-<span id="cb68-407"><a href="#cb68-407" aria-hidden="true" tabindex="-1"></a><span class="in">VlnPlot(pbmc, features = c("NKG7", "PF4"), slot = 'counts', log = TRUE)</span></span>
-<span id="cb68-408"><a href="#cb68-408" aria-hidden="true" tabindex="-1"></a><span class="in">FeaturePlot(pbmc, features = c("MS4A1", "GNLY", "CD3E", "CD14", "FCER1A", "FCGR3A", "LYZ", "PPBP", "CD8A"))</span></span>
+<span id="cb68-405"><a href="#cb68-405" aria-hidden="true" tabindex="-1"></a><span class="fu">VlnPlot</span>(pbmc, <span class="at">features =</span> <span class="fu">c</span>(<span class="st">"MS4A1"</span>, <span class="st">"CD79A"</span>))</span>
+<span id="cb68-406"><a href="#cb68-406" aria-hidden="true" tabindex="-1"></a><span class="co"># you can plot raw counts as well</span></span>
+<span id="cb68-407"><a href="#cb68-407" aria-hidden="true" tabindex="-1"></a><span class="fu">VlnPlot</span>(pbmc, <span class="at">features =</span> <span class="fu">c</span>(<span class="st">"NKG7"</span>, <span class="st">"PF4"</span>), <span class="at">slot =</span> <span class="st">'counts'</span>, <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb68-408"><a href="#cb68-408" aria-hidden="true" tabindex="-1"></a><span class="fu">FeaturePlot</span>(pbmc, <span class="at">features =</span> <span class="fu">c</span>(<span class="st">"MS4A1"</span>, <span class="st">"GNLY"</span>, <span class="st">"CD3E"</span>, <span class="st">"CD14"</span>, <span class="st">"FCER1A"</span>, <span class="st">"FCGR3A"</span>, <span class="st">"LYZ"</span>, <span class="st">"PPBP"</span>, <span class="st">"CD8A"</span>))</span>
 <span id="cb68-409"><a href="#cb68-409" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-410"><a href="#cb68-410" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-411"><a href="#cb68-411" aria-hidden="true" tabindex="-1"></a><span class="in">`DoHeatmap()`</span> generates an expression heatmap for given cells and features. In this case, we are plotting the top 20 markers (or all markers if less than 20) for each cluster.</span>
 <span id="cb68-412"><a href="#cb68-412" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-413"><a href="#cb68-413" aria-hidden="true" tabindex="-1"></a><span class="in">```{r clusterHeatmap, fig.height=8, fig.width=15}</span></span>
-<span id="cb68-414"><a href="#cb68-414" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc.markers %&gt;% group_by(cluster) %&gt;% top_n(n = 10, wt = avg_log2FC) -&gt; top10</span></span>
+<span id="cb68-414"><a href="#cb68-414" aria-hidden="true" tabindex="-1"></a>pbmc.markers <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(cluster) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">wt =</span> avg_log2FC) <span class="ot">-&gt;</span> top10</span>
 <span id="cb68-415"><a href="#cb68-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-416"><a href="#cb68-416" aria-hidden="true" tabindex="-1"></a><span class="in"># DoHeatmap doesn't automatically use the correct slot/layer anymore. need to figure out to make this occur automatically.</span></span>
-<span id="cb68-417"><a href="#cb68-417" aria-hidden="true" tabindex="-1"></a><span class="in">DefaultLayer(pbmc[["RNA"]]) &lt;- "scale.data"</span></span>
-<span id="cb68-418"><a href="#cb68-418" aria-hidden="true" tabindex="-1"></a><span class="in">DoHeatmap(pbmc, features = top10$gene) + NoLegend()</span></span>
+<span id="cb68-416"><a href="#cb68-416" aria-hidden="true" tabindex="-1"></a><span class="co"># DoHeatmap doesn't automatically use the correct slot/layer anymore. need to figure out to make this occur automatically.</span></span>
+<span id="cb68-417"><a href="#cb68-417" aria-hidden="true" tabindex="-1"></a><span class="fu">DefaultLayer</span>(pbmc[[<span class="st">"RNA"</span>]]) <span class="ot">&lt;-</span> <span class="st">"scale.data"</span></span>
+<span id="cb68-418"><a href="#cb68-418" aria-hidden="true" tabindex="-1"></a><span class="fu">DoHeatmap</span>(pbmc, <span class="at">features =</span> top10<span class="sc">$</span>gene) <span class="sc">+</span> <span class="fu">NoLegend</span>()</span>
 <span id="cb68-419"><a href="#cb68-419" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-420"><a href="#cb68-420" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-421"><a href="#cb68-421" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -1869,50 +1853,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb68-437"><a href="#cb68-437" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-438"><a href="#cb68-438" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-439"><a href="#cb68-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{r labelplot, fig.height=5, fig.width=9}</span></span>
-<span id="cb68-440"><a href="#cb68-440" aria-hidden="true" tabindex="-1"></a><span class="in">new.cluster.ids &lt;- c("Naive CD4 T", "CD14+ Mono", "Memory CD4 T", "B", "CD8 T", "FCGR3A+ Mono", "NK", "DC", "Platelet")</span></span>
-<span id="cb68-441"><a href="#cb68-441" aria-hidden="true" tabindex="-1"></a><span class="in">names(new.cluster.ids) &lt;- levels(pbmc)</span></span>
-<span id="cb68-442"><a href="#cb68-442" aria-hidden="true" tabindex="-1"></a><span class="in">pbmc &lt;- RenameIdents(pbmc, new.cluster.ids)</span></span>
-<span id="cb68-443"><a href="#cb68-443" aria-hidden="true" tabindex="-1"></a><span class="in">DimPlot(pbmc, reduction = 'umap', label = TRUE, pt.size = 0.5) + NoLegend()</span></span>
+<span id="cb68-440"><a href="#cb68-440" aria-hidden="true" tabindex="-1"></a>new.cluster.ids <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Naive CD4 T"</span>, <span class="st">"CD14+ Mono"</span>, <span class="st">"Memory CD4 T"</span>, <span class="st">"B"</span>, <span class="st">"CD8 T"</span>, <span class="st">"FCGR3A+ Mono"</span>, <span class="st">"NK"</span>, <span class="st">"DC"</span>, <span class="st">"Platelet"</span>)</span>
+<span id="cb68-441"><a href="#cb68-441" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(new.cluster.ids) <span class="ot">&lt;-</span> <span class="fu">levels</span>(pbmc)</span>
+<span id="cb68-442"><a href="#cb68-442" aria-hidden="true" tabindex="-1"></a>pbmc <span class="ot">&lt;-</span> <span class="fu">RenameIdents</span>(pbmc, new.cluster.ids)</span>
+<span id="cb68-443"><a href="#cb68-443" aria-hidden="true" tabindex="-1"></a><span class="fu">DimPlot</span>(pbmc, <span class="at">reduction =</span> <span class="st">'umap'</span>, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">pt.size =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">NoLegend</span>()</span>
 <span id="cb68-444"><a href="#cb68-444" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-445"><a href="#cb68-445" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-446"><a href="#cb68-446" aria-hidden="true" tabindex="-1"></a><span class="in">```{r save.img, include=TRUE}</span></span>
-<span id="cb68-447"><a href="#cb68-447" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
-<span id="cb68-448"><a href="#cb68-448" aria-hidden="true" tabindex="-1"></a><span class="in">plot &lt;- DimPlot(pbmc, reduction = "umap", label = TRUE, label.size = 4.5) + xlab("UMAP 1") + ylab("UMAP 2") + </span></span>
-<span id="cb68-449"><a href="#cb68-449" aria-hidden="true" tabindex="-1"></a><span class="in">  theme(axis.title = element_text(size = 18), legend.text = element_text(size = 18)) + </span></span>
-<span id="cb68-450"><a href="#cb68-450" aria-hidden="true" tabindex="-1"></a><span class="in">  guides(colour = guide_legend(override.aes = list(size = 10)))</span></span>
-<span id="cb68-451"><a href="#cb68-451" aria-hidden="true" tabindex="-1"></a><span class="in">outdir = glue("{DATA}/output/images")</span></span>
-<span id="cb68-452"><a href="#cb68-452" aria-hidden="true" tabindex="-1"></a><span class="in">if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))</span></span>
-<span id="cb68-453"><a href="#cb68-453" aria-hidden="true" tabindex="-1"></a><span class="in">filename = glue("{outdir}/pbmc3k_umap.jpg")</span></span>
-<span id="cb68-454"><a href="#cb68-454" aria-hidden="true" tabindex="-1"></a><span class="in">ggsave(filename = filename, height = 7, width = 12, plot = plot, quality = 50)</span></span>
+<span id="cb68-447"><a href="#cb68-447" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb68-448"><a href="#cb68-448" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">DimPlot</span>(pbmc, <span class="at">reduction =</span> <span class="st">"umap"</span>, <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">label.size =</span> <span class="fl">4.5</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"UMAP 1"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"UMAP 2"</span>) <span class="sc">+</span> </span>
+<span id="cb68-449"><a href="#cb68-449" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>), <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>)) <span class="sc">+</span> </span>
+<span id="cb68-450"><a href="#cb68-450" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">10</span>)))</span>
+<span id="cb68-451"><a href="#cb68-451" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{DATA}/output/images"</span>)</span>
+<span id="cb68-452"><a href="#cb68-452" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(outdir)) <span class="fu">system</span>(<span class="fu">glue</span>(<span class="st">"mkdir -p {outdir}"</span>))</span>
+<span id="cb68-453"><a href="#cb68-453" aria-hidden="true" tabindex="-1"></a>filename <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{outdir}/pbmc3k_umap.jpg"</span>)</span>
+<span id="cb68-454"><a href="#cb68-454" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> filename, <span class="at">height =</span> <span class="dv">7</span>, <span class="at">width =</span> <span class="dv">12</span>, <span class="at">plot =</span> plot, <span class="at">quality =</span> <span class="dv">50</span>)</span>
 <span id="cb68-455"><a href="#cb68-455" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-456"><a href="#cb68-456" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-457"><a href="#cb68-457" aria-hidden="true" tabindex="-1"></a><span class="in">```{r save.rds, eval=FALSE}</span></span>
-<span id="cb68-458"><a href="#cb68-458" aria-hidden="true" tabindex="-1"></a><span class="in">outdir = glue("{DATA}/output")</span></span>
-<span id="cb68-459"><a href="#cb68-459" aria-hidden="true" tabindex="-1"></a><span class="in">if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))</span></span>
-<span id="cb68-460"><a href="#cb68-460" aria-hidden="true" tabindex="-1"></a><span class="in">filename = glue("{outdir}/pbmc3k_final.rds")</span></span>
-<span id="cb68-461"><a href="#cb68-461" aria-hidden="true" tabindex="-1"></a><span class="in">saveRDS(pbmc, file = filename)</span></span>
+<span id="cb68-458"><a href="#cb68-458" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{DATA}/output"</span>)</span>
+<span id="cb68-459"><a href="#cb68-459" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(outdir)) <span class="fu">system</span>(<span class="fu">glue</span>(<span class="st">"mkdir -p {outdir}"</span>))</span>
+<span id="cb68-460"><a href="#cb68-460" aria-hidden="true" tabindex="-1"></a>filename <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{outdir}/pbmc3k_final.rds"</span>)</span>
+<span id="cb68-461"><a href="#cb68-461" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(pbmc, <span class="at">file =</span> filename)</span>
 <span id="cb68-462"><a href="#cb68-462" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-463"><a href="#cb68-463" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-464"><a href="#cb68-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{r save2, include=TRUE}</span></span>
-<span id="cb68-465"><a href="#cb68-465" aria-hidden="true" tabindex="-1"></a><span class="in">outdir = glue("{DATA}/output")</span></span>
-<span id="cb68-466"><a href="#cb68-466" aria-hidden="true" tabindex="-1"></a><span class="in">if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))</span></span>
-<span id="cb68-467"><a href="#cb68-467" aria-hidden="true" tabindex="-1"></a><span class="in">filename = glue("{outdir}/pbmc3k_final.rds")</span></span>
-<span id="cb68-468"><a href="#cb68-468" aria-hidden="true" tabindex="-1"></a><span class="in">saveRDS(pbmc, file = filename)</span></span>
+<span id="cb68-465"><a href="#cb68-465" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{DATA}/output"</span>)</span>
+<span id="cb68-466"><a href="#cb68-466" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(outdir)) <span class="fu">system</span>(<span class="fu">glue</span>(<span class="st">"mkdir -p {outdir}"</span>))</span>
+<span id="cb68-467"><a href="#cb68-467" aria-hidden="true" tabindex="-1"></a>filename <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{outdir}/pbmc3k_final.rds"</span>)</span>
+<span id="cb68-468"><a href="#cb68-468" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(pbmc, <span class="at">file =</span> filename)</span>
 <span id="cb68-469"><a href="#cb68-469" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-470"><a href="#cb68-470" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-471"><a href="#cb68-471" aria-hidden="true" tabindex="-1"></a><span class="in">```{r save.times, include=TRUE}</span></span>
-<span id="cb68-472"><a href="#cb68-472" aria-hidden="true" tabindex="-1"></a><span class="in">outdir = glue("{DATA}/output/timings")</span></span>
-<span id="cb68-473"><a href="#cb68-473" aria-hidden="true" tabindex="-1"></a><span class="in">if(!dir.exists(outdir)) system(glue("mkdir -p {outdir}"))</span></span>
-<span id="cb68-474"><a href="#cb68-474" aria-hidden="true" tabindex="-1"></a><span class="in">filename = glue("{outdir}/seurat5_pbmc3k_tutorial_times.csv")</span></span>
-<span id="cb68-475"><a href="#cb68-475" aria-hidden="true" tabindex="-1"></a><span class="in">write.csv(x = t(as.data.frame(all_times)), file = filename)</span></span>
+<span id="cb68-472"><a href="#cb68-472" aria-hidden="true" tabindex="-1"></a>outdir <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{DATA}/output/timings"</span>)</span>
+<span id="cb68-473"><a href="#cb68-473" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">dir.exists</span>(outdir)) <span class="fu">system</span>(<span class="fu">glue</span>(<span class="st">"mkdir -p {outdir}"</span>))</span>
+<span id="cb68-474"><a href="#cb68-474" aria-hidden="true" tabindex="-1"></a>filename <span class="ot">=</span> <span class="fu">glue</span>(<span class="st">"{outdir}/seurat5_pbmc3k_tutorial_times.csv"</span>)</span>
+<span id="cb68-475"><a href="#cb68-475" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> <span class="fu">t</span>(<span class="fu">as.data.frame</span>(all_times)), <span class="at">file =</span> filename)</span>
 <span id="cb68-476"><a href="#cb68-476" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb68-477"><a href="#cb68-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-478"><a href="#cb68-478" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb68-479"><a href="#cb68-479" aria-hidden="true" tabindex="-1"></a>  &lt;summary&gt;**Session Info**&lt;/summary&gt;</span>
+<span id="cb68-478"><a href="#cb68-478" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb68-479"><a href="#cb68-479" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>**Session Info**<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb68-482"><a href="#cb68-482" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb68-483"><a href="#cb68-483" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
 <span id="cb68-484"><a href="#cb68-484" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb68-485"><a href="#cb68-485" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb68-485"><a href="#cb68-485" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
