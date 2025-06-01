@@ -7,7 +7,7 @@ categories:
   - gene46100
 description: Henry's genomic language model trained on human reference genome with  nanogpt
 date-modified: last-modified
-draft: true
+draft: false
 eval: false
 jupyter: 
   kernelspec:
