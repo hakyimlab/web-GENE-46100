@@ -31,7 +31,9 @@
       "/post/2025-03-25-unit00/hands-on-introduction_to_deep_learning.html",
       "/post/2025-03-25-unit00/index.html",
       "/post/2025-04-15-unit01/nano-gpt/slides-gpt.html",
-      "/post/2025-05-01-unit03/borzoi_personal_gen_prediction-jupyter.html"
+      "/post/2025-05-01-unit03/borzoi_personal_gen_prediction-jupyter.html",
+      "/post/gan-example-mnist.html",
+      "/post/test.html"
     ]
   },
   {
@@ -70,6 +72,8 @@
       "/DRAFTS/08-quarto-conda-env.html",
       "/post/2025-05-01-unit03/borzoi_personal_gen_prediction-jupyter.html",
       "/DRAFTS/slides-00.html",
+      "/post/gan-example-mnist.html",
+      "/post/test.html",
       "/DRAFTS/2020-01-01-TODO/index.html"
     ]
   }
