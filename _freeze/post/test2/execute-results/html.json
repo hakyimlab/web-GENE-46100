@@ -1,0 +1,12 @@
+{
+  "hash": "9dd4baab2033535c17f75a3e357ded35",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Test\"\n---\n\n\n\n\n# Test\n\n::: {#d3fce541 .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport matplotlib.pyplot as plt\n\ndef u_periodic(x):\n  \"\"\"\n  Defines the periodic function u(x) = x with period 1, based on the interval [0, 1].\n  \"\"\"\n  # The modulo operator handles the periodicity. x % 1 gives the remainder of x divided by 1.\n  # For positive x, this is the fractional part. For negative x, this gives a value\n  # in the range (0, 1] or [-1, 0) depending on the implementation, but adding 1\n  # and taking modulo 1 again ensures it's in [0, 1).\n  return (x % 1 + 1) % 1\n\n# Generate x values from -2 to 2\n# We use a large number of points to get a smooth-looking plot\nx_values = np.linspace(-2, 2, 400)\n\n# Calculate the corresponding u(x) values\ny_values = u_periodic(x_values)\n\n# Plot the function\nplt.figure(figsize=(8, 4))\nplt.plot(x_values, y_values)\nplt.title('Plot of u(x) = x, Periodic from 0 to 1')\nplt.xlabel('x')\nplt.ylabel('u(x)')\nplt.grid(True)\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![](test2_files/figure-html/cell-2-output-1.png){}\n:::\n:::\n\n\ni\n\n",
+    "supporting": [
+      "test2_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
