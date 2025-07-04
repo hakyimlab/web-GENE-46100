@@ -112,7 +112,7 @@ pip install nbclient nbformat
 
 # Use conda to install the nb_conda_kernels package. This is used to manage python jupyter kernels for notebooks.
 
-conda install nb_conda_kernels
+conda install nb_conda_kernels jupyter_server ipykernel
 ## in new install I needed conda install nb_conda_kernels jupyter_server
 
 # Copy the path returned from the below command

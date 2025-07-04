@@ -1,0 +1,172 @@
+---
+title: gan example mnist 
+date: 2020-01-02
+eval: true
+freeze: true
+categories:
+  - notebook
+jupyter: 
+  kernelspec:
+    name: "conda-env-gene46100-py"
+    language: "python"
+    display_name: "gene46100"
+---
+
+```{python}
+import torch
+from torch import nn, optim
+import torchvision.transforms as transforms
+import torchvision
+import matplotlib.pyplot as plt
+```
+
+```{python} 
+# Custom Reshape layer
+class Reshape(nn.Module):
+    def __init__(self, *args):
+        super(Reshape, self).__init__()
+        self.shape = args
+
+    def forward(self, x):
+        return x.view(x.shape[0], *self.shape)
+
+# Define Generator network with convolutional layers
+class Generator(nn.Module):
+    def __init__(self, z_dim=100):
+        super(Generator, self).__init__()
+        self.gen = nn.Sequential(
+            # First layer
+            nn.Linear(z_dim, 7*7*256),
+            nn.BatchNorm1d(7*7*256),
+            nn.ReLU(True),
+            
+            # Reshape to start convolutions
+            Reshape(256, 7, 7),
+            
+            # Convolution layers
+            nn.ConvTranspose2d(256, 128, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(128),
+            nn.ReLU(True),
+            
+            nn.ConvTranspose2d(128, 64, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(64),
+            nn.ReLU(True),
+            
+            nn.ConvTranspose2d(64, 1, kernel_size=3, stride=1, padding=1),
+            nn.Tanh()
+        )
+
+    def forward(self, x):
+        return self.gen(x)
+
+# Define Discriminator network with convolutional layers
+class Discriminator(nn.Module):
+    def __init__(self):
+        super(Discriminator, self).__init__()
+        self.disc = nn.Sequential(
+            # First conv layer
+            nn.Conv2d(1, 64, kernel_size=4, stride=2, padding=1),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Dropout2d(0.3),
+            
+            # Second conv layer
+            nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1),
+            nn.BatchNorm2d(128),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Dropout2d(0.3),
+            
+            # Flatten and dense layers
+            nn.Flatten(),
+            nn.Linear(128 * 7 * 7, 1024),
+            nn.BatchNorm1d(1024),
+            nn.LeakyReLU(0.2, inplace=True),
+            nn.Dropout(0.3),
+            
+            nn.Linear(1024, 1),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x):
+        return self.disc(x)
+
+# Hyperparameters
+z_dim = 100
+lr = 2e-4      # Slightly adjusted learning rate
+beta1 = 0.5    # Beta1 for Adam optimizer
+batch_size = 128  # Increased batch size
+epochs = 20    # Increased epochs
+
+# Set up device
+device = torch.device("mps")
+
+# Data loading with normalization [-1, 1]
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,), (0.5,))
+])
+
+dataset = torchvision.datasets.MNIST(root='data/', train=True, transform=transform, download=True)
+loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+
+# Initialize models and move to MPS
+generator = Generator(z_dim).to(device)
+discriminator = Discriminator().to(device)
+
+# Optimizers with beta1
+optimG = optim.Adam(generator.parameters(), lr=lr, betas=(beta1, 0.999))
+optimD = optim.Adam(discriminator.parameters(), lr=lr, betas=(beta1, 0.999))
+
+# Loss function
+criterion = nn.BCELoss()
+
+# Training loop with improved stability
+for epoch in range(epochs):
+    for batch_idx, (real_images, _) in enumerate(loader):
+        batch_size_current = real_images.shape[0]
+        
+        # Move data to MPS
+        real_images = real_images.to(device)
+        
+        # Train Discriminator
+        discriminator.zero_grad()
+        label_real = torch.ones(batch_size_current, 1).to(device)
+        label_fake = torch.zeros(batch_size_current, 1).to(device)
+        
+        output_real = discriminator(real_images)
+        d_loss_real = criterion(output_real, label_real)
+        
+        noise = torch.randn(batch_size_current, z_dim).to(device)
+        fake_images = generator(noise)
+        output_fake = discriminator(fake_images.detach())
+        d_loss_fake = criterion(output_fake, label_fake)
+        
+        d_loss = d_loss_real + d_loss_fake
+        d_loss.backward()
+        optimD.step()
+        
+        # Train Generator
+        generator.zero_grad()
+        output_fake = discriminator(fake_images)
+        g_loss = criterion(output_fake, label_real)
+        
+        g_loss.backward()
+        optimG.step()
+        
+        if batch_idx % 100 == 0:
+            print(f'Epoch [{epoch}/{epochs}] Batch [{batch_idx}/{len(loader)}] '
+                  f'd_loss: {d_loss.item():.4f} g_loss: {g_loss.item():.4f}')
+
+    # Generate and save sample images after each epoch
+    if (epoch + 1) % 5 == 0:
+        with torch.no_grad():
+            test_noise = torch.randn(5, z_dim).to(device)
+            generated_images = generator(test_noise)
+            
+            plt.figure(figsize=(10, 2))
+            for i in range(5):
+                plt.subplot(1, 5, i + 1)
+                # Move tensor back to CPU for plotting
+                plt.imshow(generated_images[i].cpu().squeeze().numpy(), cmap='gray')
+                plt.axis('off')
+            plt.show()
+```
