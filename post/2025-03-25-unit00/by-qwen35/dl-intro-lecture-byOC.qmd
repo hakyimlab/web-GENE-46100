@@ -1,0 +1,325 @@
+---
+title: "Quick Introduction to Deep Learning for Computational Biologists"
+author: Haky Im (modified by OC)
+date: 2025-03-25
+categories:
+  - gene46100
+  - lecture-notes
+eval: false
+jupyter:
+  kernelspec:
+    name: "conda-env-gene46100-py"
+    language: "python"
+    display_name: "gene46100"
+freeze: true
+---
+
+## Learning Objectives
+
+1. Understand and implement gradient descent to fit a linear model
+2. Build and train a multi-layer perceptron (MLP) using PyTorch
+3. Learn the basics of PyTorch, including model definition, forward pass, and optimization
+4. Understand when to use deep learning vs traditional methods in genomics
+
+## Quick Review - Linear Regression
+
+Let's start with what you already know from Lasso/Elastic Net.
+
+### Simulate linear data
+
+```python
+import numpy as np
+from sklearn.datasets import make_regression
+
+np.random.seed(42)
+x, y, coef = make_regression(
+    n_samples=100,
+    n_features=2,
+    noise=10,
+    coef=True
+)
+
+print(f"True coefficients: {coef}")
+print(f"X shape: {x.shape}, Y shape: {y.shape}")
+```
+
+### Normal equation solution
+
+```python
+from numpy.linalg import inv
+
+# Closed-form solution: β = (X^T X)^{-1} X^T y
+b_hat = inv(x.T @ x) @ x.T @ y
+print(f"Estimated coefficients: {b_hat}")
+print(f"Error: {np.abs(b_hat - coef).sum()}")
+```
+
+**Key insight**: Linear models work well when data is linear. But real biological data is often nonlinear.
+
+---
+
+## Why Linear Models Fail on Nonlinear Data
+
+### Simulate nonlinear data: y = x³
+
+```python
+x = np.random.normal(size=100)
+y = x ** 3
+
+# Quick visualization
+from plotnine import qplot, geom_point, geom_abline, aes
+
+qplot(x=x, y=y, geom="point", xlab="x", ylab="y")
+```
+
+### Fit linear model and show poor fit
+
+```python
+# Simple linear regression via gradient descent
+lr = 0.1
+b = 0.0
+n_examples = len(y)
+
+for _ in range(50):
+    diff = x.dot(b) - y
+    grad = diff.dot(x) / n_examples
+    b -= lr * grad
+
+y_hat = x.dot(b)
+
+# Plot predictions vs actual
+qplot(x=y, y=y_hat, geom="point", xlab="y (actual)", ylab="y_hat (predicted)") + \
+    geom_abline(slope=1, intercept=0, color='red', linetype='dashed')
+```
+
+**Observation**: The points don't fall on the identity line (red dashed). Linear model fails!
+
+**Why?** You can't fit a cubic curve with a straight line. We need nonlinear models.
+
+---
+
+## Enter MLP - Universal Approximation
+
+### MLP Architecture
+
+```markdown
+![MLP Architecture](assets/tensorflow-playground.png)
+
+An MLP (Multi-Layer Perceptron) has:
+- **Input layer**: Your features (e.g., DNA one-hot encoding)
+- **Hidden layer(s)**: Nonlinear transformations (ReLU activation)
+- **Output layer**: Prediction
+
+Key property: **Universal Approximation Theorem** - MLPs can approximate any continuous function!
+```
+
+### Define MLP in PyTorch
+
+```python
+import torch
+from torch import nn
+import torch.nn.functional as F
+
+# Check device
+device = torch.device("mps")  # Apple Silicon, or use "cuda" for Linux clusters
+
+class MLP(nn.Module):
+    def __init__(self, input_dim, hid_dim, output_dim):
+        super().__init__()
+        self.fc1 = nn.Linear(input_dim, hid_dim)  # Input → Hidden
+        self.fc2 = nn.Linear(hid_dim, output_dim)  # Hidden → Output
+    
+    def forward(self, x):
+        x = F.relu(self.fc1(x))  # ReLU activation for nonlinearity
+        return self.fc2(x).squeeze(1)
+
+# Create model with 1024 hidden neurons
+mlp = MLP(input_dim=1, hid_dim=1024, output_dim=1).to(device)
+print(f"Model: {mlp}")
+```
+
+### Training loop (simplified)
+
+```python
+# Convert to tensors
+x_tensor = torch.Tensor(x).unsqueeze(1).to(device)
+y_tensor = torch.Tensor(y).to(device)
+
+# Optimizer and loss
+optimizer = torch.optim.SGD(mlp.parameters(), lr=0.001)
+loss_fn = nn.MSELoss()
+learning_curve = []
+
+# Train for 10,000 epochs
+for epoch in range(10000):
+    optimizer.zero_grad()      # Clear gradients
+    y_hat = mlp(x_tensor)      # Forward pass
+    loss = loss_fn(y_hat, y_tensor)  # Compute loss
+    learning_curve.append(loss.item())
+    loss.backward()            # Backward pass (compute gradients)
+    optimizer.step()           # Update weights
+
+print(f"Final loss: {learning_curve[-1]:.6f}")
+```
+
+---
+
+## GPU Availability Check
+
+```python
+print(f"PyTorch version: {torch.__version__}")
+print(f"MPS (Apple Silicon) available: {torch.backends.mps.is_available()}")
+print(f"CUDA available: {torch.cuda.is_available()}")
+
+if torch.cuda.is_available():
+    print(f"CUDA device: {torch.cuda.get_device_name(0)}")
+    print("Training will use GPU - much faster!")
+else:
+    print("Training will use CPU - slower but works")
+```
+
+---
+
+## Bridging to Genomics - DNA One-Hot Encoding
+
+### Synthetic DNA sequence
+
+```python
+# Convert DNA sequence to one-hot matrix
+dna_seq = "ATGCGTAACG"
+bases = {'A': [1,0,0,0], 'T': [0,1,0,0], 'G': [0,0,1,0], 'C': [0,0,0,1]}
+
+# One-hot encode
+one_hot = np.array([bases[b] for b in dna_seq])
+
+print(f"Sequence: {dna_seq}")
+print(f"One-hot shape: {one_hot.shape}")  # (10, 4)
+print(one_hot)
+```
+
+### Explain the encoding
+
+```markdown
+Each base is represented as a 4-dimensional vector:
+- **A** = [1,0,0,0]
+- **T** = [0,1,0,0]
+- **G** = [0,0,1,0]
+- **C** = [0,0,0,1]
+
+This creates a **(sequence_length × 4)** matrix that can be fed into a neural network.
+
+For a 100 bp motif: shape = (100, 4)
+```
+
+### Feed into MLP (conceptual)
+
+```python
+# For a longer sequence (e.g., 100 bp motif)
+seq_length = 100
+one_hot_input = np.random.choice(4, size=(seq_length, 4))  # Synthetic data
+one_hot_tensor = torch.FloatTensor(one_hot_input).unsqueeze(0)  # Add batch dimension
+
+print(f"Input to model: {one_hot_tensor.shape}")  # (1, 100, 4)
+
+# Next week: We'll use CNNs to process this!
+# For now, you could flatten and use MLP:
+flattened = one_hot_tensor.view(1, -1)  # (1, 400)
+print(f"Flattened: {flattened.shape}")
+```
+
+---
+
+## When to Use Deep Learning in Genomics
+
+### Comparison table
+
+```markdown
+| Method | Best For | Data Size | Interpretability |
+|--------|----------|-----------|------------------|
+| Linear/Logistic | Small datasets, interpretability | <10K | High |
+| Random Forest | Tabular data, quick baseline | <100K | Medium |
+| **MLP** | **Sequences, images, large data** | **>10K** | **Low-Medium** |
+| CNN | Motif discovery, local patterns | >100K | Medium |
+| Transformer | Long sequences (whole genome) | >1M | Low |
+```
+
+### Quick decision guide
+
+```python
+def choose_model(data_type, sample_size, interpretability_needed):
+    """
+    Choose the right model for your genomics task.
+    
+    Args:
+        data_type: 'sequence', 'image', 'tabular', 'long_sequence'
+        sample_size: Number of samples in your dataset
+        interpretability_needed: True if you need to explain predictions
+    """
+    if sample_size < 10000 and interpretability_needed:
+        return "Linear/Logistic Regression"
+    elif data_type == "tabular" and sample_size < 100000:
+        return "Random Forest"
+    elif data_type in ["sequence", "image"] and sample_size > 10000:
+        return "Deep Learning (MLP/CNN)"
+    elif data_type == "long_sequence" and sample_size > 1000000:
+        return "Transformer (BERT, GPT)"
+    else:
+        return "Consider more data or simpler model"
+
+# Example usage
+print("TF binding prediction:", choose_model("sequence", 50000, interpretability_needed=False))
+print("Gene expression (small):", choose_model("tabular", 500, interpretability_needed=True))
+print("Whole genome modeling:", choose_model("long_sequence", 1000000, interpretability_needed=False))
+```
+
+**Key takeaway**: Start simple, add complexity only when needed.
+
+---
+
+## Homework Connection
+
+### What's Next: Week 2 - CNNs for DNA
+
+```markdown
+## Homework: Improve the DNA Model
+
+From today's lecture, apply these concepts:
+
+1. **Try adding one more hidden layer** and re-run the model
+   - Does performance improve?
+   - How many epochs do you need?
+
+2. **Consider other improvements**:
+   - Adjust learning rate (try 0.0001, 0.01)
+   - Add batch normalization
+   - Try different activation functions (tanh, leaky ReLU)
+
+3. **Assess improvement** using:
+   - Training loss curve
+   - Test set MSE
+   - Visualization of predictions
+
+## Next Week: CNNs for DNA Sequence Scoring
+
+We'll apply these MLP concepts to **real DNA sequences**:
+- Convert DNA to one-hot encoding
+- Use CNNs to detect motifs (instead of flattening)
+- Interpret CNN filters as motif discoveries
+
+**Reference**: `tf-binding-prediction-starter.ipynb` (Week 3 project preview)
+```
+
+---
+
+## Summary
+
+✅ **Linear models** work for linear relationships but fail on nonlinear data  
+✅ **MLPs** can approximate any continuous function (Universal Approximation Theorem)  
+✅ **PyTorch** automates gradient computation and supports GPU acceleration  
+✅ **Deep learning** shines with sequences/images and large datasets  
+✅ **DNA one-hot encoding** converts sequences to matrices for neural networks  
+✅ **Next week**: CNNs for DNA sequence scoring and motif discovery  
+
+**Key takeaway**: Start simple (linear), then add complexity (MLP, CNN) as needed.
+
+**Discussion question**: For your research, what type of data would benefit most from deep learning? Would you choose MLP, CNN, or Transformer?
