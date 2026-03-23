@@ -1,7 +1,7 @@
 ---
 title: "Deep Learning in Genomics Course Material - ALL"
 listing:
-  contents: [post, DRAFTS, how-to]
+  contents: [post]
   sort: "date desc"
   type: default
   categories: true
@@ -14,7 +14,7 @@ title-block-banner: false
 
 - This page contains ALL material for the GENE46100 Deep learning in genomics course, including test notes.
 
-- Find the 2025 syllabus [here](https://docs.google.com/document/d/17X3LEh_C-34JfXJcKJfFY8ew8MHBsxc_z0DPEuIlzwE/edit?usp=sharing).
+- Find the 2026 syllabus [here](https://docs.google.com/document/d/1OMT186tHZ8EAT-W0nJobRsCwOJ3B-A6Qb3k0e8n-AMY/edit?tab=t.0) and schedule [here](https://docs.google.com/spreadsheets/d/1V3OwF10CrkIvzUiqXWOqngSVnzFwk2VixgDRNchkQEs/edit?gid=0#gid=0)
 
 - Edit github source [here](https://github.com/hakyimlab/web-GENE-46100)
 

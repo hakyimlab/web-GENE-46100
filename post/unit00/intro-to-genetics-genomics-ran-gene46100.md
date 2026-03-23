@@ -1,3 +1,11 @@
+---
+title: Introduction to Genetics and Genomics
+author: Ran Blehkman
+date: 2026-03-24
+draft: true
+---
+
+
 DNA - the code of life
 
 • DNA: Deoxyribonucleic acid - double helix structure

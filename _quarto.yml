@@ -5,6 +5,7 @@ project:
     - "*.qmd"
     - "*.ipynb"
     - "!/./.venv/"
+    - "!**/slides*.qmd"  # render slides separately: quarto render <file.qmd> --to revealjs
 
 website:
   title: "GENE 46100"

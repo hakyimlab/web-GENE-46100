@@ -3,7 +3,7 @@ title: "Quick Introduction to Deep Learning"
 subtitle: "GENE 46100 — Unit 0"
 author: "Haky Im"
 date: 2025-03-25
-draft: true
+draft: false
 engine: knitr
 jupyter:
   kernelspec:
@@ -30,10 +30,12 @@ eval: false
 
 | Unit | Topic |
 |------|-------|
-| **0** | **MLP, CNN, DNA scoring** |
-| 1 | Transformers & Genomic GPT |
-| 2 | Enformer & Borzoi |
-| 3 | Applications |
+| **0** |Can we detect regulatory motifs in DNA? | **MLP, CNN, DNA scoring** | (Weeks
+1–3)|
+| 1 | Can we learn the "language" of DNA?|Transformers & Genomic GPT |(Weeks 4–5)|
+| 2 | Can we predict gene regulation from sequence?| Enformer & Borzoi |(Weeks 6–7)|
+| 3 |Can we model microbial communities?|  |(Weeks 8–9)|
+
 
 ::::
 
