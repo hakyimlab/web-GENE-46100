@@ -1,6 +1,6 @@
 ---
 title: "Quick Introduction to Deep Learning"
-subtitle: "GENE 46100 — Unit 0"
+subtitle: "GENE 46100 — Unit 00"
 author: "Haky Im"
 date: 2025-03-25
 draft: false
