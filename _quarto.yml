@@ -3,7 +3,7 @@ project:
   output-dir: docs
   render:
     - "*.qmd"
-    - "*.ipynb"
+    - "!*.ipynb"
     - "!/./.venv/"
     - "!**/slides*.qmd"  # render slides separately: quarto render <file.qmd> --to revealjs
 

@@ -97,6 +97,7 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="slides-unit00_files/libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link rel="stylesheet" href="custom.css">
   <link href="slides-unit00_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="slides-unit00_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="slides-unit00_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -190,6 +191,11 @@
       margin-right: 0; 
     }
   </style>
+  <link href="slides-unit00_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+  <script src="slides-unit00_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <script src="slides-unit00_files/libs/viz-1.8.2/viz.js"></script>
+  <link href="slides-unit00_files/libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+  <script src="slides-unit00_files/libs/grViz-binding-1.0.11/grViz.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -211,47 +217,57 @@ Haky Im
 </section>
 <section id="course-roadmap" class="slide level2">
 <h2>Course Roadmap</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
 <table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 46%">
+<col style="width: 23%">
+<col style="width: 15%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Unit</th>
+<th>Question</th>
 <th>Topic</th>
+<th>Weeks</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>0</strong></td>
-<td>Can we detect regulatory motifs in DNA?</td>
+<td>What is DL? Can we detect regulatory motifs in DNA?</td>
+<td><strong>MLP, CNN, DNA scoring</strong></td>
+<td>1–3</td>
 </tr>
 <tr class="even">
-<td>1–3)</td>
-<td></td>
-</tr>
-<tr class="odd">
 <td>1</td>
 <td>Can we learn the “language” of DNA?</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Can we predict gene regulation from sequence?</td>
+<td>Transformers &amp; Genomic GPT</td>
+<td>4–5</td>
 </tr>
 <tr class="odd">
+<td>2</td>
+<td>Can we predict gene regulation from sequence?</td>
+<td>Enformer &amp; Borzoi</td>
+<td>6–7</td>
+</tr>
+<tr class="even">
 <td>3</td>
 <td>Can we model microbial communities?</td>
+<td></td>
+<td>8–9</td>
 </tr>
 </tbody>
 </table>
-</div><div class="column" style="width:50%;">
-<p><strong>Tools we’ll use:</strong></p>
+</section>
+<section id="tools-well-use" class="slide level2">
+<h2>Tools we’ll use:</h2>
 <ul>
 <li>Python + PyTorch</li>
 <li>Google Colab (GPU)</li>
 <li>Weights &amp; Biases</li>
 </ul>
-<p><strong>By the end:</strong> You’ll understand how state-of-the-art models predict gene expression from DNA sequence</p>
-</div></div>
+<p><strong>By the end:</strong> You’ll understand how state-of-the-art models predict gene expression from DNA sequence and apply DL to microbiome and other areas.</p>
 </section>
 <section id="what-can-deep-learning-do-in-genomics" class="slide level2">
 <h2>What Can Deep Learning Do in Genomics?</h2>
@@ -277,72 +293,25 @@ Haky Im
 <li class="fragment">Learn the basics of <strong>PyTorch</strong>: model, loss, optimizer</li>
 </ol>
 </section>
-<section id="the-starting-point-linear-models" class="slide level2">
-<h2>The Starting Point: Linear Models</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>You already know this:</p>
-<p><span class="math display">\[y = X\beta + \epsilon\]</span></p>
-<p>where <span class="math inline">\(\epsilon \sim N(0, \sigma)\)</span></p>
-<p>. . .</p>
-<p>Let’s simulate some data and fit it <strong>from scratch</strong>.</p>
-<ul>
-<li><span class="math inline">\(X\)</span>: 1000 samples × 2 features</li>
-<li><span class="math inline">\(y\)</span>: response variable</li>
-<li><span class="math inline">\(\beta\)</span>: true coefficients</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-1-1.png" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="predict-with-ground-truth-parameters" class="slide level2">
-<h2>Predict with Ground Truth Parameters</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Since we simulated the data, we <strong>know</strong> the true <span class="math inline">\(\beta\)</span>.</p>
-<p>We can compute <span class="math inline">\(\hat{y} = X\beta\)</span> and compare to <span class="math inline">\(y\)</span>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>y_hat <span class="op">=</span> x.dot(coef) <span class="op">+</span> bias</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>. . .</p>
-<p><strong>If the model is correct</strong>, points fall on the identity line.</p>
-<p>The scatter off the line = noise <span class="math inline">\(\epsilon\)</span>.</p>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-2-1.png" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="the-analytical-solution-normal-equation" class="slide level2">
-<h2>The Analytical Solution: Normal Equation</h2>
+<section id="lets-start-with-a-linear-model" class="slide level2">
+<h2>Let’s start with a linear model</h2>
+<p><span class="math display">\[y = X\beta + \epsilon ~~~~~ \text{where }\epsilon \sim N(0, \sigma)\]</span></p>
+
+<img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="864"></section>
+<section id="linear-model-has-closed-form-solution" class="slide level2">
+<h2>Linear Model Has Closed Form Solution</h2>
 <p>For linear regression, there’s a <strong>closed-form</strong> solution:</p>
-<p><span class="math display">\[\hat{\beta} = (X^TX)^{-1}X^Ty\]</span></p>
-<div class="fragment">
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>b_hat <span class="op">=</span> inv(x.T <span class="op">@</span> x) <span class="op">@</span> (x.T <span class="op">@</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p><span class="math display">\[\hat{\beta} = (X^TX)^{-1}X^Ty\]</span> this is called the normal equation.</p>
 <div class="fragment">
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:40%;">
 <p><strong>Estimated:</strong> <span class="math inline">\(\hat{\beta} \approx\)</span> true <span class="math inline">\(\beta\)</span></p>
-<p>This works because linear regression has a <strong>convex</strong> loss surface — one global minimum.</p>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:60%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></p>
+<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-2-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -350,15 +319,15 @@ Haky Im
 </div></div>
 </div>
 </section>
-<section id="but-what-if-we-cant-solve-it-analytically" class="slide level2">
-<h2>But What if We Can’t Solve It Analytically?</h2>
+<section id="most-models-dont-have-closed-form-solutions" class="slide level2">
+<h2>Most Models Don’t Have Closed Form Solutions</h2>
 <p>The normal equation works for linear models…</p>
 <div class="fragment">
-<p><strong>But most interesting models don’t have closed-form solutions.</strong></p>
+<!-- **But most interesting models don't have closed-form solutions.** -->
 <ul>
-<li class="fragment">Neural networks with millions of parameters?</li>
-<li class="fragment">Nonlinear activation functions?</li>
-<li class="fragment">Complex architectures?</li>
+<li class="fragment">Neural networks with millions of parameters</li>
+<li class="fragment">Nonlinear activation functions</li>
+<li class="fragment">Complex architectures</li>
 </ul>
 </div>
 <div class="fragment">
@@ -382,7 +351,7 @@ Haky Im
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-4-1.png" width="480"></p>
+<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-3-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -396,7 +365,7 @@ Haky Im
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/gradient-descent-computed.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="assets/gradient-descent-computed.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -407,8 +376,7 @@ Haky Im
 <li>Take a step <strong>opposite</strong> to the gradient</li>
 <li>Repeat until convergence</li>
 </ol>
-<p>. . .</p>
-<p><span class="math display">\[\beta_{t+1} = \beta_t - \alpha \cdot \nabla L(\beta_t)\]</span></p>
+<p><span class="math inline">\(\beta_{t+1} = \beta_t - \alpha \cdot \nabla L(\beta_t)\)</span></p>
 <p><span class="math inline">\(\alpha\)</span> = <strong>learning rate</strong> (step size)</p>
 </div></div>
 </section>
@@ -417,6 +385,23 @@ Haky Im
 <div class="columns">
 <div class="column" style="width:33%;">
 <p><strong>Too small</strong> (<span class="math inline">\(\alpha = 0.0001\)</span>)</p>
+</div><div class="column" style="width:33%;">
+<p><strong>Just right</strong> (<span class="math inline">\(\alpha = 0.003\)</span>)</p>
+</div><div class="column" style="width:34%;">
+<p><strong>Too large</strong> (<span class="math inline">\(\alpha = 0.1\)</span>)</p>
+</div></div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-4-1.png" width="336"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -426,9 +411,7 @@ Haky Im
 </div>
 </div>
 </div>
-<p>Tiny steps → very slow</p>
-</div><div class="column" style="width:33%;">
-<p><strong>Just right</strong> (<span class="math inline">\(\alpha = 0.003\)</span>)</p>
+</div><div class="column" style="width:34%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -438,18 +421,13 @@ Haky Im
 </div>
 </div>
 </div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p>Tiny steps → very slow</p>
+</div><div class="column" style="width:33%;">
 <p>Smooth convergence</p>
 </div><div class="column" style="width:34%;">
-<p><strong>Too large</strong> (<span class="math inline">\(\alpha = 0.1\)</span>)</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-7-1.png" width="336"></p>
-</figure>
-</div>
-</div>
-</div>
 <p>Overshoots → diverges!</p>
 </div></div>
 </section>
@@ -458,17 +436,17 @@ Haky Im
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>With 2 parameters (<span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>), gradient descent traces a path through parameter space:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
-<span id="cb3-2"><a href=""></a>    diff <span class="op">=</span> x.dot(b) <span class="op">-</span> y</span>
-<span id="cb3-3"><a href=""></a>    grad <span class="op">=</span> diff.dot(x) <span class="op">/</span> n</span>
-<span id="cb3-4"><a href=""></a>    b <span class="op">-=</span> lr <span class="op">*</span> grad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
+<span id="cb1-2"><a href=""></a>    diff <span class="op">=</span> x.dot(b) <span class="op">-</span> y</span>
+<span id="cb1-3"><a href=""></a>    grad <span class="op">=</span> diff.dot(x) <span class="op">/</span> n</span>
+<span id="cb1-4"><a href=""></a>    b <span class="op">-=</span> lr <span class="op">*</span> grad</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The trajectory spirals toward the true <span class="math inline">\(\beta\)</span>.</p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-8-1.png" width="480"></p>
+<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-7-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -477,12 +455,13 @@ Haky Im
 </section>
 <section id="stochastic-gradient-descent-sgd" class="slide level2">
 <h2>Stochastic Gradient Descent (SGD)</h2>
-<p>In practice, datasets are huge — computing gradients on <strong>all</strong> data is expensive.</p>
+<p>In practice, computing gradients on <strong>all</strong> data is expensive.</p>
 <div class="fragment">
-<p><strong>Solution:</strong> use a random <strong>mini-batch</strong> at each step.</p>
-<p><span class="math display">\[\nabla L \approx \frac{1}{|B|} \sum_{i \in B} \nabla L_i\]</span></p>
+<p><strong>Solution:</strong> use a random <strong>mini-batch</strong> at each step. <span class="math display">\[\nabla L \approx \frac{1}{|B|} \sum_{i \in B} \nabla L_i\]</span></p>
 </div>
-<div class="fragment">
+</section>
+<section id="stochastic-gradient-descent-sgd-1" class="slide level2">
+<h2>Stochastic Gradient Descent (SGD)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Full-batch GD:</strong></p>
@@ -499,30 +478,23 @@ Haky Im
 <li>Noisy but effective path</li>
 </ul>
 </div></div>
-</div>
 <div class="fragment">
+<div style="text-align: center; background-color: #e0f2fe; color: #0369a1; padding: 20px; border-radius: 10px;">
 <p>The noise actually <strong>helps</strong> escape bad local minima!</p>
+</div>
 </div>
 </section>
 <section id="three-components-of-machine-learning" class="slide level2">
 <h2>Three Components of Machine Learning</h2>
 <p>Every ML model needs these three ingredients:</p>
 <div class="fragment">
-<pre><code>┌─────────────────────────────────────────────────────────┐
-│                                                         │
-│   ┌───────────┐    ┌───────────────┐    ┌───────────┐   │
-│   │   MODEL   │    │     LOSS      │    │ OPTIMIZER │   │
-│   │           │    │               │    │           │   │
-│   │  ŷ = f(x) │───▶│ L(ŷ, y)      │───▶│ β ← β-α∇L│   │
-│   │           │    │               │    │           │   │
-│   │ (defines  │    │ (measures how │    │ (updates  │   │
-│   │  the      │    │  wrong we     │    │  params   │   │
-│   │  hypothesis)   │  are)         │    │  to       │   │
-│   │           │    │               │    │  reduce   │   │
-│   └───────────┘    └───────────────┘    │  loss)    │   │
-│                                         └───────────┘   │
-│                                                         │
-└─────────────────────────────────────────────────────────┘</code></pre>
+<ul>
+<li><strong>Model</strong> — <span class="math inline">\(\hat{y} = f(x)\)</span>: defines the hypothesis</li>
+<li><strong>Loss</strong> — <span class="math inline">\(L(\hat{y}, y)\)</span>: measures how wrong we are</li>
+<li><strong>Optimizer</strong> — <span class="math inline">\(\beta \leftarrow \beta - \alpha \nabla L\)</span>: updates params to reduce loss</li>
+</ul>
+<!-- --- -->
+<!-- ## Three Components of Machine Learning -->
 </div>
 <div class="fragment">
 <table class="caption-top">
@@ -555,33 +527,21 @@ Haky Im
 </section>
 <section id="the-loss-function-mse" class="slide level2">
 <h2>The Loss Function: MSE</h2>
-<p><strong>Mean Squared Error</strong> — the most common loss for regression:</p>
-<p><span class="math display">\[L(\beta) = \frac{1}{m}\sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2\]</span></p>
-<div class="fragment">
-<div class="columns">
+
+<img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"><div class="columns">
 <div class="column" style="width:50%;">
+<p><strong>Mean Squared Error:</strong> <span class="math display">\[L(\beta) = \frac{1}{m}\sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2\]</span></p>
+</div><div class="column" style="width:50%;">
 <p><strong>Its gradient</strong> (for linear model):</p>
 <p><span class="math display">\[\frac{\partial L}{\partial \beta_j} = \frac{1}{m}\sum_{i} (\hat{y}^{(i)} - y^{(i)}) \cdot x_j^{(i)}\]</span></p>
-<p>. . .</p>
-<p>This is the “error × input” rule — the gradient is large when the error is large <strong>and</strong> the input contributed to it.</p>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-9-1.png" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
+<!-- This is the "error × input" rule — the gradient is large when the error is large **and** the input contributed to it. -->
 </div></div>
-</div>
 </section>
 <section id="see-it-live-fit-a-line-in-the-playground" class="slide level2">
 <h2>See It Live: Fit a Line in the Playground</h2>
 <div class="columns">
 <div class="column" style="width:55%;">
-<p>Open <strong><a href="https://playground.hakyimlab.org/#activation=linear&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.55802&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=regression&amp;initZero=false&amp;hideText=false">playground.hakyimlab.org</a></strong></p>
+<p>Open <strong><a href="https://playground.hakyimlab.org/#activation=linear&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-linear&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=1&amp;seed=0.32672&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=false&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=regression&amp;initZero=false&amp;hideText=false">playground.hakyimlab.org</a></strong></p>
 <p>Settings:</p>
 <ul>
 <li>Problem type → <strong>Regression</strong></li>
@@ -597,8 +557,10 @@ Haky Im
 </div>
 </div></div>
 <div class="fragment">
-<p>Watch the <strong>loss curve</strong> drop — gradient descent is finding <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span> right now.</p>
+<div class="takehome">
+<p>Watch the <strong>loss curve</strong> drop as the gradient descent finds the optimal <span class="math inline">\(w\)</span> and <span class="math inline">\(b\)</span>.</p>
 <p><strong>Try changing the learning rate</strong> — see it converge faster or explode.</p>
+</div>
 </div>
 </section>
 <section id="linear-model-succeeds-on-linear-data" class="slide level2">
@@ -614,7 +576,7 @@ Haky Im
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-10-1.png" width="480"></p>
+<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-9-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -640,19 +602,16 @@ Haky Im
 </div>
 </div></div>
 <div class="fragment">
+<div class="takehome">
 <p><strong>Loss stays high.</strong> The best linear fit is a flat plane through a curve.</p>
 <p>No matter how long you train — a linear model can’t bend.</p>
 </div>
+</div>
 </section>
-<section id="why-linear-models-fail-on-nonlinear-data" class="slide level2">
-<h2>Why Linear Models Fail on Nonlinear Data</h2>
+<section id="we-need-a-model-that-can-learn-any-shape" class="slide level2">
+<h2>We need a model that can learn any shape</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>The linear model can only learn:</p>
-<p><span class="math display">\[y = w_1 x_1 + w_2 x_2 + b\]</span></p>
-<p>This is a <strong>plane</strong>. It cannot curve, twist, or bend.</p>
-<p>. . .</p>
-<p><strong>What we need:</strong></p>
 <ul>
 <li>A model that can learn <em>any</em> shape</li>
 <li>Without us specifying the functional form</li>
@@ -663,7 +622,7 @@ Haky Im
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-11-1.png" width="480"></p>
+<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-10-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -677,11 +636,7 @@ Haky Im
 <h2>Multi-Layer Perceptron (MLP)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="assets/tensorflow-playground.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
-</figure>
-</div>
+<p><img data-src="assets/tensorflow-playground.png" style="width:100.0%"></p>
 </div><div class="column" style="width:50%;">
 <p>A neural network with:</p>
 <ul>
@@ -690,9 +645,12 @@ Haky Im
 <li><strong>Output layer</strong>: prediction</li>
 </ul>
 <p><span class="math display">\[y = W_2 \cdot \sigma(W_1 x + b_1) + b_2\]</span></p>
-<p>. . .</p>
-<p><strong>Key insight:</strong> <span class="math inline">\(\sigma\)</span> (activation function) introduces the <strong>bends</strong> that let the model fit curves.</p>
 </div></div>
+<div class="fragment">
+<div class="takehome">
+<p><strong>Key insight:</strong> <span class="math inline">\(\sigma\)</span> (activation function) introduces the <strong>bends</strong> that let the model fit curves.</p>
+</div>
+</div>
 </section>
 <section id="what-does-a-neuron-do" class="slide level2">
 <h2>What Does a Neuron Do?</h2>
@@ -706,7 +664,7 @@ Haky Im
 <p><strong>Without activation (linear):</strong></p>
 <p><span class="math inline">\(\text{output} = w_1 x_1 + w_2 x_2 + b\)</span></p>
 <p>Just a weighted sum — still a line!</p>
-</div><div class="column" style="width:50%;">
+</div><div class="column fragment" style="width:50%;">
 <p><strong>With ReLU activation:</strong></p>
 <p><span class="math inline">\(\text{output} = \max(0, w_1 x_1 + w_2 x_2 + b)\)</span></p>
 <p>Now it can produce a <strong>kink</strong> — a bent line!</p>
@@ -714,7 +672,7 @@ Haky Im
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-12-1.png" width="432"></p>
+<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-11-1.png" width="432"></p>
 </figure>
 </div>
 </div>
@@ -729,6 +687,7 @@ Haky Im
 <p>Change activation → <strong>ReLU</strong></p>
 <p>Set hidden layer → <strong>2 neurons</strong></p>
 <p>Hit ▶ Play</p>
+<p>Select Pred vs True to show the scatter plot</p>
 </div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -737,8 +696,10 @@ Haky Im
 </div>
 </div></div>
 <div class="fragment">
+<div class="takehome">
 <p>Each neuron contributes one ReLU “kink.” Combined, they approximate a curve — but it’s rough.</p>
 <p><strong>Loss is lower, but the fit isn’t great yet.</strong></p>
+</div>
 </div>
 </section>
 <section id="neurons-4-bends-smoother" class="slide level2">
@@ -747,6 +708,7 @@ Haky Im
 <div class="column" style="width:55%;">
 <p>Increase to <strong>4 neurons</strong></p>
 <p>Hit ▶ Play</p>
+<p>Select Pred vs True to show the scatter plot</p>
 </div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -755,7 +717,9 @@ Haky Im
 </div>
 </div></div>
 <div class="fragment">
+<div class="takehome">
 <p>More neurons = more “kinks” = smoother approximation of <span class="math inline">\(x^3\)</span>.</p>
+</div>
 </div>
 </section>
 <section id="adding-depth-2-layers-4-2" class="slide level2">
@@ -772,8 +736,10 @@ Haky Im
 </div>
 </div></div>
 <div class="fragment">
+<div class="takehome">
 <p>Layer 1 learns basic bends → Layer 2 <strong>combines</strong> them into a smooth curve.</p>
 <p><strong>Stacking layers = composing simple features into complex functions.</strong></p>
+</div>
 </div>
 </section>
 <section id="the-mlp-progression-summary" class="slide level2">
@@ -788,11 +754,13 @@ Haky Im
   4 NEURONS + ReLU                          2 LAYERS (4→2) + ReLU
   ┌────────────────────────┐                ┌────────────────────────┐
   │         ╱‾‾‾╲          │                │        ╱‾‾‾╲           │
-  │   ─────╱     ╲─────   │                │  ─────╱     ╲─────    │
+  │   ─────╱     ╲─────    │                │  ─────╱     ╲─────     │
   │   four bends           │                │   smooth curve         │
   └────────────────────────┘                └────────────────────────┘</code></pre>
 <div class="fragment">
+<div class="takehome">
 <p><strong>A neural network approximates any function by combining simple bent lines.</strong></p>
+</div>
 </div>
 </section>
 <section id="counting-parameters" class="slide level2">
@@ -815,8 +783,10 @@ Haky Im
 <p><strong>Total: 13 parameters</strong></p>
 </div></div>
 <div class="fragment">
+<div class="takehome">
 <p>Manually computing gradients for 13 parameters is tedious. For millions? Impossible.</p>
 <p><strong>This is why we need PyTorch.</strong></p>
+</div>
 </div>
 </section>
 <section id="why-the-activation-function-matters" class="slide level2">
@@ -827,10 +797,13 @@ Haky Im
 <p><strong>Any number of linear layers = one linear layer!</strong></p>
 </div>
 <div class="fragment">
-<div class="columns">
-<div class="column" style="width:50%;">
+<div class="takehome">
 <p><strong>Try it yourself:</strong> set activation to “Linear” in the playground. Add as many layers as you want — the output is always a flat gradient.</p>
-</div><div class="column" style="width:50%;">
+</div>
+</div>
+</section>
+<section id="why-the-activation-function-matters-1" class="slide level2">
+<h2>Why the Activation Function Matters</h2>
 <p>The activation function <strong>breaks</strong> linearity, allowing each layer to add new “bends.”</p>
 <p>Common activations:</p>
 <ul>
@@ -838,8 +811,6 @@ Haky Im
 <li><strong>Tanh</strong>: <span class="math inline">\(\frac{e^x - e^{-x}}{e^x + e^{-x}}\)</span> — S-curve</li>
 <li><strong>Sigmoid</strong>: <span class="math inline">\(\frac{1}{1+e^{-x}}\)</span> — for probabilities</li>
 </ul>
-</div></div>
-</div>
 </section>
 <section id="universal-approximation-theorem" class="slide level2">
 <h2>Universal Approximation Theorem</h2>
@@ -850,6 +821,7 @@ Haky Im
 <p><strong>In playground terms:</strong> with enough neurons, you have enough bends to trace any curve.</p>
 </div>
 <div class="fragment">
+<div class="takehome">
 <p><strong>What this doesn’t tell you:</strong></p>
 <ul>
 <li>How many neurons you need</li>
@@ -857,8 +829,6 @@ Haky Im
 <li>Whether it will generalize to new data</li>
 </ul>
 </div>
-<div class="fragment">
-<p><em>More: <a href="http://neuralnetworksanddeeplearning.com/chap4.html">neuralnetworksanddeeplearning.com/chap4.html</a></em></p>
 </div>
 </section>
 <section id="from-playground-to-pytorch" class="slide level2">
@@ -868,29 +838,29 @@ Haky Im
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>1. Define the model:</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="kw">class</span> MLP(nn.Module):</span>
-<span id="cb8-2"><a href=""></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim, hid_dim,</span>
-<span id="cb8-3"><a href=""></a>               output_dim):</span>
-<span id="cb8-4"><a href=""></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb8-5"><a href=""></a>    <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(input_dim, hid_dim)</span>
-<span id="cb8-6"><a href=""></a>    <span class="va">self</span>.fc2 <span class="op">=</span> nn.Linear(hid_dim, output_dim)</span>
-<span id="cb8-7"><a href=""></a></span>
-<span id="cb8-8"><a href=""></a>  <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
-<span id="cb8-9"><a href=""></a>    x <span class="op">=</span> F.relu(<span class="va">self</span>.fc1(x))</span>
-<span id="cb8-10"><a href=""></a>    <span class="cf">return</span> <span class="va">self</span>.fc2(x).squeeze(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="kw">class</span> MLP(nn.Module):</span>
+<span id="cb5-2"><a href=""></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim, hid_dim,</span>
+<span id="cb5-3"><a href=""></a>               output_dim):</span>
+<span id="cb5-4"><a href=""></a>    <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb5-5"><a href=""></a>    <span class="va">self</span>.fc1 <span class="op">=</span> nn.Linear(input_dim, hid_dim)</span>
+<span id="cb5-6"><a href=""></a>    <span class="va">self</span>.fc2 <span class="op">=</span> nn.Linear(hid_dim, output_dim)</span>
+<span id="cb5-7"><a href=""></a></span>
+<span id="cb5-8"><a href=""></a>  <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb5-9"><a href=""></a>    x <span class="op">=</span> F.relu(<span class="va">self</span>.fc1(x))</span>
+<span id="cb5-10"><a href=""></a>    <span class="cf">return</span> <span class="va">self</span>.fc2(x).squeeze(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
 <p><strong>2. Train it:</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>model <span class="op">=</span> MLP(<span class="dv">1</span>, <span class="dv">1024</span>, <span class="dv">1</span>)</span>
-<span id="cb9-2"><a href=""></a>optimizer <span class="op">=</span> torch.optim.SGD(</span>
-<span id="cb9-3"><a href=""></a>    model.parameters(), lr<span class="op">=</span><span class="fl">0.001</span>)</span>
-<span id="cb9-4"><a href=""></a>loss_fn <span class="op">=</span> nn.MSELoss()</span>
-<span id="cb9-5"><a href=""></a></span>
-<span id="cb9-6"><a href=""></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
-<span id="cb9-7"><a href=""></a>    y_hat <span class="op">=</span> model(x)        <span class="co"># forward</span></span>
-<span id="cb9-8"><a href=""></a>    loss <span class="op">=</span> loss_fn(y_hat, y) <span class="co"># loss</span></span>
-<span id="cb9-9"><a href=""></a>    loss.backward()          <span class="co"># gradients</span></span>
-<span id="cb9-10"><a href=""></a>    optimizer.step()         <span class="co"># update</span></span>
-<span id="cb9-11"><a href=""></a>    optimizer.zero_grad()    <span class="co"># reset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>model <span class="op">=</span> MLP(<span class="dv">1</span>, <span class="dv">1024</span>, <span class="dv">1</span>)</span>
+<span id="cb6-2"><a href=""></a>optimizer <span class="op">=</span> torch.optim.SGD(</span>
+<span id="cb6-3"><a href=""></a>    model.parameters(), lr<span class="op">=</span><span class="fl">0.001</span>)</span>
+<span id="cb6-4"><a href=""></a>loss_fn <span class="op">=</span> nn.MSELoss()</span>
+<span id="cb6-5"><a href=""></a></span>
+<span id="cb6-6"><a href=""></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
+<span id="cb6-7"><a href=""></a>    y_hat <span class="op">=</span> model(x)        <span class="co"># forward</span></span>
+<span id="cb6-8"><a href=""></a>    loss <span class="op">=</span> loss_fn(y_hat, y) <span class="co"># loss</span></span>
+<span id="cb6-9"><a href=""></a>    loss.backward()          <span class="co"># gradients</span></span>
+<span id="cb6-10"><a href=""></a>    optimizer.step()         <span class="co"># update</span></span>
+<span id="cb6-11"><a href=""></a>    optimizer.zero_grad()    <span class="co"># reset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 </div>
 </section>
@@ -940,40 +910,30 @@ Haky Im
 </section>
 <section id="the-training-loop-visually" class="slide level2">
 <h2>The Training Loop — Visually</h2>
-<pre><code>                    ┌─────────────┐
-                    │  Input Data │
-                    └──────┬──────┘
-                           ▼
-                    ┌─────────────┐
-              ┌────▶│ Forward Pass│ ← model(x)
-              │     └──────┬──────┘
-              │            ▼
-              │     ┌─────────────┐
-              │     │ Compute Loss│ ← loss_fn(ŷ, y)
-              │     └──────┬──────┘
-              │            ▼
-              │     ┌─────────────┐
-              │     │  Backward   │ ← loss.backward()
-              │     │  (Gradients)│   PyTorch autograd!
-              │     └──────┬──────┘
-              │            ▼
-              │     ┌─────────────┐
-              └─────│Update Params│ ← optimizer.step()
-                    └─────────────┘</code></pre>
+<div class="cell">
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item" id="htmlwidget-b7613d44a90b027911f1" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-b7613d44a90b027911f1">{"x":{"diagram":"\ndigraph training {\n  graph [rankdir=LR, bgcolor=white, pad=0.3]\n  node [shape=box, style=filled, fillcolor=\"#e0f2fe\",\n        color=\"#0369a1\", fontname=\"Helvetica\", fontsize=48, width=2.5, height=1.0, margin=\"0.35,0.4\"]\n  edge [color=\"#333333\", arrowsize=2.0, penwidth=2.5]\n\n  A [label=\"Input Data\", fillcolor=\"#f0f9ff\"]\n  B [label=\"Forward Pass\nmodel(x)\"]\n  C [label=\"Compute Loss\nloss_fn(y_hat, y)\"]\n  D [label=\"Backward Pass\nloss.backward()\"]\n  E [label=\"Update Params\noptimizer.step()\"]\n\n  A -> B -> C -> D -> E\n  E -> B [constraint=false]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="fragment">
+<div class="takehome">
 <p>Each iteration of this loop = one “tick” of the playground.</p>
+</div>
+</div>
 </section>
 <section id="the-learning-curve" class="slide level2">
 <h2>The Learning Curve</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Plot <strong>loss vs epoch</strong> to monitor training:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>learning_curve <span class="op">=</span> []</span>
-<span id="cb11-2"><a href=""></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
-<span id="cb11-3"><a href=""></a>    ...</span>
-<span id="cb11-4"><a href=""></a>    learning_curve.append(loss.item())</span>
-<span id="cb11-5"><a href=""></a></span>
-<span id="cb11-6"><a href=""></a>qplot(<span class="bu">range</span>(<span class="dv">10000</span>), learning_curve,</span>
-<span id="cb11-7"><a href=""></a>      xlab<span class="op">=</span><span class="st">"epoch"</span>, ylab<span class="op">=</span><span class="st">"loss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a>learning_curve <span class="op">=</span> []</span>
+<span id="cb7-2"><a href=""></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
+<span id="cb7-3"><a href=""></a>    ...</span>
+<span id="cb7-4"><a href=""></a>    learning_curve.append(loss.item())</span>
+<span id="cb7-5"><a href=""></a></span>
+<span id="cb7-6"><a href=""></a>qplot(<span class="bu">range</span>(<span class="dv">10000</span>), learning_curve,</span>
+<span id="cb7-7"><a href=""></a>      xlab<span class="op">=</span><span class="st">"epoch"</span>, ylab<span class="op">=</span><span class="st">"loss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
@@ -986,35 +946,46 @@ Haky Im
 </div>
 </div></div>
 <div class="fragment">
+<div class="takehome">
 <ul>
 <li><strong>Dropping</strong> = model is learning</li>
 <li><strong>Flat</strong> = converged (or stuck)</li>
 <li><strong>Increasing</strong> = learning rate too high!</li>
 </ul>
 </div>
-</section>
-<section id="mlp-succeeds-on-cubic-data" class="slide level2">
-<h2>MLP Succeeds on Cubic Data!</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>After training an MLP with 1024 hidden neurons on <span class="math inline">\(y = x^3\)</span>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a>mlp <span class="op">=</span> MLP(input_dim<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb12-2"><a href=""></a>          hid_dim<span class="op">=</span><span class="dv">1024</span>,</span>
-<span id="cb12-3"><a href=""></a>          output_dim<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>. . .</p>
-<p><strong>Predicted vs observed now hugs the identity line!</strong></p>
-<p>Compared to the linear model’s failure — the MLP learned the cubic relationship from data alone.</p>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="slides-unit00_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></p>
-</figure>
+<!-- --- -->
+<!-- ## MLP Succeeds on Cubic Data! -->
+<!-- ::: {.columns} -->
+<!-- :::: {.column width="50%"} -->
+<!-- After training an MLP with 1024 hidden neurons on $y = x^3$: -->
+<!-- ```python -->
+<!-- mlp = MLP(input_dim=1, -->
+<!--           hid_dim=1024, -->
+<!--           output_dim=1) -->
+<!-- ``` -->
+<!-- . . . -->
+<!-- **Predicted vs observed now hugs the identity line!** -->
+<!-- Compared to the linear model's failure — the MLP learned the cubic relationship from data alone. -->
+<!-- :::: -->
+<!-- :::: {.column width="50%"} -->
+<!-- ```{r} -->
+<!-- #| eval: true -->
+<!-- #| fig-width: 5 -->
+<!-- #| fig-height: 4.5 -->
+<!-- set.seed(42) -->
+<!-- x_nl <- rnorm(300) -->
+<!-- y_nl <- x_nl^3 -->
+<!-- # Simulate a good MLP fit (add small noise) -->
+<!-- y_hat_good <- y_nl + rnorm(300, sd = 0.3) -->
+<!-- plot(y_nl, y_hat_good, pch = 19, col = adjustcolor("forestgreen", 0.4), cex = 0.8, -->
+<!--      xlab = "y (observed)", ylab = "ŷ (predicted)", -->
+<!--      main = "MLP: predicted vs observed") -->
+<!-- abline(0, 1, col = "gray40", lwd = 2, lty = 2) -->
+<!-- text(-4, 4, "On the\nidentity line!", col = "forestgreen", cex = 1.1, font = 2) -->
+<!-- ``` -->
+<!-- :::: -->
+<!-- ::: -->
 </div>
-</div>
-</div>
-</div></div>
 </section>
 <section id="your-turn-explore-the-playground" class="slide level2">
 <h2>Your Turn: Explore the Playground</h2>
@@ -1055,7 +1026,7 @@ ATGCGTAACG...  →  ┌─────────────┐   →   ┌─
                   │ ...         │
                   └─────────────┘</code></pre>
 <div class="fragment">
-<p><strong>This is the core pattern of the entire course.</strong></p>
+<p><strong>This is the core pattern of the most of the course.</strong></p>
 <p>Every model we study takes DNA sequence as input and predicts a biological output.</p>
 </div>
 </section>
@@ -1162,17 +1133,12 @@ ATGCGTAACG...  →  ┌─────────────┐   →   ┌─
 <li><a href="https://playground.hakyimlab.org/#activation=relu&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-gauss&amp;learningRate=0.01&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.55802&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=regression&amp;initZero=false&amp;hideText=false">playground.hakyimlab.org</a> — experiment with MLP architecture interactively</li>
 <li><a href="playground-guide.md">playground-guide.md</a> — reference for all playground controls</li>
 </ul>
-<p><strong>Papers (optional):</strong></p>
-<ul>
-<li>Avsec et al.&nbsp;2021 — Enformer</li>
-<li>Linder et al.&nbsp;2023 — Borzoi</li>
-</ul>
 </section>
 <section id="getting-started" class="slide level2">
 <h2>Getting Started</h2>
 <p><strong>Environment:</strong> Google Colab (GPU provided, no local setup needed)</p>
 <p><strong>First notebook:</strong> <code>hands-on-introduction_to_deep_learning.ipynb</code></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href=""></a>device <span class="op">=</span> torch.device(<span class="st">'cuda'</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">'cpu'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>device <span class="op">=</span> torch.device(<span class="st">'cuda'</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">'cpu'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="questions" class="slide level2">
 <h2>Questions?</h2>
@@ -1341,7 +1307,7 @@ ATGCGTAACG...  →  ┌─────────────┐   →   ┌─
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'fade',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',

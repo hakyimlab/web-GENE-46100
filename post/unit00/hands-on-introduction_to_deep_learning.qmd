@@ -9,7 +9,11 @@ categories:
 execute:
   eval: false
 draft: true
-jupyter: python3
+jupyter: 
+  kernelspec:
+    name: "conda-env-gene46100-py"
+    language: "python"
+    display_name: "gene46100"
 ---
 
 # Learning objectives

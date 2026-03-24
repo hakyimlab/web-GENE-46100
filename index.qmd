@@ -1,7 +1,7 @@
 ---
 title: "Deep Learning in Genomics Course Material"
 listing:
-  contents: [post]
+  contents: [post/unit00]
   sort: "date desc"
   type: default
   categories: true

@@ -79,9 +79,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -180,7 +180,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
@@ -215,34 +215,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1742878800000" data-listing-file-modified-sort="1774241767674" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="26" data-listing-word-count-sort="5189">
-<div class="thumbnail"><a href="./post/unit00/slides-unit00.html" class="no-external">
 
-<!-- img(9CEB782EFEE6)[progressive=false, height=]:listing:post/unit00/slides-unit00.html -->
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./post/unit00/slides-unit00.html" class="no-external">Quick Introduction to Deep Learning</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./post/unit00/slides-unit00.html" class="no-external">GENE 46100 — Unit 0</a>
-</div>
-<div class="delink listing-description"><a href="./post/unit00/slides-unit00.html" class="no-external">
-<!-- desc(5A0113B34292)[max=175]:post/unit00/slides-unit00.html -->
-</a></div>
-</div>
-<div class="metadata">
-<a href="./post/unit00/slides-unit00.html" class="no-external">
-<div class="listing-date">
-Mar 25, 2025
-</div>
-<div class="listing-author">
-Haky Im
-</div>
-</a>
-</div>
-</div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div><p>© <a href="https://hakyimlab.org">HakyImLab and Listed Authors</a> - <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0 License</a></p></main> <!-- /main -->
