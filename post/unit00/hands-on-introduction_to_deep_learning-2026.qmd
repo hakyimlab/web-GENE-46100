@@ -16,6 +16,8 @@ jupyter:
     display_name: "gene46100"
 ---
 
+[Jupyter notebook in Colab](https://drive.google.com/file/d/1oi4hR8Oo1pM5xx0-8wuSIeJeSSg8lkY2/view?usp=sharing)
+
 # Learning Objectives
 
 1. Understand and implement **gradient descent** to fit a linear model

@@ -13,6 +13,7 @@ image: false
 jupyter: python3
 ---
 
+[Jupyter notebook in Colab](https://drive.google.com/file/d/1x1oAP584Z2mXXMwcaZDaRUYENMt_S5pa/view?usp=sharing)
 
 
 created by Erin Wilson. Downloaded from [here](https://github.com/erinhwilson/dna-pytorch-tutorial). 

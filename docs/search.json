@@ -4,7 +4,7 @@
     "href": "post/unit00/updated-basic_DNA_tutorial.html",
     "title": "Updated - DNA score prediction with Pytorch",
     "section": "",
-    "text": "created by Erin Wilson. Downloaded from here.\nSome edits by Haky Im and Ran Blekhman for the deep learning in genomics gene46100 course.\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+    "text": "Jupyter notebook in Colab\ncreated by Erin Wilson. Downloaded from here.\nSome edits by Haky Im and Ran Blekhman for the deep learning in genomics gene46100 course.\n© HakyImLab and Listed Authors - CC BY 4.0 License"
   },
   {
     "objectID": "post/unit00/updated-basic_DNA_tutorial.html#import-necessary-modules",
@@ -95,14 +95,14 @@
     "href": "post/unit00/hands-on-introduction_to_deep_learning-2026.html",
     "title": "Quick introduction to deep learning",
     "section": "",
-    "text": "Understand and implement gradient descent to fit a linear model\nSee why linear models fail on nonlinear data\nBuild and train a multi-layer perceptron (MLP) using PyTorch\nLearn the basics of PyTorch: model definition, loss function, and optimizer\n\n\n\n\n## install packages if needed (set to True on first run in Colab)\nif False:\n    %pip install scikit-learn plotnine tqdm torch\n\n\nfrom sklearn.datasets import make_regression\nimport numpy as np\nfrom numpy.linalg import inv\nfrom plotnine import qplot, ggplot, geom_point, geom_line, aes, geom_abline\nfrom plotnine.themes import theme_bw\nfrom plotnine.geoms import annotate\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+    "text": "Jupyter notebook in Colab\n© HakyImLab and Listed Authors - CC BY 4.0 License"
   },
   {
     "objectID": "post/unit00/hands-on-introduction_to_deep_learning-2026.html#install-and-load-packages",
     "href": "post/unit00/hands-on-introduction_to_deep_learning-2026.html#install-and-load-packages",
     "title": "Quick introduction to deep learning",
-    "section": "",
-    "text": "## install packages if needed (set to True on first run in Colab)\nif False:\n    %pip install scikit-learn plotnine tqdm torch\n\n\nfrom sklearn.datasets import make_regression\nimport numpy as np\nfrom numpy.linalg import inv\nfrom plotnine import qplot, ggplot, geom_point, geom_line, aes, geom_abline\nfrom plotnine.themes import theme_bw\nfrom plotnine.geoms import annotate"
+    "section": "Install and load packages",
+    "text": "Install and load packages\n\n## install packages if needed (set to True on first run in Colab)\nif False:\n    %pip install scikit-learn plotnine tqdm torch\n\n\nfrom sklearn.datasets import make_regression\nimport numpy as np\nfrom numpy.linalg import inv\nfrom plotnine import qplot, ggplot, geom_point, geom_line, aes, geom_abline\nfrom plotnine.themes import theme_bw\nfrom plotnine.geoms import annotate"
   },
   {
     "objectID": "post/unit00/hands-on-introduction_to_deep_learning-2026.html#simulate-linear-data",
