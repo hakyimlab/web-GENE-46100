@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Erin Wilson">
-<meta name="dcterms.date" content="2025-04-04">
+<meta name="dcterms.date" content="2026-04-04">
 
 <title>Updated - DNA score prediction with Pytorch – GENE 46100</title>
 <style>
@@ -202,14 +202,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 4, 2025</p>
+      <p class="date">April 4, 2026</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 24, 2026</p>
+      <p class="date-modified">March 25, 2026</p>
     </div>
   </div>
     
@@ -235,8 +235,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="environment-setup" class="level1">
 <h1>Environment Setup</h1>
-<p>We use minimal conda environment gene41600 (instructions <a href="index.qmd">here</a>) and install python packages with <code>%pip</code> instead due to fewer version conflicts, especially for M-series Macs. See installation steps below.</p>
-<div id="8778fea5" class="cell" data-execution_count="1">
+<p>We use minimal conda environment gene41600 (instructions <a href="../../post/unit00/index.html">here</a>) and install python packages with <code>%pip</code> instead due to fewer version conflicts, especially for M-series Macs. See installation steps below.</p>
+<div id="93f3ab6f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">False</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">%</span>pip install seaborn matplotlib logomaker</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -265,7 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>It also assumes some familiarity with biological concepts like: * DNA nucleotides * What is a regulatory motif? * visualizing DNA motifs</p>
 <section id="import-necessary-modules" class="level2">
 <h2 class="anchored" data-anchor-id="import-necessary-modules">import necessary modules</h2>
-<div id="8e3340f4" class="cell" data-execution_count="2">
+<div id="4f120625" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> product</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -284,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="set-seeds-for-reproduciblity-across-runs" class="level2">
 <h2 class="anchored" data-anchor-id="set-seeds-for-reproduciblity-across-runs">set seeds for reproduciblity across runs</h2>
-<div id="a9ca4876" class="cell" data-execution_count="3">
+<div id="42ed3617" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a random seed in a bunch of different places</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> set_seed(seed: <span class="bu">int</span> <span class="op">=</span> <span class="dv">42</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)</span>
@@ -307,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="define-gpu-device" class="level2">
 <h2 class="anchored" data-anchor-id="define-gpu-device">define GPU device</h2>
 <p>Are you working on a GPU? If so, you can put your data/models on <code>DEVICE</code> (and have to do so explicity)! If not, you can probably remove all instances of <code>foo.to(DEVICE)</code> and it should still work fine on a CPU.</p>
-<div id="14fdbc8a" class="cell" data-execution_count="4">
+<div id="0bae5cbf" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>DEVICE <span class="op">=</span> torch.device(<span class="st">'mps'</span> <span class="cf">if</span> torch.backends.mps.is_available() </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                     <span class="cf">else</span> <span class="st">'cuda'</span> <span class="cf">if</span> torch.cuda.is_available() </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                     <span class="cf">else</span> <span class="st">'cpu'</span>)</span>
@@ -331,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>However, since many recent papers use methods like CNNs to automatically detect “motifs,” or short patterns in the DNA that can activate or repress a biological response, let’s add one more piece to our scoring system. To simulate something like motifs influencing gene expression, let’s say a given sequence gets a <code>+10</code> bump if <code>TAT</code> appears anywhere in the 8-mer, and a <code>-10</code> bump if it has a <code>GCG</code> in it. Again, these motifs don’t mean anything in real life, they are just a mechanism for simulating a really simple activation or repression effect.</p>
 <p><img src="images/scoring.png" class="img-fluid"></p>
 <p>So let’s implement this basic scoring function!</p>
-<div id="78b26980" class="cell" data-execution_count="5">
+<div id="c726bc8d" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define function for generating all k-mers of length k</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kmers(k):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''Generate a list of all k-mers for a given k'''</span></span>
@@ -340,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="generate-all-8-mers" class="level3">
 <h3 class="anchored" data-anchor-id="generate-all-8-mers">generate all 8-mers</h3>
-<div id="f0b1f387" class="cell" data-execution_count="6">
+<div id="90adca71" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate all 8-mers</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>seqs8 <span class="op">=</span> kmers(<span class="dv">8</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Total 8mers:'</span>,<span class="bu">len</span>(seqs8))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -348,7 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="define-scoring-function-for-the-dna-sequences" class="level3">
 <h3 class="anchored" data-anchor-id="define-scoring-function-for-the-dna-sequences">define scoring function for the DNA sequences</h3>
-<div id="c9d38377" class="cell" data-execution_count="7">
+<div id="b7c5801a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define score_dict</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>score_dict <span class="op">=</span> {</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'A'</span>:<span class="dv">20</span>,</span>
@@ -377,19 +377,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.DataFrame(data, columns<span class="op">=</span>[<span class="st">'seq'</span>,<span class="st">'score'</span>])</span>
 <span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d91603b8" class="cell" data-execution_count="8">
+<div id="afb16001" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mer8 <span class="op">=</span> score_seqs_motif(seqs8)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mer8.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Spot check scores of a couple seqs with motifs:</p>
-<div id="8bd0788b" class="cell" data-execution_count="9">
+<div id="3ab1923d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mer8[mer8[<span class="st">'seq'</span>].isin([<span class="st">'TGCGTTTT'</span>,<span class="st">'CCCCCTAT'</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="plot-distribution-of-motif-scores" class="level2">
 <h2 class="anchored" data-anchor-id="plot-distribution-of-motif-scores">plot distribution of motif scores</h2>
-<div id="43651824" class="cell" data-execution_count="10">
+<div id="06e1ded0" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.hist(mer8[<span class="st">'score'</span>].values,bins<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"8-mer with Motifs score distribution"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"seq score"</span>,fontsize<span class="op">=</span><span class="dv">14</span>)</span>
@@ -412,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="turn-dna-sequences-into-numbers-with-one-hot-encoding">turn DNA sequences into numbers with one hot encoding</h3>
 <p><img src="images/cat.png" class="img-fluid"></p>
 <p>This one-hot encoding has the nice property that it makes your DNA appear like how a computer sees a picture of a cat!</p>
-<div id="4aab3b34" class="cell" data-execution_count="11">
+<div id="7003d54d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> one_hot_encode(seq):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Given a DNA sequence, return its one-hot encoding</span></span>
@@ -435,12 +435,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9b941c21" class="cell" data-execution_count="12">
+<div id="3265649c" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># one hot encoding of 8 As</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>a8 <span class="op">=</span> one_hot_encode(<span class="st">"AAAAAAAA"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"AAAAAA:</span><span class="ch">\n</span><span class="st">"</span>,a8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="87a7faa0" class="cell" data-execution_count="13">
+<div id="952dee9d" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># one hot encoding of another DNA</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> one_hot_encode(<span class="st">"AGGTACCT"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"AGGTACC:</span><span class="ch">\n</span><span class="st">"</span>,s)</span>
@@ -473,7 +473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note: in this tutorial, that uses the quick_split function defined here splits the data into 20% for the test set, 80% of the remaining 80% as the training set (i.e.&nbsp;64% of the total) and 20% of the non test sets as validation (i.e.&nbsp;16%).</p>
 <section id="define-quick-splitting-function" class="level4">
 <h4 class="anchored" data-anchor-id="define-quick-splitting-function">define quick splitting function</h4>
-<div id="c5e2faeb" class="cell" data-execution_count="14">
+<div id="391fa7ac" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define function for splitting data</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quick_split(df, split_frac<span class="op">=</span><span class="fl">0.8</span>, verbose<span class="op">=</span><span class="va">False</span>):</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
@@ -501,7 +501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="split-data-into-train-validation-and-test-sets" class="level4">
 <h4 class="anchored" data-anchor-id="split-data-into-train-validation-and-test-sets">split data into train, validation, and test sets</h4>
-<div id="2ab9c397" class="cell" data-execution_count="15">
+<div id="411a3392" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># split data into train, validation, and test</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>full_train_df, test_df <span class="op">=</span> quick_split(mer8)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>train_df, val_df <span class="op">=</span> quick_split(full_train_df)</span>
@@ -516,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plot-distribution-of-train-validation-and-test-data-and-check-that-they-are-similarly-distributed" class="level3">
 <h3 class="anchored" data-anchor-id="plot-distribution-of-train-validation-and-test-data-and-check-that-they-are-similarly-distributed">plot distribution of train, validation, and test data and check that they are similarly distributed</h3>
-<div id="d86916aa" class="cell" data-execution_count="16">
+<div id="0bcf9d14" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_train_test_hist(train_df, val_df,test_df,bins<span class="op">=</span><span class="dv">20</span>):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">''' Check distribution of train/test scores, sanity check that its not skewed'''</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    plt.hist(train_df[<span class="st">'score'</span>].values,bins<span class="op">=</span>bins,label<span class="op">=</span><span class="st">'train'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
@@ -528,7 +528,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With the below histogram, we can confirm that the train, test, and val sets contain example sequences from each bucket of the distribution (each set has some examples with each kind of motif)</p>
-<div id="e15159cd" class="cell" data-execution_count="17">
+<div id="b92471b5" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plot_train_test_hist(train_df, val_df,test_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -538,13 +538,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Dataset class allows standardized way to access and preprocess data.</p>
 <p>Dataloader handles batching, shuffling, parallel data loading to make it easier to feed the data for training.</p>
 <p>You can read more about <a href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html">DataLoader and Dataset</a> objects.</p>
-<div id="eba64e97" class="cell" data-execution_count="18">
+<div id="318c7c4f" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset, DataLoader</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="define-one-hot-encoded-dataset-class" class="level4">
 <h4 class="anchored" data-anchor-id="define-one-hot-encoded-dataset-class">define one hot encoded dataset class</h4>
 <p>This class is essential for preparing DNA sequence data for deep learning models, converting the DNA sequences into a numerical format that neural networks can process.</p>
-<div id="c115c0bf" class="cell" data-execution_count="19">
+<div id="a72d6f2a" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeqDatasetOHE(Dataset):</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Dataset for one-hot-encoded sequences</span></span>
@@ -573,7 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="construct-dataloaders-from-datasets." class="level4">
 <h4 class="anchored" data-anchor-id="construct-dataloaders-from-datasets.">construct DataLoaders from Datasets.</h4>
-<div id="c6725c59" class="cell" data-execution_count="20">
+<div id="f9c4a1af" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_dataloaders(train_df,</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                      test_df,</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                      seq_col<span class="op">=</span><span class="st">'seq'</span>,</span>
@@ -598,12 +598,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> train_dl,test_dl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="04109eca" class="cell" data-execution_count="21">
+<div id="347f0a03" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>train_dl, val_dl <span class="op">=</span> build_dataloaders(train_df, val_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>These dataloaders are now ready to be used in a training loop!</p>
 <p><a id="s3"></a> ## 3. Define Pytorch models The primary model I was interested in trying was a Convolutional Neural Network, as these have been shown to be useful for learning motifs from genomic data. But as a point of comparison, I included a simple Linear model. Here are some model definitions:</p>
-<div id="056f9c42" class="cell" data-execution_count="22">
+<div id="d98767d7" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># very simple linear model</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DNA_Linear(nn.Module):</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, seq_len):</span>
@@ -662,7 +662,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Computes loss for a single batch no gradient updates</span></span>
 <span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>            process_batch()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="e89f88eb" class="cell" data-execution_count="23">
+<div id="ed8c93bb" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># +--------------------------------+</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># | Training and fitting functions |</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># +--------------------------------+</span></span>
@@ -824,7 +824,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><code>process_batch()</code>: This function processes a single batch of data. It calculates the model’s predictions and computes the loss. If an optimizer is provided, it performs backpropagation and updates the model’s weights. If no optimiser is provided, it just returns the loss and batch size. This function is used for both training and validation, with the presence of the optimiser parameter determining if back propagation occurs.</p></li>
 </ul>
 <p><a id="s5"></a> ## 5. Train the models First let’s try running a Linear Model on our 8-mer sequences</p>
-<div id="39ecf032" class="cell" data-execution_count="24">
+<div id="f10148c3" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the sequence length from the first seq in the df</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>seq_len <span class="op">=</span> <span class="bu">len</span>(train_df[<span class="st">'seq'</span>].values[<span class="dv">0</span>])</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -844,7 +844,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s look at the loss in quick plot:</p>
-<div id="b7ec2a04" class="cell" data-execution_count="25">
+<div id="f91f48ea" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quick_loss_plot(data_label_list,loss_type<span class="op">=</span><span class="st">"MSE Loss"</span>,sparse_n<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">    For each train/test loss trajectory, plot loss by epoch</span></span>
@@ -859,13 +859,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    plt.legend(bbox_to_anchor<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">1</span>),loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b632d2f9" class="cell" data-execution_count="26">
+<div id="83971d73" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>lin_data_label <span class="op">=</span> (lin_train_losses,lin_val_losses,<span class="st">"Lin"</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>quick_loss_plot([lin_data_label])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>At first glance, not much learning appears to be happening.</p>
 <p>Next let’s try the CNN.</p>
-<div id="a83d705e" class="cell" data-execution_count="27">
+<div id="db13c84a" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>seq_len <span class="op">=</span> <span class="bu">len</span>(train_df[<span class="st">'seq'</span>].values[<span class="dv">0</span>])</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create Linear model object</span></span>
@@ -880,12 +880,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    DEVICE</span>
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2f070ed1" class="cell" data-execution_count="28">
+<div id="bf0a5f1e" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>cnn_data_label <span class="op">=</span> (cnn_train_losses,cnn_val_losses,<span class="st">"CNN"</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>quick_loss_plot([lin_data_label,cnn_data_label])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>It seems clear from the loss curves that the CNN is able to capture a pattern in the data that the Linear model is not! Let’s spot check a few sequences to see what’s going on.</p>
-<div id="c1eb1602" class="cell" data-execution_count="29">
+<div id="f446b50b" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># oracle dict of true score for each seq</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>oracle <span class="op">=</span> <span class="bu">dict</span>(mer8[[<span class="st">'seq'</span>,<span class="st">'score'</span>]].values)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -913,13 +913,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>        quick_seq_pred(model, desc, seqs, oracle)</span>
 <span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e9514218" class="cell" data-execution_count="30">
+<div id="79dfe361" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ask the trained Linear model to make </span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># predictions for some 8-mers</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>quick_8mer_pred(model_lin, oracle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>From the above examples, it appears that the Linear model is really underpredicting sequences with a lot of G’s and overpredicting those with many T’s. This is probably because it noticed <code>GCG</code> made sequences have unusually low scores and <code>TAT</code> made sequences have unusually high scores, however since the Linear model doesn’t have a way to take into account the different context of <code>GCG</code> vs <code>GAG</code>, it just predicts that sequences with G’s should be lower. We know from our scoring scheme that this isn’t the case: it’s not that G’s in general are detrimental, but <strong>specifically</strong> <code>GCG</code> is.</p>
-<div id="8c9e71d3" class="cell" data-execution_count="31">
+<div id="c7a56c2a" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ask the trained CNN model to make </span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># predictions for some 8-mers</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>quick_8mer_pred(model_cnn, oracle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -931,16 +931,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Compare the performance of the Linear and CNN models by using different learning rates. First run both models with higher learning rates (0.05, 0.1) and lower learning rates (0.005, 0.001), then create loss plots showing: - Linear model with these learning rates - CNN model with these learning rates</p>
 <p>Then analyze your results by answering: 1. How does changing the learning rate affect convergence for each model? 2. Which model is more sensitive to learning rate changes, and why? 3. Based on your analysis, what learning rate would you recommend for each model type, and why?</p>
 <p><a id="s6"></a> ## 6. Check model predictions on the test set An important evaluation step in machine learning tasks is to check if your model can make good predictions on the test set, which it <em>never</em> saw during training. Here, we can use a parity plot to visualize the difference between the actual sequence scores vs the model’s predicted scores.</p>
-<div id="73157a9e" class="cell" data-execution_count="32">
+<div id="b8ff8cf2" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#%pip install altair ## datapane</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f006a469" class="cell" data-execution_count="33">
+<div id="3278dc76" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> r2_score</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">## import datapane as dp ## compatibility issues with pandas version</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="52bcb63c" class="cell" data-execution_count="34">
+<div id="c0d4ab54" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parity_plot(model_name,df,r2):</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Given a dataframe of samples with their true and predicted values,</span></span>
@@ -1015,7 +1015,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>            parity_plot(model_name, df, r2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cf2c5df1" class="cell" data-execution_count="35">
+<div id="e167c096" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="op">=</span> test_df[<span class="st">'seq'</span>].values</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Linear"</span>, model_lin),</span>
@@ -1027,7 +1027,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the Linear model, we can see that it can somewhat predict a trend in the Test set sequences, but really gets confused by these buckets of sequences in the high and low areas of the distribution (the ones with a motif).</p>
 <p>However for the CNN, it is much better at predicting scores close to the actual value! This is expected, given that the architecture of our CNN uses 3-mer kernels to scan along the sequence for influential motifs.</p>
 <p>But the CNN isn’t perfect. We could probably train it longer or adjust the hyperparameters, but the goal here isn’t perfection - this is a very simple task relative to actual regulatory grammars. Instead, I thought it would be interesting to use the Altair visualization library to interactively inspect which sequences the models get wrong:</p>
-<div id="f5e51006" class="cell" data-execution_count="36">
+<div id="98ceb7fb" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>alt.data_transformers.disable_max_rows() <span class="co"># disable altair warning</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>parity_pred(models, seqs, oracle,alt<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1065,10 +1065,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Create comparative visualizations (such as parity plots, error histograms, or other appropriate plots) to demonstrate the impact of your changes</p></li>
 <li><p>Analyze your results by discussing how your modification addresses the specific weaknesses you identified. What are the trade-offs involved in your approach?</p></li>
 </ol>
-<div id="55c8da87" class="cell" data-execution_count="37">
+<div id="6f8fa3da" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logomaker</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e933e076" class="cell" data-execution_count="38">
+<div id="49171bf4" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_conv_layers_from_model(model):</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Given a trained model, extract its convolutional layers</span></span>
@@ -1123,12 +1123,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>First, we can take a peek at the raw filters.</p>
-<div id="2c4bef6b" class="cell" data-execution_count="39">
+<div id="98cbe221" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>conv_layers, model_weights, bias_weights <span class="op">=</span> get_conv_layers_from_model(model_cnn)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>view_filters(model_weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="images/filter_activation.png" class="img-fluid"></p>
-<div id="0e5800ed" class="cell" data-execution_count="40">
+<div id="17c61864" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_conv_output_for_seq(seq, conv_layer):</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Given an input sequeunce and a convolutional layer, </span></span>
@@ -1231,7 +1231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb41-100"><a href="#cb41-100" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-101"><a href="#cb41-101" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="114def93" class="cell" data-execution_count="41">
+<div id="72e5d9d6" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># just use some seqs from test_df to activate filters</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>some_seqs <span class="op">=</span> random.choices(seqs, k<span class="op">=</span><span class="dv">3000</span>)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1241,7 +1241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="visualize-filters-using-a-stronger-activation-threshold" class="level3">
 <h3 class="anchored" data-anchor-id="visualize-filters-using-a-stronger-activation-threshold">Visualize filters using a stronger activation threshold</h3>
 <p><code>act_thresh = 1</code> instead of <code>0</code>. (Some filters have no subsequence matches above the threshold and result in an empty motif logo)</p>
-<div id="51774106" class="cell" data-execution_count="42">
+<div id="9a54121d" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>filter_activations <span class="op">=</span> get_filter_activations(some_seqs, conv_layers[<span class="dv">0</span>],act_thresh<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>view_filters_and_logos(model_weights,filter_activations)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1711,7 +1711,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb44" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Updated - DNA score prediction with Pytorch</span></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Erin Wilson</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2025-04-04'</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> '2026-04-04'</span></span>
 <span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
 <span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co">  - gene46100</span></span>

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(ls:*)",
+      "Bash(for unit:*)",
+      "Bash(do echo:*)",
+      "Read(//Users/haekyungim/Github/web-GENE-46100/post/**)",
+      "Bash(done)",
+      "Bash(cp -r /Users/haekyungim/Github/web-GENE-46100/post/2025-04-15-unit01/. /Users/haekyungim/Github/web-GENE-46100/post/unit01/)",
+      "Bash(cp -r /Users/haekyungim/Github/web-GENE-46100/post/2025-05-01-unit03/. /Users/haekyungim/Github/web-GENE-46100/post/unit03/)",
+      "Bash(cp -r /Users/haekyungim/Github/web-GENE-46100/post/2025-05-12-unit04/. /Users/haekyungim/Github/web-GENE-46100/post/unit04/)",
+      "Bash(cp \"/Users/haekyungim/Desktop/Screenshot 2026-03-24 at 5.00.55 PM.png\" /Users/haekyungim/Github/web-GENE-46100/post/unit00/images/cnn-01-typical-nn-vs-cnn.png)",
+      "Bash(cp \"/Users/haekyungim/Desktop/Screenshot 2026-03-24 at 5.01.46 PM.png\" /Users/haekyungim/Github/web-GENE-46100/post/unit00/images/cnn-02-cnn-local-connections.png)",
+      "Bash(cp \"/Users/haekyungim/Desktop/Screenshot 2026-03-24 at 5.02.03 PM.png\" /Users/haekyungim/Github/web-GENE-46100/post/unit00/images/cnn-03-fully-connected.png)",
+      "Bash(cp \"/Users/haekyungim/Desktop/Screenshot 2026-03-24 at 5.02.15 PM.png\" /Users/haekyungim/Github/web-GENE-46100/post/unit00/images/cnn-04-fully-connected-weights.png)",
+      "Bash(cp \"/Users/haekyungim/Desktop/Screenshot 2026-03-24 at 5.02.34 PM.png\" /Users/haekyungim/Github/web-GENE-46100/post/unit00/images/cnn-05-local-receptive-field.png)"
+    ]
+  }
+}

@@ -84,25 +84,11 @@
     "text": "TF binding prediction model\nThe goal of this project is to create a neural network model that predicts TF binding strength in a DNA sequence.\nTo do this, we have extracted 300 base pair-long DNA sequences that have a predicted binding site(s) from a TF, from a couple of chromosomes.\nThe training data is the following:\n\nThe sequences files: chr#_sequences.txt.gz store the 300 bp-long DNA sequences. A “window_name” in the format chr#_start_end has been assigned to each one.\nThe scores files: chr#_scores.txt.gz store a 300 bases long vector for each DNA sequence. Each position in these vectors correspond to a the sequence position. The values for each position represent the “binding score” that was predicted to that site by Homer, which is a widely used tool to discover motif binding sites for a given TF across the genome.\n\n\n1. Read-in the data\nThe data files for a couple of chromosomes are stored in the following link. Download them to your local folder.\nLet’s explore how the sequence and score data look like:\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport os\nimport numpy as np\n\nDefine data paths, this should be changed to your personal paths:\n\nPROJECT = '/Users/sofiasalazar/Library/CloudStorage/Box-Box/imlab-data/Courses/AI-in-Genomics-2025/'\nDATA = os.path.join(PROJECT, 'data')\n\nSequence data for chromosome 22\n\nsequences = pd.read_csv(os.path.join(DATA, 'chr22_sequences.txt.gz'), sep=\"\\t\", compression='gzip')\n\n\nsequences.head()\n\n\nsequences.shape\n\nTF binding scores for chromosome 22\nHere, each column has 300 values for each sequence, each value is the TF binding score for each position of the sequence. Most positions have ‘0’ as no motif is predicted to bind at those positions. One motif is a couple of bp-long and all of those bp will have the same score since they belong to the same motif.\n\nscores = pd.read_csv(os.path.join(DATA, 'chr22_scores.txt.gz'), sep=\"\\t\", compression='gzip')\n\n\nnp.array(scores.iloc[:, 0])\n\nTake a look at how these score vectors look like, the blue sections represent the predicted binding sites for this TF:\n\nx = np.arange(300)\nbar_width = 0.4\nplt.figure(figsize=(12, 5))\nplt.bar(x - bar_width, scores.iloc[:, 0], width=bar_width, label=\"Predicted\", alpha=0.7, color='b')\nplt.xlabel(\"Position in sequence window\")\nplt.ylabel(\"Homer score\")\nplt.grid(axis='y', linestyle='--', alpha=0.6)\nplt.show()\n\n\n\n2. Model training\nNow, the goal is to use these sequences to train a neural network model that predicts the scores vectors. Overall, the structure of the code should more or less follow these steps:\n\nOne-hot-encode the DNA sequences\nSplit sequences and their corresponding scores into training, test and validation sets\nBuild dataloaders for the training and test sets using sequences as predictor features and the scores as targets\nDefine a NN model architecture\nTrain the model\nTest the model on the test sequences\n\nThis process will be iterative as you find an optimal set of hyperparameters. Please share your best-performing model and we will test it on a set of held-out-data.\nAdditional notes\n\nNote how the scores are values greater than 1, you can try binarizing these values so they are between 0 and 1 and compare between models\nTo assess performance, you can use the following code to compute correlations between predicted scores and the ground truth\n\n\nfrom scipy.stats import pearsonr\ndef plot_comparison(pred, obs):\n  r_value = pearsonr(pred, obs)\n  x = np.arange(len(pred))\n  bar_width = 0.4\n  plt.figure(figsize=(12, 5))\n  plt.bar(x - bar_width, pred, width=bar_width, label=\"Predicted\", alpha=0.7, color='b')\n  plt.bar(x + bar_width, obs, width=bar_width, label=\"Observed\", alpha=0.7, color='r')\n  plt.xlabel(\"Position sequence window\")\n  plt.ylabel(\"Value\")\n  plt.title(\"Comparison of sequence scores\")\n  plt.legend(title=f\"Pearson R: {r_value:.2f}\")\n  plt.grid(axis='y', linestyle='--', alpha=0.6)\n  plt.show()\n\n\n\n\n\n\n\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
   },
   {
-    "objectID": "post/unit00/homework-01.html",
-    "href": "post/unit00/homework-01.html",
-    "title": "homework 1",
+    "objectID": "post/unit00/index.html",
+    "href": "post/unit00/index.html",
+    "title": "Unit 00 — Introduction to Deep Learning",
     "section": "",
-    "text": "Homework 1\n\nrun all the code in the notebook. You should also be able to find the notebook in your cloned course repository. (20 points)\ncomplete the exercises in the notebook (30 points)\nsubmit the jupyter notebook with the results to canvas assignment\n\n\n\n\n\n\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Deep Learning in Genomics Course Material",
-    "section": "",
-    "text": "This page contains material for the GENE46100 Deep learning in genomics course.\nFind the 2026 syllabus here and schedule here\nEdit github source here\n© HakyImLab and Listed Authors - CC BY 4.0 License"
-  },
-  {
-    "objectID": "index.html#unit-00-introduction",
-    "href": "index.html#unit-00-introduction",
-    "title": "Deep Learning in Genomics Course Material",
-    "section": "Unit 00 — Introduction",
-    "text": "Unit 00 — Introduction\n\nSlides: Intro to Deep Learning\nSlides: Intro to CNNs\nSlides: Intro to Genetics & Genomics (Ran Blekhman, PDF)"
+    "text": "Slides\n\nIntro to Genetics & Genomics (Ran Blekhman, PDF)\nSlides: Intro to Deep Learning\nSlides: Intro to CNNs\n\n\n\nPosts\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuick introduction to deep learning\n\n\n\ngene46100\n\nnotebook\n\n\n\n\n\n\n\n\n\nMar 25, 2026\n\n\nHaky Im (based on earlier version by Boxiang Liu)\n\n\n\n\n\n\n\n\n\n\n\n\nNeural Network Playground Guide\n\n\n\ngene46100\n\nhow-to\n\n\n\n\n\n\n\n\n\nMar 26, 2026\n\n\nHaky Im\n\n\n\n\n\n\n\n\n\n\n\n\nhomework 1\n\n\n\ngene46100\n\nhomework\n\n\n\n\n\n\n\n\n\nMar 27, 2026\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated - DNA score prediction with Pytorch\n\n\n\ngene46100\n\nnotebook\n\n\n\n\n\n\n\n\n\nApr 4, 2026\n\n\nErin Wilson\n\n\n\n\n\n\n\n\n\n\n\n\nTF Binding prediction project\n\n\n\ngene46100\n\nproject\n\nnotebook\n\n\n\n\n\n\n\n\n\nApr 9, 2026\n\n\nSofia Salazar\n\n\n\n\n\n\n\n\n\n\n\n\nCalibrating hyperparameters with weights and biases\n\n\n\ngene46100\n\nproject\n\nnotebook\n\n\n\n\n\n\n\n\n\nApr 10, 2026\n\n\nSofia Salazar\n\n\n\n\n\nNo matching items\n© HakyImLab and Listed Authors - CC BY 4.0 License"
   },
   {
     "objectID": "post/unit00/hands-on-introduction_to_deep_learning-2026.html",
@@ -285,6 +271,27 @@
     "title": "Quick introduction to deep learning",
     "section": "What’s next",
     "text": "What’s next\n\nCNN for DNA scoring: convolutional filters slide over one-hot encoded DNA — like learned motif scanners\nDNA one-hot encoding turns sequences into matrices that neural networks can process"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Deep Learning in Genomics Course Material",
+    "section": "",
+    "text": "This page contains material for the GENE46100 Deep learning in genomics course.\nFind the 2026 syllabus here and schedule here\nEdit github source here\n© HakyImLab and Listed Authors - CC BY 4.0 License"
+  },
+  {
+    "objectID": "index.html#unit-00-introduction",
+    "href": "index.html#unit-00-introduction",
+    "title": "Deep Learning in Genomics Course Material",
+    "section": "Unit 00 — Introduction",
+    "text": "Unit 00 — Introduction\n\nSlides: Intro to Genetics & Genomics (Ran Blekhman, PDF)\nSlides: Intro to Deep Learning\nSlides: Intro to CNNs"
+  },
+  {
+    "objectID": "post/unit00/homework-01.html",
+    "href": "post/unit00/homework-01.html",
+    "title": "homework 1",
+    "section": "",
+    "text": "Homework 1\n\nrun all the code in the notebook. You should also be able to find the notebook in your cloned course repository. (20 points)\ncomplete the exercises in the notebook (30 points)\nsubmit the jupyter notebook with the results to canvas assignment\n\n\n\n\n\n\n\n© HakyImLab and Listed Authors - CC BY 4.0 License"
   },
   {
     "objectID": "post/unit00/playground-guide.html",
