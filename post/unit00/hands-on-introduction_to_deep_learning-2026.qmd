@@ -8,7 +8,7 @@ categories:
   - notebook
 execute:
   eval: false
-draft: true
+draft: false
 jupyter:
   kernelspec:
     name: "conda-env-gene46100-py"
@@ -148,7 +148,7 @@ where $\alpha$ is the **learning rate** (step size).
 3. Take a step opposite to the gradient
 4. Repeat until convergence
 
-![gradient descent](assets/gradient-descent-computed.png)
+![gradient descent](images/gradient-descent-computed.png)
 
 ### The learning rate $\alpha$
 
@@ -287,7 +287,7 @@ In the [playground](https://playground.hakyimlab.org):
 
 ## What is an MLP?
 
-![MLP in tensorflow playground](assets/tensorflow-playground.png)
+![MLP in tensorflow playground](images/tensorflow-playground.png)
 
 A Multi-Layer Perceptron is a neural network with:
 

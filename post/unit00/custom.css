@@ -21,6 +21,25 @@
   justify-content: center;
 }
 
+.reveal .source-credit {
+  font-size: 0.3em;
+  color: #666;
+  position: absolute;
+  bottom: -40px;
+  right: 50px;
+  text-align: right;
+  line-height: 1.2;
+  z-index: 10;
+  background-color: #f0f0f0;
+  padding: 1px 8px;
+  border-radius: 6px;
+}
+
+.reveal .source-credit a {
+  color: #888;
+  text-decoration: underline;
+}
+
 .reveal .takehome {
   position: absolute;
   bottom: 10%;

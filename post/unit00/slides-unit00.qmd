@@ -219,7 +219,7 @@ text(0.8, 0.8, "minimum", col = "steelblue", cex = 0.9)
 
 :::: {.column width="50%"}
 
-![](assets/gradient-descent-computed.png){fig-align="center" width="90%"}
+![](images/gradient-descent-computed.png){fig-align="center" width="90%"}
 
 ::::
 
@@ -513,7 +513,7 @@ Settings:
 
 :::: {.column width="45%"}
 
-![](assets/playground-reg-linear-fit.png){fig-align="center" width="100%"}
+![](images/playground-reg-linear-fit.png){fig-align="center" width="100%"}
 
 ::::
 
@@ -589,7 +589,7 @@ Hit ▶ Play and wait...
 
 :::: {.column width="45%"}
 
-![](assets/playground-reg-cubic-linear.png){fig-align="center" width="100%"}
+![](images/playground-reg-cubic-linear.png){fig-align="center" width="100%"}
 
 ::::
 
@@ -640,7 +640,9 @@ text(2, -2, "Far from\nidentity line!", col = "blue", cex = 1.1, font = 2)
 
 . . .
 
+:::{.takehome}
 **Solution:** add nonlinearity → build a neural network.
+:::
 
 ---
 
@@ -649,7 +651,7 @@ text(2, -2, "Far from\nidentity line!", col = "blue", cex = 1.1, font = 2)
 ::: {.columns}
 
 :::: {.column width="50%"}
-![](assets/tensorflow-playground.png){width="100%"}
+![](images/tensorflow-playground.png){width="100%"}
 ::::
 
 :::: {.column width="50%"}
@@ -740,7 +742,7 @@ Select Pred vs True to show the scatter plot
 
 :::: {.column width="45%"}
 
-![](assets/playground-reg-cubic-2n.png){fig-align="center" width="100%"}
+![](images/playground-reg-cubic-2n.png){fig-align="center" width="100%"}
 
 ::::
 
@@ -771,7 +773,7 @@ Select Pred vs True to show the scatter plot
 
 :::: {.column width="45%"}
 
-![](assets/playground-reg-cubic-4n.png){fig-align="center" width="100%"}
+![](images/playground-reg-cubic-4n.png){fig-align="center" width="100%"}
 
 ::::
 
@@ -800,7 +802,7 @@ Hit ▶ Play
 
 :::: {.column width="45%"}
 
-![](assets/playground-reg-cubic-4n-2n.png){fig-align="center" width="100%"}
+![](images/playground-reg-cubic-4n-2n.png){fig-align="center" width="100%"}
 
 ::::
 
@@ -1010,26 +1012,17 @@ for epoch in range(10000):
 
 ## The Training Loop — Visually
 
-```{r}
-#| echo: false
-#| eval: true
-DiagrammeR::grViz("
-digraph training {
-  graph [rankdir=LR, bgcolor=white, pad=0.3]
-  node [shape=box, style=filled, fillcolor='#e0f2fe',
-        color='#0369a1', fontname='Helvetica', fontsize=48, width=2.5, height=1.0, margin='0.35,0.4']
-  edge [color='#333333', arrowsize=2.0, penwidth=2.5]
-
-  A [label='Input Data', fillcolor='#f0f9ff']
-  B [label='Forward Pass\nmodel(x)']
-  C [label='Compute Loss\nloss_fn(y_hat, y)']
-  D [label='Backward Pass\nloss.backward()']
-  E [label='Update Params\noptimizer.step()']
-
-  A -> B -> C -> D -> E
-  E -> B [constraint=false]
-}
-")
+```{mermaid}
+%%| eval: true
+%%| fig-width: 9
+%%| fig-height: 5
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '22px', 'nodePadding': 16}}}%%
+flowchart LR
+  A[Input Data] --> B["Forward Pass<br/>model(x)"]
+  B --> C["Compute Loss<br/>loss_fn(ŷ, y)"]
+  C --> D["Backward Pass<br/>loss.backward()"]
+  D --> E["Update Params<br/>optimizer.step()"]
+  E --> B
 ```
 . . .
 

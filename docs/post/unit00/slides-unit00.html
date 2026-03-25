@@ -191,11 +191,9 @@
       margin-right: 0; 
     }
   </style>
-  <link href="slides-unit00_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-  <script src="slides-unit00_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-  <script src="slides-unit00_files/libs/viz-1.8.2/viz.js"></script>
-  <link href="slides-unit00_files/libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-  <script src="slides-unit00_files/libs/grViz-binding-1.0.11/grViz.js"></script>
+  <script src="slides-unit00_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="slides-unit00_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="slides-unit00_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -203,7 +201,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Quick Introduction to Deep Learning</h1>
-  <p class="subtitle">GENE 46100 — Unit 0</p>
+  <p class="subtitle">GENE 46100 — Unit 00</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -365,7 +363,7 @@ Haky Im
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/gradient-descent-computed.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
+<p><img data-src="images/gradient-descent-computed.png" class="quarto-figure quarto-figure-center" style="width:90.0%"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -552,7 +550,7 @@ Haky Im
 </div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/playground-reg-linear-fit.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="images/playground-reg-linear-fit.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div></div>
@@ -597,7 +595,7 @@ Haky Im
 </div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/playground-reg-cubic-linear.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="images/playground-reg-cubic-linear.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div></div>
@@ -629,14 +627,16 @@ Haky Im
 </div>
 </div></div>
 <div class="fragment">
+<div class="takehome">
 <p><strong>Solution:</strong> add nonlinearity → build a neural network.</p>
+</div>
 </div>
 </section>
 <section id="multi-layer-perceptron-mlp" class="slide level2">
 <h2>Multi-Layer Perceptron (MLP)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="assets/tensorflow-playground.png" style="width:100.0%"></p>
+<p><img data-src="images/tensorflow-playground.png" style="width:100.0%"></p>
 </div><div class="column" style="width:50%;">
 <p>A neural network with:</p>
 <ul>
@@ -691,7 +691,7 @@ Haky Im
 </div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/playground-reg-cubic-2n.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="images/playground-reg-cubic-2n.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div></div>
@@ -712,7 +712,7 @@ Haky Im
 </div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/playground-reg-cubic-4n.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="images/playground-reg-cubic-4n.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div></div>
@@ -731,7 +731,7 @@ Haky Im
 </div><div class="column" style="width:45%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="assets/playground-reg-cubic-4n-2n.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+<p><img data-src="images/playground-reg-cubic-4n-2n.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
 </figure>
 </div>
 </div></div>
@@ -910,10 +910,22 @@ Haky Im
 </section>
 <section id="the-training-loop-visually" class="slide level2">
 <h2>The Training Loop — Visually</h2>
-<div class="cell">
+<div class="cell" data-reveal="true" data-eval="true" data-fig-width="9" data-fig-height="5" data-layout-align="default">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-b7613d44a90b027911f1" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-b7613d44a90b027911f1">{"x":{"diagram":"\ndigraph training {\n  graph [rankdir=LR, bgcolor=white, pad=0.3]\n  node [shape=box, style=filled, fillcolor=\"#e0f2fe\",\n        color=\"#0369a1\", fontname=\"Helvetica\", fontsize=48, width=2.5, height=1.0, margin=\"0.35,0.4\"]\n  edge [color=\"#333333\", arrowsize=2.0, penwidth=2.5]\n\n  A [label=\"Input Data\", fillcolor=\"#f0f9ff\"]\n  B [label=\"Forward Pass\nmodel(x)\"]\n  C [label=\"Compute Loss\nloss_fn(y_hat, y)\"]\n  D [label=\"Backward Pass\nloss.backward()\"]\n  E [label=\"Update Params\noptimizer.step()\"]\n\n  A -> B -> C -> D -> E\n  E -> B [constraint=false]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '22px', 'nodePadding': 16}}}%%
+flowchart LR
+  A[Input Data] --&gt; B["Forward Pass&lt;br/&gt;model(x)"]
+  B --&gt; C["Compute Loss&lt;br/&gt;loss_fn(ŷ, y)"]
+  C --&gt; D["Backward Pass&lt;br/&gt;loss.backward()"]
+  D --&gt; E["Update Params&lt;br/&gt;optimizer.step()"]
+  E --&gt; B
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
 </div>
 </div>
 <div class="fragment">
